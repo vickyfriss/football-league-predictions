@@ -27,7 +27,7 @@ This project provides a **full Monte Carlo simulation pipeline** for European fo
 2. Install dependencies from `requirements.txt`.  
 3. Run the Streamlit app:  
 ```bash
-streamlit run app.py# ⚽ Football League Monte Carlo Simulation
+streamlit run app.py# ⚽ Football League Monte Carlo Simulation ```
 
 This project provides a **full Monte Carlo simulation pipeline** for European football leagues. It predicts league standings by simulating the remainder of the season using historical match data, team strengths, and betting odds.  
 
