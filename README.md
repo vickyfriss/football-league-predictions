@@ -40,7 +40,7 @@ This project provides a **full Monte Carlo simulation pipeline** for European fo
 - **Streamlit Dashboard:** Run the pipeline interactively, choose the league, adjust the number of simulations, and visualize results.  
 
 ## Supported Leagues
-- English Premier League  
+- Premier League (England)  
 - Serie A (Italy)  
 - La Liga (Spain)  
 - Bundesliga (Germany)  
