@@ -1,9 +1,9 @@
 name: Daily Football Simulations
 
 on:
+  workflow_dispatch:      # allows manual trigger
   schedule:
-    - cron: "0 0 * * *"   # Daily at midnight UTC
-  workflow_dispatch:       # Manual trigger
+    - cron: '0 2 * * *'  # runs every day at 02:00 UTC
 
 jobs:
   run-simulations:
@@ -11,40 +11,30 @@ jobs:
 
     steps:
       # 1️⃣ Checkout repository
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       # 2️⃣ Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: '3.11'
 
       # 3️⃣ Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pandas numpy scipy
 
-      # 4️⃣ Run precompute_simulations.py and log output
-      - name: Run simulations
+      # 4️⃣ Create required folders
+      - name: Create folders
         run: |
-          mkdir -p logs backups
-          TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
-          LOGFILE="logs/simulations_$TIMESTAMP.log"
-          echo "Running simulations at $TIMESTAMP UTC" | tee -a $LOGFILE
-          python precompute_simulations.py >> $LOGFILE 2>&1
-          echo "Simulation finished at $(date -u +"%Y%m%d_%H%M%S") UTC" | tee -a $LOGFILE
+          mkdir -p data logs backups
 
-          # Save backups of pickle files
-          cp data/precomputed_pos_pct.pkl backups/precomputed_pos_pct_$TIMESTAMP.pkl
-          cp data/precomputed_pos_counts.pkl backups/precomputed_pos_counts_$TIMESTAMP.pkl
-
-      # 5️⃣ Commit updated files and logs
-      - name: Commit & push results
+      # 5️⃣ Run simulation script with error logging
+      - name: Run precompute_simulations.py
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/precomputed_pos_pct.pkl data/precomputed_pos_counts.pkl logs backups
-          git commit -m "Update simulation results: $TIMESTAMP [skip ci]" || echo "No changes to commit"
-          git push
+          set -e  # stop on first error
+          echo "Running simulations at $(date -u)"
+          python precompute_simulations.py
