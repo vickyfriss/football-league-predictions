@@ -1,48 +1,51 @@
 name: Daily Football Simulations
 
+# Trigger daily at 01:00 UTC, but also allow manual runs
 on:
   schedule:
-    - cron: "0 2 * * *"   # Runs every day at 02:00 UTC
-  workflow_dispatch:       # Allows manual trigger
+    - cron: '0 1 * * *'
+  workflow_dispatch:
 
 jobs:
   run-simulations:
     runs-on: ubuntu-latest
     defaults:
       run:
-        shell: bash
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        working-directory: ./  # Make sure it runs from your repo root
 
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"  # Match your local Python version
+          python-version: '3.11'
 
+      # 3️⃣ Install dependencies (if you have requirements.txt)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-        shell: bash
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      # 4️⃣ Prepare folders
       - name: Prepare folders
         run: |
           mkdir -p data logs backups
-        shell: bash
 
-      - name: Run simulations
+      # 5️⃣ Run simulations
+      - name: Run precompute_simulations.py
         run: |
           echo "Running simulations at $(date -u +%Y-%m-%d_%H%M%S UTC)"
-          # Fail fast and print errors
           set -euo pipefail
-          python precompute_simulations.py
-        shell: bash
+          python precompute_simulations.py | tee logs/github_actions_run.log
 
-      - name: List outputs
-        run: |
-          echo "Listing data folder contents:"
-          ls -l data
-          echo "Listing logs folder contents:"
-          ls -l logs
-        shell: bash
+      # 6️⃣ Optional: Upload logs as artifact
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-actions-log
+          path: logs/github_actions_run.log
