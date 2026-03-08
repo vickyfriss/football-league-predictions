@@ -107,12 +107,12 @@ div.stSelectbox > div > div[role="combobox"] {
 
 # -------------------------------
 # 5️⃣ TITLE AND INTRODUCTION
-st.title("⚽ Football League Simulator")
+st.title("⚽ Football League Simulator ⚽")
 st.markdown("""
-**Data-driven forecasts for final positions across Europe’s top 5 football leagues (2025–26).**
+**Data-driven forecasts for final positions across Europe’s top 5 football leagues (2025-26).**
 
-This app simulates every remaining fixture **10,000 times**, producing **10,000 full season scenarios** per league.  
-The results are aggregated to generate **probabilities for each team finishing in each league position**.
+This app simulates every remaining fixture 10,000 times, producing 10,000 full season scenarios per league.  
+The results are aggregated to generate probabilities for each team finishing in each league position.
 """)
 
 # -------------------------------
@@ -239,18 +239,33 @@ th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
 
 st.markdown(responsive_table_css, unsafe_allow_html=True)
 st.markdown(f'<div class="table-wrapper">{styled_table.to_html(escape=False)}</div>', unsafe_allow_html=True)
-st.caption("Table shows % probability of each team finishing in each position based on 10,000 simulated seasons.")
+st.caption("Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.")
 
 # -------------------------------
 # 🔟 SIMULATION METHODOLOGY
 with st.expander("📌 How this simulation works"):
     st.markdown("""
-    **Step 1 – Historical Data:** Collect past results and team stats.  
-    **Step 2 – Team Strengths:** Compute offensive and defensive strengths.  
-    **Step 3 – Match Simulation:** Simulate each remaining fixture **10,000 times**.  
-    **Step 4 – Full Season Simulation:** Combine all fixtures to produce **10,000 season scenarios**.  
-    **Step 5 – Probabilities:** Calculate frequency of teams finishing in each position across all scenarios.
-    """)
+<style>
+.simulation-text p, .simulation-text strong {
+    text-align: left !important;
+}
+</style>
+
+<div class="simulation-text">
+
+**Step 1 – Historical Data:** Compile past match results from the 2024/25 and 2025/26 seasons, along with the latest league table.  
+
+**Step 2 – Betting Odds:** Gather all available betting odds for upcoming fixtures to help inform expected outcomes.  
+
+**Step 3 – Team Strengths:** Calculate each team’s offensive and defensive strengths, factoring in home advantage.  
+
+**Step 4 – Match Probabilities:** Use a combination of betting odds and a Poisson-based goal model to estimate the probability of each match outcome (Home Win / Draw / Away Win).  
+
+**Step 5 – Full Season Simulation:** Simulate all remaining fixtures across 10,000 complete season scenarios.  
+
+**Step 6 – Final Probabilities:** Combine simulation results with the current league table to determine the probability of each team finishing in every league position.
+</div>
+""", unsafe_allow_html=True)
 
 # -------------------------------
 # 11️⃣ DOWNLOAD OPTION
