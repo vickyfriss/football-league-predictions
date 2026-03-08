@@ -266,3 +266,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-03-07T20:00:00Z,27,FINISHED,Athletic Club,FC Barcelona,0,1,AWAY_TEAM
 2026-03-08T13:00:00Z,27,FINISHED,Villarreal CF,Elche CF,2,1,HOME_TEAM
 2026-03-08T15:15:00Z,27,FINISHED,Getafe CF,Real Betis Balompié,2,0,HOME_TEAM
+2026-03-08T17:30:00Z,27,FINISHED,Sevilla FC,Rayo Vallecano de Madrid,1,1,DRAW
