@@ -189,33 +189,52 @@ pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 st.header(f"🏆 {selected_display_name} Simulation Results")
 
 # -------------------------------
-# 8️⃣ STYLE AND DISPLAY FULL WIDTH RESPONSIVE
+# 8️⃣ STYLE AND DISPLAY FULL WIDTH RESPONSIVE (DYNAMIC WIDTH)
 styled_table, num_cols = style_probabilities_table(pos_pct_df)
 
 responsive_table_css = """
 <style>
+/* Wrapper allows horizontal scroll on small screens */
 div.table-wrapper {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
+
+/* Table stretches naturally */
 table {
     width: 100% !important;
-    table-layout: fixed;
+    table-layout: auto !important;  /* Let columns resize automatically */
     border-collapse: collapse;
 }
+
+/* All cells wrap text if needed, avoid cropping numbers */
 th, td {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: visible !important;
+    white-space: normal !important;
     text-align: center !important;
     font-size: 14px !important;
+    padding: 4px 6px !important;
 }
-th:nth-child(1), td:nth-child(1) { width: 40px; }  /* POS */
-th:nth-child(2), td:nth-child(2) { width: 300px; text-align: left !important; font-size: 15px; }  /* TEAM */
-th:nth-child(3), td:nth-child(3) { width: 50px; }  /* GP */
-th:nth-child(4), td:nth-child(4) { width: 50px; }  /* PTS */
-th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }  /* probabilities */
+
+/* TEAM column left-aligned, flexible width */
+th:nth-child(2), td:nth-child(2) {
+    text-align: left !important;
+    min-width: 150px;  /* Minimum width for team names */
+}
+
+/* Other numeric columns flexible */
+th:nth-child(1), td:nth-child(1) { width: 40px; }
+th:nth-child(3), td:nth-child(3) { min-width: 50px; }
+th:nth-child(4), td:nth-child(4) { min-width: 50px; }
+th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
+
+/* Optional: smaller font for probabilities on narrow screens */
+@media (max-width: 600px) {
+    th, td { font-size: 12px !important; }
+    th:nth-child(2), td:nth-child(2) { min-width: 120px; }
+    th:nth-child(n+5), td:nth-child(n+5) { min-width: 40px; }
+}
 </style>
 """
 
