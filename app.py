@@ -39,7 +39,9 @@ def style_probabilities_table(df):
     display_df = df.copy().reset_index(drop=True)
     text_cols = ["POS", "TEAM", "GP", "PTS"]
     num_cols = display_df.columns.difference(text_cols)
-    vmax = max(display_df[num_cols].max().max(), 1)
+
+    # Safe vmax handling in case DataFrame is empty
+    vmax = max(display_df[num_cols].max().max(), 1) if not display_df[num_cols].empty else 1
     color_data = display_df[num_cols].divide(vmax).apply(lambda s: s.map(color_scale)) * vmax
 
     styled = (
@@ -75,7 +77,6 @@ def style_probabilities_table(df):
 
 # -------------------------------
 # 3️⃣ STREAMLIT APP
-
 st.set_page_config(page_title="Football League Simulation", layout="wide")
 
 # -------------------------------
@@ -92,7 +93,6 @@ h1, h2, h3, .stMarkdown p, .stSelectbox label {
 </style>
 """
 st.markdown(center_css, unsafe_allow_html=True)
-
 
 # -------------------------------
 # 4.1️⃣ SHORTER AND CENTERED SELECTBOX
@@ -114,27 +114,31 @@ div.stSelectbox > div > div[role="combobox"] {
 """
 st.markdown(selectbox_css, unsafe_allow_html=True)
 
-
 # -------------------------------
 # Load pickle and show last run time
-
 pct_file = "data/precomputed_pos_pct.pkl"
 counts_file = "data/precomputed_pos_counts.pkl"
 
-try:
-    with open(counts_file,"rb") as f:
-        position_distribution_all = pickle.load(f)
-    with open(pct_file,"rb") as f:
-        position_distribution_pct_all = pickle.load(f)
+position_distribution_all = {}
+position_distribution_pct_all = {}
 
-    # Last modified timestamp in UTC
-    pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    formatted_time = pct_mtime.strftime("%d/%B/%Y %H:%M")
-    st.info(f"Simulations last run on: {formatted_time} UTC")
+try:
+    if os.path.exists(counts_file):
+        with open(counts_file,"rb") as f:
+            position_distribution_all = pickle.load(f)
+    if os.path.exists(pct_file):
+        with open(pct_file,"rb") as f:
+            position_distribution_pct_all = pickle.load(f)
+
+    if position_distribution_pct_all:
+        pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
+        formatted_time = pct_mtime.strftime("%d/%B/%Y %H:%M")
+        st.info(f"Simulations last run on: {formatted_time} UTC")
+    else:
+        st.warning("⚠️ No precomputed simulation results found. Table will be empty.")
 
 except Exception as e:
     st.error(f"❌ Failed to load precomputed results: {e}")
-    st.stop()
 
 # -------------------------------
 # Friendly league names + mapping to pickle keys
@@ -158,16 +162,28 @@ selected_display_name = st.selectbox("Select League", league_display_names)
 league = league_key_map[selected_display_name]
 
 # -------------------------------
-# Display league table
-pos_pct_df = position_distribution_pct_all[league].copy().reset_index()
+# Display league table safely
+if league in position_distribution_pct_all and not position_distribution_pct_all[league].empty:
+    pos_pct_df = position_distribution_pct_all[league].copy().reset_index()
+else:
+    # fallback empty table if pickle missing
+    pos_pct_df = pd.DataFrame(columns=["POS","TEAM","GP","PTS"])
 
+# Flatten MultiIndex columns if any
 if isinstance(pos_pct_df.columns, pd.MultiIndex):
     pos_pct_df.columns = [str(c) for c in pos_pct_df.columns]
 
+# Ensure required columns exist
 for col in ["POS","TEAM","GP","PTS"]:
     if col not in pos_pct_df.columns:
-        pos_pct_df[col] = pos_pct_df.index + 1 if col=="POS" else 0 if col in ["GP","PTS"] else pos_pct_df.index.astype(str)
+        if col == "POS":
+            pos_pct_df[col] = np.arange(1, len(pos_pct_df)+1)
+        elif col in ["GP","PTS"]:
+            pos_pct_df[col] = 0
+        else:
+            pos_pct_df[col] = ""
 
+# Force correct dtypes
 pos_pct_df["TEAM"] = pos_pct_df["TEAM"].astype(str)
 pos_pct_df["POS"] = pos_pct_df["POS"].astype(int)
 pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
@@ -194,9 +210,9 @@ th, td {{
 }}
 th:nth-child(1), td:nth-child(1) {{ min-width: 40px; }}  /* POS */
 th:nth-child(2), td:nth-child(2) {{ 
-    min-width: 300px;  /* TEAM column stays the same width */
+    min-width: 300px;  /* TEAM column */
     text-align: left !important;
-    font-size: 15px !important;  /* slightly bigger font for team names */
+    font-size: 15px !important;  
 }}
 th:nth-child(3), td:nth-child(3) {{ min-width: 50px; }}  /* GP */
 th:nth-child(4), td:nth-child(4) {{ min-width: 50px; }}  /* PTS */
