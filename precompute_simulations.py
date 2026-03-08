@@ -28,26 +28,31 @@ print("✅ Datasets created.")
 print("2️⃣ Processing datasets...")
 globals_dict = {}
 
-for lg in dataset_processing.leagues:
-    # Past matches / standings
-    df_standings = standings.get(lg, pd.DataFrame())
-    if "team" not in df_standings.columns:
-        df_standings["team"] = df_standings.index.astype(str)
-    globals_dict[f"past_matches_{lg}_all"] = df_standings
+# Fetch all past matches for 2025 once
+past_season_results_2025 = dataset_creation.fetch_past_season_results([2025])
 
-    # Future matches / fixtures
+for lg in dataset_processing.leagues:
+    # 1️⃣ Past matches (this season)
+    past_matches_current = past_season_results_2025[lg][2025]
+    globals_dict[f"past_matches_{lg}_all"] = past_matches_current
+
+    # 2️⃣ Future matches
     df_fixtures = fixtures.get(f"fixtures_{lg}", pd.DataFrame())
     for col in ["homeTeam", "awayTeam"]:
         if col not in df_fixtures.columns:
             df_fixtures[col] = pd.NA
     globals_dict[f"future_matches_{lg}"] = df_fixtures
 
-    # Betting odds
+    # 3️⃣ Betting odds
     df_odds = odds_book.get(f"odds_{lg}", pd.DataFrame())
     for col in ["home_team", "away_team"]:
         if col not in df_odds.columns:
             df_odds[col] = pd.NA
     globals_dict[f"betting_odds_{lg}"] = df_odds
+
+    # 4️⃣ League table for verification
+    df_standings = standings.get(lg, pd.DataFrame())
+    globals_dict[lg] = pd.DataFrame({"team": df_standings["team"].copy()})
 
 missing_df, backup_futures = dataset_processing.process_datasets(globals_dict)
 if not missing_df.empty:

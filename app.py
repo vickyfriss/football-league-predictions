@@ -93,6 +93,7 @@ h1, h2, h3, .stMarkdown p, .stSelectbox label {
 """
 st.markdown(center_css, unsafe_allow_html=True)
 
+
 # -------------------------------
 # 4.1️⃣ SHORTER AND CENTERED SELECTBOX
 selectbox_css = """
@@ -112,6 +113,7 @@ div.stSelectbox > div > div[role="combobox"] {
 </style>
 """
 st.markdown(selectbox_css, unsafe_allow_html=True)
+
 
 # -------------------------------
 # Load pickle and show last run time
