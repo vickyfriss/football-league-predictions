@@ -52,7 +52,7 @@ jobs:
           file_pattern: |
             data/precomputed_pos_counts.pkl
             data/precomputed_pos_pct.pkl
-            data/simulations/*
+            data/simulations/**
             logs/*
             backups/*
           commit_user_name: github-actions[bot]
