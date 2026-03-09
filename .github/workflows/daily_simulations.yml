@@ -1,4 +1,3 @@
-```yaml
 name: Daily Football Simulations
 
 on:
@@ -66,4 +65,3 @@ jobs:
         with:
           name: github-actions-log
           path: logs/github_actions_run.log
-```
