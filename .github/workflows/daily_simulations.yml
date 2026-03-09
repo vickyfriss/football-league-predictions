@@ -34,11 +34,13 @@ jobs:
           mkdir -p data logs backups
 
       # 5️⃣ Run simulations and capture full logs
-      - name: Run precompute_simulations.py
-        run: |
-          set -euo pipefail
-          echo "Running simulations at $(date -u +%Y-%m-%d_%H%M%S UTC)"
-          python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log || exit ${PIPESTATUS[0]}
+  - name: Run precompute_simulations.py
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+    run: |
+      set -euo pipefail
+      echo "Running simulations at $(date -u +%Y-%m-%d_%H%M%S UTC)"
+      python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log || exit ${PIPESTATUS[0]}
 
       # 6️⃣ Commit and push updated pickles and new timestamped simulation CSVs
       - name: Commit and push updated data

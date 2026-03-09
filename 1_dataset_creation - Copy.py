@@ -4,37 +4,18 @@ import time
 import pandas as pd
 import requests
 from datetime import datetime, timedelta
-
-# -------------------------------
-# Helper to get API key from environment or local file
-def get_api_key(env_var_name, local_file=None):
-    """
-    Get an API key from environment variable, fallback to a local file.
-    env_var_name: name of the env var to check
-    local_file: optional path to a .env file
-    """
-    # Try env first
-    key = os.getenv(env_var_name)
-    if key:
-        return key
-
-    # Then try loading from local file (for dev)
-    if local_file and os.path.exists(local_file):
-        from dotenv import load_dotenv
-        load_dotenv(local_file)
-        key = os.getenv(env_var_name)
-        if key:
-            return key
-
-    raise ValueError(f"{env_var_name} not found in environment variables or {local_file}")
+from dotenv import load_dotenv
 
 # -------------------------------
 # 1️⃣ Team name cleaning
 TEAM_NAME_MAPPING = {
+    # Italy
     "AAS Roma": "AS Roma",
     "OComo": "Como",
+    # Germany
     "B04Bayer Leverkusen": "Bayer Leverkusen",
     "M05Mainz": "Mainz",
+    # France
     "NLyon": "Lyon",
     "LLille": "Lille",
     "ENice": "Nice",
@@ -86,7 +67,10 @@ def scrape_standings(year=2025):
 # -------------------------------
 # 3️⃣ Load betting odds
 def load_betting_odds():
-    API_KEY = get_api_key("ODDS_DATA_API_KEY", local_file="API_KEY.env")
+    load_dotenv("API_KEY.env")
+    API_KEY = os.getenv("ODDS_DATA_API_KEY")
+    if API_KEY is None:
+        raise ValueError("API_KEY not found in API_KEY.env")
 
     leagues_api = {
         "soccer_epl": "odds_premierleague_england",
@@ -161,7 +145,10 @@ def compute_implied_probs(df):
 # -------------------------------
 # 5️⃣ Get fixtures from Football-Data API
 def load_fixtures():
-    API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
+    load_dotenv("API_KEY.env")
+    API_KEY = os.getenv("FOOTBALL_DATA_API_KEY")
+    if API_KEY is None:
+        raise ValueError("API_KEY not found in API_KEY.env")
 
     competitions = {
         "PL": "fixtures_premierleague_england",
@@ -192,7 +179,10 @@ def load_fixtures():
 # -------------------------------
 # 6️⃣ Fetch past season results
 def fetch_past_season_results(seasons=[2025, 2024]):
-    API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
+    load_dotenv("API_KEY.env")
+    API_KEY = os.getenv("FOOTBALL_DATA_API_KEY")
+    if API_KEY is None:
+        raise ValueError("API_KEY not found in API_KEY.env")
 
     competitions = {
         "PL": "premierleague_england",
