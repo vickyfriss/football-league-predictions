@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout repository using PAT
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          token: ${{ secrets.GH_PAT }}
 
       # 2️⃣ Setup Python
       - name: Set up Python
@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p data logs backups
 
-      # 5️⃣ Run simulations and capture full logs
+      # 5️⃣ Run simulations and capture logs
       - name: Run precompute_simulations.py
         env:
           ODDS_DATA_API_KEY: ${{ secrets.ODDS_DATA_API_KEY }}
@@ -45,20 +45,20 @@ jobs:
 
       # 6️⃣ Commit and push updated data
       - name: Commit and push updated data
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "vickyfriss"
+          git config --local user.email "vickyfriss@users.noreply.github.com"
 
-          git add data/precomputed_pos_counts.pkl data/precomputed_pos_pct.pkl data/simulations/* logs/ backups/
+          git add data/precomputed_pos_counts.pkl \
+                  data/precomputed_pos_pct.pkl \
+                  data/simulations/* \
+                  logs/ \
+                  backups/
 
           git diff-index --quiet HEAD || git commit -m "Update precomputed data [skip ci]"
 
-          # Pull latest changes in case repo changed during the run
-          git pull --rebase https://x-access-token:${GH_PAT}@github.com/vickyfriss/football-league-predictions.git main
-
-          git push https://x-access-token:${GH_PAT}@github.com/vickyfriss/football-league-predictions.git HEAD:main
+          git pull --rebase origin main
+          git push origin main
 
       # 7️⃣ Upload logs as artifact
       - name: Upload logs
