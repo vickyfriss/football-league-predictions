@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # required to push later
+          persist-credentials: true
 
       # 2️⃣ Setup Python
       - name: Set up Python
@@ -33,27 +33,26 @@ jobs:
         run: |
           mkdir -p data logs backups
 
-      # 5️⃣ Run simulations and capture logs
-  - name: Run precompute_simulations.py
-    continue-on-error: false
-    run: |
-     set -euo pipefail
-     echo "Running simulations at $(date -u +%Y-%m-%d_%H%M%S UTC)"
-     python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log || exit ${PIPESTATUS[0]}
+      # 5️⃣ Run simulations and capture full logs
+      - name: Run precompute_simulations.py
+        run: |
+          set -euo pipefail
+          echo "Running simulations at $(date -u +%Y-%m-%d_%H%M%S UTC)"
+          python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log || exit ${PIPESTATUS[0]}
 
-      # 6️⃣ Commit and push updated data if any
+      # 6️⃣ Commit and push updated pickles and new timestamped simulation CSVs
       - name: Commit and push updated data
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ logs/ backups/
+          git add data/precomputed_pos_counts.pkl data/precomputed_pos_pct.pkl data/simulations/* logs/ backups/
           git diff-index --quiet HEAD || git commit -m "Update precomputed data [skip ci]"
           git push origin HEAD
 
-      # 7️⃣ Upload logs as artifact
+      # 7️⃣ Upload logs as artifact (updated to v4)
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: github-actions-log
           path: logs/github_actions_run.log
