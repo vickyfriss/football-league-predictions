@@ -64,7 +64,7 @@ def style_probabilities_table(df):
         })
         .hide(axis="index")
         .set_table_styles([
-            {"selector": "th", "props":[("background-color","#e6edf4"),("color","#333"),
+            {"selector": "th", "props":[("background-color","#dfe7ee"),("color","#333"),
                                         ("text-align","center"),
                                         ("font-family","Inter, Roboto, Arial, sans-serif"),
                                         ("font-size","13px"),("font-weight","600")]},
@@ -83,16 +83,12 @@ def style_probabilities_table(df):
 @st.cache_data(ttl=0, show_spinner=False)
 def load_simulation_data():
     pct_file = "data/precomputed_pos_pct.pkl"
-
-    # Wait for file to be ready
-    timeout = 10  # seconds
+    timeout = 10
     start_time = time.time()
     while not os.path.exists(pct_file) and time.time() - start_time < timeout:
         time.sleep(0.5)
-
     if not os.path.exists(pct_file):
         return {}
-
     try:
         with open(pct_file, "rb") as f:
             return pickle.load(f)
@@ -104,7 +100,7 @@ def load_simulation_data():
 
 st.markdown("""
 <style>
-body, .main { background-color: #f8f9fa; }
+body, .main { background-color: #e6e6e6; font-family: Inter, Roboto, Arial, sans-serif; }
 
 h1, h2, h3, .stMarkdown p, .stSelectbox label { 
     text-align: center !important; 
@@ -130,12 +126,9 @@ div.stSelectbox > div > div[role="combobox"] {
 # 6️⃣ TITLE
 
 st.title("⚽ Football League Simulator ⚽")
-
 st.markdown("""
 **Data-driven forecasts for final positions across Europe’s top 5 football leagues (2025-26).**
-
-This app simulates every remaining fixture 10,000 times, producing 10,000 full season scenarios per league.  
-The results are aggregated to generate probabilities for each team finishing in each league position.
+This app simulates every remaining fixture 10,000 times and aggregates results into probability tables.
 """)
 
 # -------------------------------
@@ -207,30 +200,15 @@ styled_table, num_cols = style_probabilities_table(pos_pct_df)
 
 responsive_table_css = """
 <style>
-div.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-}
-table {
-    width: 100% !important;
-    border-collapse: collapse;
-}
-th, td {
-    overflow: visible !important;
-    white-space: normal !important;
-    text-align: center !important;
-    font-size: 14px !important;
-    padding: 4px 6px !important;
-}
+div.table-wrapper { width: 100%; overflow-x: auto; }
+table { width: 100% !important; border-collapse: collapse; }
+th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 4px 6px !important; }
 th:nth-child(2), td:nth-child(2) { text-align: left !important; min-width: 150px; }
 th:nth-child(1), td:nth-child(1) { width: 40px; }
 th:nth-child(3), td:nth-child(3) { min-width: 50px; }
 th:nth-child(4), td:nth-child(4) { min-width: 50px; }
 th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
-@media (max-width: 600px) {
-    th, td { font-size: 12px !important; }
-    th:nth-child(2), td:nth-child(2) { min-width: 120px; }
-}
+@media (max-width: 600px) { th, td { font-size: 12px !important; } th:nth-child(2), td:nth-child(2) { min-width: 120px; } }
 </style>
 """
 st.markdown(responsive_table_css, unsafe_allow_html=True)
@@ -257,16 +235,28 @@ with st.expander("📌 How this simulation works"):
 """)
 
 # -------------------------------
-# 1️⃣3️⃣ ABOUT ME
+# 1️⃣3️⃣ ABOUT ME (PRETTIER VERSION WITH ICONS)
 
 st.markdown("---")
-st.header("About Me")
+
 st.markdown("""
-Hi, I'm **Victoria Friss de Kereki**, a Data Scientist working in sports analytics and applied modelling.  
-I build probabilistic football simulations and predictive models for Europe’s top leagues and write about football data and analytics.
-""")
-st.markdown("""
-📄 [Read my Medium](https://medium.com/@vickyfrissdekereki)  
-💼 [LinkedIn](https://www.linkedin.com/in/victoria-friss-de-kereki/)  
-✉️ [Email](mailto:vicky_friss@hotmail.com)
-""")
+<div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+
+<h3>About Me</h3>
+<p>Hi, I'm <b>Victoria Friss de Kereki</b>, a Data Scientist working in sports analytics and applied modelling.</p>
+<p>I build probabilistic football simulations and predictive models for Europe’s top leagues.</p>
+
+<div style="margin-top:10px;">
+<a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="margin:0 10px; text-decoration:none;">
+  <img src="https://img.icons8.com/ios-filled/30/000000/medium-monogram.png"/>
+</a>
+<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="margin:0 10px; text-decoration:none;">
+  <img src="https://img.icons8.com/ios-filled/30/000000/linkedin.png"/>
+</a>
+<a href="mailto:vicky_friss@hotmail.com" style="margin:0 10px; text-decoration:none;">
+  <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
+</a>
+</div>
+
+</div>
+""", unsafe_allow_html=True)
