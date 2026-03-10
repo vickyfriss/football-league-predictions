@@ -5,6 +5,7 @@ import pickle
 import pandas as pd
 import numpy as np
 import os
+import time
 from datetime import datetime, timezone
 from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -26,9 +27,7 @@ mid_pct = 0.14
 max_pct = 0.75
 
 def zero_style(val):
-    if val < 1:
-        return "background-color: white !important;"
-    return ""
+    return "background-color: white !important;" if val < 1 else ""
 
 def color_scale(val, mid=mid_pct, max_val=max_pct):
     if val >= max_val:
@@ -40,7 +39,6 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
 
 def style_probabilities_table(df):
     display_df = df.copy().reset_index(drop=True)
-
     text_cols = ["POS", "TEAM", "GP", "PTS"]
     num_cols = display_df.columns.difference(text_cols)
 
@@ -67,9 +65,9 @@ def style_probabilities_table(df):
         .hide(axis="index")
         .set_table_styles([
             {"selector": "th", "props":[("background-color","#e6edf4"),("color","#333"),
-                                       ("text-align","center"),
-                                       ("font-family","Inter, Roboto, Arial, sans-serif"),
-                                       ("font-size","13px"),("font-weight","600")]},
+                                        ("text-align","center"),
+                                        ("font-family","Inter, Roboto, Arial, sans-serif"),
+                                        ("font-size","13px"),("font-weight","600")]},
             {"selector": "tr", "props":[("height","25px")]},
             {"selector": "th:nth-child(4), td:nth-child(4)", "props":[("border-right","2px solid #999")]},
             {"selector": "td:nth-child(-n+4)", "props":[("border-bottom","1px solid #ccc")]},
@@ -77,14 +75,24 @@ def style_probabilities_table(df):
             {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
         ])
     )
-
     return styled, num_cols
 
 # -------------------------------
 # 4️⃣ CACHE SIMULATION DATA LOADING
-@st.cache_data(show_spinner=False)
-def load_simulation_data(file_mtime):
+
+@st.cache_data(ttl=0, show_spinner=False)
+def load_simulation_data():
     pct_file = "data/precomputed_pos_pct.pkl"
+
+    # Wait for file to be ready
+    timeout = 10  # seconds
+    start_time = time.time()
+    while not os.path.exists(pct_file) and time.time() - start_time < timeout:
+        time.sleep(0.5)
+
+    if not os.path.exists(pct_file):
+        return {}
+
     try:
         with open(pct_file, "rb") as f:
             return pickle.load(f)
@@ -93,6 +101,7 @@ def load_simulation_data(file_mtime):
 
 # -------------------------------
 # 5️⃣ PAGE STYLING
+
 st.markdown("""
 <style>
 body, .main { background-color: #f8f9fa; }
@@ -119,7 +128,9 @@ div.stSelectbox > div > div[role="combobox"] {
 
 # -------------------------------
 # 6️⃣ TITLE
+
 st.title("⚽ Football League Simulator ⚽")
+
 st.markdown("""
 **Data-driven forecasts for final positions across Europe’s top 5 football leagues (2025-26).**
 
@@ -128,21 +139,21 @@ The results are aggregated to generate probabilities for each team finishing in 
 """)
 
 # -------------------------------
-# 7️⃣ LOAD SIMULATION DATA WITH TIMESTAMP
-pct_file = "data/precomputed_pos_pct.pkl"
-file_mtime = os.path.getmtime(pct_file) if os.path.exists(pct_file) else 0
+# 7️⃣ LOAD SIMULATION DATA
 
-with st.spinner("Loading simulation results..."):
-    position_distribution_pct_all = load_simulation_data(file_mtime)
+with st.spinner("Loading simulation data..."):
+    position_distribution_pct_all = load_simulation_data()
 
-if position_distribution_pct_all:
-    pct_mtime_dt = datetime.fromtimestamp(file_mtime, tz=timezone.utc)
-    st.info(f"Simulations last run on: {pct_mtime_dt.strftime('%d/%B/%Y %H:%M')} UTC")
+if not position_distribution_pct_all:
+    st.warning("⚠️ Simulation data not ready yet. Please reload later.")
 else:
-    st.warning("⚠️ No precomputed simulation results found.")
+    pct_file = "data/precomputed_pos_pct.pkl"
+    pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
+    st.info(f"Simulations last run on: {pct_mtime.strftime('%d/%B/%Y %H:%M')} UTC")
 
 # -------------------------------
 # 8️⃣ LEAGUE SELECTION
+
 league_display_names = [
     "Premier League (England)",
     "Serie A (Italy)",
@@ -164,7 +175,8 @@ league = league_key_map[selected_display_name]
 
 # -------------------------------
 # 9️⃣ PREPARE DATAFRAME
-if league in position_distribution_pct_all and not position_distribution_pct_all[league].empty:
+
+if position_distribution_pct_all and league in position_distribution_pct_all:
     pos_pct_df = position_distribution_pct_all[league].copy().reset_index()
 else:
     pos_pct_df = pd.DataFrame(columns=["POS","TEAM","GP","PTS"])
@@ -181,44 +193,59 @@ for col in ["POS","TEAM","GP","PTS"]:
         else:
             pos_pct_df[col] = ""
 
-pos_pct_df = pos_pct_df.astype({"TEAM": str, "POS": int, "GP": int, "PTS": int})
+pos_pct_df["TEAM"] = pos_pct_df["TEAM"].astype(str)
+pos_pct_df["POS"] = pos_pct_df["POS"].astype(int)
+pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
+pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
 st.header(f"🏆 {selected_display_name} Simulation Results")
 
 # -------------------------------
 # 🔟 STYLE AND DISPLAY TABLE
+
 styled_table, num_cols = style_probabilities_table(pos_pct_df)
 
 responsive_table_css = """
 <style>
-div.table-wrapper { width: 100%; overflow-x: auto; }
-table { width: 100% !important; border-collapse: collapse; }
-th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 4px 6px !important; }
+div.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100% !important;
+    border-collapse: collapse;
+}
+th, td {
+    overflow: visible !important;
+    white-space: normal !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+}
 th:nth-child(2), td:nth-child(2) { text-align: left !important; min-width: 150px; }
 th:nth-child(1), td:nth-child(1) { width: 40px; }
 th:nth-child(3), td:nth-child(3) { min-width: 50px; }
 th:nth-child(4), td:nth-child(4) { min-width: 50px; }
 th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
-@media (max-width: 600px) { th, td { font-size: 12px !important; } th:nth-child(2), td:nth-child(2) { min-width: 120px; } }
+@media (max-width: 600px) {
+    th, td { font-size: 12px !important; }
+    th:nth-child(2), td:nth-child(2) { min-width: 120px; }
+}
 </style>
 """
-
 st.markdown(responsive_table_css, unsafe_allow_html=True)
 st.markdown(f'<div class="table-wrapper">{styled_table.to_html(escape=False)}</div>', unsafe_allow_html=True)
 st.caption("Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.")
 
 # -------------------------------
-# 11️⃣ DOWNLOAD OPTION
+# 1️⃣1️⃣ DOWNLOAD OPTION
+
 csv = pos_pct_df.to_csv(index=False).encode("utf-8")
-st.download_button(
-    label="Download table as CSV",
-    data=csv,
-    file_name=f"{league}_final_positions.csv",
-    mime="text/csv",
-)
+st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
 
 # -------------------------------
-# 12️⃣ METHODOLOGY
+# 1️⃣2️⃣ METHODOLOGY
+
 with st.expander("📌 How this simulation works"):
     st.markdown("""
 **Step 1 – Historical Data:** Compile past match results from the 2024/25 and 2025/26 seasons.  
@@ -230,12 +257,12 @@ with st.expander("📌 How this simulation works"):
 """)
 
 # -------------------------------
-# 13️⃣ ABOUT ME
+# 1️⃣3️⃣ ABOUT ME
+
 st.markdown("---")
 st.header("About Me")
 st.markdown("""
-Hi, I'm **Victoria Friss de Kereki**, a Data Scientist working in sports analytics and applied modelling.
-
+Hi, I'm **Victoria Friss de Kereki**, a Data Scientist working in sports analytics and applied modelling.  
 I build probabilistic football simulations and predictive models for Europe’s top leagues and write about football data and analytics.
 """)
 st.markdown("""
