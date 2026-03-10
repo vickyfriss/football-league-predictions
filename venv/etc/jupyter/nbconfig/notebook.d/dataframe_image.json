@@ -1,9 +1,0 @@
-{
-    "bundlerextensions":{
-        "dataframe_image_bundler": {
-        "label": "DataFrame as Image (PDF or Markdown)",
-        "module_name": "dataframe_image._bundler",
-        "group": "download"
-        }
-    }
-}
