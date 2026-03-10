@@ -96,7 +96,7 @@ def load_simulation_data():
         return {}
 
 # -------------------------------
-# 5️⃣ PAGE STYLING + CONTACT PANEL + SELECTBOX CSS
+# 5️⃣ PAGE STYLING + SELECTBOX + CONTACT PANEL
 
 st.markdown("""
 <style>
@@ -136,7 +136,7 @@ th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
 #contact-panel a:first-child { margin-top: 4px; }
 #contact-panel a:hover img { transform: scale(1.3); }
 
-/* Style the selectbox container to match info box */
+/* Style the selectbox container like a card */
 div.stSelectbox > div[role="combobox"] {
     background-color: #ffffff !important;
     padding: 12px 20px !important;
@@ -155,8 +155,13 @@ div.stSelectbox svg { fill: #1f77b4 !important; }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    #contact-panel { top: 40px; right: 10px; padding: 8px; }
+    /* Horizontal top-right bar instead of vertical */
+    #contact-panel { flex-direction: row; top: 10px; right: 10px; padding: 8px; border-radius: 8px; }
+    #contact-panel a { margin: 0 8px; }
+    #contact-panel a:first-child { margin-left: 0; }
     #contact-panel a img { width: 24px !important; height: 24px !important; }
+
+    /* Selectbox smaller on mobile */
     div.stSelectbox > div[role="combobox"] {
         max-width: 220px !important;
         padding: 8px 12px !important;
@@ -293,17 +298,12 @@ st.markdown("""
 <div id="about-me" style="background: #f0f7ff; padding:35px 25px; border-radius:10px; max-width:700px; 
             margin:auto; text-align:center; font-size:18px; line-height:1.8; margin-top:50px; margin-bottom:60px;">
 <h3 style="color:#1f77b4; font-size:28px; margin-bottom:15px;">About Me</h3>
-
 <p>Hi, I’m <b>Victoria Friss de Kereki</b>, an Applied Data Scientist specialising in <b>sports analytics</b> and performance insights.</p>
-
 <p>I build <b>probabilistic simulations</b>, <b>predictive models</b>, and <b>data-driven insights</b> to help sports organisations and analysts make informed decisions backed by data.</p>
-
 <p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="color:#1f77b4;">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
-
 <p style="margin-top:20px; font-size:19px; font-weight:600; color:#1f77b4;">
 Interested in collaborating, hiring, or discussing sports analytics? <br><b>Let’s connect!</b>
 </p>
-
 <div style="margin-top:20px;">
 <a href="mailto:vicky_friss@hotmail.com" style="margin:0 15px; text-decoration:none;">
   <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
