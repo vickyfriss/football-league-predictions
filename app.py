@@ -10,9 +10,12 @@ from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 # -------------------------------
-# 2️⃣ HELPER FUNCTIONS FOR STYLING
+# 2️⃣ STREAMLIT APP CONFIG
+st.set_page_config(page_title="Football League Simulator", layout="wide", page_icon="⚽")
 
-# Soft green colormap
+# -------------------------------
+# 3️⃣ HELPER FUNCTIONS FOR STYLING
+
 greens = plt.cm.Greens
 green_cmap = LinearSegmentedColormap.from_list(
     "Greens_soft",
@@ -37,6 +40,7 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
 
 def style_probabilities_table(df):
     display_df = df.copy().reset_index(drop=True)
+
     text_cols = ["POS", "TEAM", "GP", "PTS"]
     num_cols = display_df.columns.difference(text_cols)
 
@@ -63,8 +67,9 @@ def style_probabilities_table(df):
         .hide(axis="index")
         .set_table_styles([
             {"selector": "th", "props":[("background-color","#e6edf4"),("color","#333"),
-                                         ("text-align","center"),("font-family","Inter, Roboto, Arial, sans-serif"),
-                                         ("font-size","13px"),("font-weight","600")]},
+                                       ("text-align","center"),
+                                       ("font-family","Inter, Roboto, Arial, sans-serif"),
+                                       ("font-size","13px"),("font-weight","600")]},
             {"selector": "tr", "props":[("height","25px")]},
             {"selector": "th:nth-child(4), td:nth-child(4)", "props":[("border-right","2px solid #999")]},
             {"selector": "td:nth-child(-n+4)", "props":[("border-bottom","1px solid #ccc")]},
@@ -72,32 +77,42 @@ def style_probabilities_table(df):
             {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
         ])
     )
+
     return styled, num_cols
 
 # -------------------------------
-# 3️⃣ STREAMLIT APP CONFIG
-st.set_page_config(page_title="Football League Simulator", layout="wide", page_icon="⚽")
+# 4️⃣ CACHE SIMULATION DATA LOADING
+
+@st.cache_data
+def load_simulation_data():
+
+    pct_file = "data/precomputed_pos_pct.pkl"
+
+    if not os.path.exists(pct_file):
+        return {}
+
+    with open(pct_file, "rb") as f:
+        return pickle.load(f)
 
 # -------------------------------
-# 4️⃣ PAGE STYLING (PALE GREY BACKGROUND + CENTERED TEXT)
+# 5️⃣ PAGE STYLING
 st.markdown("""
 <style>
 body, .main { background-color: #f8f9fa; }
 
-/* Center headings & paragraphs */
 h1, h2, h3, .stMarkdown p, .stSelectbox label { 
     text-align: center !important; 
     width: 100%; 
     display: block;
 }
 
-/* Selectbox styling */
 div.stSelectbox > label, div.stSelectbox > div {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
+
 div.stSelectbox > div > div[role="combobox"] {
     max-width: 300px;
     min-width: 200px;
@@ -106,8 +121,10 @@ div.stSelectbox > div > div[role="combobox"] {
 """, unsafe_allow_html=True)
 
 # -------------------------------
-# 5️⃣ TITLE AND INTRODUCTION
+# 6️⃣ TITLE
+
 st.title("⚽ Football League Simulator ⚽")
+
 st.markdown("""
 **Data-driven forecasts for final positions across Europe’s top 5 football leagues (2025-26).**
 
@@ -116,32 +133,30 @@ The results are aggregated to generate probabilities for each team finishing in 
 """)
 
 # -------------------------------
-# 6️⃣ LOAD PICKLES
-pct_file = "data/precomputed_pos_pct.pkl"
-counts_file = "data/precomputed_pos_counts.pkl"
-
-position_distribution_all = {}
-position_distribution_pct_all = {}
+# 7️⃣ LOAD SIMULATION DATA
 
 try:
-    if os.path.exists(counts_file):
-        with open(counts_file,"rb") as f:
-            position_distribution_all = pickle.load(f)
-    if os.path.exists(pct_file):
-        with open(pct_file,"rb") as f:
-            position_distribution_pct_all = pickle.load(f)
+
+    position_distribution_pct_all = load_simulation_data()
 
     if position_distribution_pct_all:
+
+        pct_file = "data/precomputed_pos_pct.pkl"
         pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
         formatted_time = pct_mtime.strftime("%d/%B/%Y %H:%M")
+
         st.info(f"Simulations last run on: {formatted_time} UTC")
+
     else:
-        st.warning("⚠️ No precomputed simulation results found. Table will be empty.")
+        st.warning("⚠️ No precomputed simulation results found.")
+
 except Exception as e:
-    st.error(f"❌ Failed to load precomputed results: {e}")
+    st.error(f"❌ Failed to load simulation results: {e}")
+    position_distribution_pct_all = {}
 
 # -------------------------------
-# 7️⃣ LEAGUE SELECTION
+# 8️⃣ LEAGUE SELECTION
+
 league_display_names = [
     "Premier League (England)",
     "Serie A (Italy)",
@@ -162,21 +177,29 @@ selected_display_name = st.selectbox("Select League", league_display_names)
 league = league_key_map[selected_display_name]
 
 # -------------------------------
-# 8️⃣ PREPARE DATAFRAME
+# 9️⃣ PREPARE DATAFRAME
+
 if league in position_distribution_pct_all and not position_distribution_pct_all[league].empty:
+
     pos_pct_df = position_distribution_pct_all[league].copy().reset_index()
+
 else:
+
     pos_pct_df = pd.DataFrame(columns=["POS","TEAM","GP","PTS"])
 
 if isinstance(pos_pct_df.columns, pd.MultiIndex):
     pos_pct_df.columns = [str(c) for c in pos_pct_df.columns]
 
 for col in ["POS","TEAM","GP","PTS"]:
+
     if col not in pos_pct_df.columns:
+
         if col == "POS":
             pos_pct_df[col] = np.arange(1, len(pos_pct_df)+1)
+
         elif col in ["GP","PTS"]:
             pos_pct_df[col] = 0
+
         else:
             pos_pct_df[col] = ""
 
@@ -188,26 +211,23 @@ pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 st.header(f"🏆 {selected_display_name} Simulation Results")
 
 # -------------------------------
-# 9️⃣ STYLE AND DISPLAY TABLE (EXPAND DYNAMICALLY)
+# 🔟 STYLE AND DISPLAY TABLE
+
 styled_table, num_cols = style_probabilities_table(pos_pct_df)
 
 responsive_table_css = """
 <style>
-/* Wrapper for horizontal scroll on small screens */
+
 div.table-wrapper {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
-/* Table stretches naturally */
 table {
     width: 100% !important;
-    table-layout: auto !important;
     border-collapse: collapse;
 }
 
-/* All cells wrap text if needed, avoid cropping numbers */
 th, td {
     overflow: visible !important;
     white-space: normal !important;
@@ -216,60 +236,34 @@ th, td {
     padding: 4px 6px !important;
 }
 
-/* TEAM column left-aligned */
 th:nth-child(2), td:nth-child(2) {
     text-align: left !important;
     min-width: 150px;
 }
 
-/* Other numeric columns flexible */
 th:nth-child(1), td:nth-child(1) { width: 40px; }
 th:nth-child(3), td:nth-child(3) { min-width: 50px; }
 th:nth-child(4), td:nth-child(4) { min-width: 50px; }
 th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
 
-/* Reduce font-size on very narrow screens */
 @media (max-width: 600px) {
     th, td { font-size: 12px !important; }
     th:nth-child(2), td:nth-child(2) { min-width: 120px; }
-    th:nth-child(n+5), td:nth-child(n+5) { min-width: 40px; }
 }
+
 </style>
 """
 
 st.markdown(responsive_table_css, unsafe_allow_html=True)
 st.markdown(f'<div class="table-wrapper">{styled_table.to_html(escape=False)}</div>', unsafe_allow_html=True)
+
 st.caption("Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.")
 
 # -------------------------------
-# 🔟 SIMULATION METHODOLOGY
-with st.expander("📌 How this simulation works"):
-    st.markdown("""
-<style>
-.simulation-text p, .simulation-text strong {
-    text-align: left !important;
-}
-</style>
-
-<div class="simulation-text">
-
-**Step 1 – Historical Data:** Compile past match results from the 2024/25 and 2025/26 seasons, along with the latest league table.  
-
-**Step 2 – Betting Odds:** Gather all available betting odds for upcoming fixtures to help inform expected outcomes.  
-
-**Step 3 – Team Strengths:** Calculate each team’s offensive and defensive strengths, factoring in home advantage.  
-
-**Step 4 – Match Probabilities:** Use a combination of betting odds and a Poisson-based goal model to estimate the probability of each match outcome (Home Win / Draw / Away Win).  
-
-**Step 5 – Full Season Simulation:** Simulate all remaining fixtures across 10,000 complete season scenarios.  
-
-**Step 6 – Final Probabilities:** Combine simulation results with the current league table to determine the probability of each team finishing in every league position.
-</div>
-""", unsafe_allow_html=True)
-
-# -------------------------------
 # 11️⃣ DOWNLOAD OPTION
-csv = pos_pct_df.to_csv(index=False).encode('utf-8')
+
+csv = pos_pct_df.to_csv(index=False).encode("utf-8")
+
 st.download_button(
     label="Download table as CSV",
     data=csv,
@@ -278,18 +272,40 @@ st.download_button(
 )
 
 # -------------------------------
-# 12️⃣ ABOUT ME & LINKS
-st.markdown("---")
-st.header("About Me")
-st.markdown("""
-Hi, I'm Victoria Friss de Kereki, a Data Scientist working in sports analytics and applied modelling.  
+# 12️⃣ METHODOLOGY
 
-I build probabilistic football simulations and predictive models for Europe’s top leagues, and  
-write about football, performance data, and how context changes what the numbers really mean.
+with st.expander("📌 How this simulation works"):
+
+    st.markdown("""
+
+**Step 1 – Historical Data:** Compile past match results from the 2024/25 and 2025/26 seasons.  
+
+**Step 2 – Betting Odds:** Gather betting odds for upcoming fixtures.  
+
+**Step 3 – Team Strengths:** Estimate offensive and defensive strength.  
+
+**Step 4 – Match Probabilities:** Use betting odds and a Poisson goal model.  
+
+**Step 5 – Full Season Simulation:** Simulate remaining fixtures 10,000 times.  
+
+**Step 6 – Final Probabilities:** Aggregate the simulated league tables.
+""")
+
+# -------------------------------
+# 13️⃣ ABOUT ME
+
+st.markdown("---")
+
+st.header("About Me")
+
+st.markdown("""
+Hi, I'm **Victoria Friss de Kereki**, a Data Scientist working in sports analytics and applied modelling.
+
+I build probabilistic football simulations and predictive models for Europe’s top leagues and write about football data and analytics.
 """)
 
 st.markdown("""
 📄 [Read my Medium](https://medium.com/@vickyfrissdekereki)  
 💼 [LinkedIn](https://www.linkedin.com/in/victoria-friss-de-kereki/)  
-✉️ [Send me an email](mailto:vicky_friss@hotmail.com)
+✉️ [Email](mailto:vicky_friss@hotmail.com)
 """)
