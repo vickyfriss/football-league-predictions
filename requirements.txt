@@ -1,14 +1,9 @@
-# Core data & scientific packages
-pandas>=3.0.1
-numpy>=2.4.3
-scipy>=1.17.1
-matplotlib>=3.10.8
-
-# Web requests and environment
-requests>=2.32.5
-python-dotenv>=1.2.2
-
-# Streamlit & visualization
-streamlit>=1.27.0
-altair>=4.2.2
-dataframe-image>=0.2.7
+pandas<3
+numpy<2
+requests
+scipy
+matplotlib
+python-dotenv
+dataframe-image
+streamlit==1.19.0
+altair==4.2.2
