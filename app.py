@@ -96,13 +96,12 @@ def load_simulation_data():
         return {}
 
 # -------------------------------
-# 5️⃣ PAGE STYLING
+# 5️⃣ PAGE STYLING + CONTACT PANEL + SELECTBOX CSS
 
 st.markdown("""
 <style>
 body, .main { background-color: #f2f2f2; font-family: Inter, Roboto, Arial, sans-serif; }
 h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
-div.stSelectbox > div > div[role="combobox"] { max-width: 300px; min-width: 200px; }
 
 /* Table responsiveness */
 div.table-wrapper { width: 100%; overflow-x: auto; }
@@ -113,26 +112,16 @@ th:nth-child(1), td:nth-child(1) { width: 40px; }
 th:nth-child(3), td:nth-child(3) { min-width: 50px; }
 th:nth-child(4), td:nth-child(4) { min-width: 50px; }
 th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
-@media (max-width: 600px) { th, td { font-size: 12px !important; } th:nth-child(2), td:nth-child(2) { min-width: 120px; } }
 
 /* Simulation methodology styling */
 .sim-step { background-color: #ffffff; border-left: 4px solid #1f77b4; padding: 10px 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .sim-step h4 { margin: 0 0 4px 0; font-weight: 600; color: #1f77b4; }
 .sim-step p { margin: 0; font-size: 14px; line-height: 1.5; color: #333; }
 
-/* Contact top-right panel */
-#contact-panel { position: fixed; top: 40px; right: 20px; background-color: #ffffff; padding: 10px 12px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); z-index: 100; display: flex; flex-direction: column; align-items: center; }
-#contact-panel a { margin: 6px 0; text-decoration: none; transition: transform 0.2s; }
-#contact-panel a:hover img { transform: scale(1.3); }
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-/* Contact top-right panel */
+/* Top-right contact panel */
 #contact-panel { 
     position: fixed; 
-    top: 20px; 
+    top: 60px;              
     right: 20px; 
     background-color: #ffffff; 
     padding: 10px 12px; 
@@ -143,22 +132,36 @@ st.markdown("""
     flex-direction: column; 
     align-items: center; 
 }
+#contact-panel a { margin: 8px 0; text-decoration: none; transition: transform 0.2s; }
+#contact-panel a:first-child { margin-top: 4px; }
+#contact-panel a:hover img { transform: scale(1.3); }
 
-/* All icons spacing */
-#contact-panel a { 
-    margin: 8px 0;           /* equal spacing between icons */
-    text-decoration: none; 
-    transition: transform 0.2s; 
+/* Style the selectbox container to match info box */
+div.stSelectbox > div[role="combobox"] {
+    background-color: #ffffff !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+    max-width: 300px !important;
+    margin: 10px auto !important;
 }
-
-/* Extra margin above the first icon */
-#contact-panel a:first-child {
-    margin-top: 12px;        /* slightly more space from top */
+div.stSelectbox > div[role="combobox"] > div {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #1f77b4 !important;
+    text-align: center !important;
 }
+div.stSelectbox svg { fill: #1f77b4 !important; }
 
-/* Hover effect */
-#contact-panel a:hover img { 
-    transform: scale(1.3); 
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    #contact-panel { top: 40px; right: 10px; padding: 8px; }
+    #contact-panel a img { width: 24px !important; height: 24px !important; }
+    div.stSelectbox > div[role="combobox"] {
+        max-width: 220px !important;
+        padding: 8px 12px !important;
+    }
+    div.stSelectbox > div[role="combobox"] > div { font-size: 14px !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -188,19 +191,20 @@ st.markdown("""
 
 st.title("⚽ Football League Simulator ⚽")
 st.markdown("""
-<div style="background: linear-gradient(90deg, #f9fbff, #ffffff); padding:20px 25px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:920px; margin:auto; text-align:center; font-size:16px; line-height:1.7; margin-bottom:10px;">
+<div style="background: linear-gradient(90deg, #f9fbff, #ffffff); padding:20px 25px; border-radius:10px; 
+            box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:920px; margin:auto; text-align:center; 
+            font-size:16px; line-height:1.7; margin-bottom:10px;">
 <p><b>Data-driven forecasts</b> for final positions across Europe’s top 5 football leagues (2025-26).</p>
 <p>This app simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.</p>
 <p style="margin-top:10px; font-weight:600; color:#1f77b4;">
-<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none; color:#1f77b4;">Learn more about the creator & connect →</a>
+<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none; color:#1f77b4;">
+Learn more about the creator & connect →</a>
 </p>
 </div>
 """, unsafe_allow_html=True)
 
 # -------------------------------
 # 8️⃣ LEAGUE SELECTION
-
-st.markdown('<div style="height:10px;"></div>', unsafe_allow_html=True)  # spacing
 
 league_display_names = [
     "Premier League (England)",
@@ -219,7 +223,8 @@ league_key_map = {
 
 selected_display_name = st.selectbox(
     "Select League",
-    league_display_names
+    league_display_names,
+    index=0
 )
 league = league_key_map[selected_display_name]
 
@@ -234,7 +239,7 @@ if not position_distribution_pct_all:
 else:
     pct_file = "data/precomputed_pos_pct.pkl"
     pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    st.markdown('<div style="height:10px;"></div>', unsafe_allow_html=True)  # spacing
+    st.markdown('<div style="height:10px;"></div>', unsafe_allow_html=True)
     st.info(f"Simulations last run on: {pct_mtime.strftime('%d/%B/%Y %H:%M')} UTC")
 
 # -------------------------------
@@ -278,14 +283,15 @@ csv = pos_pct_df.to_csv(index=False).encode("utf-8")
 st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
 
 # -------------------------------
-# 13️⃣ METHODOLOGY SECTION (unchanged, same styling as before)
-# ... keep your methodology code here ...
+# 13️⃣ METHODOLOGY SECTION
+# (Insert your methodology code here with .sim-step styling)
 
 # -------------------------------
-# 14️⃣ BOTTOM ABOUT ME (updated for sports analytics, icon order)
+# 14️⃣ BOTTOM ABOUT ME
 
 st.markdown("""
-<div id="about-me" style="background: #f0f7ff; padding:35px 25px; border-radius:10px; max-width:700px; margin:auto; text-align:center; font-size:18px; line-height:1.8; margin-top:50px; margin-bottom:60px;">
+<div id="about-me" style="background: #f0f7ff; padding:35px 25px; border-radius:10px; max-width:700px; 
+            margin:auto; text-align:center; font-size:18px; line-height:1.8; margin-top:50px; margin-bottom:60px;">
 <h3 style="color:#1f77b4; font-size:28px; margin-bottom:15px;">About Me</h3>
 
 <p>Hi, I’m <b>Victoria Friss de Kereki</b>, an Applied Data Scientist specialising in <b>sports analytics</b> and performance insights.</p>
@@ -311,7 +317,6 @@ Interested in collaborating, hiring, or discussing sports analytics? <br><b>Let�
 <a href="https://github.com/vickyfriss" target="_blank" style="margin:0 15px; text-decoration:none;">
   <img src="https://img.icons8.com/ios-filled/30/000000/github.png"/>
 </a>
-
 </div>
 </div>
 """, unsafe_allow_html=True)
