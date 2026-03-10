@@ -321,8 +321,48 @@ csv = pos_pct_df.to_csv(index=False).encode("utf-8")
 st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
 
 # -------------------------------
-# 13️⃣ METHODOLOGY SECTION
-# (Insert your methodology code here with .sim-step styling)
+# -------------------------------
+# 1️⃣4️⃣ METHODOLOGY
+st.markdown("""
+<div style="background-color:#fff; padding:25px 30px; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.1); max-width:920px; margin:auto; margin-top:30px;">
+<h3 style="color:#1f77b4; margin-bottom:15px;">📌 How This Simulation Works</h3>
+<p style="font-size:15px; line-height:1.8; color:#333;">
+This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  
+We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position.
+</p>
+<ul style="font-size:15px; line-height:1.8; color:#333; padding-left:0; list-style:none; border-left:3px solid #1f77b4; margin-top:20px;">
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>1</div>
+<div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2025" target="_blank">ESPN</a>).</div>
+</li>
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>2</div>
+<div><b>Fixtures:</b> Historical match results and remaining fixtures obtained via the <a href="https://www.football-data.org/" target="_blank">Football-Data API</a>.</div>
+</li>
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>3</div>
+<div><b>Betting Odds:</b> Incorporate market expectations from <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> to boost accuracy.</div>
+</li>
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>4</div>
+<div><b>Team Strengths:</b> Estimate attacking and defensive strengths for each team.</div>
+</li>
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>5</div>
+<div><b>Match Probabilities:</b> Generate outcome probabilities using Poisson and betting-based models.</div>
+</li>
+<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>6</div>
+<div><b>Monte Carlo Simulations:</b> Run 10,000 full season simulations to cover all possible scenarios.</div>
+</li>
+<li style="margin-bottom:0; display:flex; align-items:flex-start;">
+<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>7</div>
+<div><b>Final Positions:</b> Aggregate the simulation results into probability distributions.</div>
+</li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+
 
 # -------------------------------
 # 14️⃣ BOTTOM ABOUT ME
