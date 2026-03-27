@@ -1,6 +1,23 @@
 # ⚽ Football League Monte Carlo Simulation
 
-This project provides a **full Monte Carlo simulation pipeline** for European football leagues. It predicts league standings by simulating the remainder of the season using historical match data, team strengths, and betting odds.  
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Daily%20Simulations-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+This project provides a **full Monte Carlo simulation pipeline** for European football leagues. It predicts league standings by simulating the remainder of the season using historical match data, team strengths, and betting odds.
+
+---
+
+# 🌐 Live App
+
+Try the interactive simulator:
+
+https://football-league-simulator.streamlit.app/
+
+The dashboard allows you to explore predicted league outcomes and probability distributions for each team.
+
+---
 
 ## Features
 - **Data Collection & Processing:** Automatically scrapes and organizes past match results, upcoming fixtures, and betting odds.  
