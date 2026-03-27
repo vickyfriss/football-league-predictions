@@ -4,7 +4,6 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Daily%20Simulations-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
-
 [![Open Simulator](https://img.shields.io/badge/Open%20Simulator-Streamlit-green)](https://football-league-simulator.streamlit.app/)
 
 This project provides a **full Monte Carlo simulation pipeline** for European football leagues. It predicts league standings by simulating the remainder of the season using historical match data, team strengths, and betting odds.
