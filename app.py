@@ -246,6 +246,7 @@ st.markdown("""
 
 league_display_names = [
     "Premier League (England)",
+    "EFL Championship (England 2nd tier)",
     "Serie A (Italy)",
     "La Liga (Spain)",
     "Bundesliga (Germany)",
@@ -253,6 +254,7 @@ league_display_names = [
 ]
 league_key_map = {
     "Premier League (England)": "premierleague_england",
+    "EFL Championship (England 2nd tier)", "championship_england",
     "Serie A (Italy)": "seriea_italy",
     "La Liga (Spain)": "laliga_spain",
     "Bundesliga (Germany)": "bundesliga_germany",
