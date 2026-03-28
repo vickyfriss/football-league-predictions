@@ -143,6 +143,7 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
 if __name__ == "__main__":
     leagues = [
         "premierleague_england",
+        "championship_england",
         "seriea_italy",
         "laliga_spain",
         "bundesliga_germany",

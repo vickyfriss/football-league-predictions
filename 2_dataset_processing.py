@@ -10,6 +10,7 @@ leagues = [
     "laliga_spain",
     "bundesliga_germany",
     "ligue1_france",
+    "championship_england"  # ✅ Added Championship
 ]
 
 # -------------------------------
@@ -120,6 +121,41 @@ mappings = {
         "Auxerre": "AJ Auxerre",
         "Le Havre": "Le Havre AC",
         "Rennes": "Stade Rennais"
+    },
+    "championship_england": {  
+        "Sheffield United FC": "Sheffield United",
+        "West Bromwich Albion FC": "West Bromwich Albion",
+        "Burnley FC": "Burnley",
+        "Blackpool FC": "Blackpool",
+        "Bristol City FC": "Bristol City",
+        "Coventry City FC": "Coventry City",
+        "Hull City AFC": "Hull City",
+        "Luton Town FC": "Luton Town",
+        "Middlesbrough FC": "Middlesbrough",
+        "Millwall FC": "Millwall",
+        "Nottingham Forest FC": "Nottingham Forest",
+        "Queens Park Rangers FC": "Queens Park Rangers",
+        "Reading FC": "Reading",
+        "Rotherham United FC": "Rotherham United",
+        "Stoke City FC": "Stoke City",
+        "Sunderland AFC": "Sunderland",
+        "Swansea City AFC": "Swansea City",
+        "Watford FC": "Watford",
+        "Wigan Athletic FC": "Wigan Athletic",
+        "Derby County FC": "Derby County",
+        "Ipswich Town FC": "Ipswich Town",
+        "Southampton FC": "Southampton",
+        "Wrexham AFC": "Wrexham",
+        "Leicester City FC": "Leicester City",
+        "Portsmouth FC": "Portsmouth",
+        "Oxford United FC": "Oxford United",
+        "Charlton Athletic FC": "Charlton Athletic",
+        "Wrexham AFC": "Wrexham",
+        "Sheffield Wednesday FC": "Sheffield Wednesday",
+        "Preston North End FC": "Preston North End",
+        "Blackburn Rovers FC": "Blackburn Rovers",
+        "Norwich City FC": "Norwich City",
+        "Birmingham City FC": "Birmingham City"
     }
 }
 
