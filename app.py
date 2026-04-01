@@ -163,23 +163,7 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 #contact-panel a:first-child { margin-top: 4px; }
 #contact-panel a:hover img { transform: scale(1.3); }
 
-/* Style the selectbox container like a card */
-div.stSelectbox > div[role="combobox"] {
-    background-color: #ffffff !important;
-    padding: 12px 20px !important;
-    border-radius: 10px !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
-    max-width: 300px !important;
-    margin: 10px auto !important;
-}
-div.stSelectbox > div[role="combobox"] > div {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    color: #1f77b4 !important;
-    text-align: center !important;
-}
-div.stSelectbox svg { fill: #1f77b4 !important; }
-
+            
 /* Responsive adjustments for other elements */
 @media (max-width: 600px) {
     /* Horizontal top-right bar with margin from top */
@@ -269,6 +253,7 @@ selected_display_name = st.selectbox(
     index=0
 )
 league = league_key_map[selected_display_name]
+
 
 # -------------------------------
 # 9️⃣ LOAD SIMULATION DATA
