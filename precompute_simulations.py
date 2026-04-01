@@ -32,7 +32,7 @@ if not dataset_creation.standings_changed(standings):
 
 print("✅ Standings changed. Creating datasets...")
 
-standings, odds_book, fixtures, past_results = dataset_creation.create_datasets(save_csv=True)
+standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
 
 print("✅ Datasets created.")
 
@@ -41,13 +41,20 @@ print("2️⃣ Processing datasets...")
 
 globals_dict = {}
 
-# Fetch all past matches for 2025 once
-past_season_results_2025 = dataset_creation.fetch_past_season_results([2025])
+# Fetch all past matches from dataset_creation
+# past_season_results = past_results
 
 for lg in dataset_processing.leagues:
 
     # 1️⃣ Past matches (this season)
-    past_matches_current = past_season_results_2025[lg][2025]
+    league_results = past_season_results.get(lg, {})
+
+    if league_results:
+        latest_season = max(league_results.keys())
+        past_matches_current = league_results[latest_season]
+    else:
+        past_matches_current = pd.DataFrame()
+
     globals_dict[f"past_matches_{lg}_all"] = past_matches_current
 
     # 2️⃣ Future matches

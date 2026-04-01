@@ -30,6 +30,7 @@ TEAM_NAME_MAPPING = {
     "LLille": "Lille",
     "ENice": "Nice",
     "ZMetz": "Metz",
+    "ORemo": "Remo",
 }
 
 def clean_team_names(df, column="team"):
@@ -39,17 +40,22 @@ def clean_team_names(df, column="team"):
 
 # -------------------------------
 # Scrape final standings from ESPN
-def scrape_standings(year=2025):
+def scrape_standings():
     leagues_codes = {
-        "ENG.1": "premierleague_england",
-        "ENG.2": "championship_england",
-        "ITA.1": "seriea_italy",
-        "ESP.1": "laliga_spain",
-        "GER.1": "bundesliga_germany",
-        "FRA.1": "ligue1_france",
+        "ENG.1": ("premierleague_england", 2025),
+        "ENG.2": ("championship_england", 2025),
+        "ITA.1": ("seriea_italy", 2025),
+        "ESP.1": ("laliga_spain", 2025),
+        "GER.1": ("bundesliga_germany", 2025),
+        "FRA.1": ("ligue1_france", 2025),
+
+        # South America
+        "BRA.1": ("seriea_brazil", 2026),
+#        "URU.1": "primera_division_uruguay",
+#        "ARG.1": "primera_division_argentina",
     }
     standings = {}
-    for league_code, df_name in leagues_codes.items():
+    for league_code, (df_name, year) in leagues_codes.items():
         url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
         tables = pd.read_html(url)
 
@@ -106,7 +112,11 @@ def load_betting_odds():
         "soccer_spain_la_liga": "odds_laliga_spain",
         "soccer_germany_bundesliga": "odds_bundesliga_germany",
         "soccer_france_ligue_one": "odds_ligue1_france",
+                # NEW (may or may not exist in Odds API)
+#        "soccer_argentina_primera_division": "odds_primera_division_argentina",
+        "soccer_brazil_campeonato": "odds_seriea_brazil",
     }
+
     base_url = "https://api.the-odds-api.com/v4/sports/{}/odds"
     params = {"apiKey": API_KEY, "regions": "uk", "markets": "h2h", "oddsFormat": "decimal", "dateFormat": "iso", "days": 365}
 
@@ -119,8 +129,8 @@ def load_betting_odds():
             data = response.json()
             print(f"{var_name}: {len(data)} matches returned")
             odds_data[var_name] = data
-        except Exception as e:
-            print(f"Error fetching {sport_key}: {e}")
+        except Exception:
+            print(f"{sport_key}: betting odds not available, skipping.")
             odds_data[var_name] = []
     return odds_data
 
@@ -179,6 +189,9 @@ def load_fixtures():
         "PD": "fixtures_laliga_spain",
         "BL1": "fixtures_bundesliga_germany",
         "FL1": "fixtures_ligue1_france",
+            # NEW
+        "BSA": "fixtures_seriea_brazil",
+#        "LPF": "fixtures_primera_division_argentina",
     }
     headers = {"X-Auth-Token": API_KEY}
     today = datetime.utcnow().date()
@@ -188,9 +201,14 @@ def load_fixtures():
     fixtures_data = {}
     for comp_code, df_name in competitions.items():
         url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
-        response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()["matches"]
+        try:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()["matches"]
+        except Exception:
+            print(f"{comp_code}: fixtures not available, skipping.")
+            continue
+
         df = pd.DataFrame(data)[["utcDate","status","homeTeam","awayTeam"]].copy()
         df["homeTeam"] = df["homeTeam"].apply(lambda x: x["name"])
         df["awayTeam"] = df["awayTeam"].apply(lambda x: x["name"])
@@ -199,28 +217,57 @@ def load_fixtures():
 
 # -------------------------------
 # Past season results
-def fetch_past_season_results(seasons=[2025, 2024]):
+def fetch_past_season_results(data_folder="data/previous_season"):
     API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
+
     competitions = {
-        "PL": "premierleague_england",
-        "ELC": "championship_england",
-        "SA": "seriea_italy",
-        "PD": "laliga_spain",
-        "BL1": "bundesliga_germany",
-        "FL1": "ligue1_france",
+        "PL": ("premierleague_england", [2025, 2024]),
+        "ELC": ("championship_england", [2025, 2024]),
+        "SA": ("seriea_italy", [2025, 2024]),
+        "PD": ("laliga_spain", [2025, 2024]),
+        "BL1": ("bundesliga_germany", [2025, 2024]),
+        "FL1": ("ligue1_france", [2025, 2024]),
+
+        # Brazil calendar seasons
+        "BSA": ("seriea_brazil", [2026, 2025]),
     }
+
     headers = {"X-Auth-Token": API_KEY}
     past_matches = {}
 
-    for comp_code, league_name in competitions.items():
+    os.makedirs(data_folder, exist_ok=True)
+
+    for comp_code, (league_name, seasons) in competitions.items():
         past_matches[league_name] = {}
+
         for season in seasons:
+
+            file_path = f"{data_folder}/past_{league_name}_{season}.csv"
+            previous_season = seasons[1]
+
+            # -----------------------------
+            # LOAD PREVIOUS SEASON FROM CACHE
+            # -----------------------------
+            if season == previous_season and os.path.exists(file_path):
+                print(f"Loading cached {league_name} {season}")
+                past_matches[league_name][season] = pd.read_csv(file_path)
+                continue
+
+            # -----------------------------
+            # FETCH FROM API
+            # -----------------------------
             print(f"Fetching {league_name} season {season}...")
+
             url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
             params = {"season": season, "status": "FINISHED"}
-            response = requests.get(url, headers=headers, params=params)
-            response.raise_for_status()
-            matches = response.json()["matches"]
+
+            try:
+                response = requests.get(url, headers=headers, params=params)
+                response.raise_for_status()
+                matches = response.json()["matches"]
+            except Exception:
+                print(f"{league_name} season {season}: data not available, skipping.")
+                continue
 
             rows = []
             for m in matches:
@@ -234,8 +281,17 @@ def fetch_past_season_results(seasons=[2025, 2024]):
                     "awayGoals": m["score"]["fullTime"]["away"],
                     "winner": m["score"]["winner"],
                 })
-            past_matches[league_name][season] = pd.DataFrame(rows)
+
+            df = pd.DataFrame(rows)
+
+            # Save previous season to cache
+            if season == previous_season:
+                df.to_csv(file_path, index=False)
+
+            past_matches[league_name][season] = df
+
             time.sleep(10)
+
     return past_matches
 
 # -------------------------------

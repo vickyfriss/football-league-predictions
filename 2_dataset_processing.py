@@ -10,7 +10,9 @@ leagues = [
     "laliga_spain",
     "bundesliga_germany",
     "ligue1_france",
-    "championship_england"  # ✅ Added Championship
+    "championship_england",
+#    "primera_division_argentina",
+    "seriea_brazil"
 ]
 
 # -------------------------------
@@ -156,6 +158,35 @@ mappings = {
         "Blackburn Rovers FC": "Blackburn Rovers",
         "Norwich City FC": "Norwich City",
         "Birmingham City FC": "Birmingham City"
+    },
+
+#    "primera_division_argentina": {},
+    "seriea_brazil": {
+        "CR Flamengo": "Flamengo",
+        "SE Palmeiras": "Palmeiras",
+        "Cruzeiro EC": "Cruzeiro",
+        "Mirassol FC": "Mirassol",
+        "Fluminense FC": "Fluminense",
+        "Botafogo FR": "Botafogo",
+        "EC Bahia": "Bahia",
+        "São Paulo FC": "São Paulo",
+        "Sao Paulo": "São Paulo",
+        "Grêmio FBPA": "Grêmio",
+        "RB Bragantino": "Red Bull Bragantino",
+        "Bragantino-SP": "Red Bull Bragantino",
+        "CA Mineiro": "Atlético-MG",
+        "Atletico Mineiro": "Atlético-MG",
+        "Santos FC": "Santos",
+        "SC Corinthians Paulista": "Corinthians",
+        "CR Vasco da Gama": "Vasco da Gama",
+        "EC Vitória": "Vitória",
+        "Vitoria": "Vitória",
+        "SC Internacional": "Internacional",
+        "Coritiba FBC": "Coritiba",
+        "CA Paranaense": "Athletico Paranaense",
+        "Atletico Paranaense": "Athletico Paranaense",
+        "Chapecoense AF": "Chapecoense",
+        "Clube do Remo": "Remo"
     }
 }
 

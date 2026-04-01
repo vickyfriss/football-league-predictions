@@ -250,7 +250,8 @@ league_display_names = [
     "Serie A (Italy)",
     "La Liga (Spain)",
     "Bundesliga (Germany)",
-    "Ligue 1 (France)"
+    "Ligue 1 (France)",
+    "Serie A (Brazil)"
 ]
 league_key_map = {
     "Premier League (England)": "premierleague_england",
@@ -258,7 +259,8 @@ league_key_map = {
     "Serie A (Italy)": "seriea_italy",
     "La Liga (Spain)": "laliga_spain",
     "Bundesliga (Germany)": "bundesliga_germany",
-    "Ligue 1 (France)": "ligue1_france"
+    "Ligue 1 (France)": "ligue1_france",
+    "Serie A (Brazil)": "seriea_brazil"
 }
 
 selected_display_name = st.selectbox(

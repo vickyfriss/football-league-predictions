@@ -145,13 +145,14 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
 
 # === 5. USAGE EXAMPLE ===
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     leagues = [
         "premierleague_england",
         "seriea_italy",
         "laliga_spain",
         "bundesliga_germany",
         "ligue1_france",
+        "seriea_brazil"
     ]
     # tables_all should be a dict: league_name → table dataframe with 'team', 'pts', 'gd', 'gp'
     tables_all = {league: globals()[league] for league in leagues}

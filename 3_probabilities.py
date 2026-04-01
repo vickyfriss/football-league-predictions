@@ -147,7 +147,8 @@ if __name__ == "__main__":
         "seriea_italy",
         "laliga_spain",
         "bundesliga_germany",
-        "ligue1_france"
+        "ligue1_france",
+        "seriea_brazil"
     ]
     past_matches_all = {league: globals().get(f"past_matches_{league}_all", pd.DataFrame()) for league in leagues}
     fixtures_all = {league: globals().get(f"fixtures_{league}", pd.DataFrame()) for league in leagues}
