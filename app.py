@@ -230,7 +230,7 @@ st.markdown("""
     </h1>
     <div style="height:4px; width:80px; background:#1f77b4; margin:10px auto 20px auto; border-radius:2px;"></div>
     <p style="font-size:16px; line-height:1.7; color:#333; margin:0;">
-        Data-driven forecasts for final positions across European football leagues (2025-26).<br>
+        Data-driven forecasts for final positions across football leagues worldwide.<br>
         Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.
     </p>
     <p style="margin-top:15px; font-weight:600; color:#1f77b4;">
