@@ -103,16 +103,17 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         total_matches_season = num_teams * (num_teams - 1)
         matches_played = len(df_all)
         season_progress = matches_played / total_matches_season if total_matches_season > 0 else 1.0
+        mean_attack = attack.mean()
+        mean_defense = defense.mean()
 
         if season_progress < 0.5:
-            # Stronger shrink early, linearly decreasing to zero at half season
-            shrink_strength = 1 - 2 * season_progress  # 1 -> 0 at half-season
-            mean_attack = attack.mean()
-            mean_defense = defense.mean()
-            
-            # Deterministic shrink toward mean
-            attack = mean_attack + shrink_strength * (attack - mean_attack)
-            defense = mean_defense + shrink_strength * (defense - mean_defense) 
+            # Flatten toward mean more strongly early season
+            # Max shrink: factor = 0.5 → ratings halfway to mean. 0.3 means only 30% of the original distance from the mean remains, so the ratings are closer to the mean.
+            max_shrink = 0.3  # smaller = stronger flattening
+            shrink_factor = max_shrink + (1 - max_shrink) * season_progress*2  # linear up to half season
+            shrink_factor = min(shrink_factor, 1.0)
+            attack = mean_attack + shrink_factor * (attack - mean_attack)
+            defense = mean_defense + shrink_factor * (defense - mean_defense)
 
         # Compute Poisson probabilities
         df_future = normalize_columns(fixtures_dict[league])
