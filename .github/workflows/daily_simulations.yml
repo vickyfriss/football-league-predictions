@@ -2,7 +2,7 @@ name: Daily Football Simulations
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # Run daily at 01:00 UTC
+    - cron: '0 6 * * *'  # Run daily at 06:00 UTC so Brazil will have finished playing
   workflow_dispatch:     # Allow manual runs
 
 jobs:
@@ -58,11 +58,20 @@ jobs:
           git add data/last_updated.txt
           git add data/simulations/*  # recursively add all timestamped folders and CSVs
 
+
       # 8️⃣ Commit and push updated data
       - name: Commit and push updated data
         run: |
-          git commit -m "Update precomputed simulations [skip ci]" || true
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Pull latest version first
           git pull --rebase origin main
+
+          # Commit changes
+          git commit -m "Update precomputed simulations [skip ci]" || true
+
+          # Push
           git push origin main
 
 
