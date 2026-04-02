@@ -3,13 +3,13 @@ import pandas as pd
 # -------------------------------
 # 1️⃣ Season start date and leagues
 SEASON_START_DATES = {
-    "premierleague_england": pd.Timestamp("2025-08-01"),
-    "seriea_italy": pd.Timestamp("2025-08-01"),
-    "laliga_spain": pd.Timestamp("2025-08-01"),
-    "bundesliga_germany": pd.Timestamp("2025-08-01"),
-    "ligue1_france": pd.Timestamp("2025-08-01"),
-    "championship_england": pd.Timestamp("2025-08-01"),
-    "seriea_brazil": pd.Timestamp("2026-01-01")
+    "premierleague_england": pd.Timestamp("2025-08-01", tz="UTC"),
+    "championship_england": pd.Timestamp("2025-08-01", tz="UTC"),
+    "seriea_italy": pd.Timestamp("2025-08-01", tz="UTC"),
+    "laliga_spain": pd.Timestamp("2025-08-01", tz="UTC"),
+    "bundesliga_germany": pd.Timestamp("2025-08-01", tz="UTC"),
+    "ligue1_france": pd.Timestamp("2025-08-01", tz="UTC"),
+    "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC")
 }
 
 leagues = [
