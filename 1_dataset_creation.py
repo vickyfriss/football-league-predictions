@@ -217,6 +217,8 @@ def load_fixtures():
 
 # -------------------------------
 # Past season results
+# -------------------------------
+# Past season results
 def fetch_past_season_results(data_folder="data/previous_season"):
     API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
 
@@ -227,8 +229,6 @@ def fetch_past_season_results(data_folder="data/previous_season"):
         "PD": ("laliga_spain", [2025, 2024]),
         "BL1": ("bundesliga_germany", [2025, 2024]),
         "FL1": ("ligue1_france", [2025, 2024]),
-
-        # Brazil calendar seasons
         "BSA": ("seriea_brazil", [2026, 2025]),
     }
 
@@ -239,36 +239,34 @@ def fetch_past_season_results(data_folder="data/previous_season"):
 
     for comp_code, (league_name, seasons) in competitions.items():
         past_matches[league_name] = {}
+        previous_season = seasons[1]
 
         for season in seasons:
-
             file_path = f"{data_folder}/past_{league_name}_{season}.csv"
-            previous_season = seasons[1]
 
-            # -----------------------------
-            # LOAD PREVIOUS SEASON FROM CACHE
-            # -----------------------------
+            # Use cache for the previous season if exists
             if season == previous_season and os.path.exists(file_path):
                 print(f"Loading cached {league_name} {season}")
                 past_matches[league_name][season] = pd.read_csv(file_path)
                 continue
 
-            # -----------------------------
-            # FETCH FROM API
-            # -----------------------------
+            # Fetch from API
             print(f"Fetching {league_name} season {season}...")
-
             url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
             params = {"season": season, "status": "FINISHED"}
 
             try:
-                response = requests.get(url, headers=headers, params=params)
+                response = requests.get(url, headers=headers, params=params, timeout=30)
                 response.raise_for_status()
-                matches = response.json()["matches"]
-            except Exception:
-                print(f"{league_name} season {season}: data not available, skipping.")
-                continue
+                matches = response.json().get("matches")
+                if matches is None:
+                    raise RuntimeError(f"{league_name} season {season}: API returned no 'matches'")
+            except Exception as e:
+                # ❌ Fail the whole run if API call fails
+                print(f"❌ {league_name} season {season}: API call failed: {e}")
+                raise RuntimeError(f"{league_name} season {season}: API call failed") from e
 
+            # Convert to DataFrame
             rows = []
             for m in matches:
                 rows.append({
@@ -290,7 +288,7 @@ def fetch_past_season_results(data_folder="data/previous_season"):
 
             past_matches[league_name][season] = df
 
-            time.sleep(10)
+            time.sleep(10)  # be polite to API
 
     return past_matches
 
