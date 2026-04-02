@@ -1,0 +1,64 @@
+utcDate,status,homeTeam,awayTeam
+2026-04-04T13:30:00Z,TIMED,SC Freiburg,FC Bayern München
+2026-04-04T13:30:00Z,TIMED,TSG 1899 Hoffenheim,1. FSV Mainz 05
+2026-04-04T13:30:00Z,TIMED,SV Werder Bremen,RB Leipzig
+2026-04-04T13:30:00Z,TIMED,Bayer 04 Leverkusen,VfL Wolfsburg
+2026-04-04T13:30:00Z,TIMED,Hamburger SV,FC Augsburg
+2026-04-04T13:30:00Z,TIMED,Borussia Mönchengladbach,1. FC Heidenheim 1846
+2026-04-04T16:30:00Z,TIMED,VfB Stuttgart,Borussia Dortmund
+2026-04-05T13:30:00Z,TIMED,1. FC Union Berlin,FC St. Pauli 1910
+2026-04-05T15:30:00Z,TIMED,Eintracht Frankfurt,1. FC Köln
+2026-04-10T18:30:00Z,TIMED,FC Augsburg,TSG 1899 Hoffenheim
+2026-04-11T13:30:00Z,TIMED,Borussia Dortmund,Bayer 04 Leverkusen
+2026-04-11T13:30:00Z,TIMED,VfL Wolfsburg,Eintracht Frankfurt
+2026-04-11T13:30:00Z,TIMED,RB Leipzig,Borussia Mönchengladbach
+2026-04-11T13:30:00Z,TIMED,1. FC Heidenheim 1846,1. FC Union Berlin
+2026-04-11T16:30:00Z,TIMED,FC St. Pauli 1910,FC Bayern München
+2026-04-12T13:30:00Z,TIMED,1. FC Köln,SV Werder Bremen
+2026-04-12T15:30:00Z,TIMED,VfB Stuttgart,Hamburger SV
+2026-04-12T17:30:00Z,TIMED,1. FSV Mainz 05,SC Freiburg
+2026-04-17T18:30:00Z,TIMED,FC St. Pauli 1910,1. FC Köln
+2026-04-18T13:30:00Z,TIMED,SV Werder Bremen,Hamburger SV
+2026-04-18T13:30:00Z,TIMED,Bayer 04 Leverkusen,FC Augsburg
+2026-04-18T13:30:00Z,TIMED,TSG 1899 Hoffenheim,Borussia Dortmund
+2026-04-18T13:30:00Z,TIMED,1. FC Union Berlin,VfL Wolfsburg
+2026-04-18T16:30:00Z,TIMED,Eintracht Frankfurt,RB Leipzig
+2026-04-19T13:30:00Z,TIMED,SC Freiburg,1. FC Heidenheim 1846
+2026-04-19T15:30:00Z,TIMED,FC Bayern München,VfB Stuttgart
+2026-04-19T17:30:00Z,TIMED,Borussia Mönchengladbach,1. FSV Mainz 05
+2026-04-24T18:30:00Z,TIMED,RB Leipzig,1. FC Union Berlin
+2026-04-25T13:30:00Z,TIMED,1. FSV Mainz 05,FC Bayern München
+2026-04-25T13:30:00Z,TIMED,1. FC Köln,Bayer 04 Leverkusen
+2026-04-25T13:30:00Z,TIMED,FC Augsburg,Eintracht Frankfurt
+2026-04-25T13:30:00Z,TIMED,VfL Wolfsburg,Borussia Mönchengladbach
+2026-04-25T13:30:00Z,TIMED,1. FC Heidenheim 1846,FC St. Pauli 1910
+2026-04-25T16:30:00Z,TIMED,Hamburger SV,TSG 1899 Hoffenheim
+2026-04-26T13:30:00Z,TIMED,VfB Stuttgart,SV Werder Bremen
+2026-04-26T15:30:00Z,TIMED,Borussia Dortmund,SC Freiburg
+2026-05-02T13:30:00Z,TIMED,TSG 1899 Hoffenheim,VfB Stuttgart
+2026-05-02T13:30:00Z,TIMED,SV Werder Bremen,FC Augsburg
+2026-05-02T13:30:00Z,TIMED,FC Bayern München,1. FC Heidenheim 1846
+2026-05-02T13:30:00Z,TIMED,1. FC Union Berlin,1. FC Köln
+2026-05-02T13:30:00Z,TIMED,Eintracht Frankfurt,Hamburger SV
+2026-05-02T16:30:00Z,TIMED,Bayer 04 Leverkusen,RB Leipzig
+2026-05-03T13:30:00Z,TIMED,FC St. Pauli 1910,1. FSV Mainz 05
+2026-05-03T15:30:00Z,TIMED,Borussia Mönchengladbach,Borussia Dortmund
+2026-05-03T17:30:00Z,TIMED,SC Freiburg,VfL Wolfsburg
+2026-05-08T18:30:00Z,TIMED,Borussia Dortmund,Eintracht Frankfurt
+2026-05-09T13:30:00Z,TIMED,VfB Stuttgart,Bayer 04 Leverkusen
+2026-05-09T13:30:00Z,TIMED,TSG 1899 Hoffenheim,SV Werder Bremen
+2026-05-09T13:30:00Z,TIMED,FC Augsburg,Borussia Mönchengladbach
+2026-05-09T13:30:00Z,TIMED,RB Leipzig,FC St. Pauli 1910
+2026-05-09T16:30:00Z,TIMED,VfL Wolfsburg,FC Bayern München
+2026-05-10T13:30:00Z,TIMED,Hamburger SV,SC Freiburg
+2026-05-10T15:30:00Z,TIMED,1. FC Köln,1. FC Heidenheim 1846
+2026-05-10T17:30:00Z,TIMED,1. FSV Mainz 05,1. FC Union Berlin
+2026-05-16T13:30:00Z,TIMED,SV Werder Bremen,Borussia Dortmund
+2026-05-16T13:30:00Z,TIMED,1. FC Heidenheim 1846,1. FSV Mainz 05
+2026-05-16T13:30:00Z,TIMED,SC Freiburg,RB Leipzig
+2026-05-16T13:30:00Z,TIMED,Eintracht Frankfurt,VfB Stuttgart
+2026-05-16T13:30:00Z,TIMED,FC St. Pauli 1910,VfL Wolfsburg
+2026-05-16T13:30:00Z,TIMED,1. FC Union Berlin,FC Augsburg
+2026-05-16T13:30:00Z,TIMED,Borussia Mönchengladbach,TSG 1899 Hoffenheim
+2026-05-16T13:30:00Z,TIMED,FC Bayern München,1. FC Köln
+2026-05-16T13:30:00Z,TIMED,Bayer 04 Leverkusen,Hamburger SV
