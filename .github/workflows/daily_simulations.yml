@@ -1,5 +1,9 @@
 name: Daily Football Simulations
 
+concurrency:
+  group: football-simulations
+  cancel-in-progress: false
+
 on:
   schedule:
     - cron: '0 6 * * *'  # Run daily at 06:00 UTC so Brazil will have finished playing
@@ -31,7 +35,8 @@ jobs:
       # 4️⃣ Prepare folders
       - name: Prepare folders
         run: |
-          mkdir -p data/simulations logs
+          mkdir -p data/simulations
+          mkdir -p logs
 
       # 5️⃣ Run simulations and capture logs
       - name: Run precompute_simulations.py
@@ -41,38 +46,28 @@ jobs:
         run: |
           set -euo pipefail
           echo "Running simulations at $(date -u +"%Y-%m-%d_%H%M%S_UTC")"
-          python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log || exit ${PIPESTATUS[0]}
+          python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log
 
       # 6️⃣ Update redeploy trigger (forces Streamlit to reload)
       - name: Update redeploy trigger
         run: |
           date -u +"%Y-%m-%d %H:%M:%S UTC" > data/last_updated.txt
 
-      # 7️⃣ Ensure all generated files are tracked
-      - name: Stage all generated files
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/precomputed_pos_counts.pkl
-          git add data/precomputed_pos_pct.pkl
-          git add data/last_updated.txt
-          git add data/simulations/*  # recursively add all timestamped folders and CSVs
-
-
-      # 8️⃣ Commit and push updated data
+      # 7️⃣ Commit and push updated simulation data
       - name: Commit and push updated data
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add data/
-          git commit -m "Update precomputed simulations [skip ci]"
+
+          git commit -m "Update precomputed simulations [skip ci]" || echo "No changes to commit"
           git push
 
-      # 9️⃣ Upload logs as artifact
+      # 8️⃣ Upload logs as artifact
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: github-actions-log
-          path: logs/github_actions_run.log
+          path: logs/github_actions_run.logs

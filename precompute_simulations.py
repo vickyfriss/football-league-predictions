@@ -5,7 +5,7 @@ import pandas as pd
 import importlib.util
 import sys
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 
 # === 0️⃣ HELPER: dynamic import for numbered modules ===
 def import_module_from_path(module_name, path):
@@ -41,9 +41,6 @@ print("2️⃣ Processing datasets...")
 
 globals_dict = {}
 
-# Fetch all past matches from dataset_creation
-# past_season_results = past_results
-
 for lg in dataset_processing.leagues:
 
     # 1️⃣ Past matches (this season)
@@ -55,10 +52,15 @@ for lg in dataset_processing.leagues:
     else:
         past_matches_current = pd.DataFrame()
 
+    # 🛡 SAFETY CHECK (prevents simulation with empty data)
+    if past_matches_current.empty:
+        raise ValueError(f"{lg}: No past matches retrieved. API may have failed.")
+
     globals_dict[f"past_matches_{lg}_all"] = past_matches_current
 
     # 2️⃣ Future matches
     df_fixtures = fixtures.get(f"fixtures_{lg}", pd.DataFrame())
+
     for col in ["homeTeam", "awayTeam"]:
         if col not in df_fixtures.columns:
             df_fixtures[col] = pd.NA
@@ -67,6 +69,7 @@ for lg in dataset_processing.leagues:
 
     # 3️⃣ Betting odds
     df_odds = odds_book.get(f"odds_{lg}", pd.DataFrame())
+
     for col in ["home_team", "away_team"]:
         if col not in df_odds.columns:
             df_odds[col] = pd.NA
@@ -132,6 +135,7 @@ print("✅ Simulations complete.")
 print("5️⃣ Saving precomputed results...")
 
 os.makedirs("data", exist_ok=True)
+os.makedirs("data/simulations", exist_ok=True)
 
 # Save pickle files
 with open("data/precomputed_pos_counts.pkl", "wb") as f:
@@ -141,7 +145,7 @@ with open("data/precomputed_pos_pct.pkl", "wb") as f:
     pickle.dump(position_distribution_pct_all, f)
 
 # Save CSV per league in timestamped folder
-timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
 sim_folder = os.path.join("data", "simulations", timestamp)
 
 os.makedirs(sim_folder, exist_ok=True)
