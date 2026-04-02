@@ -369,7 +369,7 @@ def process_datasets(globals_dict):
         if future_matches is None or past_matches_all is None or league_table is None:
             continue
 
-        past_matches = filter_current_season(past_matches_all)
+        past_matches = filter_current_season(past_matches_all, league)
         fixtures = season_fixtures(past_matches, future_matches)
         league_teams = set(league_table["team"])
 
