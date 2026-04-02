@@ -65,15 +65,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Pull latest version first
-          git pull --rebase origin main
-
-          # Commit changes
-          git commit -m "Update precomputed simulations [skip ci]" || true
-
-          # Push
-          git push origin main
-
+          git add data/
+          git commit -m "Update precomputed simulations [skip ci]"
+          git push
 
       # 9️⃣ Upload logs as artifact
       - name: Upload logs
