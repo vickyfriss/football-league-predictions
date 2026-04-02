@@ -2,7 +2,15 @@ import pandas as pd
 
 # -------------------------------
 # 1️⃣ Season start date and leagues
-SEASON_START_DATE = pd.Timestamp("2025-08-01")
+SEASON_START_DATES = {
+    "premierleague_england": pd.Timestamp("2025-08-01"),
+    "seriea_italy": pd.Timestamp("2025-08-01"),
+    "laliga_spain": pd.Timestamp("2025-08-01"),
+    "bundesliga_germany": pd.Timestamp("2025-08-01"),
+    "ligue1_france": pd.Timestamp("2025-08-01"),
+    "championship_england": pd.Timestamp("2025-08-01"),
+    "seriea_brazil": pd.Timestamp("2026-01-01")
+}
 
 leagues = [
     "premierleague_england",
@@ -214,11 +222,11 @@ def normalize_columns(df):
     return df
 
 
-def filter_current_season(df):
+def filter_current_season(df, league):
     df = df.copy()
-    if "utcDate" in df.columns:
-        df["utcDate"] = pd.to_datetime(df["utcDate"], utc=True).dt.tz_localize(None)
-        df = df[df["utcDate"] >= SEASON_START_DATE]
+    df["utcDate"] = pd.to_datetime(df["utcDate"], errors="coerce")
+    df = df.dropna(subset=["utcDate"])
+    df = df[df["utcDate"] >= SEASON_START_DATES[league]]
     return df
 
 
@@ -270,7 +278,7 @@ def verify_league_schedule(globals_dict):
             print(f"{league}: ⚠️ Missing dataset(s) {missing}, skipping verification")
             continue
 
-        past_matches = filter_current_season(past_matches_all)
+        past_matches = filter_current_season(past_matches_all, league)
         total_matches = len(past_matches) + len(future_matches)
 
         # Total teams in the league
