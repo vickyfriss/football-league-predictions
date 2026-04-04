@@ -1,5 +1,5 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Paris Saint-Germain,26,19,3,4,58,22,36,60
+1,Paris Saint-Germain,27,20,3,4,61,23,38,63
 2,Lens,27,19,2,6,54,24,30,59
 3,Marseille,27,15,4,8,54,35,19,49
 4,Lyon,27,14,5,8,41,29,12,47
@@ -7,7 +7,7 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 6,AS Monaco,27,14,4,9,47,38,9,46
 7,Stade Rennais,27,12,8,7,43,37,6,44
 8,Strasbourg,27,11,7,9,43,33,10,40
-9,Toulouse,27,10,7,10,38,32,6,37
+9,Toulouse,28,10,7,11,39,35,4,37
 10,Lorient,27,9,10,8,37,41,-4,37
 11,Brest,27,10,6,11,34,39,-5,36
 12,Angers,27,9,5,13,24,37,-13,32
