@@ -242,3 +242,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-03-22T16:15:00Z,27,FINISHED,Stade Rennais FC 1901,FC Metz,0,0,DRAW
 2026-03-22T19:45:00Z,27,FINISHED,FC Nantes,RC Strasbourg Alsace,2,3,AWAY_TEAM
 2026-04-03T18:45:00Z,28,FINISHED,Paris Saint-Germain FC,Toulouse FC,3,1,HOME_TEAM
+2026-04-04T15:00:00Z,28,FINISHED,RC Strasbourg Alsace,OGC Nice,3,1,HOME_TEAM
+2026-04-04T17:00:00Z,28,FINISHED,Stade Brestois 29,Stade Rennais FC 1901,3,4,AWAY_TEAM
+2026-04-04T19:05:00Z,28,FINISHED,Lille OSC,Racing Club de Lens,3,0,HOME_TEAM

@@ -86,3 +86,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-02T22:00:00Z,9,FINISHED,Santos FC,Clube do Remo,2,0,HOME_TEAM
 2026-04-03T00:30:00Z,9,FINISHED,RB Bragantino,CR Flamengo,3,0,HOME_TEAM
 2026-04-03T00:30:00Z,9,FINISHED,SE Palmeiras,Grêmio FBPA,2,1,HOME_TEAM
+2026-04-04T21:30:00Z,10,FINISHED,São Paulo FC,Cruzeiro EC,4,1,HOME_TEAM
+2026-04-04T23:30:00Z,10,FINISHED,Coritiba FBC,Fluminense FC,0,0,DRAW
+2026-04-05T00:00:00Z,10,FINISHED,CR Vasco da Gama,Botafogo FR,1,2,AWAY_TEAM

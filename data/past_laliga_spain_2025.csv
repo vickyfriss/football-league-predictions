@@ -290,3 +290,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-03-22T17:30:00Z,29,FINISHED,Athletic Club,Real Betis Balompié,2,1,HOME_TEAM
 2026-03-22T20:00:00Z,29,FINISHED,Real Madrid CF,Club Atlético de Madrid,3,2,HOME_TEAM
 2026-04-03T19:00:00Z,30,FINISHED,Rayo Vallecano de Madrid,Elche CF,1,0,HOME_TEAM
+2026-04-04T12:00:00Z,30,FINISHED,Real Sociedad de Fútbol,Levante UD,2,0,HOME_TEAM
+2026-04-04T14:15:00Z,30,FINISHED,RCD Mallorca,Real Madrid CF,2,1,HOME_TEAM
+2026-04-04T16:30:00Z,30,FINISHED,Real Betis Balompié,RCD Espanyol de Barcelona,0,0,DRAW
+2026-04-04T19:00:00Z,30,FINISHED,Club Atlético de Madrid,FC Barcelona,1,2,AWAY_TEAM
