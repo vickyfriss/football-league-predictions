@@ -249,3 +249,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-04T13:30:00Z,28,FINISHED,Hamburger SV,FC Augsburg,1,1,DRAW
 2026-04-04T13:30:00Z,28,FINISHED,Borussia Mönchengladbach,1. FC Heidenheim 1846,2,2,DRAW
 2026-04-04T16:30:00Z,28,FINISHED,VfB Stuttgart,Borussia Dortmund,0,2,AWAY_TEAM
+2026-04-05T13:30:00Z,28,FINISHED,1. FC Union Berlin,FC St. Pauli 1910,1,1,DRAW
+2026-04-05T15:30:00Z,28,FINISHED,Eintracht Frankfurt,1. FC Köln,2,2,DRAW
