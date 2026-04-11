@@ -308,3 +308,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-03-22T12:00:00Z,31,FINISHED,Newcastle United FC,Sunderland AFC,1,2,AWAY_TEAM
 2026-03-22T14:15:00Z,31,FINISHED,Aston Villa FC,West Ham United FC,2,0,HOME_TEAM
 2026-03-22T14:15:00Z,31,FINISHED,Tottenham Hotspur FC,Nottingham Forest FC,0,3,AWAY_TEAM
+2026-04-10T19:00:00Z,32,FINISHED,West Ham United FC,Wolverhampton Wanderers FC,4,0,HOME_TEAM

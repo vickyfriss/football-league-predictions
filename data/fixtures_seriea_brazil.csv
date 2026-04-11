@@ -1,12 +1,12 @@
 utcDate,status,homeTeam,awayTeam
 2026-04-11T19:30:00Z,TIMED,Clube do Remo,CR Vasco da Gama
 2026-04-11T19:30:00Z,TIMED,EC Vitória,São Paulo FC
-2026-04-11T21:30:00Z,TIMED,Fluminense FC,CR Flamengo
 2026-04-11T21:30:00Z,TIMED,Mirassol FC,EC Bahia
 2026-04-11T23:00:00Z,TIMED,Santos FC,CA Mineiro
 2026-04-11T23:30:00Z,TIMED,SC Internacional,Grêmio FBPA
 2026-04-12T14:00:00Z,TIMED,CA Paranaense,Chapecoense AF
 2026-04-12T19:00:00Z,TIMED,Botafogo FR,Coritiba FBC
+2026-04-12T21:00:00Z,TIMED,Fluminense FC,CR Flamengo
 2026-04-12T21:30:00Z,TIMED,SC Corinthians Paulista,SE Palmeiras
 2026-04-12T21:30:00Z,TIMED,Cruzeiro EC,RB Bragantino
 2026-04-18T21:30:00Z,TIMED,Chapecoense AF,Botafogo FR
@@ -30,8 +30,8 @@ utcDate,status,homeTeam,awayTeam
 2026-04-26T23:30:00Z,TIMED,CA Mineiro,CR Flamengo
 2026-04-26T23:30:00Z,TIMED,Fluminense FC,Chapecoense AF
 2026-05-02T19:00:00Z,TIMED,Botafogo FR,Clube do Remo
-2026-05-02T19:00:00Z,TIMED,EC Vitória,Coritiba FBC
 2026-05-02T21:30:00Z,TIMED,SE Palmeiras,Santos FC
+2026-05-02T21:30:00Z,TIMED,EC Vitória,Coritiba FBC
 2026-05-02T23:30:00Z,TIMED,CA Paranaense,Grêmio FBPA
 2026-05-03T00:00:00Z,TIMED,Cruzeiro EC,CA Mineiro
 2026-05-03T19:00:00Z,TIMED,CR Flamengo,CR Vasco da Gama

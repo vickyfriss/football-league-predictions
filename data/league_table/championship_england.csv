@@ -1,8 +1,8 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Coventry City,41,25,9,7,84,42,42,84
-2,Ipswich Town,39,20,12,7,69,40,29,72
-3,Middlesbrough,41,20,12,9,62,41,21,72
-4,Millwall,41,21,9,11,56,47,9,72
+2,Millwall,42,21,10,11,56,47,9,73
+3,Ipswich Town,39,20,12,7,69,40,29,72
+4,Middlesbrough,41,20,12,9,62,41,21,72
 5,Hull City,41,20,8,13,63,58,5,68
 6,Southampton,40,18,12,10,68,49,19,66
 7,Wrexham,41,17,13,11,63,58,5,64
@@ -18,7 +18,7 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 17,Sheffield United,41,15,6,20,57,58,-1,51
 18,Charlton Athletic,41,12,13,16,38,49,-11,49
 19,Blackburn Rovers,41,12,11,18,37,49,-12,47
-20,West Bromwich Albion,41,11,12,18,42,56,-14,45
+20,West Bromwich Albion,42,11,13,18,42,56,-14,46
 21,Portsmouth,40,10,12,18,40,57,-17,42
 22,Leicester City,41,11,14,16,54,63,-9,41
 23,Oxford United,41,9,14,18,39,54,-15,41

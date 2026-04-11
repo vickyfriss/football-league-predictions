@@ -250,3 +250,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-05T15:15:00Z,28,FINISHED,FC Lorient,Paris FC,1,1,DRAW
 2026-04-05T15:15:00Z,28,FINISHED,FC Metz,FC Nantes,0,0,DRAW
 2026-04-05T18:45:00Z,28,FINISHED,AS Monaco FC,Olympique de Marseille,2,1,HOME_TEAM
+2026-04-10T17:00:00Z,29,FINISHED,Paris FC,AS Monaco FC,4,1,HOME_TEAM
+2026-04-10T19:05:00Z,29,FINISHED,Olympique de Marseille,FC Metz,3,1,HOME_TEAM
