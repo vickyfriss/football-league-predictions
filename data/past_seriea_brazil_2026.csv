@@ -96,3 +96,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-05T22:30:00Z,10,FINISHED,SC Corinthians Paulista,SC Internacional,0,1,AWAY_TEAM
 2026-04-05T23:00:00Z,10,FINISHED,Mirassol FC,RB Bragantino,0,1,AWAY_TEAM
 2026-04-05T23:30:00Z,10,FINISHED,Grêmio FBPA,Clube do Remo,0,0,DRAW
+2026-04-11T19:30:00Z,11,FINISHED,Clube do Remo,CR Vasco da Gama,1,1,DRAW
+2026-04-11T19:30:00Z,11,FINISHED,EC Vitória,São Paulo FC,2,0,HOME_TEAM
+2026-04-11T21:30:00Z,11,FINISHED,Mirassol FC,EC Bahia,1,2,AWAY_TEAM
+2026-04-11T23:30:00Z,11,FINISHED,SC Internacional,Grêmio FBPA,0,0,DRAW

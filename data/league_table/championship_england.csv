@@ -1,25 +1,25 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Coventry City,41,25,9,7,84,42,42,84
-2,Millwall,42,21,10,11,56,47,9,73
-3,Ipswich Town,39,20,12,7,69,40,29,72
-4,Middlesbrough,41,20,12,9,62,41,21,72
-5,Hull City,41,20,8,13,63,58,5,68
-6,Southampton,40,18,12,10,68,49,19,66
+1,Coventry City,42,25,10,7,84,42,42,85
+2,Ipswich Town,40,21,12,7,71,40,31,75
+3,Millwall,42,21,10,11,56,47,9,73
+4,Middlesbrough,42,20,12,10,62,42,20,72
+5,Southampton,41,19,12,10,70,50,20,69
+6,Hull City,42,20,8,14,64,60,4,68
 7,Wrexham,41,17,13,11,63,58,5,64
-8,Derby County,41,18,9,14,60,51,9,63
-9,Norwich City,41,17,7,17,55,48,7,58
-10,Watford,41,14,15,12,52,49,3,57
-11,Bristol City,41,16,9,16,52,51,1,57
-12,Queens Park Rangers,41,16,9,16,58,63,-5,57
-13,Stoke City,41,15,9,17,48,45,3,54
-14,Preston North End,41,13,15,13,48,52,-4,54
-15,Swansea City,41,15,9,17,49,54,-5,54
-16,Birmingham City,41,14,11,16,49,52,-3,53
-17,Sheffield United,41,15,6,20,57,58,-1,51
-18,Charlton Athletic,41,12,13,16,38,49,-11,49
-19,Blackburn Rovers,41,12,11,18,37,49,-12,47
+8,Derby County,42,18,9,15,61,53,8,63
+9,Norwich City,42,17,7,18,55,50,5,58
+10,Bristol City,42,16,10,16,52,51,1,58
+11,Queens Park Rangers,42,16,10,16,58,63,-5,58
+12,Watford,42,14,15,13,52,51,1,57
+13,Preston North End,42,14,15,13,50,53,-3,57
+14,Swansea City,42,16,9,17,50,54,-4,57
+15,Stoke City,42,15,10,17,49,46,3,55
+16,Sheffield United,42,16,6,20,59,59,0,54
+17,Birmingham City,41,14,11,16,49,52,-3,53
+18,Charlton Athletic,42,12,13,17,39,51,-12,49
+19,Blackburn Rovers,42,12,12,18,38,50,-12,48
 20,West Bromwich Albion,42,11,13,18,42,56,-14,46
-21,Portsmouth,40,10,12,18,40,57,-17,42
-22,Leicester City,41,11,14,16,54,63,-9,41
-23,Oxford United,41,9,14,18,39,54,-15,41
-24,Sheffield Wednesday,41,1,10,30,25,82,-57,-5
+21,Portsmouth,41,11,12,18,41,57,-16,45
+22,Oxford United,42,10,14,18,41,54,-13,44
+23,Leicester City,42,11,14,17,54,64,-10,41
+24,Sheffield Wednesday,42,1,11,30,25,82,-57,-4

@@ -300,3 +300,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-05T19:00:00Z,30,FINISHED,Deportivo Alavés,CA Osasuna,2,2,DRAW
 2026-04-06T19:00:00Z,30,FINISHED,Girona FC,Villarreal CF,1,0,HOME_TEAM
 2026-04-10T19:00:00Z,31,FINISHED,Real Madrid CF,Girona FC,1,1,DRAW
+2026-04-11T12:00:00Z,31,FINISHED,Real Sociedad de Fútbol,Deportivo Alavés,3,3,DRAW
+2026-04-11T14:15:00Z,31,FINISHED,Elche CF,Valencia CF,1,0,HOME_TEAM
+2026-04-11T16:30:00Z,31,FINISHED,FC Barcelona,RCD Espanyol de Barcelona,4,1,HOME_TEAM
+2026-04-11T19:00:00Z,31,FINISHED,Sevilla FC,Club Atlético de Madrid,2,1,HOME_TEAM

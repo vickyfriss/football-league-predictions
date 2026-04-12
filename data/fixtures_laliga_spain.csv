@@ -1,8 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-04-11T12:00:00Z,TIMED,Real Sociedad de Fútbol,Deportivo Alavés
-2026-04-11T14:15:00Z,TIMED,Elche CF,Valencia CF
-2026-04-11T16:30:00Z,TIMED,FC Barcelona,RCD Espanyol de Barcelona
-2026-04-11T19:00:00Z,TIMED,Sevilla FC,Club Atlético de Madrid
 2026-04-12T12:00:00Z,TIMED,CA Osasuna,Real Betis Balompié
 2026-04-12T14:15:00Z,TIMED,RCD Mallorca,Rayo Vallecano de Madrid
 2026-04-12T16:30:00Z,TIMED,RC Celta de Vigo,Real Oviedo
@@ -28,16 +24,16 @@ utcDate,status,homeTeam,awayTeam
 2026-04-26T16:30:00Z,TIMED,CA Osasuna,Sevilla FC
 2026-04-26T19:00:00Z,TIMED,Villarreal CF,RC Celta de Vigo
 2026-04-27T19:00:00Z,TIMED,RCD Espanyol de Barcelona,Levante UD
-2026-05-03T00:00:00Z,SCHEDULED,Deportivo Alavés,Athletic Club
-2026-05-03T00:00:00Z,SCHEDULED,Real Betis Balompié,Real Oviedo
-2026-05-03T00:00:00Z,SCHEDULED,RC Celta de Vigo,Elche CF
+2026-05-01T19:00:00Z,TIMED,Girona FC,RCD Mallorca
+2026-05-02T12:00:00Z,TIMED,Villarreal CF,Levante UD
+2026-05-02T16:30:00Z,TIMED,Deportivo Alavés,Athletic Club
 2026-05-03T00:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Real Madrid CF
-2026-05-03T00:00:00Z,SCHEDULED,Getafe CF,Rayo Vallecano de Madrid
-2026-05-03T00:00:00Z,SCHEDULED,Girona FC,RCD Mallorca
 2026-05-03T00:00:00Z,SCHEDULED,Valencia CF,Club Atlético de Madrid
 2026-05-03T00:00:00Z,SCHEDULED,CA Osasuna,FC Barcelona
-2026-05-03T00:00:00Z,SCHEDULED,Villarreal CF,Levante UD
-2026-05-03T00:00:00Z,SCHEDULED,Sevilla FC,Real Sociedad de Fútbol
+2026-05-03T12:00:00Z,TIMED,RC Celta de Vigo,Elche CF
+2026-05-03T14:15:00Z,TIMED,Getafe CF,Rayo Vallecano de Madrid
+2026-05-03T16:30:00Z,TIMED,Real Betis Balompié,Real Oviedo
+2026-05-04T19:00:00Z,TIMED,Sevilla FC,Real Sociedad de Fútbol
 2026-05-10T00:00:00Z,SCHEDULED,Athletic Club,Valencia CF
 2026-05-10T00:00:00Z,SCHEDULED,Club Atlético de Madrid,RC Celta de Vigo
 2026-05-10T00:00:00Z,SCHEDULED,Levante UD,CA Osasuna

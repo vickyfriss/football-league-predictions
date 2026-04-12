@@ -252,3 +252,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-05T18:45:00Z,28,FINISHED,AS Monaco FC,Olympique de Marseille,2,1,HOME_TEAM
 2026-04-10T17:00:00Z,29,FINISHED,Paris FC,AS Monaco FC,4,1,HOME_TEAM
 2026-04-10T19:05:00Z,29,FINISHED,Olympique de Marseille,FC Metz,3,1,HOME_TEAM
+2026-04-11T17:00:00Z,29,FINISHED,AJ Auxerre,FC Nantes,0,0,DRAW
+2026-04-11T19:05:00Z,29,FINISHED,Stade Rennais FC 1901,Angers SCO,2,1,HOME_TEAM
