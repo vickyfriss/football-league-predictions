@@ -257,3 +257,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-11T13:30:00Z,29,FINISHED,RB Leipzig,Borussia Mönchengladbach,1,0,HOME_TEAM
 2026-04-11T13:30:00Z,29,FINISHED,1. FC Heidenheim 1846,1. FC Union Berlin,3,1,HOME_TEAM
 2026-04-11T16:30:00Z,29,FINISHED,FC St. Pauli 1910,FC Bayern München,0,5,AWAY_TEAM
+2026-04-12T13:30:00Z,29,FINISHED,1. FC Köln,SV Werder Bremen,3,1,HOME_TEAM
+2026-04-12T15:30:00Z,29,FINISHED,VfB Stuttgart,Hamburger SV,4,0,HOME_TEAM
+2026-04-12T17:30:00Z,29,FINISHED,1. FSV Mainz 05,SC Freiburg,0,1,AWAY_TEAM
