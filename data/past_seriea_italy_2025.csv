@@ -318,3 +318,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-12T13:00:00Z,32,FINISHED,Parma Calcio 1913,SSC Napoli,1,1,DRAW
 2026-04-12T16:00:00Z,32,FINISHED,Bologna FC 1909,US Lecce,2,0,HOME_TEAM
 2026-04-12T18:45:00Z,32,FINISHED,Como 1907,FC Internazionale Milano,3,4,AWAY_TEAM
+2026-04-13T18:45:00Z,32,FINISHED,ACF Fiorentina,SS Lazio,1,0,HOME_TEAM

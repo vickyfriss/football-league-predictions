@@ -317,3 +317,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-12T13:00:00Z,32,FINISHED,Crystal Palace FC,Newcastle United FC,2,1,HOME_TEAM
 2026-04-12T13:00:00Z,32,FINISHED,Nottingham Forest FC,Aston Villa FC,1,1,DRAW
 2026-04-12T15:30:00Z,32,FINISHED,Chelsea FC,Manchester City FC,0,3,AWAY_TEAM
+2026-04-13T19:00:00Z,32,FINISHED,Manchester United FC,Leeds United FC,1,2,AWAY_TEAM
