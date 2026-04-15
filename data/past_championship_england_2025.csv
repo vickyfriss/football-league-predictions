@@ -500,3 +500,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-11T14:00:00Z,42,FINISHED,Southampton FC,Derby County FC,2,1,HOME_TEAM
 2026-04-11T14:00:00Z,42,FINISHED,Stoke City FC,Blackburn Rovers FC,1,1,DRAW
 2026-04-12T11:00:00Z,42,FINISHED,Birmingham City FC,Wrexham AFC,2,0,HOME_TEAM
+2026-04-14T19:00:00Z,45,FINISHED,Southampton FC,Blackburn Rovers FC,3,0,HOME_TEAM
+2026-04-14T19:00:00Z,26,FINISHED,Portsmouth FC,Ipswich Town FC,2,0,HOME_TEAM
