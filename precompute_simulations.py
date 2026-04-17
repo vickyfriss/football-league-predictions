@@ -7,6 +7,8 @@ import sys
 import os
 from datetime import datetime, UTC
 
+RUN_CREATION = True   # set False to skip scraping + dataset creation
+
 # === 0️⃣ HELPER: dynamic import for numbered modules ===
 def import_module_from_path(module_name, path):
     spec = importlib.util.spec_from_file_location(module_name, path)
@@ -26,15 +28,58 @@ print("1️⃣ Scraping league standings...")
 
 standings = dataset_creation.scrape_standings()
 
-if not dataset_creation.standings_changed(standings):
-    print("⚠️ Standings unchanged. Skipping dataset creation and simulations.")
-    sys.exit(0)
+if RUN_CREATION:
+    if not dataset_creation.standings_changed(standings):
+        print("⚠️ Standings unchanged. Skipping dataset creation and simulations.")
+        sys.exit(0)
 
-print("✅ Standings changed. Creating datasets...")
+    print("✅ Standings changed. Creating datasets...")
+    standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
 
-standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
+else:
+    print("⚡ RUN_CREATION=False → loading datasets from CSV files")
 
-print("✅ Datasets created.")
+    def load_csv(path):
+        return pd.read_csv(path)
+
+    # -------------------------------
+    # Standings
+    standings = dataset_creation.scrape_standings()  # structure only (no API-heavy logic used later)
+
+    league_table_folder = "data/league_table"
+    standings = {
+        lg: load_csv(f"{league_table_folder}/{lg}.csv")
+        for lg in dataset_processing.leagues
+        if os.path.exists(f"{league_table_folder}/{lg}.csv")
+    }
+
+    # -------------------------------
+    # Odds
+    odds_book = {
+        f"odds_{lg}": load_csv(f"data/odds_{lg}.csv")
+        for lg in dataset_processing.leagues
+        if os.path.exists(f"data/odds_{lg}.csv")
+    }
+
+    # -------------------------------
+    # Fixtures
+    fixtures = {
+        f"fixtures_{lg}": load_csv(f"data/fixtures_{lg}.csv")
+        for lg in dataset_processing.leagues
+        if os.path.exists(f"data/fixtures_{lg}.csv")
+    }
+
+    # -------------------------------
+    # Past results
+    past_season_results = {}
+
+    for lg in dataset_processing.leagues:
+        past_season_results[lg] = {}
+
+        for file in os.listdir("data"):
+            if file.startswith(f"past_{lg}_"):
+                season = int(file.split("_")[-1].replace(".csv", ""))
+                past_season_results[lg][season] = load_csv(f"data/{file}")
 
 # === 2️⃣ Process datasets ===
 print("2️⃣ Processing datasets...")
@@ -44,7 +89,7 @@ globals_dict = {}
 for lg in dataset_processing.leagues:
 
     # 1️⃣ Past matches (this season)
-    league_results = past_season_results.get(lg, {})
+    league_results = past_season_results.get(lg, {}) if past_season_results else {}
 
     if league_results:
         latest_season = max(league_results.keys())
@@ -59,7 +104,7 @@ for lg in dataset_processing.leagues:
     globals_dict[f"past_matches_{lg}_all"] = past_matches_current
 
     # 2️⃣ Future matches
-    df_fixtures = fixtures.get(f"fixtures_{lg}", pd.DataFrame())
+    df_fixtures = (fixtures or {}).get(f"fixtures_{lg}", pd.DataFrame())
 
     for col in ["homeTeam", "awayTeam"]:
         if col not in df_fixtures.columns:
@@ -68,7 +113,7 @@ for lg in dataset_processing.leagues:
     globals_dict[f"future_matches_{lg}"] = df_fixtures
 
     # 3️⃣ Betting odds
-    df_odds = odds_book.get(f"odds_{lg}", pd.DataFrame())
+    df_odds = (odds_book or {}).get(f"odds_{lg}", pd.DataFrame())
 
     for col in ["home_team", "away_team"]:
         if col not in df_odds.columns:
