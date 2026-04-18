@@ -260,3 +260,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-12T13:30:00Z,29,FINISHED,1. FC Köln,SV Werder Bremen,3,1,HOME_TEAM
 2026-04-12T15:30:00Z,29,FINISHED,VfB Stuttgart,Hamburger SV,4,0,HOME_TEAM
 2026-04-12T17:30:00Z,29,FINISHED,1. FSV Mainz 05,SC Freiburg,0,1,AWAY_TEAM
+2026-04-17T18:30:00Z,30,FINISHED,FC St. Pauli 1910,1. FC Köln,1,1,DRAW

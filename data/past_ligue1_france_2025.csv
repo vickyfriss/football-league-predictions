@@ -257,3 +257,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-12T15:15:00Z,29,FINISHED,Toulouse FC,Lille OSC,0,4,AWAY_TEAM
 2026-04-12T15:15:00Z,29,FINISHED,OGC Nice,Le Havre AC,1,1,DRAW
 2026-04-12T18:45:00Z,29,FINISHED,Olympique Lyonnais,FC Lorient,2,0,HOME_TEAM
+2026-04-17T18:45:00Z,30,FINISHED,Racing Club de Lens,Toulouse FC,3,2,HOME_TEAM
