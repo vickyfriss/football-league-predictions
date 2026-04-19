@@ -266,3 +266,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-18T13:30:00Z,30,FINISHED,TSG 1899 Hoffenheim,Borussia Dortmund,2,1,HOME_TEAM
 2026-04-18T13:30:00Z,30,FINISHED,1. FC Union Berlin,VfL Wolfsburg,1,2,AWAY_TEAM
 2026-04-18T16:30:00Z,30,FINISHED,Eintracht Frankfurt,RB Leipzig,1,3,AWAY_TEAM
+2026-04-19T13:30:00Z,30,FINISHED,SC Freiburg,1. FC Heidenheim 1846,2,1,HOME_TEAM
+2026-04-19T15:30:00Z,30,FINISHED,FC Bayern München,VfB Stuttgart,4,2,HOME_TEAM

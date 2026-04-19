@@ -324,3 +324,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-18T13:00:00Z,33,FINISHED,Udinese Calcio,Parma Calcio 1913,0,1,AWAY_TEAM
 2026-04-18T16:00:00Z,33,FINISHED,SSC Napoli,SS Lazio,0,2,AWAY_TEAM
 2026-04-18T18:45:00Z,33,FINISHED,AS Roma,Atalanta BC,1,1,DRAW
+2026-04-19T10:30:00Z,33,FINISHED,US Cremonese,Torino FC,1,0,HOME_TEAM
+2026-04-19T13:00:00Z,33,FINISHED,Hellas Verona FC,AC Milan,0,1,AWAY_TEAM

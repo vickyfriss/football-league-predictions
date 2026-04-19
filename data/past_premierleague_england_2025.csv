@@ -323,3 +323,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-18T14:00:00Z,33,FINISHED,Leeds United FC,Wolverhampton Wanderers FC,3,0,HOME_TEAM
 2026-04-18T16:30:00Z,33,FINISHED,Tottenham Hotspur FC,Brighton & Hove Albion FC,2,2,DRAW
 2026-04-18T19:00:00Z,33,FINISHED,Chelsea FC,Manchester United FC,0,1,AWAY_TEAM
+2026-04-19T13:00:00Z,33,FINISHED,Nottingham Forest FC,Burnley FC,4,1,HOME_TEAM
+2026-04-19T13:00:00Z,33,FINISHED,Aston Villa FC,Sunderland AFC,4,3,HOME_TEAM
+2026-04-19T13:00:00Z,33,FINISHED,Everton FC,Liverpool FC,1,2,AWAY_TEAM
+2026-04-19T15:30:00Z,33,FINISHED,Manchester City FC,Arsenal FC,2,1,HOME_TEAM
