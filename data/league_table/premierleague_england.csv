@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Arsenal,32,21,7,4,62,24,38,70
 2,Manchester City,31,19,7,5,63,28,35,64
-3,Manchester United,32,15,10,7,57,45,12,55
+3,Manchester United,33,16,10,7,58,45,13,58
 4,Aston Villa,32,16,7,9,43,38,5,55
 5,Liverpool,32,15,7,10,52,42,10,52
-6,Chelsea,32,13,9,10,53,41,12,48
-7,Brentford,32,13,8,11,48,44,4,47
-8,Everton,32,13,8,11,39,37,2,47
-9,Brighton & Hove Albion,32,12,10,10,43,37,6,46
-10,Sunderland,32,12,10,10,33,36,-3,46
-11,AFC Bournemouth,32,10,15,7,48,49,-1,45
-12,Fulham,32,13,5,14,43,46,-3,44
+6,Chelsea,33,13,9,11,53,42,11,48
+7,Brentford,33,13,9,11,48,44,4,48
+8,AFC Bournemouth,33,11,15,7,50,50,0,48
+9,Brighton & Hove Albion,33,12,11,10,45,39,6,47
+10,Everton,32,13,8,11,39,37,2,47
+11,Sunderland,32,12,10,10,33,36,-3,46
+12,Fulham,33,13,6,14,43,46,-3,45
 13,Crystal Palace,31,11,9,11,35,36,-1,42
-14,Newcastle United,32,12,6,14,45,47,-2,42
-15,Leeds United,32,8,12,12,39,49,-10,36
+14,Newcastle United,33,12,6,15,46,49,-3,42
+15,Leeds United,33,9,12,12,42,49,-7,39
 16,Nottingham Forest,32,8,9,15,32,44,-12,33
 17,West Ham United,32,8,8,16,40,57,-17,32
-18,Tottenham Hotspur,32,7,9,16,40,51,-11,30
+18,Tottenham Hotspur,33,7,10,16,42,53,-11,31
 19,Burnley,32,4,8,20,33,63,-30,20
-20,Wolverhampton Wanderers,32,3,8,21,24,58,-34,17
+20,Wolverhampton Wanderers,33,3,8,22,24,61,-37,17

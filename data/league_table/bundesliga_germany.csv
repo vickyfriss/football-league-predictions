@@ -1,19 +1,19 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Bayern Munich,29,24,4,1,105,27,78,76
-2,Borussia Dortmund,29,19,7,3,60,29,31,64
-3,VfB Stuttgart,29,17,5,7,60,38,22,56
-4,RB Leipzig,29,17,5,7,56,36,20,56
-5,Bayer Leverkusen,29,15,7,7,59,39,20,52
-6,TSG Hoffenheim,29,15,6,8,57,43,14,51
-7,Eintracht Frankfurt,29,11,9,9,54,54,0,42
+2,Borussia Dortmund,30,19,7,4,61,31,30,64
+3,RB Leipzig,30,18,5,7,59,37,22,59
+4,VfB Stuttgart,29,17,5,7,60,38,22,56
+5,TSG Hoffenheim,30,16,6,8,59,44,15,54
+6,Bayer Leverkusen,30,15,7,8,60,41,19,52
+7,Eintracht Frankfurt,30,11,9,10,55,57,-2,42
 8,SC Freiburg,29,11,7,11,42,47,-5,40
-9,Mainz,29,8,9,12,35,44,-9,33
-10,FC Augsburg,29,9,6,14,36,53,-17,33
-11,1. FC Union Berlin,29,8,8,13,33,50,-17,32
+9,FC Augsburg,30,10,6,14,38,54,-16,36
+10,Mainz,29,8,9,12,35,44,-9,33
+11,1. FC Union Berlin,30,8,8,14,34,52,-18,32
 12,FC Cologne,30,7,10,13,44,51,-7,31
-13,Hamburg SV,29,7,10,12,32,45,-13,31
-14,Borussia Mönchengladbach,29,7,9,13,35,49,-14,30
-15,Werder Bremen,29,7,7,15,32,52,-20,28
+13,Hamburg SV,30,7,10,13,33,48,-15,31
+14,Werder Bremen,30,8,7,15,35,53,-18,31
+15,Borussia Mönchengladbach,29,7,9,13,35,49,-14,30
 16,St. Pauli,30,6,8,16,26,51,-25,26
-17,VfL Wolfsburg,29,5,6,18,39,65,-26,21
+17,VfL Wolfsburg,30,6,6,18,41,66,-25,24
 18,1. FC Heidenheim 1846,29,4,7,18,32,64,-32,19
