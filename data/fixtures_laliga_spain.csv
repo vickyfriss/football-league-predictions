@@ -29,26 +29,7 @@ utcDate,status,homeTeam,awayTeam
 2026-05-03T16:30:00Z,TIMED,Real Betis Balompié,Real Oviedo
 2026-05-03T19:00:00Z,TIMED,RCD Espanyol de Barcelona,Real Madrid CF
 2026-05-04T19:00:00Z,TIMED,Sevilla FC,Real Sociedad de Fútbol
-2026-05-10T00:00:00Z,SCHEDULED,Athletic Club,Valencia CF
-2026-05-10T00:00:00Z,SCHEDULED,Club Atlético de Madrid,RC Celta de Vigo
-2026-05-10T00:00:00Z,SCHEDULED,Levante UD,CA Osasuna
-2026-05-10T00:00:00Z,SCHEDULED,RCD Mallorca,Villarreal CF
-2026-05-10T00:00:00Z,SCHEDULED,Elche CF,Deportivo Alavés
-2026-05-10T00:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Real Betis Balompié
-2026-05-10T00:00:00Z,SCHEDULED,Sevilla FC,RCD Espanyol de Barcelona
-2026-05-10T00:00:00Z,SCHEDULED,Real Oviedo,Getafe CF
-2026-05-10T00:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Girona FC
 2026-05-10T19:00:00Z,TIMED,FC Barcelona,Real Madrid CF
-2026-05-13T00:00:00Z,SCHEDULED,Deportivo Alavés,FC Barcelona
-2026-05-13T00:00:00Z,SCHEDULED,Real Betis Balompié,Elche CF
-2026-05-13T00:00:00Z,SCHEDULED,RC Celta de Vigo,Levante UD
-2026-05-13T00:00:00Z,SCHEDULED,Getafe CF,RCD Mallorca
-2026-05-13T00:00:00Z,SCHEDULED,Girona FC,Real Sociedad de Fútbol
-2026-05-13T00:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Athletic Club
-2026-05-13T00:00:00Z,SCHEDULED,CA Osasuna,Club Atlético de Madrid
-2026-05-13T00:00:00Z,SCHEDULED,Valencia CF,Rayo Vallecano de Madrid
-2026-05-13T00:00:00Z,SCHEDULED,Villarreal CF,Sevilla FC
-2026-05-13T00:00:00Z,SCHEDULED,Real Madrid CF,Real Oviedo
 2026-05-17T00:00:00Z,SCHEDULED,Athletic Club,RC Celta de Vigo
 2026-05-17T00:00:00Z,SCHEDULED,Club Atlético de Madrid,Girona FC
 2026-05-17T00:00:00Z,SCHEDULED,FC Barcelona,Real Betis Balompié
