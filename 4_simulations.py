@@ -142,25 +142,3 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
         print(f"Finished simulations for {league} ✅")
 
     return position_distribution_all, position_distribution_pct_all, styled_position_pct_all
-
-# === 5. USAGE EXAMPLE ===
-
-#if __name__ == "__main__":
-    leagues = [
-        "premierleague_england",
-        "seriea_italy",
-        "laliga_spain",
-        "bundesliga_germany",
-        "ligue1_france",
-        "seriea_brazil"
-    ]
-    # tables_all should be a dict: league_name → table dataframe with 'team', 'pts', 'gd', 'gp'
-    tables_all = {league: globals()[league] for league in leagues}
-
-    # Run simulations and display top 3 positions only
-    position_distribution_all, position_distribution_pct_all, styled_position_pct_all = simulate_leagues(
-        leagues, df_simulation_all, tables_all, n_sim=1000, top_n=3
-    )
-
-    # Display top 3 for Premier League
-    display(styled_position_pct_all["premierleague_england"])
