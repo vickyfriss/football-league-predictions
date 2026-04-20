@@ -10,6 +10,7 @@ SEASON_START_DATES = {
     "laliga_spain": pd.Timestamp("2025-08-01", tz="UTC"),
     "bundesliga_germany": pd.Timestamp("2025-08-01", tz="UTC"),
     "ligue1_france": pd.Timestamp("2025-08-01", tz="UTC"),
+    "eredivisie_netherlands": pd.Timestamp("2025-08-01", tz="UTC"),
     "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC")
 }
 
@@ -20,6 +21,7 @@ leagues = [
     "bundesliga_germany",
     "ligue1_france",
     "championship_england",
+    "eredivisie_netherlands",
 #    "primera_division_argentina",
     "seriea_brazil"
 ]
@@ -169,7 +171,25 @@ mappings = {
         "Birmingham City FC": "Birmingham City"
     },
 
+    "eredivisie_netherlands": {
+        "PSV": "PSV Eindhoven",
+        "Feyenoord": "Feyenoord Rotterdam",
+        "NEC": "NEC Nijmegen",
+        "FC Twente Enschede": "FC Twente",
+        "FC Twente '65": "FC Twente",
+        "AFC Ajax": "Ajax Amsterdam",
+        "Ajax": "Ajax Amsterdam",
+        "AZ": "AZ Alkmaar",
+        "SC Heerenveen": "Heerenveen",
+        "Groningen": "FC Groningen",
+        "FC Zwolle": "PEC Zwolle",
+        "SBV Excelsior": "Excelsior",
+        "Telstar 1963": "Telstar",
+        "SC Telstar": "Telstar"
+    },
+
 #    "primera_division_argentina": {},
+
     "seriea_brazil": {
         "CR Flamengo": "Flamengo",
         "SE Palmeiras": "Palmeiras",

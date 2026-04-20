@@ -235,6 +235,7 @@ league_display_names = [
     "La Liga (Spain)",
     "Bundesliga (Germany)",
     "Ligue 1 (France)",
+    "Eredivisie (Netherlands)",
     "Serie A (Brazil)"
 ]
 league_key_map = {
@@ -244,6 +245,7 @@ league_key_map = {
     "La Liga (Spain)": "laliga_spain",
     "Bundesliga (Germany)": "bundesliga_germany",
     "Ligue 1 (France)": "ligue1_france",
+    "Eredivisie (Netherlands)": "eredivisie_netherlands",
     "Serie A (Brazil)": "seriea_brazil"
 }
 

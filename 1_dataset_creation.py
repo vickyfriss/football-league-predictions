@@ -60,6 +60,7 @@ TEAM_NAME_MAPPING = {
     "ENice": "Nice",
     "ZMetz": "Metz",
     "ORemo": "Remo",
+    "Z Alkmaar": "AZ Alkmaar",
 }
 
 def clean_team_names(df, column="team"):
@@ -78,7 +79,7 @@ def scrape_standings():
         "ESP.1": ("laliga_spain", 2025),
         "GER.1": ("bundesliga_germany", 2025),
         "FRA.1": ("ligue1_france", 2025),
-
+        "NED.1": ("eredivisie_netherlands", 2025),
         "BRA.1": ("seriea_brazil", 2026),
     }
 
@@ -160,6 +161,7 @@ def load_betting_odds():
         "soccer_spain_la_liga": "odds_laliga_spain",
         "soccer_germany_bundesliga": "odds_bundesliga_germany",
         "soccer_france_ligue_one": "odds_ligue1_france",
+        "soccer_netherlands_eredivisie": "odds_eredivisie_netherlands",
         "soccer_brazil_campeonato": "odds_seriea_brazil",
     }
 
@@ -277,6 +279,7 @@ def load_fixtures():
         "PD": "fixtures_laliga_spain",
         "BL1": "fixtures_bundesliga_germany",
         "FL1": "fixtures_ligue1_france",
+        "DED": "fixtures_eredivisie_netherlands",
         "BSA": "fixtures_seriea_brazil",
     }
 
@@ -331,6 +334,7 @@ def fetch_past_season_results(data_folder="data/previous_season"):
         "PD": ("laliga_spain", [2025, 2024]),
         "BL1": ("bundesliga_germany", [2025, 2024]),
         "FL1": ("ligue1_france", [2025, 2024]),
+        "DED": ("eredivisie_netherlands", [2025, 2024]),
         "BSA": ("seriea_brazil", [2026, 2025]),
     }
 
