@@ -132,15 +132,15 @@ def standings_changed(new_standings, data_folder="data/league_table"):
             return True
 
         old_df = pd.read_csv(file_path)
-
-        merged = new_df[["team", "position"]].merge(
-            old_df[["team", "position"]],
+        
+        merged = new_df[["team", "gp"]].merge(
+            old_df[["team", "gp"]],
             on="team",
             suffixes=("_new", "_old"),
             how="outer"
         )
 
-        if not (merged["position_new"] == merged["position_old"]).all():
+        if not (merged["gp_new"] == merged["gp_old"]).all():
             print(f"{league}: standings changed.")
             return True
 
