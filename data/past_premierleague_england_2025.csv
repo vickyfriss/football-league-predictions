@@ -328,3 +328,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-19T13:00:00Z,33,FINISHED,Everton FC,Liverpool FC,1,2,AWAY_TEAM
 2026-04-19T15:30:00Z,33,FINISHED,Manchester City FC,Arsenal FC,2,1,HOME_TEAM
 2026-04-20T19:00:00Z,33,FINISHED,Crystal Palace FC,West Ham United FC,0,0,DRAW
+2026-04-21T19:00:00Z,34,FINISHED,Brighton & Hove Albion FC,Chelsea FC,3,0,HOME_TEAM
