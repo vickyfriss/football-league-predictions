@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Arsenal,33,21,7,5,63,26,37,70
-2,Manchester City,32,20,7,5,65,29,36,67
+1,Manchester City,33,21,7,5,66,29,37,70
+2,Arsenal,33,21,7,5,63,26,37,70
 3,Manchester United,33,16,10,7,58,45,13,58
 4,Aston Villa,33,17,7,9,47,41,6,58
 5,Liverpool,33,16,7,10,54,43,11,55
 6,Brighton & Hove Albion,34,13,11,10,48,39,9,50
-7,Chelsea,34,13,9,12,53,45,8,48
-8,Brentford,33,13,9,11,48,44,4,48
-9,AFC Bournemouth,33,11,15,7,50,50,0,48
+7,AFC Bournemouth,34,11,16,7,52,52,0,49
+8,Chelsea,34,13,9,12,53,45,8,48
+9,Brentford,33,13,9,11,48,44,4,48
 10,Everton,33,13,8,12,40,39,1,47
 11,Sunderland,33,12,10,11,36,40,-4,46
 12,Fulham,33,13,6,14,43,46,-3,45
 13,Crystal Palace,32,11,10,11,35,36,-1,43
 14,Newcastle United,33,12,6,15,46,49,-3,42
-15,Leeds United,33,9,12,12,42,49,-7,39
+15,Leeds United,34,9,13,12,44,51,-7,40
 16,Nottingham Forest,33,9,9,15,36,45,-9,36
 17,West Ham United,33,8,9,16,40,57,-17,33
 18,Tottenham Hotspur,33,7,10,16,42,53,-11,31
-19,Burnley,33,4,8,21,34,67,-33,20
+19,Burnley,34,4,8,22,34,68,-34,20
 20,Wolverhampton Wanderers,33,3,8,22,24,61,-37,17

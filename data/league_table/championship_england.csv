@@ -1,25 +1,25 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Coventry City,44,26,11,7,90,44,46,89
-2,Millwall,44,23,10,11,61,48,13,79
-3,Ipswich Town,42,21,13,8,73,44,29,76
+2,Ipswich Town,43,22,13,8,75,45,30,79
+3,Millwall,44,23,10,11,61,48,13,79
 4,Southampton,44,21,13,10,77,53,24,76
-5,Middlesbrough,43,20,13,10,64,44,20,73
+5,Middlesbrough,44,21,13,10,65,44,21,76
 6,Wrexham,44,19,13,12,66,60,6,70
 7,Hull City,44,20,10,14,67,63,4,70
 8,Derby County,44,19,9,16,63,55,8,66
 9,Norwich City,44,19,7,18,61,53,8,64
-10,Swansea City,44,17,9,18,53,57,-4,60
-11,Bristol City,44,16,11,17,56,57,-1,59
-12,Queens Park Rangers,44,16,10,18,59,67,-8,58
-13,Sheffield United,43,17,6,20,61,59,2,57
-14,Birmingham City,43,15,12,16,52,53,-1,57
+10,Birmingham City,44,16,12,16,54,54,0,60
+11,Swansea City,44,17,9,18,53,57,-4,60
+12,Bristol City,44,16,11,17,56,57,-1,59
+13,Queens Park Rangers,44,16,10,18,59,67,-8,58
+14,Sheffield United,44,17,6,21,62,62,0,57
 15,Watford,44,14,15,15,52,56,-4,57
-16,Preston North End,43,14,15,14,50,55,-5,57
+16,Preston North End,44,14,15,15,51,57,-6,57
 17,Stoke City,44,15,10,19,50,51,-1,55
 18,West Bromwich Albion,44,13,13,18,47,56,-9,52
-19,Portsmouth,44,13,12,19,45,62,-17,51
-20,Charlton Athletic,43,12,14,17,40,52,-12,50
-21,Blackburn Rovers,44,12,13,19,39,54,-15,49
+19,Blackburn Rovers,45,13,13,19,42,55,-13,52
+20,Portsmouth,44,13,12,19,45,62,-17,51
+21,Charlton Athletic,44,12,14,18,41,54,-13,50
 22,Oxford United,44,10,14,20,41,56,-15,44
 23,Leicester City,44,11,15,18,56,67,-11,42
-24,Sheffield Wednesday,43,1,12,30,26,83,-57,-3
+24,Sheffield Wednesday,44,1,12,31,26,84,-58,-3
