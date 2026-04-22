@@ -68,6 +68,26 @@ def clean_team_names(df, column="team"):
     df[column] = df[column].replace(TEAM_NAME_MAPPING)
     return df
 
+def fetch_html(url, headers, retries=3):
+
+    for i in range(retries):
+
+        try:
+            response = requests.get(url, headers=headers, timeout=30)
+
+            print(f"Attempt {i+1}: {response.status_code}, size={len(response.text)}")
+
+            # success condition (real HTML, not blocked/empty)
+            if response.status_code == 200 and len(response.text.strip()) > 2000:
+                return response.text
+
+        except Exception as e:
+            print(f"Request error: {e}")
+
+        time.sleep(2 ** i)
+
+    return None
+
 # -------------------------------
 # Scrape standings
 def scrape_standings():
@@ -94,16 +114,17 @@ def scrape_standings():
 
         url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
 
-        response = requests.get(url, headers=headers, timeout=30)
+        html = fetch_html(url, headers)
 
-        print(f"{league_code} -> status {response.status_code}, size {len(response.text)}")
+        if html is None:
+            print(f"⚠️ Skipping {league_code} (no valid response)")
+            continue
 
-        # 🔴 HARD BLOCK DETECTION
-        if response.status_code != 200 or len(response.text.strip()) < 2000:
-            print(response.text[:300])  # debug output
-            raise RuntimeError(f"Blocked or empty response for {league_code}")
-
-        tables = pd.read_html(response.text)
+        try:
+            tables = pd.read_html(html)
+        except Exception as e:
+            print(f"⚠️ Failed parsing HTML for {league_code}: {e}")
+            continue
 
         teams_raw = tables[0]
         stats = tables[1]
