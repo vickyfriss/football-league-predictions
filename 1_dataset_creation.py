@@ -87,7 +87,7 @@ def fetch_html(url, headers, retries=3):
 
         time.sleep(2 ** i)
 
-    return None
+    raise RuntimeError(f"❌ Failed to fetch valid HTML after retries for {url}")
 
 # -------------------------------
 # Scrape standings
@@ -116,10 +116,6 @@ def scrape_standings():
         url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
 
         html = fetch_html(url, headers)
-
-        if html is None:
-            print(f"⚠️ Skipping {league_code} (no valid response)")
-            continue
 
         try:
             from io import StringIO
@@ -443,6 +439,9 @@ def create_datasets(save_csv=True):
     print("Scraping league standings...")
 
     standings = scrape_standings()
+
+    if not standings or len(standings) == 0:
+        raise RuntimeError("❌ No standings were scraped. Aborting pipeline.")
 
     league_table_folder = "data/league_table"
 
