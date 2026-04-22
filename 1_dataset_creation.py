@@ -84,7 +84,8 @@ def scrape_standings():
     }
 
     headers = {
-        "User-Agent": "Mozilla/5.0"
+        "User-Agent": "Mozilla/5.0",
+        "Accept-Language": "en-US,en;q=0.9",
     }
 
     standings = {}
@@ -95,12 +96,12 @@ def scrape_standings():
 
         response = requests.get(url, headers=headers, timeout=30)
 
-        if response.status_code != 200 or len(response.text.strip()) < 1000:
-            raise ValueError(
-                f"Failed to fetch standings for {league_code}. "
-                f"Status: {response.status_code}, "
-                f"Length: {len(response.text)}"
-            )
+        print(f"{league_code} -> status {response.status_code}, size {len(response.text)}")
+
+        # 🔴 HARD BLOCK DETECTION
+        if response.status_code != 200 or len(response.text.strip()) < 2000:
+            print(response.text[:300])  # debug output
+            raise RuntimeError(f"Blocked or empty response for {league_code}")
 
         tables = pd.read_html(response.text)
 
@@ -131,6 +132,7 @@ def scrape_standings():
         standings[df_name] = df
 
     return standings
+
 
 # -------------------------------
 # Check standings changes
