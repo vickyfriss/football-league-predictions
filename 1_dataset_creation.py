@@ -1,4 +1,5 @@
 # 1_dataset_creation.py
+from io import StringIO
 import os
 import time
 import pandas as pd
@@ -121,7 +122,8 @@ def scrape_standings():
             continue
 
         try:
-            tables = pd.read_html(html)
+            from io import StringIO
+            tables = pd.read_html(StringIO(html))
         except Exception as e:
             print(f"⚠️ Failed parsing HTML for {league_code}: {e}")
             continue
