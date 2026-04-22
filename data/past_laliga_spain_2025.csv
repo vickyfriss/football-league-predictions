@@ -311,3 +311,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-13T19:00:00Z,31,FINISHED,Levante UD,Getafe CF,1,0,HOME_TEAM
 2026-04-21T17:00:00Z,33,FINISHED,Athletic Club,CA Osasuna,1,0,HOME_TEAM
 2026-04-21T17:00:00Z,33,FINISHED,RCD Mallorca,Valencia CF,1,1,DRAW
+2026-04-21T19:30:00Z,33,FINISHED,Real Madrid CF,Deportivo Alavés,2,1,HOME_TEAM
+2026-04-21T19:30:00Z,33,FINISHED,Girona FC,Real Betis Balompié,2,3,AWAY_TEAM
