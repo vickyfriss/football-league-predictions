@@ -83,12 +83,26 @@ def scrape_standings():
         "BRA.1": ("seriea_brazil", 2026),
     }
 
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+
     standings = {}
 
     for league_code, (df_name, year) in leagues_codes.items():
 
         url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
-        tables = pd.read_html(url)
+
+        response = requests.get(url, headers=headers, timeout=30)
+
+        if response.status_code != 200 or len(response.text.strip()) < 1000:
+            raise ValueError(
+                f"Failed to fetch standings for {league_code}. "
+                f"Status: {response.status_code}, "
+                f"Length: {len(response.text)}"
+            )
+
+        tables = pd.read_html(response.text)
 
         teams_raw = tables[0]
         stats = tables[1]
