@@ -522,3 +522,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-21T18:45:00Z,44,FINISHED,Stoke City FC,Millwall FC,1,3,AWAY_TEAM
 2026-04-21T18:45:00Z,44,FINISHED,West Bromwich Albion FC,Watford FC,3,0,HOME_TEAM
 2026-04-21T18:45:00Z,44,FINISHED,Leicester City FC,Hull City AFC,2,2,DRAW
+2026-04-22T18:45:00Z,44,FINISHED,Middlesbrough FC,Sheffield Wednesday FC,1,0,HOME_TEAM
+2026-04-22T18:45:00Z,44,FINISHED,Birmingham City FC,Preston North End FC,2,1,HOME_TEAM
+2026-04-22T18:45:00Z,44,FINISHED,Charlton Athletic FC,Ipswich Town FC,1,2,AWAY_TEAM
+2026-04-22T18:45:00Z,44,FINISHED,Sheffield United FC,Blackburn Rovers FC,1,3,AWAY_TEAM
+2026-04-24T19:00:00Z,45,FINISHED,Leicester City FC,Millwall FC,1,1,DRAW
