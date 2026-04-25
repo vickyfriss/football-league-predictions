@@ -2,6 +2,6 @@
 *.env
 __pycache__/
 venv/*
-data/fixtures_*
-data/odds_*
-data/past_*
+#data/fixtures_*
+#data/odds_*
+#data/past_*

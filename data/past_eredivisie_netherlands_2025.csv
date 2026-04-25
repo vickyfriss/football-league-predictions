@@ -272,3 +272,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-22T18:00:00Z,31,FINISHED,Telstar 1963,Sparta Rotterdam,4,1,HOME_TEAM
 2026-04-23T16:45:00Z,31,FINISHED,Go Ahead Eagles,AZ,0,0,DRAW
 2026-04-23T19:00:00Z,31,FINISHED,PSV,PEC Zwolle,6,1,HOME_TEAM
+2026-04-25T14:30:00Z,31,FINISHED,Feyenoord Rotterdam,FC Groningen,3,1,HOME_TEAM
+2026-04-25T16:45:00Z,31,FINISHED,SC Heerenveen,Fortuna Sittard,2,1,HOME_TEAM
