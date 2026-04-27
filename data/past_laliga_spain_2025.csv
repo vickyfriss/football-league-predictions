@@ -325,3 +325,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-25T16:30:00Z,32,FINISHED,Valencia CF,Girona FC,2,1,HOME_TEAM
 2026-04-25T19:00:00Z,32,FINISHED,Club Atlético de Madrid,Athletic Club,3,2,HOME_TEAM
 2026-04-26T12:00:00Z,32,FINISHED,Rayo Vallecano de Madrid,Real Sociedad de Fútbol,3,3,DRAW
+2026-04-26T14:15:00Z,32,FINISHED,Real Oviedo,Elche CF,1,2,AWAY_TEAM
+2026-04-26T16:30:00Z,32,FINISHED,CA Osasuna,Sevilla FC,2,1,HOME_TEAM
+2026-04-26T19:00:00Z,32,FINISHED,Villarreal CF,RC Celta de Vigo,2,1,HOME_TEAM
