@@ -337,3 +337,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-26T13:00:00Z,34,FINISHED,Genoa CFC,Como 1907,0,2,AWAY_TEAM
 2026-04-26T16:00:00Z,34,FINISHED,Torino FC,FC Internazionale Milano,2,2,DRAW
 2026-04-26T18:45:00Z,34,FINISHED,AC Milan,Juventus FC,0,0,DRAW
+2026-04-27T16:30:00Z,34,FINISHED,Cagliari Calcio,Atalanta BC,3,2,HOME_TEAM
+2026-04-27T18:45:00Z,34,FINISHED,SS Lazio,Udinese Calcio,3,3,DRAW

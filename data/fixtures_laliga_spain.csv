@@ -1,6 +1,34 @@
 utcDate,status,homeTeam,awayTeam
-2026-04-27T19:00:00Z,TIMED,RCD Espanyol de Barcelona,Levante UD
+2026-05-01T19:00:00Z,TIMED,Girona FC,RCD Mallorca
+2026-05-02T12:00:00Z,TIMED,Villarreal CF,Levante UD
+2026-05-02T14:15:00Z,TIMED,Valencia CF,Club Atlético de Madrid
+2026-05-02T16:30:00Z,TIMED,Deportivo Alavés,Athletic Club
+2026-05-02T19:00:00Z,TIMED,CA Osasuna,FC Barcelona
+2026-05-03T12:00:00Z,TIMED,RC Celta de Vigo,Elche CF
+2026-05-03T14:15:00Z,TIMED,Getafe CF,Rayo Vallecano de Madrid
+2026-05-03T16:30:00Z,TIMED,Real Betis Balompié,Real Oviedo
+2026-05-03T19:00:00Z,TIMED,RCD Espanyol de Barcelona,Real Madrid CF
+2026-05-04T19:00:00Z,TIMED,Sevilla FC,Real Sociedad de Fútbol
+2026-05-08T19:00:00Z,TIMED,Levante UD,CA Osasuna
+2026-05-09T12:00:00Z,TIMED,Elche CF,Deportivo Alavés
+2026-05-09T14:15:00Z,TIMED,Sevilla FC,RCD Espanyol de Barcelona
+2026-05-09T16:30:00Z,TIMED,Club Atlético de Madrid,RC Celta de Vigo
+2026-05-09T19:00:00Z,TIMED,Real Sociedad de Fútbol,Real Betis Balompié
+2026-05-10T12:00:00Z,TIMED,RCD Mallorca,Villarreal CF
+2026-05-10T14:15:00Z,TIMED,Athletic Club,Valencia CF
+2026-05-10T16:30:00Z,TIMED,Real Oviedo,Getafe CF
 2026-05-10T19:00:00Z,TIMED,FC Barcelona,Real Madrid CF
+2026-05-11T19:00:00Z,TIMED,Rayo Vallecano de Madrid,Girona FC
+2026-05-12T17:00:00Z,TIMED,RC Celta de Vigo,Levante UD
+2026-05-12T18:00:00Z,TIMED,Real Betis Balompié,Elche CF
+2026-05-12T19:30:00Z,TIMED,CA Osasuna,Club Atlético de Madrid
+2026-05-13T17:00:00Z,TIMED,RCD Espanyol de Barcelona,Athletic Club
+2026-05-13T17:00:00Z,TIMED,Villarreal CF,Sevilla FC
+2026-05-13T19:30:00Z,TIMED,Deportivo Alavés,FC Barcelona
+2026-05-13T19:30:00Z,TIMED,Getafe CF,RCD Mallorca
+2026-05-14T17:00:00Z,TIMED,Valencia CF,Rayo Vallecano de Madrid
+2026-05-14T18:00:00Z,TIMED,Girona FC,Real Sociedad de Fútbol
+2026-05-14T19:30:00Z,TIMED,Real Madrid CF,Real Oviedo
 2026-05-17T00:00:00Z,SCHEDULED,Athletic Club,RC Celta de Vigo
 2026-05-17T00:00:00Z,SCHEDULED,Club Atlético de Madrid,Girona FC
 2026-05-17T00:00:00Z,SCHEDULED,FC Barcelona,Real Betis Balompié
