@@ -329,3 +329,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-26T16:30:00Z,32,FINISHED,CA Osasuna,Sevilla FC,2,1,HOME_TEAM
 2026-04-26T19:00:00Z,32,FINISHED,Villarreal CF,RC Celta de Vigo,2,1,HOME_TEAM
 2026-04-27T19:00:00Z,32,FINISHED,RCD Espanyol de Barcelona,Levante UD,0,0,DRAW
+2026-05-01T19:00:00Z,34,FINISHED,Girona FC,RCD Mallorca,0,1,AWAY_TEAM
