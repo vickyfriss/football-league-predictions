@@ -5,7 +5,7 @@ import sys
 import os
 from datetime import datetime, UTC
 
-RUN_CREATION = False   # OFFLINE MODE
+RUN_CREATION = False  # OFFLINE MODE
 
 # =========================
 # 0️⃣ HELPER: dynamic import
@@ -30,14 +30,6 @@ dataset_simulation = import_module_from_path("dataset_simulation", "4_simulation
 print("1️⃣ Loading datasets...")
 
 if RUN_CREATION:
-    print("1️⃣ Scraping league standings...")
-    standings_raw = dataset_creation.scrape_standings()
-
-    if not dataset_creation.standings_changed(standings_raw):
-        print("⚠️ Standings unchanged. Exiting.")
-        sys.exit(0)
-
-    print("✅ Creating datasets...")
     standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
 
 else:
@@ -58,13 +50,13 @@ else:
     }
 
     odds_book = {
-        f"odds_{lg}": load_csv(f"data/odds_{lg}.csv")
+        lg: load_csv(f"data/odds_{lg}.csv")
         for lg in dataset_processing.leagues
         if os.path.exists(f"data/odds_{lg}.csv")
     }
 
     fixtures = {
-        f"fixtures_{lg}": load_csv(f"data/fixtures_{lg}.csv")
+        lg: load_csv(f"data/fixtures_{lg}.csv")
         for lg in dataset_processing.leagues
         if os.path.exists(f"data/fixtures_{lg}.csv")
     }
@@ -108,27 +100,22 @@ for lg in dataset_processing.leagues:
         continue
 
     globals_dict[f"past_matches_{lg}_all"] = past_matches_current
-
-    globals_dict[f"future_matches_{lg}"] = fixtures.get(f"fixtures_{lg}", pd.DataFrame())
-    globals_dict[f"betting_odds_{lg}"] = odds_book.get(f"odds_{lg}", pd.DataFrame())
-
-    # IMPORTANT FIX: keep full table (not only team column)
+    globals_dict[f"future_matches_{lg}"] = fixtures.get(lg, pd.DataFrame())
+    globals_dict[f"betting_odds_{lg}"] = odds_book.get(lg, pd.DataFrame())
     globals_dict[lg] = standings.get(lg, pd.DataFrame())
 
 
 # =========================
 # 3️⃣ PROCESS DATASETS
 # =========================
-missing_df, backup_futures = dataset_processing.process_datasets(globals_dict)
+missing_df, _ = dataset_processing.process_datasets(globals_dict)
 
-if missing_df is not None and not missing_df.empty:
-    print(f"⚠️ Missing fixtures added:\n{missing_df}")
-else:
-    print("✅ No missing fixtures detected.")
+print("\n📊 Missing fixtures:")
+print(missing_df if missing_df is not None else "None")
 
 
 # =========================
-# 4️⃣ LEAGUE CLASSIFICATION (ROBUST FIX)
+# 4️⃣ LEAGUE CLASSIFICATION
 # =========================
 active_leagues = []
 finished_leagues = []
@@ -142,21 +129,17 @@ for lg in dataset_processing.leagues:
     if table is None or table.empty:
         continue
 
-    required_cols = {"team", "gp"}
-    if not required_cols.issubset(table.columns):
+    if "gp" not in table.columns or "team" not in table.columns:
         continue
 
     table = table.copy()
 
-    gp = pd.to_numeric(table["gp"], errors="coerce").fillna(0)
+    table["gp"] = pd.to_numeric(table["gp"], errors="coerce").fillna(0)
 
     teams = table["team"].nunique()
-    if teams < 2:
-        continue
+    expected_gp = (teams - 1) * 2 if teams > 0 else 0
 
-    expected_gp = (teams - 1) * 2
-
-    if (gp >= expected_gp).all():
+    if expected_gp > 0 and (table["gp"] >= expected_gp).all():
         finished_leagues.append(lg)
         print(f"{lg}: 🏁 finished")
     else:
@@ -169,86 +152,98 @@ print(f"Finished leagues: {finished_leagues}")
 
 
 # =========================
-# 5️⃣ PROBABILITIES (ONLY ACTIVE)
+# 5️⃣ NORMALISERS (SAFE)
+# =========================
+def normalize_fixtures(df):
+    if df is None or df.empty:
+        return pd.DataFrame(columns=["homeTeam", "awayTeam"])
+
+    df = df.copy()
+    df = df.rename(columns={"home_team": "homeTeam", "away_team": "awayTeam"})
+
+    if "homeTeam" not in df.columns:
+        df["homeTeam"] = pd.NA
+    if "awayTeam" not in df.columns:
+        df["awayTeam"] = pd.NA
+
+    return df
+
+
+def normalize_odds(df):
+    if df is None:
+        return pd.DataFrame()
+
+    df = df.copy()
+    return df.rename(columns={"home_team": "homeTeam", "away_team": "awayTeam"})
+
+
+# =========================
+# 6️⃣ PROBABILITIES (ACTIVE ONLY)
 # =========================
 print("3️⃣ Computing match probabilities...")
 
-simulation_leagues = active_leagues
-
-past_matches_dict = {
-    lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame())
-    for lg in simulation_leagues
-}
-
-fixtures_dict = {
-    lg: globals_dict.get(f"future_matches_{lg}", pd.DataFrame())
-    for lg in simulation_leagues
-}
-
-betting_odds_dict = {
-    lg: globals_dict.get(f"betting_odds_{lg}", pd.DataFrame())
-    for lg in simulation_leagues
-}
-
 df_simulation_all = dataset_probabilities.compute_final_probabilities(
-    simulation_leagues,
-    past_matches_dict,
-    fixtures_dict,
-    betting_odds_dict
+    active_leagues,
+    {lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame()) for lg in active_leagues},
+    {lg: normalize_fixtures(globals_dict.get(f"future_matches_{lg}")) for lg in active_leagues},
+    {lg: normalize_odds(globals_dict.get(f"betting_odds_{lg}")) for lg in active_leagues},
 )
 
 print("✅ Probabilities computed.")
 
 
 # =========================
-# 6️⃣ MONTE CARLO (ACTIVE ONLY)
+# 7️⃣ MONTE CARLO (ACTIVE ONLY)
 # =========================
 print("4️⃣ Running Monte Carlo simulations...")
 
-tables_all = {
-    lg: globals_dict.get(lg, pd.DataFrame())
-    for lg in simulation_leagues
-}
+tables_all = {lg: globals_dict.get(lg, pd.DataFrame()) for lg in active_leagues}
 
 position_distribution_all, position_distribution_pct_all, _ = dataset_simulation.simulate_leagues(
-    simulation_leagues,
+    active_leagues,
     df_simulation_all,
     tables_all,
-    n_sim=10000
+    n_sim=1000
 )
 
 
 # =========================
-# 6B️⃣ FINISHED LEAGUES (FIXED CLEAN OUTPUT)
+# 8️⃣ FINISHED LEAGUES (STRICT UNIFIED SCHEMA)
 # =========================
 for lg in finished_leagues:
 
     df = globals_dict[lg].copy()
 
-    # final ranking
+    df["pts"] = pd.to_numeric(df["pts"], errors="coerce").fillna(0)
+
     df = df.sort_values("pts", ascending=False).reset_index(drop=True)
-    df["position"] = range(1, len(df) + 1)
 
     n = len(df)
 
-    # create probability columns exactly like simulation output
-    for i in range(1, n + 1):
-        df[f"prob_{i}"] = 0.0
+    # build clean simulation-style output only
+    clean = pd.DataFrame({
+        "team": df["team"],
+        "position": range(1, n + 1),
+    })
 
-    # ONLY correct deterministic mapping
+    # match simulation probability schema EXACTLY
+    max_pos = len(df)
+
+    for i in range(1, max_pos + 1):
+        clean[f"prob_{i}"] = 0.0
+
     for i in range(n):
-        pos = i + 1
-        df.loc[i, f"prob_{pos}"] = 1.0
+        clean.loc[i, f"prob_{i+1}"] = 1.0
 
-    position_distribution_all[lg] = df
-    position_distribution_pct_all[lg] = df
+    position_distribution_all[lg] = clean
+    position_distribution_pct_all[lg] = clean
 
 
 print("✅ Simulations complete.")
 
 
 # =========================
-# 7️⃣ SAVE OUTPUTS
+# 9️⃣ SAVE OUTPUTS
 # =========================
 print("5️⃣ Saving results...")
 
