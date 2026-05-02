@@ -339,3 +339,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-25T16:30:00Z,34,FINISHED,Arsenal FC,Newcastle United FC,1,0,HOME_TEAM
 2026-04-27T19:00:00Z,34,FINISHED,Manchester United FC,Brentford FC,2,1,HOME_TEAM
 2026-05-01T19:00:00Z,35,FINISHED,Leeds United FC,Burnley FC,3,1,HOME_TEAM
+2026-05-02T14:00:00Z,35,FINISHED,Brentford FC,West Ham United FC,3,0,HOME_TEAM
+2026-05-02T14:00:00Z,35,FINISHED,Newcastle United FC,Brighton & Hove Albion FC,3,1,HOME_TEAM
+2026-05-02T14:00:00Z,35,FINISHED,Wolverhampton Wanderers FC,Sunderland AFC,1,1,DRAW
+2026-05-02T16:30:00Z,35,FINISHED,Arsenal FC,Fulham FC,3,0,HOME_TEAM

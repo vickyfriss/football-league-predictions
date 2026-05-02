@@ -1,25 +1,25 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Coventry City,45,27,11,7,93,45,48,92
-2,Ipswich Town,45,22,15,8,77,47,30,81
-3,Millwall,45,23,11,11,62,49,13,80
-4,Middlesbrough,45,22,13,10,70,45,25,79
-5,Southampton,45,21,14,10,79,55,24,77
-6,Wrexham,45,19,13,13,67,63,4,70
-7,Hull City,45,20,10,15,68,65,3,70
-8,Derby County,45,20,9,16,66,57,9,69
-9,Norwich City,45,19,8,18,62,54,8,65
-10,Birmingham City,45,17,12,16,56,55,1,63
-11,Swansea City,45,17,10,18,54,58,-4,61
-12,Preston North End,45,15,15,15,54,59,-5,60
-13,Bristol City,45,16,11,18,57,59,-2,59
-14,Queens Park Rangers,45,16,10,19,61,70,-9,58
-15,Sheffield United,45,17,6,22,64,65,-1,57
-16,Watford,45,14,15,16,53,61,-8,57
-17,Stoke City,45,15,10,20,51,54,-3,55
-18,Portsmouth,45,14,12,19,48,63,-15,54
-19,Charlton Athletic,45,13,14,18,43,55,-12,53
-20,Blackburn Rovers,45,13,13,19,42,55,-13,52
-21,West Bromwich Albion,45,13,14,18,47,56,-9,51
-22,Oxford United,45,11,14,20,45,57,-12,47
-23,Leicester City,45,11,16,18,57,68,-11,43
-24,Sheffield Wednesday,45,1,12,32,27,88,-61,-3
+1,Coventry City,46,28,11,7,97,45,52,95
+2,Ipswich Town,46,23,15,8,80,47,33,84
+3,Millwall,46,24,11,11,64,49,15,83
+4,Southampton,46,22,14,10,82,56,26,80
+5,Middlesbrough,46,22,14,10,72,47,25,80
+6,Hull City,46,21,10,15,70,66,4,73
+7,Wrexham,46,19,14,13,69,65,4,71
+8,Derby County,46,20,9,17,67,59,8,69
+9,Norwich City,46,19,8,19,63,56,7,65
+10,Birmingham City,46,17,13,16,57,56,1,64
+11,Swansea City,46,18,10,18,57,59,-2,64
+12,Bristol City,46,17,11,18,59,59,0,62
+13,Sheffield United,46,18,6,22,66,66,0,60
+14,Preston North End,46,15,15,16,55,62,-7,60
+15,Queens Park Rangers,46,16,10,20,61,73,-12,58
+16,Watford,46,14,15,17,53,65,-12,57
+17,Stoke City,46,15,10,21,51,56,-5,55
+18,Portsmouth,46,14,13,19,49,64,-15,55
+19,Charlton Athletic,46,13,14,19,44,58,-14,53
+20,Blackburn Rovers,46,13,13,20,42,56,-14,52
+21,West Bromwich Albion,46,13,14,19,48,58,-10,51
+22,Oxford United,46,11,14,21,45,59,-14,47
+23,Leicester City,46,12,16,18,58,68,-10,46
+24,Sheffield Wednesday,46,2,12,32,29,89,-60,0

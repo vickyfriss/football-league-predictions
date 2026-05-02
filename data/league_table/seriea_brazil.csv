@@ -6,8 +6,8 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 5,Athletico Paranaense,13,7,1,5,20,15,5,22
 6,Bahia,12,6,3,3,17,14,3,21
 7,Coritiba,13,5,4,4,15,13,2,19
-8,Botafogo,12,5,2,5,24,24,0,17
-9,Red Bull Bragantino,13,5,2,6,15,15,0,17
+8,Red Bull Bragantino,13,5,2,6,15,15,0,17
+9,Botafogo,13,5,2,6,25,26,-1,17
 10,Vasco da Gama,13,4,4,5,18,19,-1,16
 11,Grêmio,13,4,4,5,15,16,-1,16
 12,Cruzeiro,13,4,4,5,17,21,-4,16
@@ -16,6 +16,6 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 15,Atlético-MG,13,4,2,7,14,19,-5,14
 16,Internacional,13,3,5,5,12,14,-2,14
 17,Santos,13,3,5,5,18,21,-3,14
-18,Mirassol,12,2,3,7,13,18,-5,9
-19,Remo,13,1,5,7,13,23,-10,8
+18,Remo,14,2,5,7,15,24,-9,11
+19,Mirassol,12,2,3,7,13,18,-5,9
 20,Chapecoense,12,1,5,6,12,24,-12,8
