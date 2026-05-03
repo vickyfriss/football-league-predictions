@@ -284,3 +284,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-02T13:30:00Z,32,FINISHED,1. FC Union Berlin,1. FC Köln,2,2,DRAW
 2026-05-02T13:30:00Z,32,FINISHED,Eintracht Frankfurt,Hamburger SV,1,2,AWAY_TEAM
 2026-05-02T16:30:00Z,32,FINISHED,Bayer 04 Leverkusen,RB Leipzig,4,1,HOME_TEAM
+2026-05-03T13:30:00Z,32,FINISHED,FC St. Pauli 1910,1. FSV Mainz 05,1,2,AWAY_TEAM
+2026-05-03T15:30:00Z,32,FINISHED,Borussia Mönchengladbach,Borussia Dortmund,1,0,HOME_TEAM
+2026-05-03T17:30:00Z,32,FINISHED,SC Freiburg,VfL Wolfsburg,1,1,DRAW

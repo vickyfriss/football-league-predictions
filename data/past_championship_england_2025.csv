@@ -379,6 +379,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-02-14T15:00:00Z,32,FINISHED,Queens Park Rangers FC,Blackburn Rovers FC,1,3,AWAY_TEAM
 2026-02-14T15:00:00Z,32,FINISHED,Sheffield Wednesday FC,Millwall FC,1,2,AWAY_TEAM
 2026-02-16T20:00:00Z,32,FINISHED,Coventry City FC,Middlesbrough FC,3,1,HOME_TEAM
+2026-02-17T19:45:00Z,19,FINISHED,Charlton Athletic FC,Portsmouth FC,1,3,AWAY_TEAM
 2026-02-17T19:45:00Z,32,FINISHED,Bristol City FC,Wrexham AFC,2,2,DRAW
 2026-02-20T20:00:00Z,33,FINISHED,Blackburn Rovers FC,Preston North End FC,1,0,HOME_TEAM
 2026-02-21T12:30:00Z,33,FINISHED,Hull City AFC,Queens Park Rangers FC,1,3,AWAY_TEAM
