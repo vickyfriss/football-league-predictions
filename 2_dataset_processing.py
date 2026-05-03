@@ -1,8 +1,8 @@
 import pandas as pd
 
-
-# -------------------------------
-# 1️⃣ Season start date and leagues
+# ===============================
+# 1️⃣ Season start dates
+# ===============================
 SEASON_START_DATES = {
     "premierleague_england": pd.Timestamp("2025-08-01", tz="UTC"),
     "championship_england": pd.Timestamp("2025-08-01", tz="UTC"),
@@ -22,10 +22,12 @@ leagues = [
     "ligue1_france",
     "championship_england",
     "eredivisie_netherlands",
-#    "primera_division_argentina",
     "seriea_brazil"
 ]
 
+# ===============================
+# 2️⃣ FULL TEAM MAPPINGS
+# ===============================
 # -------------------------------
 # 2️⃣ Team name mappings per league
 mappings = {
@@ -219,8 +221,9 @@ mappings = {
     }
 }
 
-# -------------------------------
-# Helpers
+# ===============================
+# HELPERS
+# ===============================
 def normalize_columns(df):
     df = df.copy()
 
@@ -231,8 +234,10 @@ def normalize_columns(df):
 
     rename_map = {}
     for old, new in [
-        ("home_team", "homeTeam"), ("away_team", "awayTeam"),
-        ("HomeTeam", "homeTeam"), ("AwayTeam", "awayTeam")
+        ("home_team", "homeTeam"),
+        ("away_team", "awayTeam"),
+        ("HomeTeam", "homeTeam"),
+        ("AwayTeam", "awayTeam")
     ]:
         if old in df.columns:
             rename_map[old] = new
@@ -251,12 +256,44 @@ def filter_current_season(df, league):
     return df
 
 
+# ===============================
+# 🆕 LEAGUE ACTIVE CHECK (FIX)
+# ===============================
+def is_league_active(league_table):
+    """
+    League is active if not all teams have completed all expected matches.
+    Expected matches = (number of teams - 1) * 2
+    """
+
+    if league_table is None or league_table.empty:
+        return False
+
+    if "gp" not in league_table.columns or "team" not in league_table.columns:
+        return False
+
+    gp = pd.to_numeric(league_table["gp"], errors="coerce").fillna(0)
+
+    num_teams = league_table["team"].nunique()
+
+    if num_teams < 2:
+        return False
+
+    expected_gp = (num_teams - 1) * 2
+
+    # league finished only if ALL teams reached expected GP
+    return not (gp == expected_gp).all()
+
+
+# ===============================
 def season_fixtures(past_matches, future_matches):
     past_matches = normalize_columns(past_matches)
     future_matches = normalize_columns(future_matches)
+
     return pd.concat(
-        [past_matches[["homeTeam", "awayTeam"]],
-         future_matches[["homeTeam", "awayTeam"]]],
+        [
+            past_matches[["homeTeam", "awayTeam"]],
+            future_matches[["homeTeam", "awayTeam"]]
+        ],
         ignore_index=True
     )
 
@@ -272,79 +309,20 @@ def find_missing_reverse_fixture(team, opponent, fixtures):
     return None
 
 
-# -------------------------------
-# VERIFICATION (upgraded)
-def verify_league_schedule(globals_dict):
-    print("\n==============================")
-    print("🔎 VERIFYING LEAGUE SCHEDULES")
-    print("==============================")
-
-    for league in leagues:
-
-        missing = []
-
-        future_matches = globals_dict.get(f"future_matches_{league}")
-        if future_matches is None:
-            missing.append("future_matches")
-
-        past_matches_all = globals_dict.get(f"past_matches_{league}_all")
-        if past_matches_all is None:
-            missing.append("past_matches_all")
-
-        league_table = globals_dict.get(league)
-        if league_table is None:
-            missing.append("league table")
-
-        if missing:
-            print(f"{league}: ⚠️ Missing dataset(s) {missing}, skipping verification")
-            continue
-
-        past_matches = filter_current_season(past_matches_all, league)
-        total_matches = len(past_matches) + len(future_matches)
-
-        # Total teams in the league
-        if "team" not in league_table.columns:
-            print(f"{league}: ⚠️ 'team' column missing in league table, skipping")
-            continue
-
-        teams = set(league_table["team"])
-        expected_matches_per_team = (len(teams) - 1) * 2
-        print(f"\n{league}: Total teams = {len(teams)} | Expected matches per team = {expected_matches_per_team}")
-
-        # Count home + away matches per team
-        played_counts = past_matches["homeTeam"].value_counts().add(
-            past_matches["awayTeam"].value_counts(), fill_value=0
-        ).add(
-            future_matches["homeTeam"].value_counts(), fill_value=0
-        ).add(
-            future_matches["awayTeam"].value_counts(), fill_value=0
-        )
-
-        missing_teams = {team: expected_matches_per_team - played_counts.get(team, 0)
-                         for team in teams if expected_matches_per_team - played_counts.get(team, 0) > 0}
-
-        print(f"Past matches (this season): {len(past_matches)} | Future matches: {len(future_matches)} | Total fixtures: {len(past_matches)+len(future_matches)}")
-
-        if not missing_teams:
-            print("✅ All teams have complete fixtures")
-        else:
-            print("⚠️ Teams missing fixtures:")
-            for team, missing_count in missing_teams.items():
-                print(f"  {team}: {missing_count} matches missing")
-
-
-# -------------------------------
-# MAIN PROCESS
+# ===============================
+# MAIN PROCESS (SAFE)
+# ===============================
 def process_datasets(globals_dict):
+
     print("\n==============================")
     print("⚙️ PROCESSING DATASETS")
     print("==============================")
 
     missing_fixtures = []
 
+    # -------------------------------
     # Apply mappings
     for league, mapping in mappings.items():
-        print(f"\n🔧 Applying team mapping: {league}")
         for dataset in [
             f"past_matches_{league}_all",
             f"future_matches_{league}",
@@ -358,19 +336,35 @@ def process_datasets(globals_dict):
             globals_dict[dataset] = df
 
     # -------------------------------
-    # Add fixtures from betting odds
-    print("\n📊 Checking betting odds for missing fixtures")
+    # ACTIVE LEAGUE FILTER
+    active_leagues = []
+
+    print("\n📊 Checking league status...")
     for league in leagues:
+        if is_league_active(globals_dict.get(league)):
+            active_leagues.append(league)
+        else:
+            print(f"{league}: 🏁 finished → skipping generation")
+
+    print(f"\nActive leagues: {active_leagues}")
+
+    # -------------------------------
+    # Betting odds fill (only active leagues)
+    print("\n📊 Checking betting odds")
+
+    for league in active_leagues:
+
         future_matches = globals_dict.get(f"future_matches_{league}")
         betting_odds = globals_dict.get(f"betting_odds_{league}")
+
         if future_matches is None or betting_odds is None:
             continue
 
         future_set = set(zip(future_matches["homeTeam"], future_matches["awayTeam"]))
         odds_df = normalize_columns(betting_odds)
         book_set = set(zip(odds_df["homeTeam"], odds_df["awayTeam"]))
+
         missing = book_set - future_set
-        print(f"{league}: {len(missing)} fixtures missing from API")
 
         for home, away in missing:
             future_matches.loc[len(future_matches)] = {
@@ -378,25 +372,32 @@ def process_datasets(globals_dict):
                 "homeTeam": home,
                 "awayTeam": away
             }
+
         globals_dict[f"future_matches_{league}"] = future_matches
 
     # -------------------------------
-    # Detect reverse fixtures
-    print("\n🔎 Detecting missing reverse fixtures")
-    for league in leagues:
+    # Reverse fixtures (only active leagues)
+    print("\n🔎 Detecting reverse fixtures")
+
+    for league in active_leagues:
+
         future_matches = globals_dict.get(f"future_matches_{league}")
         past_matches_all = globals_dict.get(f"past_matches_{league}_all")
         league_table = globals_dict.get(league)
+
         if future_matches is None or past_matches_all is None or league_table is None:
             continue
 
         past_matches = filter_current_season(past_matches_all, league)
         fixtures = season_fixtures(past_matches, future_matches)
-        league_teams = set(league_table["team"])
 
-        for team in league_teams:
-            for opponent in league_teams - {team}:
+        teams = set(league_table["team"])
+
+        for team in teams:
+            for opponent in teams - {team}:
+
                 result = find_missing_reverse_fixture(team, opponent, fixtures)
+
                 if result:
                     home, away = result
                     missing_fixtures.append({
@@ -406,31 +407,29 @@ def process_datasets(globals_dict):
                     })
 
     # -------------------------------
-    # Append missing fixtures
     missing_df = pd.DataFrame(missing_fixtures)
-    future_matches_backup = {}
 
     if not missing_df.empty:
-        missing_df = (missing_df
-                      .drop_duplicates()
-                      .sort_values(["league", "homeTeam"])
-                      .reset_index(drop=True))
+
+        missing_df = missing_df.drop_duplicates().reset_index(drop=True)
+
         print("\n➕ Adding reverse fixtures")
+
         for league in missing_df["league"].unique():
-            future_matches_backup[league] = globals_dict[f"future_matches_{league}"].copy()
+
             future_matches = globals_dict[f"future_matches_{league}"]
-            league_missing = missing_df[missing_df["league"]==league]
-            print(f"{league}: adding {len(league_missing)} fixtures")
+            league_missing = missing_df[missing_df["league"] == league]
+
             for _, row in league_missing.iterrows():
                 future_matches.loc[len(future_matches)] = {
                     "utcDate": pd.NaT,
                     "homeTeam": row["homeTeam"],
                     "awayTeam": row["awayTeam"]
                 }
+
             globals_dict[f"future_matches_{league}"] = future_matches
+
     else:
         print("\n✅ No reverse fixtures missing")
 
-    # -------------------------------
-    verify_league_schedule(globals_dict)
-    return missing_df, future_matches_backup
+    return missing_df, {}

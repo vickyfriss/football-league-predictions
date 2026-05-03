@@ -334,17 +334,21 @@ def load_fixtures():
     for comp_code, df_name in competitions.items():
 
         try:
-
             url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
 
             response = request_with_retry(url, headers=headers, params=params)
 
-            data = response.json()["matches"]
+            data = response.json().get("matches", [])
 
-        except Exception:
+            # ✅ handle empty response safely
+            if not data:
+                print(f"{comp_code}: no upcoming fixtures returned")
+                fixtures_data[df_name] = pd.DataFrame()
+                continue
 
-            print(f"{comp_code}: fixtures not available")
-
+        except Exception as e:
+            print(f"{comp_code}: fixtures not available ({e})")
+            fixtures_data[df_name] = pd.DataFrame()
             continue
 
         df = pd.DataFrame(data)[["utcDate", "status", "homeTeam", "awayTeam"]]
@@ -354,7 +358,7 @@ def load_fixtures():
 
         fixtures_data[df_name] = df
 
-    return fixtures_data
+    return fixtures_data  # ✅ always returns dict
 
 # -------------------------------
 # Past results
@@ -482,6 +486,11 @@ def create_datasets(save_csv=True):
             df.to_csv(f"data/{name}.csv", index=False)
 
         for name, df in fixtures.items():
+
+            if df is None or not isinstance(df, pd.DataFrame):
+                print(f"{name}: invalid or None fixture data, saving empty dataset")
+                df = pd.DataFrame(columns=["utcDate", "status", "homeTeam", "awayTeam"])
+
             df.to_csv(f"data/{name}.csv", index=False)
 
         for league_name, seasons_dict in past_results.items():
