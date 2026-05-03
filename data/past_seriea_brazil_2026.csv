@@ -126,9 +126,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-26T21:30:00Z,13,FINISHED,RB Bragantino,SE Palmeiras,0,1,AWAY_TEAM
 2026-04-26T23:30:00Z,13,FINISHED,CA Mineiro,CR Flamengo,0,4,AWAY_TEAM
 2026-04-26T23:30:00Z,13,FINISHED,Fluminense FC,Chapecoense AF,2,1,HOME_TEAM
-<<<<<<< Updated upstream
-=======
 2026-05-02T19:00:00Z,14,FINISHED,Botafogo FR,Clube do Remo,1,2,AWAY_TEAM
-2026-05-02T21:30:00Z,14,FINISHED,SE Palmeiras,Santos FC,2,1,HOME_TEAM
+2026-05-02T21:30:00Z,14,FINISHED,SE Palmeiras,Santos FC,1,1,DRAW
 2026-05-02T21:30:00Z,14,FINISHED,EC Vitória,Coritiba FBC,4,1,HOME_TEAM
->>>>>>> Stashed changes
