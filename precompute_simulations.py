@@ -4,6 +4,7 @@ import importlib.util
 import sys
 import os
 from datetime import datetime, UTC
+import numpy as np
 
 RUN_CREATION = False  # OFFLINE MODE
 
@@ -203,40 +204,55 @@ position_distribution_all, position_distribution_pct_all, _ = dataset_simulation
     active_leagues,
     df_simulation_all,
     tables_all,
-    n_sim=1000
+    n_sim=500
 )
 
 
 # =========================
-# 8️⃣ FINISHED LEAGUES (STRICT UNIFIED SCHEMA)
+# 8️⃣ FINISHED LEAGUES (MATCH SIM FORMAT EXACTLY)
 # =========================
-for lg in finished_leagues:
 
-    df = globals_dict[lg].copy()
+def build_finished_like_sim(df):
+    df = df.copy()
+
+    # ---- same cleaning as active pipeline ----
+    df.columns = df.columns.str.lower()
+    df = df.loc[:, ~df.columns.str.contains("^unnamed")]
+    df = df.drop(columns=["index"], errors="ignore")
 
     df["pts"] = pd.to_numeric(df["pts"], errors="coerce").fillna(0)
+    df["gp"] = pd.to_numeric(df["gp"], errors="coerce").fillna(0)
 
     df = df.sort_values("pts", ascending=False).reset_index(drop=True)
 
-    n = len(df)
+    df["pos"] = np.arange(1, len(df) + 1)
 
-    # build clean simulation-style output only
-    clean = pd.DataFrame({
-        "team": df["team"],
-        "position": range(1, n + 1),
+    df = df.rename(columns={
+        "team": "TEAM",
+        "gp": "GP",
+        "pts": "PTS",
+        "pos": "POS"
     })
 
-    # match simulation probability schema EXACTLY
-    max_pos = len(df)
+    df = df[["POS", "TEAM", "GP", "PTS"]]
 
-    for i in range(1, max_pos + 1):
-        clean[f"prob_{i}"] = 0.0
+    # ---- THIS is the important part ----
+    # mimic simulation output structure EXACTLY
 
-    for i in range(n):
-        clean.loc[i, f"prob_{i+1}"] = 1.0
+    n = len(df)
 
-    position_distribution_all[lg] = clean
-    position_distribution_pct_all[lg] = clean
+    for i in range(1, n + 1):
+        df[i] = 0.0
+
+    df.loc[np.arange(n), np.arange(1, n + 1)] = 100.0
+
+    # ensure identical formatting to PL output
+    df = df.reset_index(drop=True)
+    df.index.name = None
+    df.columns.name = None
+
+    return df
+
 
 
 print("✅ Simulations complete.")
