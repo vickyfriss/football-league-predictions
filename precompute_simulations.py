@@ -6,7 +6,7 @@ import os
 from datetime import datetime, UTC
 import numpy as np
 
-RUN_CREATION = False  # OFFLINE MODE
+RUN_CREATION = True  # OFFLINE MODE
 
 # =========================
 # 0️⃣ HELPER: dynamic import
@@ -202,7 +202,7 @@ position_distribution_all, position_distribution_pct_all, _ = dataset_simulation
     active_leagues,
     df_simulation_all,
     tables_all,
-    n_sim=500
+    n_sim=10000
 )
 
 

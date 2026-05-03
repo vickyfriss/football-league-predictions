@@ -155,14 +155,44 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
             
 /* FIX STREAMLIT SELECTBOX (LIGHT THEME FORCE) */
 
+/* ================================
+   STREAMLIT SELECTBOX FIX (SAFE)
+================================ */
+
 div.stSelectbox label {
     color: #333 !important;
 }
 
-/* FULL SAFE OVERRIDE */
-div[data-baseweb="select"] * {
+/* control box only (NOT all children) */
+div[data-baseweb="select"] > div {
     background-color: #ffffff !important;
     color: #111 !important;
+    border-radius: 6px;
+}
+
+/* dropdown menu */
+div[data-baseweb="popover"],
+div[data-baseweb="menu"] {
+    background-color: #ffffff !important;
+}
+
+/* menu items */
+div[data-baseweb="menu"] li {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+/* hover */
+div[data-baseweb="menu"] li:hover {
+    background-color: #dbeafe !important;
+    color: #111 !important;
+}
+
+/* selected */
+div[data-baseweb="menu"] li[aria-selected="true"] {
+    background-color: #bfdbfe !important;
+    color: #111 !important;
+    font-weight: 600;
 }
 
 /* dropdown */
