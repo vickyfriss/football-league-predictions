@@ -278,3 +278,9 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-04-25T16:30:00Z,31,FINISHED,Hamburger SV,TSG 1899 Hoffenheim,1,2,AWAY_TEAM
 2026-04-26T13:30:00Z,31,FINISHED,VfB Stuttgart,SV Werder Bremen,1,1,DRAW
 2026-04-26T15:30:00Z,31,FINISHED,Borussia Dortmund,SC Freiburg,4,0,HOME_TEAM
+2026-05-02T13:30:00Z,32,FINISHED,TSG 1899 Hoffenheim,VfB Stuttgart,3,3,DRAW
+2026-05-02T13:30:00Z,32,FINISHED,SV Werder Bremen,FC Augsburg,1,3,AWAY_TEAM
+2026-05-02T13:30:00Z,32,FINISHED,FC Bayern München,1. FC Heidenheim 1846,3,3,DRAW
+2026-05-02T13:30:00Z,32,FINISHED,1. FC Union Berlin,1. FC Köln,2,2,DRAW
+2026-05-02T13:30:00Z,32,FINISHED,Eintracht Frankfurt,Hamburger SV,1,2,AWAY_TEAM
+2026-05-02T16:30:00Z,32,FINISHED,Bayer 04 Leverkusen,RB Leipzig,4,1,HOME_TEAM
