@@ -152,6 +152,96 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     }
 }
 
+            
+/* FIX STREAMLIT SELECTBOX (LIGHT THEME FORCE) */
+
+div.stSelectbox label {
+    color: #333 !important;
+}
+
+/* FULL SAFE OVERRIDE */
+div[data-baseweb="select"] * {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+/* dropdown */
+div[data-baseweb="popover"] {
+    background-color: #ffffff !important;
+}
+
+/* options */
+div[role="option"] {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+div[role="option"]:hover {
+    background-color: #dbeafe !important;
+}
+
+div[aria-selected="true"] {
+    background-color: #bfdbfe !important;
+    font-weight: 600;
+}
+            
+div[data-baseweb="menu"] {
+    background-color: #ffffff !important;
+}
+
+div[data-baseweb="menu"] ul {
+    background-color: #ffffff !important;
+}
+
+div[data-baseweb="menu"] li {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+//* ================================
+   FIX: NO BLACK HOVER EVER
+================================ */
+
+/* dropdown container */
+div[data-baseweb="popover"],
+div[data-baseweb="menu"] {
+    background-color: #ffffff !important;
+}
+
+/* list */
+div[data-baseweb="menu"] ul {
+    background-color: #ffffff !important;
+}
+
+/* all items (important override layer) */
+div[data-baseweb="menu"] li,
+div[data-baseweb="menu"] li * {
+    background-color: #ffffff !important;
+    color: #111 !important;
+}
+
+/* hover state (MAIN FIX) */
+div[data-baseweb="menu"] li:hover,
+div[data-baseweb="menu"] li:hover * {
+    background-color: #dbeafe !important;  /* light blue */
+    color: #111 !important;
+}
+
+/* keyboard focus (prevents dark highlight) */
+div[data-baseweb="menu"] li:focus,
+div[data-baseweb="menu"] li:focus-visible {
+    background-color: #dbeafe !important;
+    outline: none !important;
+}
+
+/* selected item */
+div[data-baseweb="menu"] li[aria-selected="true"],
+div[data-baseweb="menu"] li[aria-selected="true"] * {
+    background-color: #bfdbfe !important;
+    color: #111 !important;
+    font-weight: 600;
+}
+            
 /* Simulation methodology styling */
 .sim-step { background-color: #ffffff; border-left: 4px solid #1f77b4; padding: 10px 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .sim-step h4 { margin: 0 0 4px 0; font-weight: 600; color: #1f77b4; }
