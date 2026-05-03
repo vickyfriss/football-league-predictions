@@ -38,7 +38,18 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
         return 0.5 + (val - mid) / (max_val - mid) * 0.5
 
 def style_probabilities_table(df):
-    display_df = df.copy().reset_index(drop=True)
+    display_df = df.copy()
+
+    # -------------------------------
+    # SAFE CLEANING ONLY (non-destructive)
+    # remove accidental index columns ONLY if they exist
+    display_df = display_df.loc[:, ~display_df.columns.astype(str).str.match(r"^(index|Unnamed.*|level_0)$")]
+
+    # DO NOT reset index unless it's actually needed
+    display_df = display_df.reset_index(drop=True)
+
+    # -------------------------------
+    # TEXT / NUMERIC SPLIT
     text_cols = ["POS", "TEAM", "GP", "PTS"]
     num_cols = display_df.columns.difference(text_cols)
 
@@ -75,6 +86,7 @@ def style_probabilities_table(df):
             {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
         ])
     )
+
     return styled, num_cols
 
 # -------------------------------

@@ -134,7 +134,6 @@ for lg in dataset_processing.leagues:
         continue
 
     table = table.copy()
-
     table["gp"] = pd.to_numeric(table["gp"], errors="coerce").fillna(0)
 
     teams = table["team"].nunique()
@@ -147,13 +146,12 @@ for lg in dataset_processing.leagues:
         active_leagues.append(lg)
         print(f"{lg}: ⚽ active")
 
-
 print(f"\nActive leagues: {active_leagues}")
 print(f"Finished leagues: {finished_leagues}")
 
 
 # =========================
-# 5️⃣ NORMALISERS (SAFE)
+# 5️⃣ NORMALISERS
 # =========================
 def normalize_fixtures(df):
     if df is None or df.empty:
@@ -179,7 +177,7 @@ def normalize_odds(df):
 
 
 # =========================
-# 6️⃣ PROBABILITIES (ACTIVE ONLY)
+# 6️⃣ PROBABILITIES
 # =========================
 print("3️⃣ Computing match probabilities...")
 
@@ -194,7 +192,7 @@ print("✅ Probabilities computed.")
 
 
 # =========================
-# 7️⃣ MONTE CARLO (ACTIVE ONLY)
+# 7️⃣ MONTE CARLO
 # =========================
 print("4️⃣ Running Monte Carlo simulations...")
 
@@ -209,57 +207,65 @@ position_distribution_all, position_distribution_pct_all, _ = dataset_simulation
 
 
 # =========================
-# 8️⃣ FINISHED LEAGUES (MATCH SIM FORMAT EXACTLY)
+# 8️⃣ FIXED FORMATTER (IMPORTANT FIX)
 # =========================
-
-def build_finished_like_sim(df):
+def to_simulation_format(df):
     df = df.copy()
 
-    # ---- same cleaning as active pipeline ----
+    # 🔥 REMOVE ANY INDEX-LIKE COLUMNS (THIS FIXES YOUR ISSUE)
     df.columns = df.columns.str.lower()
-    df = df.loc[:, ~df.columns.str.contains("^unnamed")]
+    df = df.loc[:, ~df.columns.str.contains("^unnamed|^index$")]
     df = df.drop(columns=["index"], errors="ignore")
+
+    # 🔥 FORCE CLEAN INDEX (REMOVES LEFT COLUMN EFFECT)
+    df = df.reset_index(drop=True)
 
     df["pts"] = pd.to_numeric(df["pts"], errors="coerce").fillna(0)
     df["gp"] = pd.to_numeric(df["gp"], errors="coerce").fillna(0)
 
     df = df.sort_values("pts", ascending=False).reset_index(drop=True)
 
-    df["pos"] = np.arange(1, len(df) + 1)
+    df["POS"] = np.arange(1, len(df) + 1)
 
     df = df.rename(columns={
         "team": "TEAM",
         "gp": "GP",
-        "pts": "PTS",
-        "pos": "POS"
+        "pts": "PTS"
     })
 
     df = df[["POS", "TEAM", "GP", "PTS"]]
-
-    # ---- THIS is the important part ----
-    # mimic simulation output structure EXACTLY
 
     n = len(df)
 
     for i in range(1, n + 1):
         df[i] = 0.0
 
-    df.loc[np.arange(n), np.arange(1, n + 1)] = 100.0
+    for idx, row in df.iterrows():
+        df.at[idx, int(row["POS"])] = 100.0
 
-    # ensure identical formatting to PL output
-    df = df.reset_index(drop=True)
-    df.index.name = None
     df.columns.name = None
+    df.index.name = None
 
     return df
 
+
+# =========================
+# 9️⃣ APPLY FIX
+# =========================
+for lg in finished_leagues:
+    df = globals_dict[lg]
+
+    position_distribution_all[lg] = to_simulation_format(df)
+    position_distribution_pct_all[lg] = position_distribution_all[lg]
+
+    print(f"✅ Finished league formatted: {lg}")
 
 
 print("✅ Simulations complete.")
 
 
 # =========================
-# 9️⃣ SAVE OUTPUTS
+# 🔟 SAVE OUTPUTS
 # =========================
 print("5️⃣ Saving results...")
 
