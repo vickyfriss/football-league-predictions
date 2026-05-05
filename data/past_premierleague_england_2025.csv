@@ -346,3 +346,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-03T13:00:00Z,35,FINISHED,AFC Bournemouth,Crystal Palace FC,3,0,HOME_TEAM
 2026-05-03T14:30:00Z,35,FINISHED,Manchester United FC,Liverpool FC,3,2,HOME_TEAM
 2026-05-03T18:00:00Z,35,FINISHED,Aston Villa FC,Tottenham Hotspur FC,1,2,AWAY_TEAM
+2026-05-04T14:00:00Z,35,FINISHED,Chelsea FC,Nottingham Forest FC,1,3,AWAY_TEAM
+2026-05-04T19:00:00Z,35,FINISHED,Everton FC,Manchester City FC,3,3,DRAW

@@ -338,3 +338,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-03T14:15:00Z,34,FINISHED,Getafe CF,Rayo Vallecano de Madrid,0,2,AWAY_TEAM
 2026-05-03T16:30:00Z,34,FINISHED,Real Betis Balompié,Real Oviedo,3,0,HOME_TEAM
 2026-05-03T19:00:00Z,34,FINISHED,RCD Espanyol de Barcelona,Real Madrid CF,0,2,AWAY_TEAM
+2026-05-04T19:00:00Z,34,FINISHED,Sevilla FC,Real Sociedad de Fútbol,1,0,HOME_TEAM
