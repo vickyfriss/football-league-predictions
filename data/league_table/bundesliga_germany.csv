@@ -1,19 +1,19 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Bayern Munich,32,26,5,1,116,35,81,83
+1,Bayern Munich,33,27,5,1,117,35,82,86
 2,Borussia Dortmund,33,21,7,5,68,34,34,70
-3,RB Leipzig,32,19,5,8,63,42,21,62
-4,Bayer Leverkusen,32,17,7,8,66,43,23,58
-5,VfB Stuttgart,32,17,7,8,66,46,20,58
-6,TSG Hoffenheim,32,17,7,8,64,48,16,58
+3,RB Leipzig,33,20,5,8,65,43,22,65
+4,VfB Stuttgart,33,18,7,8,69,47,22,61
+5,TSG Hoffenheim,33,18,7,8,65,48,17,61
+6,Bayer Leverkusen,33,17,7,9,67,46,21,58
 7,SC Freiburg,32,12,8,12,45,53,-8,44
 8,Eintracht Frankfurt,33,11,10,12,59,63,-4,43
-9,FC Augsburg,32,11,7,14,42,56,-14,40
+9,FC Augsburg,33,12,7,14,45,57,-12,43
 10,Mainz,32,9,10,13,41,50,-9,37
-11,Borussia Mönchengladbach,32,8,11,13,37,50,-13,35
+11,Borussia Mönchengladbach,33,8,11,14,38,53,-15,35
 12,Hamburg SV,32,8,10,14,36,51,-15,34
 13,1. FC Union Berlin,32,8,9,15,37,57,-20,33
 14,FC Cologne,32,7,11,14,47,55,-8,32
-15,Werder Bremen,32,8,8,16,37,57,-20,32
-16,VfL Wolfsburg,32,6,8,18,42,67,-25,26
-17,St. Pauli,32,6,8,18,27,55,-28,26
+15,Werder Bremen,33,8,8,17,37,58,-21,32
+16,VfL Wolfsburg,33,6,8,19,42,68,-26,26
+17,St. Pauli,33,6,8,19,28,57,-29,26
 18,1. FC Heidenheim 1846,32,5,8,19,38,69,-31,23
