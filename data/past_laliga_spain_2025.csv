@@ -345,3 +345,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-09T16:30:00Z,35,FINISHED,Club Atlético de Madrid,RC Celta de Vigo,0,1,AWAY_TEAM
 2026-05-09T19:00:00Z,35,FINISHED,Real Sociedad de Fútbol,Real Betis Balompié,2,2,DRAW
 2026-05-10T12:00:00Z,35,FINISHED,RCD Mallorca,Villarreal CF,1,1,DRAW
+2026-05-10T14:15:00Z,35,FINISHED,Athletic Club,Valencia CF,0,1,AWAY_TEAM
+2026-05-10T16:30:00Z,35,FINISHED,Real Oviedo,Getafe CF,0,0,DRAW
+2026-05-10T19:00:00Z,35,FINISHED,FC Barcelona,Real Madrid CF,2,0,HOME_TEAM

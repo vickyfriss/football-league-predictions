@@ -353,3 +353,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-09T14:00:00Z,36,FINISHED,Brighton & Hove Albion FC,Wolverhampton Wanderers FC,3,0,HOME_TEAM
 2026-05-09T14:00:00Z,36,FINISHED,Fulham FC,AFC Bournemouth,0,1,AWAY_TEAM
 2026-05-09T16:30:00Z,36,FINISHED,Manchester City FC,Brentford FC,3,0,HOME_TEAM
+2026-05-10T13:00:00Z,36,FINISHED,Crystal Palace FC,Everton FC,2,2,DRAW
+2026-05-10T13:00:00Z,36,FINISHED,Burnley FC,Aston Villa FC,2,2,DRAW
+2026-05-10T13:00:00Z,36,FINISHED,Nottingham Forest FC,Newcastle United FC,1,1,DRAW
+2026-05-10T15:30:00Z,36,FINISHED,West Ham United FC,Arsenal FC,0,1,AWAY_TEAM
