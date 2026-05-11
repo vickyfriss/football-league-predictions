@@ -348,3 +348,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-10T14:15:00Z,35,FINISHED,Athletic Club,Valencia CF,0,1,AWAY_TEAM
 2026-05-10T16:30:00Z,35,FINISHED,Real Oviedo,Getafe CF,0,0,DRAW
 2026-05-10T19:00:00Z,35,FINISHED,FC Barcelona,Real Madrid CF,2,0,HOME_TEAM
+2026-05-11T19:00:00Z,35,FINISHED,Rayo Vallecano de Madrid,Girona FC,1,1,DRAW
