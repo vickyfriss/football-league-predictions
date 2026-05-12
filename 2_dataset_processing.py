@@ -382,16 +382,24 @@ def process_datasets(globals_dict):
     for league in active_leagues:
 
         future_matches = globals_dict.get(f"future_matches_{league}")
-        past_matches_all = globals_dict.get(f"past_matches_{league}_all")
+        
         league_table = globals_dict.get(league)
+        past_matches_all = globals_dict.get(f"past_matches_{league}_all")
+
+        if league_table is None or past_matches_all is None:
+            continue
+
+        expected_gp = league_table.set_index("team")["gp"]
 
         if future_matches is None or past_matches_all is None or league_table is None:
             continue
 
-        past_matches = filter_current_season(past_matches_all, league)
-        fixtures = season_fixtures(past_matches, future_matches)
+        fixtures = season_fixtures(past_matches_all, future_matches)
 
         teams = set(league_table["team"])
+
+        past_set = set(zip(past_matches_all["homeTeam"], past_matches_all["awayTeam"]))
+        future_set = set(zip(future_matches["homeTeam"], future_matches["awayTeam"]))
 
         for team in teams:
             for opponent in teams - {team}:
@@ -400,10 +408,34 @@ def process_datasets(globals_dict):
 
                 if result:
                     home, away = result
+
+                    # already exists somewhere → skip
+                    if (home, away) in future_set or (home, away) in past_set:
+                        continue
+
+                    home_gp = expected_gp.get(home, 0)
+                    away_gp = expected_gp.get(away, 0)
+
+                    # count how many matches each team has already played in past data
+                    home_played = past_matches_all[
+                        (past_matches_all["homeTeam"] == home) |
+                        (past_matches_all["awayTeam"] == home)
+                    ].shape[0]
+
+                    away_played = past_matches_all[
+                        (past_matches_all["homeTeam"] == away) |
+                        (past_matches_all["awayTeam"] == away)
+                    ].shape[0]
+
                     missing_fixtures.append({
                         "league": league,
                         "homeTeam": home,
-                        "awayTeam": away
+                        "awayTeam": away,
+                        "home_gp_expected": home_gp,
+                        "away_gp_expected": away_gp,
+                        "home_gp_actual": home_played,
+                        "away_gp_actual": away_played,
+                        "missing_in": "past" if home_played < home_gp or away_played < away_gp else "future"
                     })
 
     # -------------------------------
@@ -421,7 +453,16 @@ def process_datasets(globals_dict):
             league_missing = missing_df[missing_df["league"] == league]
 
             for _, row in league_missing.iterrows():
-                future_matches.loc[len(future_matches)] = {
+
+                # If GP mismatch is large → likely data gap (not schedule)
+                missing_in = row["missing_in"]
+
+                if missing_in == "past":
+                    target_df = past_matches_all
+                else:
+                    target_df = future_matches
+
+                target_df.loc[len(target_df)] = {
                     "utcDate": pd.NaT,
                     "homeTeam": row["homeTeam"],
                     "awayTeam": row["awayTeam"]
