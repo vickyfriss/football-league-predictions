@@ -1,4 +1,14 @@
 utcDate,status,homeTeam,awayTeam
+2026-05-17T10:30:00Z,TIMED,AS Roma,SS Lazio
+2026-05-17T10:30:00Z,TIMED,Genoa CFC,AC Milan
+2026-05-17T10:30:00Z,TIMED,Como 1907,Parma Calcio 1913
+2026-05-17T10:30:00Z,TIMED,Juventus FC,ACF Fiorentina
+2026-05-17T10:30:00Z,TIMED,AC Pisa 1909,SSC Napoli
+2026-05-17T13:00:00Z,TIMED,FC Internazionale Milano,Hellas Verona FC
+2026-05-17T16:00:00Z,TIMED,Atalanta BC,Bologna FC 1909
+2026-05-17T18:45:00Z,TIMED,Cagliari Calcio,Torino FC
+2026-05-17T18:45:00Z,TIMED,US Sassuolo Calcio,US Lecce
+2026-05-17T18:45:00Z,TIMED,Udinese Calcio,US Cremonese
 2026-05-24T00:00:00Z,SCHEDULED,ACF Fiorentina,Atalanta BC
 2026-05-24T00:00:00Z,SCHEDULED,AC Milan,Cagliari Calcio
 2026-05-24T00:00:00Z,SCHEDULED,Bologna FC 1909,FC Internazionale Milano
