@@ -553,3 +553,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-02T11:30:00Z,46.0,FINISHED,Wrexham AFC,Middlesbrough FC,2,2,DRAW
 2026-05-08T19:00:00Z,,FINISHED,Hull City AFC,Millwall FC,0,0,DRAW
 2026-05-09T11:30:00Z,,FINISHED,Middlesbrough FC,Southampton FC,0,0,DRAW
+2026-05-11T19:00:00Z,,FINISHED,Millwall FC,Hull City AFC,0,2,AWAY_TEAM
