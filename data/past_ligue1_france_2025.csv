@@ -294,3 +294,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-10T19:00:00Z,33,FINISHED,Paris Saint-Germain FC,Stade Brestois 29,1,0,HOME_TEAM
 2026-05-10T19:00:00Z,33,FINISHED,Angers SCO,RC Strasbourg Alsace,1,1,DRAW
 2026-05-10T19:00:00Z,33,FINISHED,Stade Rennais FC 1901,Paris FC,2,1,HOME_TEAM
+2026-05-13T17:00:00Z,29,FINISHED,Stade Brestois 29,RC Strasbourg Alsace,1,2,AWAY_TEAM
+2026-05-13T19:00:00Z,29,FINISHED,Racing Club de Lens,Paris Saint-Germain FC,0,2,AWAY_TEAM

@@ -358,3 +358,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-10T13:00:00Z,36,FINISHED,Nottingham Forest FC,Newcastle United FC,1,1,DRAW
 2026-05-10T15:30:00Z,36,FINISHED,West Ham United FC,Arsenal FC,0,1,AWAY_TEAM
 2026-05-11T19:00:00Z,36,FINISHED,Tottenham Hotspur FC,Leeds United FC,1,1,DRAW
+2026-05-13T19:00:00Z,31,FINISHED,Manchester City FC,Crystal Palace FC,3,0,HOME_TEAM
