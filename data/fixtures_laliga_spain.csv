@@ -1,7 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-05-14T17:00:00Z,TIMED,Valencia CF,Rayo Vallecano de Madrid
-2026-05-14T18:00:00Z,TIMED,Girona FC,Real Sociedad de Fútbol
-2026-05-14T19:30:00Z,TIMED,Real Madrid CF,Real Oviedo
 2026-05-17T17:00:00Z,TIMED,Athletic Club,RC Celta de Vigo
 2026-05-17T17:00:00Z,TIMED,Club Atlético de Madrid,Girona FC
 2026-05-17T17:00:00Z,TIMED,FC Barcelona,Real Betis Balompié
@@ -21,4 +18,4 @@ utcDate,status,homeTeam,awayTeam
 2026-05-23T19:00:00Z,TIMED,Real Madrid CF,Athletic Club
 2026-05-23T19:00:00Z,TIMED,Valencia CF,FC Barcelona
 2026-05-23T19:00:00Z,TIMED,Girona FC,Elche CF
-2026-05-24T00:00:00Z,SCHEDULED,Villarreal CF,Club Atlético de Madrid
+2026-05-24T19:00:00Z,TIMED,Villarreal CF,Club Atlético de Madrid

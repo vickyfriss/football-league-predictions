@@ -356,3 +356,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-13T17:00:00Z,36,FINISHED,Villarreal CF,Sevilla FC,2,3,AWAY_TEAM
 2026-05-13T19:30:00Z,36,FINISHED,Deportivo Alavés,FC Barcelona,1,0,HOME_TEAM
 2026-05-13T19:30:00Z,36,FINISHED,Getafe CF,RCD Mallorca,3,1,HOME_TEAM
+2026-05-14T17:00:00Z,36,FINISHED,Valencia CF,Rayo Vallecano de Madrid,1,1,DRAW
+2026-05-14T18:00:00Z,36,FINISHED,Girona FC,Real Sociedad de Fútbol,1,1,DRAW
+2026-05-14T19:30:00Z,36,FINISHED,Real Madrid CF,Real Oviedo,2,0,HOME_TEAM
