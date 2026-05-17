@@ -360,3 +360,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-11T19:00:00Z,36,FINISHED,Tottenham Hotspur FC,Leeds United FC,1,1,DRAW
 2026-05-13T19:00:00Z,31,FINISHED,Manchester City FC,Crystal Palace FC,3,0,HOME_TEAM
 2026-05-15T19:00:00Z,37,FINISHED,Aston Villa FC,Liverpool FC,4,2,HOME_TEAM
+2026-05-17T11:30:00Z,37,FINISHED,Manchester United FC,Nottingham Forest FC,3,2,HOME_TEAM
+2026-05-17T14:00:00Z,37,FINISHED,Brentford FC,Crystal Palace FC,2,2,DRAW
+2026-05-17T14:00:00Z,37,FINISHED,Everton FC,Sunderland AFC,1,3,AWAY_TEAM
+2026-05-17T14:00:00Z,37,FINISHED,Leeds United FC,Brighton & Hove Albion FC,1,0,HOME_TEAM
+2026-05-17T14:00:00Z,37,FINISHED,Wolverhampton Wanderers FC,Fulham FC,1,1,DRAW
