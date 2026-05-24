@@ -371,3 +371,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-17T18:45:00Z,37,FINISHED,Udinese Calcio,US Cremonese,0,1,AWAY_TEAM
 2026-05-22T18:45:00Z,38,FINISHED,ACF Fiorentina,Atalanta BC,1,1,DRAW
 2026-05-23T16:00:00Z,38,FINISHED,Bologna FC 1909,FC Internazionale Milano,3,3,DRAW
+2026-05-23T18:45:00Z,38,FINISHED,SS Lazio,AC Pisa 1909,2,1,HOME_TEAM
+2026-05-24T13:00:00Z,38,FINISHED,Parma Calcio 1913,US Sassuolo Calcio,1,0,HOME_TEAM
