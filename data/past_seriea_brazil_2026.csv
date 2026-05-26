@@ -164,4 +164,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-05-24T19:00:00Z,17,FINISHED,Cruzeiro EC,Chapecoense AF,2,1,HOME_TEAM
 2026-05-24T19:00:00Z,17,FINISHED,Clube do Remo,CA Paranaense,1,2,AWAY_TEAM
 2026-05-24T21:30:00Z,17,FINISHED,SC Corinthians Paulista,CA Mineiro,1,0,HOME_TEAM
-2026-05-24T23:30:00Z,17,FINISHED,CR Vasco da Gama,RB Bragantino,0,2,AWAY_TEAM
+2026-05-24T23:30:00Z,17,FINISHED,CR Vasco da Gama,RB Bragantino,0,3,AWAY_TEAM
+2026-05-25T23:00:00Z,17,FINISHED,Coritiba FBC,EC Bahia,3,1,HOME_TEAM
