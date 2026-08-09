@@ -199,7 +199,7 @@ li:hover .step-circle { background-color: #245f27; }
 /* Branded replacement for st.info() -- Streamlit's built-in info box is a fixed
    blue with no easy way to retheme it, so this is a plain styled div instead. */
 .status-banner {
-    max-width: 900px; margin: 14px auto; padding: 10px 18px;
+    max-width: 900px; margin: 28px auto; padding: 10px 18px;
     background-color: #eaf5ec; border-left: 2px solid #a5d6a7; border-right: 2px solid #a5d6a7;
     border-radius: 8px; color: #245f27; font-size: 14px; text-align: center;
 }
@@ -216,7 +216,7 @@ li:hover .step-circle { background-color: #245f27; }
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     padding: 20px 24px;
     width: 100%;
-    margin: 24px auto;
+    margin: 28px auto;
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
@@ -263,7 +263,7 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 ================================ */
 div[data-testid="stSelectbox"] {
     max-width: 900px;
-    margin: 16px auto !important;
+    margin: 28px auto !important;
 }
 div.stSelectbox label {
     color: #333 !important;
@@ -386,8 +386,8 @@ st.markdown("""
 # 7️⃣ HERO SECTION
 
 st.markdown("""
-<div class="app-card" style="padding:28px 32px; max-width:900px; margin:24px auto; text-align:center;">
-    <h1 style="margin:0; font-size:36px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">
+<div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto; text-align:center;">
+    <h1 style="margin:0; font-size:34px; font-weight:700; letter-spacing:0.4px;">
         Football League Simulator
     </h1>
     <div style="height:4px; width:80px; background:#2E7D32; margin:10px auto 20px auto; border-radius:2px;"></div>
@@ -504,7 +504,7 @@ st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final
 # -------------------------------
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown("""
-<div class="app-card" style="padding:28px 32px; max-width:900px; margin:24px auto;">
+<div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto;">
 <h3 style="margin-bottom:15px;">How This Simulation Works</h3>
 <p style="font-size:15px; line-height:1.8;">
 This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  
@@ -549,7 +549,7 @@ We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to 
 
 st.markdown("""
 <div id="about-me" class="app-card" style="padding:35px 25px; max-width:700px; 
-            margin:40px auto; text-align:center; font-size:18px; line-height:1.8;">
+            margin:28px auto; text-align:center; font-size:18px; line-height:1.8;">
 <h3 style="font-size:28px; margin-bottom:15px;">About Me</h3>
 <p>Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.</p>
 <p>I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.</p>
