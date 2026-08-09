@@ -498,7 +498,7 @@ st.markdown("""
 <p>I build <b>probabilistic simulations</b>, <b>predictive models</b>, and <b>data-driven insights</b> to help sports organisations and analysts make informed decisions backed by data.</p>
 <p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="color:#1f77b4;">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
 <p style="margin-top:20px; font-size:19px; font-weight:600; color:#1f77b4;">
-Interested in collaborating, hiring, or discussing sports analytics? <br><b>Let’s connect!</b>
+Interested in collaborating or discussing sports analytics? <br><b>Let’s connect!</b>
 </p>
 <div style="margin-top:20px;">
 <a href="mailto:vicky_friss@hotmail.com" style="margin:0 15px; text-decoration:none;">
