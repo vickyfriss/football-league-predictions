@@ -106,30 +106,44 @@ for lg in dataset_processing.leagues:
     league_results = past_season_results.get(lg, {})
 
     if league_results:
-        # Blend the current season with the immediately preceding one, instead
-        # of using ONLY the latest season. A handful of current-season matches
-        # alone (especially in the season's first weeks) isn't enough signal to
-        # rate a team fairly -- and the previous season is already fetched and
-        # cached right here, so discarding it meant a team that dominated last
-        # season could show up rated as anonymous a few matches into the new
-        # one (e.g. PSV: 1 draw so far this season -> near-zero title chance,
-        # with zero credit for winning the league comfortably last season).
+        sorted_seasons = sorted(league_results.keys())
+        current_season_key = sorted_seasons[-1]
+        past_matches_current = league_results[current_season_key]
+
+        # Blend the current season with the immediately preceding one, for
+        # RATINGS purposes only (see past_matches_{lg}_blended below) -- a
+        # handful of current-season matches alone (especially in the season's
+        # first weeks) isn't enough signal to rate a team fairly, and the
+        # previous season is already fetched and cached right here (e.g. PSV:
+        # 1 draw so far this season -> near-zero title chance with zero credit
+        # for winning the league comfortably last season, before this blend).
         # 3_probabilities.py's existing recency-weighting (sorted by actual
         # match date, linearly ramped 1x -> 2x) naturally gives the more
-        # recent season more weight once both are combined here -- no extra
-        # weighting needed at this step.
-        sorted_seasons = sorted(league_results.keys())
-        seasons_to_blend = sorted_seasons[-2:]  # current + previous, if both exist
+        # recent season more weight once both are combined here.
+        #
+        # Deliberately kept SEPARATE from past_matches_current (which stays
+        # current-season-only): process_datasets() below compares played-match
+        # counts against THIS SEASON's expected games-played to detect missing
+        # reverse fixtures -- feeding it blended multi-season data made it
+        # think almost every match was "missing" (comparing e.g. 35 blended
+        # matches played against 1 expected). The "has this league's season
+        # even started" check just below has the same requirement.
+        seasons_to_blend = sorted_seasons[-2:]
         non_empty = [league_results[s] for s in seasons_to_blend if not league_results[s].empty]
-        past_matches_current = pd.concat(non_empty, ignore_index=True) if non_empty else pd.DataFrame()
+        past_matches_blended = pd.concat(non_empty, ignore_index=True) if non_empty else pd.DataFrame()
     else:
         past_matches_current = pd.DataFrame()
+        past_matches_blended = pd.DataFrame()
 
     if past_matches_current.empty:
-        print(f"⚠️ {lg}: no past matches → skipping")
+        # The season genuinely hasn't started yet (zero matches played this
+        # season) -- not "not much data yet", literally nothing to simulate.
+        # Skip entirely, same as before the blending above was introduced.
+        print(f"⚠️ {lg}: season hasn't started yet (no current-season matches) → skipping")
         continue
 
     globals_dict[f"past_matches_{lg}_all"] = past_matches_current
+    globals_dict[f"past_matches_{lg}_blended"] = past_matches_blended
     globals_dict[f"future_matches_{lg}"] = fixtures.get(lg, pd.DataFrame())
     globals_dict[f"betting_odds_{lg}"] = odds_book.get(lg, pd.DataFrame())
     globals_dict[lg] = standings.get(lg, pd.DataFrame())
@@ -212,7 +226,7 @@ print("3️⃣ Computing match probabilities...")
 
 df_simulation_all = dataset_probabilities.compute_final_probabilities(
     active_leagues,
-    {lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame()) for lg in active_leagues},
+    {lg: globals_dict.get(f"past_matches_{lg}_blended", pd.DataFrame()) for lg in active_leagues},
     {lg: normalize_fixtures(globals_dict.get(f"future_matches_{lg}")) for lg in active_leagues},
     {lg: normalize_odds(globals_dict.get(f"betting_odds_{lg}")) for lg in active_leagues},
 )
