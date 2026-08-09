@@ -111,6 +111,7 @@ mappings = {
         "Real Racing Club de Santander": "Racing Santander",
         "RC Deportivo de La Coruña": "Deportivo La Coruña",
         "Deportivo de La Coruña": "Deportivo La Coruña",
+        "RC Deportivo La Coruña": "Deportivo La Coruña",  # actual fixtures-feed spelling (no "de")
         "Málaga CF": "Málaga"
     },
     "bundesliga_germany": {

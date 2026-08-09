@@ -133,7 +133,10 @@ def scrape_standings():
         teams["team"] = (
             teams_raw.iloc[:, 0]
             .str.replace(r"^\d+", "", regex=True)
-            .str.replace(r"^[A-Z]{2,3}", "", regex=True)
+            # Some clubs' ESPN abbreviation codes mix letters and digits (e.g.
+            # Schalke 04 -> "S04"), which [A-Z]{2,3} alone doesn't match, leaving
+            # the code stuck to the front of the name (e.g. "S04Schalke 04").
+            .str.replace(r"^[A-Z0-9]{2,3}", "", regex=True)
             .str.strip()
         )
 

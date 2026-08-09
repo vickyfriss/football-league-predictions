@@ -30,53 +30,68 @@ dataset_simulation = import_module_from_path("dataset_simulation", "4_simulation
 # =========================
 print("1️⃣ Loading datasets...")
 
-if RUN_CREATION:
-    standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
+def load_csv(path):
+    try:
+        return pd.read_csv(path)
+    except Exception:
+        return pd.DataFrame()
 
-else:
-    print("⚡ OFFLINE MODE → loading from CSV")
 
-    def load_csv(path):
-        try:
-            return pd.read_csv(path)
-        except Exception:
-            return pd.DataFrame()
-
+def load_cached_odds_fixtures_and_history():
+    """Reload odds/fixtures/past-season-results from the CSV cache on disk.
+    Used for OFFLINE MODE, and also as the fallback below when standings are
+    unchanged: create_datasets() intentionally returns None for these three in
+    that case (no need to re-hit the APIs), but something still has to supply
+    real data for the rest of the pipeline to simulate from."""
     league_table_folder = "data/league_table"
 
-    standings = {
+    standings_cached = {
         lg: load_csv(f"{league_table_folder}/{lg}.csv")
         for lg in dataset_processing.leagues
         if os.path.exists(f"{league_table_folder}/{lg}.csv")
     }
 
-    odds_book = {
+    odds_book_cached = {
         lg: load_csv(f"data/odds_{lg}.csv")
         for lg in dataset_processing.leagues
         if os.path.exists(f"data/odds_{lg}.csv")
     }
 
-    fixtures = {
+    fixtures_cached = {
         lg: load_csv(f"data/fixtures_{lg}.csv")
         for lg in dataset_processing.leagues
         if os.path.exists(f"data/fixtures_{lg}.csv")
     }
 
-    past_season_results = {}
-
+    past_season_results_cached = {}
     for lg in dataset_processing.leagues:
-        past_season_results[lg] = {}
-
+        past_season_results_cached[lg] = {}
         if not os.path.exists("data"):
             continue
-
         for file in os.listdir("data"):
             if file.startswith(f"past_{lg}_"):
                 try:
                     season = int(file.split("_")[-1].replace(".csv", ""))
-                    past_season_results[lg][season] = load_csv(f"data/{file}")
+                    past_season_results_cached[lg][season] = load_csv(f"data/{file}")
                 except:
                     continue
+
+    return standings_cached, odds_book_cached, fixtures_cached, past_season_results_cached
+
+
+if RUN_CREATION:
+    standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
+
+    if odds_book is None or fixtures is None or past_season_results is None:
+        print("Standings unchanged — reloading odds/fixtures/history from the CSV cache instead of live APIs.")
+        _, cached_odds, cached_fixtures, cached_history = load_cached_odds_fixtures_and_history()
+        odds_book = cached_odds if odds_book is None else odds_book
+        fixtures = cached_fixtures if fixtures is None else fixtures
+        past_season_results = cached_history if past_season_results is None else past_season_results
+
+else:
+    print("⚡ OFFLINE MODE → loading from CSV")
+    standings, odds_book, fixtures, past_season_results = load_cached_odds_fixtures_and_history()
 
 
 # =========================
