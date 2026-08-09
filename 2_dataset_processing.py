@@ -52,7 +52,11 @@ mappings = {
         "Nottingham Forest FC": "Nottingham Forest",
         "Tottenham Hotspur FC": "Tottenham Hotspur",
         "Brighton and Hove Albion": "Brighton & Hove Albion",
-        "Bournemouth": "AFC Bournemouth"
+        "Bournemouth": "AFC Bournemouth",
+        # Promoted from the Championship for 2026/27
+        "Coventry City FC": "Coventry City",
+        "Ipswich Town FC": "Ipswich Town",
+        "Hull City AFC": "Hull City"
     },
     "seriea_italy": {
         "US Sassuolo Calcio": "Sassuolo",
@@ -75,7 +79,11 @@ mappings = {
         "SSC Napoli": "Napoli",
         "US Lecce": "Lecce",
         "Inter Milan": "Internazionale",
-        "Como": "Como"
+        "Como": "Como",
+        # Promoted from Serie B for 2026/27
+        "Venezia FC": "Venezia",
+        "Frosinone Calcio": "Frosinone",
+        "AC Monza": "Monza"
     },
     "laliga_spain": {
         "Club Atlético de Madrid": "Atlético Madrid",
@@ -97,7 +105,13 @@ mappings = {
         "Real Madrid CF": "Real Madrid",
         "RC Celta de Vigo": "Celta Vigo",
         "Oviedo": "Real Oviedo",
-        "Athletic Bilbao": "Athletic Club"
+        "Athletic Bilbao": "Athletic Club",
+        # Promoted from Segunda División for 2026/27
+        "Racing de Santander": "Racing Santander",
+        "Real Racing Club de Santander": "Racing Santander",
+        "RC Deportivo de La Coruña": "Deportivo La Coruña",
+        "Deportivo de La Coruña": "Deportivo La Coruña",
+        "Málaga CF": "Málaga"
     },
     "bundesliga_germany": {
         "1. FC Köln": "FC Cologne",
@@ -113,7 +127,11 @@ mappings = {
         "Borussia Monchengladbach": "Borussia Mönchengladbach",
         "FSV Mainz 05": "Mainz",
         "Augsburg": "FC Augsburg",
-        "FC St. Pauli": "St. Pauli"
+        "FC St. Pauli": "St. Pauli",
+        # Promoted from 2. Bundesliga for 2026/27
+        "FC Schalke 04": "Schalke 04",
+        "SV 07 Elversberg": "SV Elversberg",
+        "SC Paderborn 07": "SC Paderborn 07"
     },
     "ligue1_france": {
         "Racing Club de Lens": "Lens",
@@ -135,7 +153,10 @@ mappings = {
         "Paris Saint Germain": "Paris Saint-Germain",
         "Auxerre": "AJ Auxerre",
         "Le Havre": "Le Havre AC",
-        "Rennes": "Stade Rennais"
+        "Rennes": "Stade Rennais",
+        # Promoted from Ligue 2 for 2026/27
+        "ES Troyes AC": "Troyes",
+        "Le Mans FC": "Le Mans"
     },
     "championship_england": {  
         "Sheffield United FC": "Sheffield United",
@@ -170,7 +191,14 @@ mappings = {
         "Preston North End FC": "Preston North End",
         "Blackburn Rovers FC": "Blackburn Rovers",
         "Norwich City FC": "Norwich City",
-        "Birmingham City FC": "Birmingham City"
+        "Birmingham City FC": "Birmingham City",
+        # Relegated from the Premier League for 2026/27
+        "West Ham United FC": "West Ham United",
+        "Wolverhampton Wanderers FC": "Wolverhampton Wanderers",
+        # Promoted from League One for 2026/27
+        "Lincoln City FC": "Lincoln City",
+        "Cardiff City FC": "Cardiff City",
+        "Bolton Wanderers FC": "Bolton Wanderers"
     },
 
     "eredivisie_netherlands": {

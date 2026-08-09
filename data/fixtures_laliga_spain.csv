@@ -1,1 +1,381 @@
-
+utcDate,status,homeTeam,awayTeam
+2026-08-15T17:30:00Z,SCHEDULED,Deportivo Alavés,Getafe CF
+2026-08-15T19:30:00Z,SCHEDULED,Sevilla FC,Rayo Vallecano de Madrid
+2026-08-16T15:00:00Z,SCHEDULED,Real Racing Club de Santander,Villarreal CF
+2026-08-16T17:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Levante UD
+2026-08-16T19:30:00Z,SCHEDULED,RC Celta de Vigo,CA Osasuna
+2026-08-17T19:00:00Z,SCHEDULED,RC Deportivo La Coruña,Elche CF
+2026-08-19T19:00:00Z,SCHEDULED,Club Atlético de Madrid,Málaga CF
+2026-08-20T19:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Deportivo Alavés
+2026-08-21T19:00:00Z,SCHEDULED,Real Betis Balompié,Real Sociedad de Fútbol
+2026-08-22T15:00:00Z,SCHEDULED,Athletic Club,Sevilla FC
+2026-08-22T17:30:00Z,SCHEDULED,Valencia CF,RC Celta de Vigo
+2026-08-22T19:30:00Z,SCHEDULED,RCD Espanyol de Barcelona,Real Madrid CF
+2026-08-23T15:00:00Z,SCHEDULED,Club Atlético de Madrid,Villarreal CF
+2026-08-23T17:30:00Z,SCHEDULED,Getafe CF,Real Racing Club de Santander
+2026-08-23T19:30:00Z,SCHEDULED,Elche CF,FC Barcelona
+2026-08-24T17:30:00Z,SCHEDULED,CA Osasuna,Levante UD
+2026-08-24T19:30:00Z,SCHEDULED,Málaga CF,RC Deportivo La Coruña
+2026-08-25T19:00:00Z,SCHEDULED,Valencia CF,Real Betis Balompié
+2026-08-26T19:00:00Z,SCHEDULED,Real Madrid CF,Real Sociedad de Fútbol
+2026-08-27T19:00:00Z,SCHEDULED,FC Barcelona,Athletic Club
+2026-08-28T17:00:00Z,SCHEDULED,Real Racing Club de Santander,Elche CF
+2026-08-28T19:30:00Z,SCHEDULED,Deportivo Alavés,Villarreal CF
+2026-08-29T15:00:00Z,SCHEDULED,Levante UD,Real Betis Balompié
+2026-08-29T17:00:00Z,SCHEDULED,Real Sociedad de Fútbol,RCD Espanyol de Barcelona
+2026-08-29T19:30:00Z,SCHEDULED,Sevilla FC,Club Atlético de Madrid
+2026-08-30T15:00:00Z,SCHEDULED,Real Madrid CF,Málaga CF
+2026-08-30T17:30:00Z,SCHEDULED,RC Deportivo La Coruña,Valencia CF
+2026-08-30T19:30:00Z,SCHEDULED,RC Celta de Vigo,Athletic Club
+2026-08-31T17:30:00Z,SCHEDULED,CA Osasuna,Getafe CF
+2026-08-31T19:30:00Z,SCHEDULED,FC Barcelona,Rayo Vallecano de Madrid
+2026-09-06T15:00:00Z,SCHEDULED,Elche CF,Real Sociedad de Fútbol
+2026-09-06T15:00:00Z,SCHEDULED,Valencia CF,FC Barcelona
+2026-09-06T15:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Real Racing Club de Santander
+2026-09-06T15:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Sevilla FC
+2026-09-06T15:00:00Z,SCHEDULED,Villarreal CF,RC Deportivo La Coruña
+2026-09-06T15:00:00Z,SCHEDULED,Athletic Club,Club Atlético de Madrid
+2026-09-06T15:00:00Z,SCHEDULED,Deportivo Alavés,CA Osasuna
+2026-09-06T15:00:00Z,SCHEDULED,Getafe CF,RC Celta de Vigo
+2026-09-06T15:00:00Z,SCHEDULED,Málaga CF,Levante UD
+2026-09-06T15:00:00Z,SCHEDULED,Real Betis Balompié,Real Madrid CF
+2026-09-13T15:00:00Z,SCHEDULED,Getafe CF,RC Deportivo La Coruña
+2026-09-13T15:00:00Z,SCHEDULED,Sevilla FC,Valencia CF
+2026-09-13T15:00:00Z,SCHEDULED,Real Racing Club de Santander,Deportivo Alavés
+2026-09-13T15:00:00Z,SCHEDULED,Villarreal CF,Real Betis Balompié
+2026-09-13T15:00:00Z,SCHEDULED,RC Celta de Vigo,Málaga CF
+2026-09-13T15:00:00Z,SCHEDULED,CA Osasuna,RCD Espanyol de Barcelona
+2026-09-13T15:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Club Atlético de Madrid
+2026-09-13T15:00:00Z,SCHEDULED,Levante UD,FC Barcelona
+2026-09-13T15:00:00Z,SCHEDULED,Athletic Club,Elche CF
+2026-09-13T15:00:00Z,SCHEDULED,Real Madrid CF,Rayo Vallecano de Madrid
+2026-09-16T15:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,RCD Espanyol de Barcelona
+2026-09-16T15:00:00Z,SCHEDULED,RC Deportivo La Coruña,Sevilla FC
+2026-09-16T15:00:00Z,SCHEDULED,Deportivo Alavés,Valencia CF
+2026-09-16T15:00:00Z,SCHEDULED,Elche CF,Real Madrid CF
+2026-09-16T15:00:00Z,SCHEDULED,Real Sociedad de Fútbol,RC Celta de Vigo
+2026-09-16T15:00:00Z,SCHEDULED,Málaga CF,Villarreal CF
+2026-09-16T15:00:00Z,SCHEDULED,Club Atlético de Madrid,CA Osasuna
+2026-09-16T15:00:00Z,SCHEDULED,Levante UD,Athletic Club
+2026-09-16T15:00:00Z,SCHEDULED,Real Betis Balompié,Getafe CF
+2026-09-16T15:00:00Z,SCHEDULED,FC Barcelona,Real Racing Club de Santander
+2026-09-20T15:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Madrid CF
+2026-09-20T15:00:00Z,SCHEDULED,Valencia CF,Real Sociedad de Fútbol
+2026-09-20T15:00:00Z,SCHEDULED,Sevilla FC,FC Barcelona
+2026-09-20T15:00:00Z,SCHEDULED,Athletic Club,Deportivo Alavés
+2026-09-20T15:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Elche CF
+2026-09-20T15:00:00Z,SCHEDULED,CA Osasuna,Rayo Vallecano de Madrid
+2026-09-20T15:00:00Z,SCHEDULED,RC Celta de Vigo,Real Racing Club de Santander
+2026-09-20T15:00:00Z,SCHEDULED,RC Deportivo La Coruña,Real Betis Balompié
+2026-09-20T15:00:00Z,SCHEDULED,Villarreal CF,Levante UD
+2026-09-20T15:00:00Z,SCHEDULED,Getafe CF,Málaga CF
+2026-10-11T15:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Athletic Club
+2026-10-11T15:00:00Z,SCHEDULED,Deportivo Alavés,Club Atlético de Madrid
+2026-10-11T15:00:00Z,SCHEDULED,FC Barcelona,Getafe CF
+2026-10-11T15:00:00Z,SCHEDULED,Real Betis Balompié,CA Osasuna
+2026-10-11T15:00:00Z,SCHEDULED,Real Madrid CF,Villarreal CF
+2026-10-11T15:00:00Z,SCHEDULED,Elche CF,RC Celta de Vigo
+2026-10-11T15:00:00Z,SCHEDULED,Levante UD,Sevilla FC
+2026-10-11T15:00:00Z,SCHEDULED,Real Racing Club de Santander,Valencia CF
+2026-10-11T15:00:00Z,SCHEDULED,Málaga CF,RCD Espanyol de Barcelona
+2026-10-11T15:00:00Z,SCHEDULED,Real Sociedad de Fútbol,RC Deportivo La Coruña
+2026-10-18T15:00:00Z,SCHEDULED,Villarreal CF,Elche CF
+2026-10-18T15:00:00Z,SCHEDULED,Real Madrid CF,Sevilla FC
+2026-10-18T15:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Club Atlético de Madrid
+2026-10-18T15:00:00Z,SCHEDULED,Valencia CF,Athletic Club
+2026-10-18T15:00:00Z,SCHEDULED,RC Celta de Vigo,Deportivo Alavés
+2026-10-18T15:00:00Z,SCHEDULED,Real Betis Balompié,FC Barcelona
+2026-10-18T15:00:00Z,SCHEDULED,Málaga CF,Real Sociedad de Fútbol
+2026-10-18T15:00:00Z,SCHEDULED,CA Osasuna,Real Racing Club de Santander
+2026-10-18T15:00:00Z,SCHEDULED,RC Deportivo La Coruña,Levante UD
+2026-10-18T15:00:00Z,SCHEDULED,Getafe CF,Rayo Vallecano de Madrid
+2026-10-25T16:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Elche CF
+2026-10-25T16:00:00Z,SCHEDULED,Deportivo Alavés,Málaga CF
+2026-10-25T16:00:00Z,SCHEDULED,Athletic Club,Getafe CF
+2026-10-25T16:00:00Z,SCHEDULED,Sevilla FC,CA Osasuna
+2026-10-25T16:00:00Z,SCHEDULED,Valencia CF,Villarreal CF
+2026-10-25T16:00:00Z,SCHEDULED,FC Barcelona,Real Madrid CF
+2026-10-25T16:00:00Z,SCHEDULED,Club Atlético de Madrid,RC Deportivo La Coruña
+2026-10-25T16:00:00Z,SCHEDULED,RC Celta de Vigo,Real Betis Balompié
+2026-10-25T16:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Levante UD
+2026-10-25T16:00:00Z,SCHEDULED,Real Racing Club de Santander,RCD Espanyol de Barcelona
+2026-11-01T16:00:00Z,SCHEDULED,Real Betis Balompié,Málaga CF
+2026-11-01T16:00:00Z,SCHEDULED,Villarreal CF,RCD Espanyol de Barcelona
+2026-11-01T16:00:00Z,SCHEDULED,Elche CF,Valencia CF
+2026-11-01T16:00:00Z,SCHEDULED,Athletic Club,Real Sociedad de Fútbol
+2026-11-01T16:00:00Z,SCHEDULED,Levante UD,Club Atlético de Madrid
+2026-11-01T16:00:00Z,SCHEDULED,RC Deportivo La Coruña,CA Osasuna
+2026-11-01T16:00:00Z,SCHEDULED,FC Barcelona,Deportivo Alavés
+2026-11-01T16:00:00Z,SCHEDULED,Getafe CF,Sevilla FC
+2026-11-01T16:00:00Z,SCHEDULED,Real Racing Club de Santander,Real Madrid CF
+2026-11-01T16:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,RC Celta de Vigo
+2026-11-08T16:00:00Z,SCHEDULED,Elche CF,Real Betis Balompié
+2026-11-08T16:00:00Z,SCHEDULED,CA Osasuna,Athletic Club
+2026-11-08T16:00:00Z,SCHEDULED,Sevilla FC,Deportivo Alavés
+2026-11-08T16:00:00Z,SCHEDULED,Valencia CF,Real Madrid CF
+2026-11-08T16:00:00Z,SCHEDULED,RC Celta de Vigo,Levante UD
+2026-11-08T16:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Rayo Vallecano de Madrid
+2026-11-08T16:00:00Z,SCHEDULED,Málaga CF,Real Racing Club de Santander
+2026-11-08T16:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,RC Deportivo La Coruña
+2026-11-08T16:00:00Z,SCHEDULED,Club Atlético de Madrid,FC Barcelona
+2026-11-08T16:00:00Z,SCHEDULED,Villarreal CF,Getafe CF
+2026-11-22T16:00:00Z,SCHEDULED,Athletic Club,RCD Espanyol de Barcelona
+2026-11-22T16:00:00Z,SCHEDULED,FC Barcelona,Villarreal CF
+2026-11-22T16:00:00Z,SCHEDULED,Real Racing Club de Santander,Real Sociedad de Fútbol
+2026-11-22T16:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Valencia CF
+2026-11-22T16:00:00Z,SCHEDULED,CA Osasuna,Málaga CF
+2026-11-22T16:00:00Z,SCHEDULED,Getafe CF,Club Atlético de Madrid
+2026-11-22T16:00:00Z,SCHEDULED,Real Madrid CF,RC Celta de Vigo
+2026-11-22T16:00:00Z,SCHEDULED,Deportivo Alavés,RC Deportivo La Coruña
+2026-11-22T16:00:00Z,SCHEDULED,Sevilla FC,Real Betis Balompié
+2026-11-22T16:00:00Z,SCHEDULED,Levante UD,Elche CF
+2026-11-29T16:00:00Z,SCHEDULED,RC Celta de Vigo,Villarreal CF
+2026-11-29T16:00:00Z,SCHEDULED,Elche CF,Club Atlético de Madrid
+2026-11-29T16:00:00Z,SCHEDULED,Real Betis Balompié,Rayo Vallecano de Madrid
+2026-11-29T16:00:00Z,SCHEDULED,Valencia CF,CA Osasuna
+2026-11-29T16:00:00Z,SCHEDULED,Real Madrid CF,Deportivo Alavés
+2026-11-29T16:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Getafe CF
+2026-11-29T16:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Sevilla FC
+2026-11-29T16:00:00Z,SCHEDULED,Levante UD,Real Racing Club de Santander
+2026-11-29T16:00:00Z,SCHEDULED,RC Deportivo La Coruña,FC Barcelona
+2026-11-29T16:00:00Z,SCHEDULED,Málaga CF,Athletic Club
+2026-12-06T16:00:00Z,SCHEDULED,CA Osasuna,Elche CF
+2026-12-06T16:00:00Z,SCHEDULED,Sevilla FC,Málaga CF
+2026-12-06T16:00:00Z,SCHEDULED,Deportivo Alavés,RCD Espanyol de Barcelona
+2026-12-06T16:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Betis Balompié
+2026-12-06T16:00:00Z,SCHEDULED,Real Racing Club de Santander,RC Deportivo La Coruña
+2026-12-06T16:00:00Z,SCHEDULED,FC Barcelona,RC Celta de Vigo
+2026-12-06T16:00:00Z,SCHEDULED,Getafe CF,Valencia CF
+2026-12-06T16:00:00Z,SCHEDULED,Athletic Club,Real Madrid CF
+2026-12-06T16:00:00Z,SCHEDULED,Villarreal CF,Real Sociedad de Fútbol
+2026-12-06T16:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Levante UD
+2026-12-13T16:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,RC Celta de Vigo
+2026-12-13T16:00:00Z,SCHEDULED,Málaga CF,FC Barcelona
+2026-12-13T16:00:00Z,SCHEDULED,Real Madrid CF,CA Osasuna
+2026-12-13T16:00:00Z,SCHEDULED,RC Deportivo La Coruña,Athletic Club
+2026-12-13T16:00:00Z,SCHEDULED,Levante UD,Deportivo Alavés
+2026-12-13T16:00:00Z,SCHEDULED,Elche CF,Sevilla FC
+2026-12-13T16:00:00Z,SCHEDULED,Villarreal CF,Rayo Vallecano de Madrid
+2026-12-13T16:00:00Z,SCHEDULED,Real Betis Balompié,Real Racing Club de Santander
+2026-12-13T16:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Getafe CF
+2026-12-13T16:00:00Z,SCHEDULED,Club Atlético de Madrid,Valencia CF
+2026-12-20T16:00:00Z,SCHEDULED,Athletic Club,Real Betis Balompié
+2026-12-20T16:00:00Z,SCHEDULED,Getafe CF,Levante UD
+2026-12-20T16:00:00Z,SCHEDULED,Deportivo Alavés,Elche CF
+2026-12-20T16:00:00Z,SCHEDULED,Valencia CF,RCD Espanyol de Barcelona
+2026-12-20T16:00:00Z,SCHEDULED,CA Osasuna,Villarreal CF
+2026-12-20T16:00:00Z,SCHEDULED,FC Barcelona,Real Sociedad de Fútbol
+2026-12-20T16:00:00Z,SCHEDULED,RC Celta de Vigo,Club Atlético de Madrid
+2026-12-20T16:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Málaga CF
+2026-12-20T16:00:00Z,SCHEDULED,RC Deportivo La Coruña,Real Madrid CF
+2026-12-20T16:00:00Z,SCHEDULED,Sevilla FC,Real Racing Club de Santander
+2027-01-03T12:00:00Z,SCHEDULED,Real Madrid CF,Getafe CF
+2027-01-03T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,CA Osasuna
+2027-01-03T12:00:00Z,SCHEDULED,Levante UD,Valencia CF
+2027-01-03T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Athletic Club
+2027-01-03T12:00:00Z,SCHEDULED,Málaga CF,Elche CF
+2027-01-03T12:00:00Z,SCHEDULED,Real Betis Balompié,Deportivo Alavés
+2027-01-03T12:00:00Z,SCHEDULED,RC Celta de Vigo,RC Deportivo La Coruña
+2027-01-03T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,FC Barcelona
+2027-01-03T12:00:00Z,SCHEDULED,Villarreal CF,Sevilla FC
+2027-01-03T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Club Atlético de Madrid
+2027-01-10T12:00:00Z,SCHEDULED,Athletic Club,Villarreal CF
+2027-01-10T12:00:00Z,SCHEDULED,Elche CF,Getafe CF
+2027-01-10T12:00:00Z,SCHEDULED,Real Madrid CF,Levante UD
+2027-01-10T12:00:00Z,SCHEDULED,CA Osasuna,FC Barcelona
+2027-01-10T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Rayo Vallecano de Madrid
+2027-01-10T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Racing Club de Santander
+2027-01-10T12:00:00Z,SCHEDULED,Deportivo Alavés,Real Sociedad de Fútbol
+2027-01-10T12:00:00Z,SCHEDULED,Sevilla FC,RC Celta de Vigo
+2027-01-10T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Real Betis Balompié
+2027-01-10T12:00:00Z,SCHEDULED,Valencia CF,Málaga CF
+2027-01-17T12:00:00Z,SCHEDULED,Málaga CF,Real Madrid CF
+2027-01-17T12:00:00Z,SCHEDULED,FC Barcelona,Elche CF
+2027-01-17T12:00:00Z,SCHEDULED,Villarreal CF,Deportivo Alavés
+2027-01-17T12:00:00Z,SCHEDULED,Real Racing Club de Santander,CA Osasuna
+2027-01-17T12:00:00Z,SCHEDULED,Levante UD,RCD Espanyol de Barcelona
+2027-01-17T12:00:00Z,SCHEDULED,RC Celta de Vigo,Valencia CF
+2027-01-17T12:00:00Z,SCHEDULED,Getafe CF,Athletic Club
+2027-01-17T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Sevilla FC
+2027-01-17T12:00:00Z,SCHEDULED,Real Betis Balompié,RC Deportivo La Coruña
+2027-01-17T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Sociedad de Fútbol
+2027-01-24T12:00:00Z,SCHEDULED,Real Madrid CF,Real Betis Balompié
+2027-01-24T12:00:00Z,SCHEDULED,Getafe CF,CA Osasuna
+2027-01-24T12:00:00Z,SCHEDULED,Valencia CF,Sevilla FC
+2027-01-24T12:00:00Z,SCHEDULED,Elche CF,Rayo Vallecano de Madrid
+2027-01-24T12:00:00Z,SCHEDULED,Deportivo Alavés,FC Barcelona
+2027-01-24T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Málaga CF
+2027-01-24T12:00:00Z,SCHEDULED,Real Racing Club de Santander,RC Celta de Vigo
+2027-01-24T12:00:00Z,SCHEDULED,Athletic Club,Levante UD
+2027-01-24T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Villarreal CF
+2027-01-24T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Club Atlético de Madrid
+2027-01-31T12:00:00Z,SCHEDULED,Real Betis Balompié,Elche CF
+2027-01-31T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Real Madrid CF
+2027-01-31T12:00:00Z,SCHEDULED,Club Atlético de Madrid,RCD Espanyol de Barcelona
+2027-01-31T12:00:00Z,SCHEDULED,RC Celta de Vigo,Getafe CF
+2027-01-31T12:00:00Z,SCHEDULED,Villarreal CF,Real Racing Club de Santander
+2027-01-31T12:00:00Z,SCHEDULED,Levante UD,Real Sociedad de Fútbol
+2027-01-31T12:00:00Z,SCHEDULED,FC Barcelona,Valencia CF
+2027-01-31T12:00:00Z,SCHEDULED,Sevilla FC,Athletic Club
+2027-01-31T12:00:00Z,SCHEDULED,CA Osasuna,RC Deportivo La Coruña
+2027-01-31T12:00:00Z,SCHEDULED,Málaga CF,Deportivo Alavés
+2027-02-07T12:00:00Z,SCHEDULED,Athletic Club,CA Osasuna
+2027-02-07T12:00:00Z,SCHEDULED,Deportivo Alavés,RC Celta de Vigo
+2027-02-07T12:00:00Z,SCHEDULED,Real Betis Balompié,Sevilla FC
+2027-02-07T12:00:00Z,SCHEDULED,Elche CF,Levante UD
+2027-02-07T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Rayo Vallecano de Madrid
+2027-02-07T12:00:00Z,SCHEDULED,Getafe CF,Villarreal CF
+2027-02-07T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Málaga CF
+2027-02-07T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Real Madrid CF
+2027-02-07T12:00:00Z,SCHEDULED,Valencia CF,Real Racing Club de Santander
+2027-02-07T12:00:00Z,SCHEDULED,FC Barcelona,Club Atlético de Madrid
+2027-02-14T12:00:00Z,SCHEDULED,Sevilla FC,RCD Espanyol de Barcelona
+2027-02-14T12:00:00Z,SCHEDULED,CA Osasuna,Club Atlético de Madrid
+2027-02-14T12:00:00Z,SCHEDULED,RC Celta de Vigo,Rayo Vallecano de Madrid
+2027-02-14T12:00:00Z,SCHEDULED,Villarreal CF,FC Barcelona
+2027-02-14T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Real Betis Balompié
+2027-02-14T12:00:00Z,SCHEDULED,Elche CF,RC Deportivo La Coruña
+2027-02-14T12:00:00Z,SCHEDULED,Valencia CF,Deportivo Alavés
+2027-02-14T12:00:00Z,SCHEDULED,Levante UD,Málaga CF
+2027-02-14T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Getafe CF
+2027-02-14T12:00:00Z,SCHEDULED,Real Madrid CF,Athletic Club
+2027-02-21T12:00:00Z,SCHEDULED,Deportivo Alavés,Real Racing Club de Santander
+2027-02-21T12:00:00Z,SCHEDULED,Málaga CF,Real Betis Balompié
+2027-02-21T12:00:00Z,SCHEDULED,Villarreal CF,Valencia CF
+2027-02-21T12:00:00Z,SCHEDULED,FC Barcelona,Levante UD
+2027-02-21T12:00:00Z,SCHEDULED,Athletic Club,RC Celta de Vigo
+2027-02-21T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,CA Osasuna
+2027-02-21T12:00:00Z,SCHEDULED,Sevilla FC,Real Madrid CF
+2027-02-21T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Elche CF
+2027-02-21T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Real Sociedad de Fútbol
+2027-02-21T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Getafe CF
+2027-02-28T12:00:00Z,SCHEDULED,RC Celta de Vigo,RCD Espanyol de Barcelona
+2027-02-28T12:00:00Z,SCHEDULED,Levante UD,RC Deportivo La Coruña
+2027-02-28T12:00:00Z,SCHEDULED,Málaga CF,Club Atlético de Madrid
+2027-02-28T12:00:00Z,SCHEDULED,CA Osasuna,Sevilla FC
+2027-02-28T12:00:00Z,SCHEDULED,Real Madrid CF,Valencia CF
+2027-02-28T12:00:00Z,SCHEDULED,Getafe CF,Deportivo Alavés
+2027-02-28T12:00:00Z,SCHEDULED,Athletic Club,FC Barcelona
+2027-02-28T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Rayo Vallecano de Madrid
+2027-02-28T12:00:00Z,SCHEDULED,Real Betis Balompié,Villarreal CF
+2027-02-28T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Elche CF
+2027-03-07T12:00:00Z,SCHEDULED,FC Barcelona,Real Betis Balompié
+2027-03-07T12:00:00Z,SCHEDULED,Elche CF,Málaga CF
+2027-03-07T12:00:00Z,SCHEDULED,Deportivo Alavés,Athletic Club
+2027-03-07T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,CA Osasuna
+2027-03-07T12:00:00Z,SCHEDULED,Sevilla FC,Real Sociedad de Fútbol
+2027-03-07T12:00:00Z,SCHEDULED,Club Atlético de Madrid,RC Celta de Vigo
+2027-03-07T12:00:00Z,SCHEDULED,Villarreal CF,Real Madrid CF
+2027-03-07T12:00:00Z,SCHEDULED,Valencia CF,Levante UD
+2027-03-07T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Getafe CF
+2027-03-07T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Real Racing Club de Santander
+2027-03-14T12:00:00Z,SCHEDULED,CA Osasuna,RC Celta de Vigo
+2027-03-14T12:00:00Z,SCHEDULED,Elche CF,Villarreal CF
+2027-03-14T12:00:00Z,SCHEDULED,Deportivo Alavés,Sevilla FC
+2027-03-14T12:00:00Z,SCHEDULED,Athletic Club,Valencia CF
+2027-03-14T12:00:00Z,SCHEDULED,Real Betis Balompié,Levante UD
+2027-03-14T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Club Atlético de Madrid
+2027-03-14T12:00:00Z,SCHEDULED,Málaga CF,Rayo Vallecano de Madrid
+2027-03-14T12:00:00Z,SCHEDULED,Getafe CF,Real Sociedad de Fútbol
+2027-03-14T12:00:00Z,SCHEDULED,FC Barcelona,RC Deportivo La Coruña
+2027-03-14T12:00:00Z,SCHEDULED,Real Madrid CF,RCD Espanyol de Barcelona
+2027-03-21T12:00:00Z,SCHEDULED,Villarreal CF,Málaga CF
+2027-03-21T12:00:00Z,SCHEDULED,Sevilla FC,Elche CF
+2027-03-21T12:00:00Z,SCHEDULED,Levante UD,CA Osasuna
+2027-03-21T12:00:00Z,SCHEDULED,RC Celta de Vigo,Real Madrid CF
+2027-03-21T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,FC Barcelona
+2027-03-21T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Deportivo Alavés
+2027-03-21T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Athletic Club
+2027-03-21T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Real Betis Balompié
+2027-03-21T12:00:00Z,SCHEDULED,Valencia CF,RC Deportivo La Coruña
+2027-03-21T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Getafe CF
+2027-04-04T12:00:00Z,SCHEDULED,Levante UD,Rayo Vallecano de Madrid
+2027-04-04T12:00:00Z,SCHEDULED,FC Barcelona,Sevilla FC
+2027-04-04T12:00:00Z,SCHEDULED,Málaga CF,CA Osasuna
+2027-04-04T12:00:00Z,SCHEDULED,Athletic Club,Real Racing Club de Santander
+2027-04-04T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Villarreal CF
+2027-04-04T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Valencia CF
+2027-04-04T12:00:00Z,SCHEDULED,Elche CF,Deportivo Alavés
+2027-04-04T12:00:00Z,SCHEDULED,Real Madrid CF,Club Atlético de Madrid
+2027-04-04T12:00:00Z,SCHEDULED,Getafe CF,RCD Espanyol de Barcelona
+2027-04-04T12:00:00Z,SCHEDULED,Real Betis Balompié,RC Celta de Vigo
+2027-04-11T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Real Sociedad de Fútbol
+2027-04-11T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Málaga CF
+2027-04-11T12:00:00Z,SCHEDULED,Villarreal CF,Athletic Club
+2027-04-11T12:00:00Z,SCHEDULED,Deportivo Alavés,Real Betis Balompié
+2027-04-11T12:00:00Z,SCHEDULED,Valencia CF,Getafe CF
+2027-04-11T12:00:00Z,SCHEDULED,Sevilla FC,RC Deportivo La Coruña
+2027-04-11T12:00:00Z,SCHEDULED,RC Celta de Vigo,Elche CF
+2027-04-11T12:00:00Z,SCHEDULED,Real Racing Club de Santander,FC Barcelona
+2027-04-11T12:00:00Z,SCHEDULED,CA Osasuna,Real Madrid CF
+2027-04-11T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Levante UD
+2027-04-18T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Sevilla FC
+2027-04-18T12:00:00Z,SCHEDULED,FC Barcelona,RCD Espanyol de Barcelona
+2027-04-18T12:00:00Z,SCHEDULED,Levante UD,Villarreal CF
+2027-04-18T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Real Racing Club de Santander
+2027-04-18T12:00:00Z,SCHEDULED,Málaga CF,Valencia CF
+2027-04-18T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,RC Celta de Vigo
+2027-04-18T12:00:00Z,SCHEDULED,Elche CF,CA Osasuna
+2027-04-18T12:00:00Z,SCHEDULED,Deportivo Alavés,Rayo Vallecano de Madrid
+2027-04-18T12:00:00Z,SCHEDULED,Real Betis Balompié,Athletic Club
+2027-04-18T12:00:00Z,SCHEDULED,Getafe CF,Real Madrid CF
+2027-04-21T12:00:00Z,SCHEDULED,Getafe CF,Real Betis Balompié
+2027-04-21T12:00:00Z,SCHEDULED,Valencia CF,Rayo Vallecano de Madrid
+2027-04-21T12:00:00Z,SCHEDULED,RC Celta de Vigo,FC Barcelona
+2027-04-21T12:00:00Z,SCHEDULED,CA Osasuna,Deportivo Alavés
+2027-04-21T12:00:00Z,SCHEDULED,Real Madrid CF,Elche CF
+2027-04-21T12:00:00Z,SCHEDULED,Athletic Club,RC Deportivo La Coruña
+2027-04-21T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Málaga CF
+2027-04-21T12:00:00Z,SCHEDULED,Villarreal CF,Club Atlético de Madrid
+2027-04-21T12:00:00Z,SCHEDULED,Sevilla FC,Levante UD
+2027-04-21T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Real Sociedad de Fútbol
+2027-05-02T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Real Racing Club de Santander
+2027-05-02T12:00:00Z,SCHEDULED,RC Celta de Vigo,Sevilla FC
+2027-05-02T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Athletic Club
+2027-05-02T12:00:00Z,SCHEDULED,FC Barcelona,CA Osasuna
+2027-05-02T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Villarreal CF
+2027-05-02T12:00:00Z,SCHEDULED,Málaga CF,Getafe CF
+2027-05-02T12:00:00Z,SCHEDULED,Real Betis Balompié,Valencia CF
+2027-05-02T12:00:00Z,SCHEDULED,Elche CF,RCD Espanyol de Barcelona
+2027-05-02T12:00:00Z,SCHEDULED,Levante UD,Real Madrid CF
+2027-05-02T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Deportivo Alavés
+2027-05-09T12:00:00Z,SCHEDULED,Valencia CF,Club Atlético de Madrid
+2027-05-09T12:00:00Z,SCHEDULED,CA Osasuna,Real Sociedad de Fútbol
+2027-05-09T12:00:00Z,SCHEDULED,Deportivo Alavés,Levante UD
+2027-05-09T12:00:00Z,SCHEDULED,Athletic Club,Málaga CF
+2027-05-09T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Sevilla FC
+2027-05-09T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,RC Deportivo La Coruña
+2027-05-09T12:00:00Z,SCHEDULED,Real Betis Balompié,RCD Espanyol de Barcelona
+2027-05-09T12:00:00Z,SCHEDULED,Real Madrid CF,FC Barcelona
+2027-05-09T12:00:00Z,SCHEDULED,Getafe CF,Elche CF
+2027-05-09T12:00:00Z,SCHEDULED,Villarreal CF,RC Celta de Vigo
+2027-05-16T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Rayo Vallecano de Madrid
+2027-05-16T12:00:00Z,SCHEDULED,Sevilla FC,Villarreal CF
+2027-05-16T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,FC Barcelona
+2027-05-16T12:00:00Z,SCHEDULED,Elche CF,Athletic Club
+2027-05-16T12:00:00Z,SCHEDULED,Málaga CF,RC Celta de Vigo
+2027-05-16T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,Deportivo Alavés
+2027-05-16T12:00:00Z,SCHEDULED,Levante UD,Getafe CF
+2027-05-16T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Valencia CF
+2027-05-16T12:00:00Z,SCHEDULED,Real Madrid CF,Real Racing Club de Santander
+2027-05-16T12:00:00Z,SCHEDULED,CA Osasuna,Real Betis Balompié
+2027-05-23T12:00:00Z,SCHEDULED,Club Atlético de Madrid,Athletic Club
+2027-05-23T12:00:00Z,SCHEDULED,Deportivo Alavés,Real Madrid CF
+2027-05-23T12:00:00Z,SCHEDULED,Sevilla FC,Getafe CF
+2027-05-23T12:00:00Z,SCHEDULED,Villarreal CF,CA Osasuna
+2027-05-23T12:00:00Z,SCHEDULED,Real Racing Club de Santander,Levante UD
+2027-05-23T12:00:00Z,SCHEDULED,RC Deportivo La Coruña,RCD Espanyol de Barcelona
+2027-05-23T12:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Real Betis Balompié
+2027-05-23T12:00:00Z,SCHEDULED,FC Barcelona,Málaga CF
+2027-05-23T12:00:00Z,SCHEDULED,Valencia CF,Elche CF
+2027-05-23T12:00:00Z,SCHEDULED,RC Celta de Vigo,Real Sociedad de Fútbol
+2027-05-30T12:00:00Z,SCHEDULED,Levante UD,RC Celta de Vigo
+2027-05-30T12:00:00Z,SCHEDULED,Real Madrid CF,RC Deportivo La Coruña
+2027-05-30T12:00:00Z,SCHEDULED,Real Betis Balompié,Club Atlético de Madrid
+2027-05-30T12:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Villarreal CF
+2027-05-30T12:00:00Z,SCHEDULED,Málaga CF,Sevilla FC
+2027-05-30T12:00:00Z,SCHEDULED,Elche CF,Real Racing Club de Santander
+2027-05-30T12:00:00Z,SCHEDULED,Athletic Club,Rayo Vallecano de Madrid
+2027-05-30T12:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Deportivo Alavés
+2027-05-30T12:00:00Z,SCHEDULED,Getafe CF,FC Barcelona
+2027-05-30T12:00:00Z,SCHEDULED,CA Osasuna,Valencia CF
