@@ -167,6 +167,18 @@ body, .main, .stApp {
 }
 h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
 
+/* Streamlit auto-adds an anchor-link icon to every heading (h1/h2/h3) for
+   in-page linking. It's invisible until hover, but still reserves layout
+   space next to the text -- which is exactly why headings specifically
+   looked slightly left-of-center while plain paragraphs (no anchor icon)
+   centered correctly. Removing it entirely also frees the space it reserved. */
+[data-testid="stHeaderActionElements"] {
+    display: none !important;
+}
+h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
+    display: none !important;
+}
+
 /* Shared white "page section" card -- hero, methodology and about-me all use
    this for a consistent surface, radius and shadow. Each section keeps its own
    inline padding/max-width/margin so widths can still differ on purpose. */

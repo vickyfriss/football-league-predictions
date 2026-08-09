@@ -106,8 +106,22 @@ for lg in dataset_processing.leagues:
     league_results = past_season_results.get(lg, {})
 
     if league_results:
-        latest_season = max(league_results.keys())
-        past_matches_current = league_results[latest_season]
+        # Blend the current season with the immediately preceding one, instead
+        # of using ONLY the latest season. A handful of current-season matches
+        # alone (especially in the season's first weeks) isn't enough signal to
+        # rate a team fairly -- and the previous season is already fetched and
+        # cached right here, so discarding it meant a team that dominated last
+        # season could show up rated as anonymous a few matches into the new
+        # one (e.g. PSV: 1 draw so far this season -> near-zero title chance,
+        # with zero credit for winning the league comfortably last season).
+        # 3_probabilities.py's existing recency-weighting (sorted by actual
+        # match date, linearly ramped 1x -> 2x) naturally gives the more
+        # recent season more weight once both are combined here -- no extra
+        # weighting needed at this step.
+        sorted_seasons = sorted(league_results.keys())
+        seasons_to_blend = sorted_seasons[-2:]  # current + previous, if both exist
+        non_empty = [league_results[s] for s in seasons_to_blend if not league_results[s].empty]
+        past_matches_current = pd.concat(non_empty, ignore_index=True) if non_empty else pd.DataFrame()
     else:
         past_matches_current = pd.DataFrame()
 
