@@ -158,7 +158,7 @@ body, .main, .stApp {
     background-color: var(--page-bg) !important;
     color: var(--text-main);
 }
-h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
+h1, h2, h3, .stMarkdown p, .stSelectbox label, div[data-testid="stSegmentedControl"] label { text-align: center !important; }
 
 /* Shared white "page section" card -- hero, methodology and about-me all use
    this for a consistent surface, radius and shadow. Each section keeps its own
@@ -172,7 +172,8 @@ h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
 }
 .app-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
 .app-card a, .app-card h1, .app-card h3 { color: var(--accent-text); }
-.app-card p, .app-card li { color: var(--text-main); }
+.app-card h3 { font-size: 22px; font-weight: 700; }
+.app-card p, .app-card li { color: var(--text-main); font-size: 16px; line-height: 1.7; }
 
 /* Numbered step badges in the methodology list -- fixed brand green (not a
    dark-mode variable): it's a solid-fill badge with guaranteed white text, so
@@ -255,60 +256,38 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 }
 
 /* ================================
-   LEAGUE SELECTBOX
-   Fixed light in any theme (deliberate, same as the table/icons above): an
-   earlier fix here forced light mode to avoid a Streamlit/baseweb bug where the
-   dropdown's hover state rendered pure black and illegible. Restyled to match
-   the card language (radius, shadow, border) without touching that fix.
+   LEAGUE PILL BUTTONS (built from plain st.button, not st.segmented_control)
+   segmented_control's internal styling proved too hard to reliably override --
+   two attempts at its selected-state color and width both lost to Streamlit's
+   own internal CSS. st.button is what the download button already renders
+   correctly with in this exact environment, so the pill row is built from
+   st.button + st.columns instead: full page width and even spacing come for
+   free from st.columns (real layout, not a style override), and un/selected
+   look comes from Streamlit's own long-established primary/secondary button
+   "kind" attribute rather than a newer widget's internals.
 ================================ */
-div[data-testid="stSelectbox"] {
-    max-width: 900px;
-    margin: 28px auto !important;
-}
-div.stSelectbox label {
-    color: #333 !important;
-}
-div[data-baseweb="select"] > div {
+div.stButton > button[kind="secondary"] {
     background-color: #ffffff !important;
-    color: #111 !important;
-    border-radius: 10px !important;
+    color: #333 !important;
     border: 1px solid #e3e3e3 !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    font-weight: 500 !important;
 }
-
-/* dropdown container + list */
-div[data-baseweb="popover"],
-div[data-baseweb="menu"],
-div[data-baseweb="menu"] ul {
-    background-color: #ffffff !important;
-}
-
-/* menu items / options */
-div[data-baseweb="menu"] li,
-div[data-baseweb="menu"] li *,
-div[role="option"] {
-    background-color: #ffffff !important;
-    color: #111 !important;
-}
-
-/* hover + keyboard focus */
-div[data-baseweb="menu"] li:hover,
-div[data-baseweb="menu"] li:hover *,
-div[data-baseweb="menu"] li:focus,
-div[data-baseweb="menu"] li:focus-visible,
-div[role="option"]:hover {
+div.stButton > button[kind="secondary"]:hover {
     background-color: #e2f3e4 !important;
     color: #111 !important;
-    outline: none !important;
+    border-color: #a5d6a7 !important;
 }
-
-/* selected item */
-div[data-baseweb="menu"] li[aria-selected="true"],
-div[data-baseweb="menu"] li[aria-selected="true"] *,
-div[aria-selected="true"] {
-    background-color: #c8e6c9 !important;
-    color: #111 !important;
-    font-weight: 600;
+/* Selected league pill */
+div.stButton > button[kind="primary"] {
+    background-color: #2E7D32 !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+div.stButton > button[kind="primary"]:hover {
+    background-color: #245f27 !important;
+    color: #ffffff !important;
 }
 
 /* Top-right contact panel -- also fixed white; same black-icon reasoning */
@@ -337,17 +316,11 @@ div[aria-selected="true"] {
     #contact-panel a:first-child { margin-left: 0; }
     #contact-panel a img { width: 24px !important; height: 24px !important; }
 
-    /* Selectbox smaller on mobile */
-    div.stSelectbox > div[role="combobox"] {
-        max-width: 220px !important;
-        padding: 8px 12px !important;
-    }
-    div.stSelectbox > div[role="combobox"] > div { font-size: 14px !important; }
 }
 
-/* Buttons (download button uses this) -- fixed brand green, same reasoning as
-   the step-circle badges: solid fill with guaranteed white text. */
-div.stButton > button, div[data-testid="stDownloadButton"] button {
+/* Download button -- always solid green regardless of primary/secondary kind
+   (it's the only stDownloadButton on the page, no need to differentiate it). */
+div[data-testid="stDownloadButton"] button {
     background-color: #2E7D32 !important;
     color: #ffffff !important;
     border: none !important;
@@ -355,9 +328,13 @@ div.stButton > button, div[data-testid="stDownloadButton"] button {
     font-weight: 600 !important;
     transition: background-color 0.2s ease;
 }
-div.stButton > button:hover, div[data-testid="stDownloadButton"] button:hover {
+div[data-testid="stDownloadButton"] button:hover {
     background-color: #245f27 !important;
     color: #ffffff !important;
+}
+div.stButton > button {
+    border-radius: 8px !important;
+    transition: background-color 0.2s ease;
 }
 /* Hide Streamlit's own chrome (hamburger menu, "Deploy" button, "Made with
    Streamlit" footer) -- a polished page shouldn't visibly announce the
@@ -408,7 +385,7 @@ st.markdown("""
         by Victoria Friss de Kereki
     </p>
     <div style="height:4px; width:80px; background:#2E7D32; margin:14px auto 20px auto; border-radius:2px;"></div>
-    <p style="font-size:16px; line-height:1.7; margin:0;">
+    <p style="margin:0;">
         Data-driven forecasts for final positions across football leagues worldwide.<br>
         Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.
     </p>
@@ -423,38 +400,57 @@ st.markdown("""
 # -------------------------------
 # 8️⃣ LEAGUE SELECTION
 
+# Short, even-length labels on purpose -- these render as segmented-control pills,
+# and one noticeably longer label (the old "EFL Championship (England 2nd tier)")
+# was enough by itself to force an unbalanced wrap onto a lonely second row.
 league_display_names = [
-    "Premier League (England)",
-    "EFL Championship (England 2nd tier)",
-    "Serie A (Italy)",
-    "La Liga (Spain)",
-    "Bundesliga (Germany)",
-    "Ligue 1 (France)",
-    "Eredivisie (Netherlands)",
-    "Serie A (Brazil)"
+    "Premier League (ENG)",
+    "Championship (ENG)",
+    "Serie A (ITA)",
+    "La Liga (ESP)",
+    "Bundesliga (GER)",
+    "Ligue 1 (FRA)",
+    "Eredivisie (NED)",
+    "Serie A (BRA)"
 ]
 league_key_map = {
-    "Premier League (England)": "premierleague_england",
-    "EFL Championship (England 2nd tier)": "championship_england",
-    "Serie A (Italy)": "seriea_italy",
-    "La Liga (Spain)": "laliga_spain",
-    "Bundesliga (Germany)": "bundesliga_germany",
-    "Ligue 1 (France)": "ligue1_france",
-    "Eredivisie (Netherlands)": "eredivisie_netherlands",
-    "Serie A (Brazil)": "seriea_brazil"
+    "Premier League (ENG)": "premierleague_england",
+    "Championship (ENG)": "championship_england",
+    "Serie A (ITA)": "seriea_italy",
+    "La Liga (ESP)": "laliga_spain",
+    "Bundesliga (GER)": "bundesliga_germany",
+    "Ligue 1 (FRA)": "ligue1_france",
+    "Eredivisie (NED)": "eredivisie_netherlands",
+    "Serie A (BRA)": "seriea_brazil"
 }
 
 # Temporary default: most leagues haven't kicked off their 2026/27 season yet (0 games
 # played), so land on a league that's already actually playing. Eredivisie is mid-season
 # while the Premier League etc. are still empty tables. Revert DEFAULT_LEAGUE to
-# "Premier League (England)" once the PL season is underway.
-DEFAULT_LEAGUE = "Eredivisie (Netherlands)"
+# "Premier League (ENG)" once the PL season is underway.
+DEFAULT_LEAGUE = "Eredivisie (NED)"
 
-selected_display_name = st.selectbox(
-    "Select League",
-    league_display_names,
-    index=league_display_names.index(DEFAULT_LEAGUE)
-)
+# Built from plain st.button + st.columns rather than st.segmented_control --
+# see the CSS comment above for why. st.columns naturally divides the full
+# available width evenly, which is also what gives this the same width as the
+# table below without any CSS width-fighting.
+if "selected_league" not in st.session_state:
+    st.session_state.selected_league = DEFAULT_LEAGUE
+
+league_cols = st.columns(len(league_display_names))
+for col, name in zip(league_cols, league_display_names):
+    with col:
+        is_active = st.session_state.selected_league == name
+        if st.button(
+            name,
+            key=f"league_btn_{name}",
+            type="primary" if is_active else "secondary",
+            use_container_width=True,
+        ):
+            st.session_state.selected_league = name
+            st.rerun()
+
+selected_display_name = st.session_state.selected_league
 league = league_key_map[selected_display_name]
 
 
@@ -523,11 +519,11 @@ st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final
 st.markdown("""
 <div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto;">
 <h3 style="margin-bottom:15px;">How This Simulation Works</h3>
-<p style="font-size:15px; line-height:1.8;">
+<p>
 This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  
 We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position.
 </p>
-<ul style="font-size:15px; line-height:1.8; padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
+<ul style="padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
 <div class="step-circle">1</div>
 <div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).</div>
@@ -565,13 +561,13 @@ We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to 
 # 14️⃣ BOTTOM ABOUT ME
 
 st.markdown("""
-<div id="about-me" class="app-card" style="padding:35px 25px; max-width:700px; 
-            margin:28px auto; text-align:center; font-size:18px; line-height:1.8;">
-<h3 style="font-size:28px; margin-bottom:15px;">About Me</h3>
+<div id="about-me" class="app-card" style="padding:28px 32px; max-width:900px; 
+            margin:28px auto; text-align:center;">
+<h3 style="margin-bottom:15px;">About Me</h3>
 <p>Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.</p>
 <p>I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.</p>
 <p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
-<p style="margin-top:20px; font-size:19px; font-weight:600; color:var(--accent-text);">
+<p style="margin-top:20px; font-size:17px; font-weight:600; color:var(--accent-text);">
 Interested in collaborating or discussing sports analytics? <br><b>Let’s connect!</b>
 </p>
 <div style="margin-top:20px;">
@@ -595,6 +591,6 @@ Interested in collaborating or discussing sports analytics? <br><b>Let’s conne
 # 15️⃣ FOOTER
 st.markdown("""
 <div style="text-align:center; padding:10px 0 30px 0; font-size:13px; color:#999;">
-    © 2026 Victoria Friss de Kereki &middot; Built with Python, pandas & Streamlit
+    © 2026 Victoria Friss de Kereki &middot; Built with Python & Streamlit
 </div>
 """, unsafe_allow_html=True)
