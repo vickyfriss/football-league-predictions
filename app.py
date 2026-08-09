@@ -153,129 +153,55 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 }
 
             
-/* FIX STREAMLIT SELECTBOX (LIGHT THEME FORCE) */
-
 /* ================================
-   STREAMLIT SELECTBOX FIX (SAFE)
+   STREAMLIT SELECTBOX FIX (SAFE) — light theme forced, no dark hover
 ================================ */
 
 div.stSelectbox label {
     color: #333 !important;
 }
 
-/* control box only (NOT all children) */
+/* control box */
 div[data-baseweb="select"] > div {
     background-color: #ffffff !important;
     color: #111 !important;
     border-radius: 6px;
 }
 
-/* dropdown menu */
+/* dropdown container + list */
 div[data-baseweb="popover"],
-div[data-baseweb="menu"] {
+div[data-baseweb="menu"],
+div[data-baseweb="menu"] ul {
     background-color: #ffffff !important;
 }
 
-/* menu items */
-div[data-baseweb="menu"] li {
-    background-color: #ffffff !important;
-    color: #111 !important;
-}
-
-/* hover */
-div[data-baseweb="menu"] li:hover {
-    background-color: #dbeafe !important;
-    color: #111 !important;
-}
-
-/* selected */
-div[data-baseweb="menu"] li[aria-selected="true"] {
-    background-color: #bfdbfe !important;
-    color: #111 !important;
-    font-weight: 600;
-}
-
-/* dropdown */
-div[data-baseweb="popover"] {
-    background-color: #ffffff !important;
-}
-
-/* options */
+/* menu items / options */
+div[data-baseweb="menu"] li,
+div[data-baseweb="menu"] li *,
 div[role="option"] {
     background-color: #ffffff !important;
     color: #111 !important;
 }
 
-div[role="option"]:hover {
-    background-color: #dbeafe !important;
-}
-
-div[aria-selected="true"] {
-    background-color: #bfdbfe !important;
-    font-weight: 600;
-}
-            
-div[data-baseweb="menu"] {
-    background-color: #ffffff !important;
-}
-
-div[data-baseweb="menu"] ul {
-    background-color: #ffffff !important;
-}
-
-div[data-baseweb="menu"] li {
-    background-color: #ffffff !important;
-    color: #111 !important;
-}
-
-//* ================================
-   FIX: NO BLACK HOVER EVER
-================================ */
-
-/* dropdown container */
-div[data-baseweb="popover"],
-div[data-baseweb="menu"] {
-    background-color: #ffffff !important;
-}
-
-/* list */
-div[data-baseweb="menu"] ul {
-    background-color: #ffffff !important;
-}
-
-/* all items (important override layer) */
-div[data-baseweb="menu"] li,
-div[data-baseweb="menu"] li * {
-    background-color: #ffffff !important;
-    color: #111 !important;
-}
-
-/* hover state (MAIN FIX) */
+/* hover + keyboard focus */
 div[data-baseweb="menu"] li:hover,
-div[data-baseweb="menu"] li:hover * {
-    background-color: #dbeafe !important;  /* light blue */
-    color: #111 !important;
-}
-
-/* keyboard focus (prevents dark highlight) */
+div[data-baseweb="menu"] li:hover *,
 div[data-baseweb="menu"] li:focus,
-div[data-baseweb="menu"] li:focus-visible {
-    background-color: #dbeafe !important;
+div[data-baseweb="menu"] li:focus-visible,
+div[role="option"]:hover {
+    background-color: #e2f3e4 !important;
+    color: #111 !important;
     outline: none !important;
 }
 
 /* selected item */
 div[data-baseweb="menu"] li[aria-selected="true"],
-div[data-baseweb="menu"] li[aria-selected="true"] * {
-    background-color: #bfdbfe !important;
+div[data-baseweb="menu"] li[aria-selected="true"] *,
+div[aria-selected="true"] {
+    background-color: #c8e6c9 !important;
     color: #111 !important;
     font-weight: 600;
 }
-            
-/* Simulation methodology styling */
-.sim-step { background-color: #ffffff; border-left: 4px solid #1f77b4; padding: 10px 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.sim-step h4 { margin: 0 0 4px 0; font-weight: 600; color: #1f77b4; }
-.sim-step p { margin: 0; font-size: 14px; line-height: 1.5; color: #333; }
 
 /* Top-right contact panel */
 #contact-panel { 
@@ -341,16 +267,16 @@ st.markdown("""
 <div style="background: linear-gradient(90deg, #f9fbff, #ffffff); padding:25px 30px; 
             border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:920px; 
             margin:auto; text-align:center; font-family:Inter, Roboto, Arial, sans-serif;">
-    <h1 style="margin:0; font-size:36px; font-weight:700; color:#1f77b4; letter-spacing:1px; text-transform:uppercase;">
+    <h1 style="margin:0; font-size:36px; font-weight:700; color:#2E7D32; letter-spacing:1px; text-transform:uppercase;">
         Football League Simulator
     </h1>
-    <div style="height:4px; width:80px; background:#1f77b4; margin:10px auto 20px auto; border-radius:2px;"></div>
+    <div style="height:4px; width:80px; background:#2E7D32; margin:10px auto 20px auto; border-radius:2px;"></div>
     <p style="font-size:16px; line-height:1.7; color:#333; margin:0;">
         Data-driven forecasts for final positions across football leagues worldwide.<br>
         Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.
     </p>
-    <p style="margin-top:15px; font-weight:600; color:#1f77b4;">
-        <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none; color:#1f77b4;">
+    <p style="margin-top:15px; font-weight:600; color:#2E7D32;">
+        <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none; color:#2E7D32;">
         Learn more about the creator & connect →
         </a>
     </p>
@@ -381,10 +307,16 @@ league_key_map = {
     "Serie A (Brazil)": "seriea_brazil"
 }
 
+# Temporary default: most leagues haven't kicked off their 2026/27 season yet (0 games
+# played), so land on a league that's already actually playing. Eredivisie is mid-season
+# while the Premier League etc. are still empty tables. Revert DEFAULT_LEAGUE to
+# "Premier League (England)" once the PL season is underway.
+DEFAULT_LEAGUE = "Eredivisie (Netherlands)"
+
 selected_display_name = st.selectbox(
     "Select League",
     league_display_names,
-    index=0
+    index=league_display_names.index(DEFAULT_LEAGUE)
 )
 league = league_key_map[selected_display_name]
 
@@ -448,38 +380,38 @@ st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown("""
 <div style="background-color:#fff; padding:25px 30px; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.1); max-width:920px; margin:auto; margin-top:30px;">
-<h3 style="color:#1f77b4; margin-bottom:15px;">📌 How This Simulation Works</h3>
+<h3 style="color:#2E7D32; margin-bottom:15px;">📌 How This Simulation Works</h3>
 <p style="font-size:15px; line-height:1.8; color:#333;">
 This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  
 We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position.
 </p>
-<ul style="font-size:15px; line-height:1.8; color:#333; padding-left:0; list-style:none; border-left:3px solid #1f77b4; margin-top:20px;">
+<ul style="font-size:15px; line-height:1.8; color:#333; padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>1</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>1</div>
 <div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>2</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>2</div>
 <div><b>Fixtures:</b> Historical match results and remaining fixtures obtained via the <a href="https://www.football-data.org/" target="_blank">Football-Data.org API</a>.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>3</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>3</div>
 <div><b>Betting Odds:</b> Incorporate market expectations from <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> to boost accuracy.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>4</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>4</div>
 <div><b>Team Strengths:</b> Estimate attacking and defensive strengths for each team.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>5</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>5</div>
 <div><b>Match Probabilities:</b> Generate outcome probabilities using Poisson and betting-based models.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>6</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>6</div>
 <div><b>Monte Carlo Simulations:</b> Run 10,000 full season simulations to cover all possible scenarios.</div>
 </li>
 <li style="margin-bottom:0; display:flex; align-items:flex-start;">
-<div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>7</div>
+<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>7</div>
 <div><b>Final Positions:</b> Aggregate the simulation results into probability distributions.</div>
 </li>
 </ul>
@@ -493,11 +425,11 @@ We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to 
 st.markdown("""
 <div id="about-me" style="background: #f0f7ff; padding:35px 25px; border-radius:10px; max-width:700px; 
             margin:auto; text-align:center; font-size:18px; line-height:1.8; margin-top:50px; margin-bottom:60px;">
-<h3 style="color:#1f77b4; font-size:28px; margin-bottom:15px;">About Me</h3>
-<p>Hi, I’m <b>Victoria Friss de Kereki</b>, an Applied Data Scientist specialising in <b>sports analytics</b> and performance insights.</p>
-<p>I build <b>probabilistic simulations</b>, <b>predictive models</b>, and <b>data-driven insights</b> to help sports organisations and analysts make informed decisions backed by data.</p>
-<p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="color:#1f77b4;">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
-<p style="margin-top:20px; font-size:19px; font-weight:600; color:#1f77b4;">
+<h3 style="color:#2E7D32; font-size:28px; margin-bottom:15px;">About Me</h3>
+<p>Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.</p>
+<p>I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.</p>
+<p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="color:#2E7D32;">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
+<p style="margin-top:20px; font-size:19px; font-weight:600; color:#2E7D32;">
 Interested in collaborating or discussing sports analytics? <br><b>Let’s connect!</b>
 </p>
 <div style="margin-top:20px;">
