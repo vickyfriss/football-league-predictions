@@ -4,14 +4,14 @@ import pandas as pd
 # 1️⃣ Season start dates
 # ===============================
 SEASON_START_DATES = {
-    "premierleague_england": pd.Timestamp("2025-08-01", tz="UTC"),
-    "championship_england": pd.Timestamp("2025-08-01", tz="UTC"),
-    "seriea_italy": pd.Timestamp("2025-08-01", tz="UTC"),
-    "laliga_spain": pd.Timestamp("2025-08-01", tz="UTC"),
-    "bundesliga_germany": pd.Timestamp("2025-08-01", tz="UTC"),
-    "ligue1_france": pd.Timestamp("2025-08-01", tz="UTC"),
-    "eredivisie_netherlands": pd.Timestamp("2025-08-01", tz="UTC"),
-    "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC")
+    "premierleague_england": pd.Timestamp("2026-08-01", tz="UTC"),
+    "championship_england": pd.Timestamp("2026-08-01", tz="UTC"),
+    "seriea_italy": pd.Timestamp("2026-08-01", tz="UTC"),
+    "laliga_spain": pd.Timestamp("2026-08-01", tz="UTC"),
+    "bundesliga_germany": pd.Timestamp("2026-08-01", tz="UTC"),
+    "ligue1_france": pd.Timestamp("2026-08-01", tz="UTC"),
+    "eredivisie_netherlands": pd.Timestamp("2026-08-01", tz="UTC"),
+    "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC")  # calendar-year league, still mid-season — unchanged
 }
 
 leagues = [

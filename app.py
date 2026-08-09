@@ -456,7 +456,7 @@ We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to 
 <ul style="font-size:15px; line-height:1.8; color:#333; padding-left:0; list-style:none; border-left:3px solid #1f77b4; margin-top:20px;">
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
 <div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>1</div>
-<div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2025" target="_blank">ESPN</a>).</div>
+<div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
 <div style='background-color:#1f77b4;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>2</div>

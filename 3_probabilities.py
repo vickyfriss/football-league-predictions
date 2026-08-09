@@ -26,7 +26,7 @@ def normalize_columns(df, kind="fixtures"):
 def extract_teams(df):
     return set(df["homeTeam"]).union(set(df["awayTeam"]))
 
-def filter_current_season(df, season_start=pd.Timestamp("2025-08-01")):
+def filter_current_season(df, season_start=pd.Timestamp("2026-08-01")):
     df = df.copy()
     if "utcDate" in df.columns:
         df["utcDate"] = pd.to_datetime(df["utcDate"], errors='coerce', utc=True).dt.tz_localize(None)

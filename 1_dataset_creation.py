@@ -94,14 +94,14 @@ def fetch_html(url, headers, retries=3):
 def scrape_standings():
 
     leagues_codes = {
-        "ENG.1": ("premierleague_england", 2025),
-        "ENG.2": ("championship_england", 2025),
-        "ITA.1": ("seriea_italy", 2025),
-        "ESP.1": ("laliga_spain", 2025),
-        "GER.1": ("bundesliga_germany", 2025),
-        "FRA.1": ("ligue1_france", 2025),
-        "NED.1": ("eredivisie_netherlands", 2025),
-        "BRA.1": ("seriea_brazil", 2026),
+        "ENG.1": ("premierleague_england", 2026),
+        "ENG.2": ("championship_england", 2026),
+        "ITA.1": ("seriea_italy", 2026),
+        "ESP.1": ("laliga_spain", 2026),
+        "GER.1": ("bundesliga_germany", 2026),
+        "FRA.1": ("ligue1_france", 2026),
+        "NED.1": ("eredivisie_netherlands", 2026),
+        "BRA.1": ("seriea_brazil", 2026),  # calendar-year league, still mid-season — unchanged
     }
 
     headers = {
@@ -367,14 +367,14 @@ def fetch_past_season_results(data_folder="data/previous_season"):
     API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
 
     competitions = {
-        "PL": ("premierleague_england", [2025, 2024]),
-        "ELC": ("championship_england", [2025, 2024]),
-        "SA": ("seriea_italy", [2025, 2024]),
-        "PD": ("laliga_spain", [2025, 2024]),
-        "BL1": ("bundesliga_germany", [2025, 2024]),
-        "FL1": ("ligue1_france", [2025, 2024]),
-        "DED": ("eredivisie_netherlands", [2025, 2024]),
-        "BSA": ("seriea_brazil", [2026, 2025]),
+        "PL": ("premierleague_england", [2026, 2025]),
+        "ELC": ("championship_england", [2026, 2025]),
+        "SA": ("seriea_italy", [2026, 2025]),
+        "PD": ("laliga_spain", [2026, 2025]),
+        "BL1": ("bundesliga_germany", [2026, 2025]),
+        "FL1": ("ligue1_france", [2026, 2025]),
+        "DED": ("eredivisie_netherlands", [2026, 2025]),
+        "BSA": ("seriea_brazil", [2026, 2025]),  # calendar-year league, still mid-season — unchanged
     }
 
     headers = {"X-Auth-Token": API_KEY}
