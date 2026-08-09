@@ -154,11 +154,18 @@ st.markdown("""
     font-family: 'Inter', Roboto, Arial, sans-serif !important;
 }
 
+html {
+    /* Reserves the scrollbar's width permanently instead of only when a
+       scrollbar happens to be showing -- otherwise centered content can sit a
+       few pixels left of true-center, since the scrollbar only ever eats into
+       the right edge. */
+    scrollbar-gutter: stable;
+}
 body, .main, .stApp {
     background-color: var(--page-bg) !important;
     color: var(--text-main);
 }
-h1, h2, h3, .stMarkdown p, .stSelectbox label, div[data-testid="stSegmentedControl"] label { text-align: center !important; }
+h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
 
 /* Shared white "page section" card -- hero, methodology and about-me all use
    this for a consistent surface, radius and shadow. Each section keeps its own
@@ -292,42 +299,43 @@ div.stButton > button[kind="primary"]:hover {
 /* Every pill label is "League name\n\nCODE" so they're all the same shape
    regardless of how long the league name is (previously sized by whatever
    text happened to wrap to, so some pills looked bigger than others).
-   white-space:pre-line is the safety net if Streamlit renders the label as
-   plain text rather than parsing the \n\n as a markdown paragraph break. */
+   Streamlit renders the \n\n as a real markdown paragraph break (confirmed --
+   the two-line layout itself works), but that means each line is its own <p>
+   with the browser's default paragraph margin, which showed up as a visible
+   blank line between them. Zeroing that margin keeps the two lines but
+   removes the gap; white-space:pre-line is a safety net for any Streamlit
+   version that renders the label as plain text instead. */
 div.stButton > button {
     min-height: 60px;
     white-space: pre-line;
     line-height: 1.3;
     text-align: center;
 }
+div.stButton > button p {
+    margin: 0 !important;
+}
+div.stButton > button p:last-child {
+    margin-top: 2px !important;
+    font-size: 13px;
+    opacity: 0.8;
+}
 
 /* Mobile: st.columns stacks into 8 full-width rows below Streamlit's own
    responsive breakpoint by default -- that's a lot of vertical space for a
-   league picker. Force it to stay one row and scroll horizontally instead,
-   same "chip row" pattern as filter chips in most mobile apps. This overrides
-   a basic flex-direction property (Streamlit's own responsive stacking rule),
-   not a themed component internal, so it should be more reliable than the
-   segmented_control overrides that didn't stick earlier. */
+   league picker. A horizontally-scrolling row (tried first) has a real
+   discoverability problem -- nothing signals there are more options off-
+   screen to the right. With every pill now a fixed, uniform size, 8 leagues
+   divides evenly into a 2-column grid instead -- every option visible at
+   once, no scrolling, no hidden state. */
 @media (max-width: 600px) {
     div[data-testid="stHorizontalBlock"]:has(div.stButton) {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        flex-wrap: wrap !important;
         gap: 8px !important;
     }
-    div[data-testid="stHorizontalBlock"]:has(div.stButton)::-webkit-scrollbar {
-        display: none;
-    }
     div[data-testid="stHorizontalBlock"]:has(div.stButton) > div[data-testid="stColumn"] {
-        flex: 0 0 auto !important;
-        width: auto !important;
+        flex: 0 0 calc(50% - 4px) !important;
+        width: calc(50% - 4px) !important;
         min-width: unset !important;
-    }
-    div[data-testid="stHorizontalBlock"]:has(div.stButton) button {
-        white-space: nowrap;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
     }
 }
 
