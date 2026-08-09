@@ -359,6 +359,20 @@ div.stButton > button:hover, div[data-testid="stDownloadButton"] button:hover {
     background-color: #245f27 !important;
     color: #ffffff !important;
 }
+/* Hide Streamlit's own chrome (hamburger menu, "Deploy" button, "Made with
+   Streamlit" footer) -- a polished page shouldn't visibly announce the
+   dev tool it was built with. header uses display:none (not visibility) so it
+   stops reserving space -- fixed-position elements like #contact-panel are
+   positioned relative to the viewport, not the header, so this doesn't move them. */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header { display: none; }
+
+/* Streamlit still pads .block-container to make room for that header even
+   once it's hidden -- without this the page keeps a large empty gap up top. */
+.block-container {
+    padding-top: 2rem !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -390,7 +404,10 @@ st.markdown("""
     <h1 style="margin:0; font-size:34px; font-weight:700; letter-spacing:0.4px;">
         Football League Simulator
     </h1>
-    <div style="height:4px; width:80px; background:#2E7D32; margin:10px auto 20px auto; border-radius:2px;"></div>
+    <p style="margin:6px 0 0 0; font-size:14px; font-weight:500; color:#777; letter-spacing:0.3px;">
+        by Victoria Friss de Kereki
+    </p>
+    <div style="height:4px; width:80px; background:#2E7D32; margin:14px auto 20px auto; border-radius:2px;"></div>
     <p style="font-size:16px; line-height:1.7; margin:0;">
         Data-driven forecasts for final positions across football leagues worldwide.<br>
         Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.
@@ -571,5 +588,13 @@ Interested in collaborating or discussing sports analytics? <br><b>Let’s conne
   <img src="https://img.icons8.com/ios-filled/20/000000/github.png"/>
 </a>
 </div>
+</div>
+""", unsafe_allow_html=True)
+
+# -------------------------------
+# 15️⃣ FOOTER
+st.markdown("""
+<div style="text-align:center; padding:10px 0 30px 0; font-size:13px; color:#999;">
+    © 2026 Victoria Friss de Kereki &middot; Built with Python, pandas & Streamlit
 </div>
 """, unsafe_allow_html=True)
