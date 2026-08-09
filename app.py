@@ -290,6 +290,36 @@ div.stButton > button[kind="primary"]:hover {
     color: #ffffff !important;
 }
 
+/* Mobile: st.columns stacks into 8 full-width rows below Streamlit's own
+   responsive breakpoint by default -- that's a lot of vertical space for a
+   league picker. Force it to stay one row and scroll horizontally instead,
+   same "chip row" pattern as filter chips in most mobile apps. This overrides
+   a basic flex-direction property (Streamlit's own responsive stacking rule),
+   not a themed component internal, so it should be more reliable than the
+   segmented_control overrides that didn't stick earlier. */
+@media (max-width: 600px) {
+    div[data-testid="stHorizontalBlock"]:has(div.stButton) {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 8px !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(div.stButton)::-webkit-scrollbar {
+        display: none;
+    }
+    div[data-testid="stHorizontalBlock"]:has(div.stButton) > div[data-testid="stColumn"] {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: unset !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(div.stButton) button {
+        white-space: nowrap;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+}
+
 /* Top-right contact panel -- also fixed white; same black-icon reasoning */
 #contact-panel { 
     position: fixed; 
@@ -406,58 +436,51 @@ st.markdown("""
 # -------------------------------
 # 8️⃣ LEAGUE SELECTION
 
-# Short, even-length labels on purpose -- these render as segmented-control pills,
-# and one noticeably longer label (the old "EFL Championship (England 2nd tier)")
-# was enough by itself to force an unbalanced wrap onto a lonely second row.
-league_display_names = [
-    "Premier League (ENG)",
-    "Championship (ENG)",
-    "Serie A (ITA)",
-    "La Liga (ESP)",
-    "Bundesliga (GER)",
-    "Ligue 1 (FRA)",
-    "Eredivisie (NED)",
-    "Serie A (BRA)"
+# (internal key, two-line pill label, clean single-line label for the header below).
+# Every pill is forced into the same "name / code" shape on purpose -- before this,
+# pills were sized by whatever their label happened to wrap to, which made some
+# look bigger than others. "ENG2" (not "ENG 2") to match the punctuation-free,
+# compact code style of the other tags.
+LEAGUES = [
+    ("premierleague_england", "Premier League\n\nENG", "Premier League (ENG)"),
+    ("championship_england", "Championship\n\nENG2", "Championship (ENG2)"),
+    ("seriea_italy", "Serie A\n\nITA", "Serie A (ITA)"),
+    ("laliga_spain", "La Liga\n\nESP", "La Liga (ESP)"),
+    ("bundesliga_germany", "Bundesliga\n\nGER", "Bundesliga (GER)"),
+    ("ligue1_france", "Ligue 1\n\nFRA", "Ligue 1 (FRA)"),
+    ("eredivisie_netherlands", "Eredivisie\n\nNED", "Eredivisie (NED)"),
+    ("seriea_brazil", "Serie A\n\nBRA", "Serie A (BRA)"),
 ]
-league_key_map = {
-    "Premier League (ENG)": "premierleague_england",
-    "Championship (ENG)": "championship_england",
-    "Serie A (ITA)": "seriea_italy",
-    "La Liga (ESP)": "laliga_spain",
-    "Bundesliga (GER)": "bundesliga_germany",
-    "Ligue 1 (FRA)": "ligue1_france",
-    "Eredivisie (NED)": "eredivisie_netherlands",
-    "Serie A (BRA)": "seriea_brazil"
-}
+league_header_labels = {key: header for key, pill, header in LEAGUES}
 
 # Temporary default: most leagues haven't kicked off their 2026/27 season yet (0 games
 # played), so land on a league that's already actually playing. Eredivisie is mid-season
-# while the Premier League etc. are still empty tables. Revert DEFAULT_LEAGUE to
-# "Premier League (ENG)" once the PL season is underway.
-DEFAULT_LEAGUE = "Eredivisie (NED)"
+# while the Premier League etc. are still empty tables. Revert DEFAULT_LEAGUE_KEY to
+# "premierleague_england" once the PL season is underway.
+DEFAULT_LEAGUE_KEY = "eredivisie_netherlands"
 
 # Built from plain st.button + st.columns rather than st.segmented_control --
 # see the CSS comment above for why. st.columns naturally divides the full
 # available width evenly, which is also what gives this the same width as the
 # table below without any CSS width-fighting.
 if "selected_league" not in st.session_state:
-    st.session_state.selected_league = DEFAULT_LEAGUE
+    st.session_state.selected_league = DEFAULT_LEAGUE_KEY
 
-league_cols = st.columns(len(league_display_names))
-for col, name in zip(league_cols, league_display_names):
+league_cols = st.columns(len(LEAGUES))
+for col, (key, pill_label, header_label) in zip(league_cols, LEAGUES):
     with col:
-        is_active = st.session_state.selected_league == name
+        is_active = st.session_state.selected_league == key
         if st.button(
-            name,
-            key=f"league_btn_{name}",
+            pill_label,
+            key=f"league_btn_{key}",
             type="primary" if is_active else "secondary",
             use_container_width=True,
         ):
-            st.session_state.selected_league = name
+            st.session_state.selected_league = key
             st.rerun()
 
-selected_display_name = st.session_state.selected_league
-league = league_key_map[selected_display_name]
+league = st.session_state.selected_league
+selected_display_name = league_header_labels[league]
 
 
 # -------------------------------
