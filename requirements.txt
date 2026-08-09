@@ -5,6 +5,5 @@ scipy
 matplotlib
 python-dotenv
 dataframe-image
-streamlit==1.19.0
-altair==4.2.2
+streamlit  # altair was previously pinned here but is never imported directly -- dropped, streamlit pulls whatever version it needs on its own.
 standard-imghdr; python_version >= "3.13"
