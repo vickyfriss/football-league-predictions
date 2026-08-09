@@ -2,6 +2,7 @@
 *.env
 __pycache__/
 venv/*
+.DS_Store
 #data/fixtures_*
 #data/odds_*
 #data/past_*
