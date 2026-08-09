@@ -215,7 +215,16 @@ mappings = {
         "FC Zwolle": "PEC Zwolle",
         "SBV Excelsior": "Excelsior",
         "Telstar 1963": "Telstar",
-        "SC Telstar": "Telstar"
+        "SC Telstar": "Telstar",
+        # Promoted for 2026/27 -- their ESPN standings name is already clean, but
+        # football-data.org's fixtures feed uses a different, longer official
+        # name, so without this mapping their fixtures never matched their
+        # standings-table name at all. That's what caused the actual bug: those
+        # two teams had zero matching fixtures in the simulation, so their points
+        # never moved across any of the 10,000 simulated seasons -- which is why
+        # they showed exactly 100% probability for their current position.
+        "SC Cambuur-Leeuwarden": "SC Cambuur",
+        "Willem II Tilburg": "Willem II"
     },
 
 #    "primera_division_argentina": {},
