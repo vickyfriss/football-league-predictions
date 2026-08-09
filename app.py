@@ -461,14 +461,14 @@ st.markdown("""
 # look bigger than others. "ENG2" (not "ENG 2") to match the punctuation-free,
 # compact code style of the other tags.
 LEAGUES = [
-    ("premierleague_england", "Premier League\n\nENG", "Premier League (ENG)"),
-    ("championship_england", "Championship\n\nENG2", "Championship (ENG2)"),
-    ("seriea_italy", "Serie A\n\nITA", "Serie A (ITA)"),
-    ("laliga_spain", "La Liga\n\nESP", "La Liga (ESP)"),
-    ("bundesliga_germany", "Bundesliga\n\nGER", "Bundesliga (GER)"),
-    ("ligue1_france", "Ligue 1\n\nFRA", "Ligue 1 (FRA)"),
-    ("eredivisie_netherlands", "Eredivisie\n\nNED", "Eredivisie (NED)"),
-    ("seriea_brazil", "Serie A\n\nBRA", "Serie A (BRA)"),
+    ("premierleague_england", "**Premier League**\n\nENG", "Premier League (ENG)"),
+    ("championship_england", "**Championship**\n\nENG2", "Championship (ENG2)"),
+    ("seriea_italy", "**Serie A**\n\nITA", "Serie A (ITA)"),
+    ("laliga_spain", "**La Liga**\n\nESP", "La Liga (ESP)"),
+    ("bundesliga_germany", "**Bundesliga**\n\nGER", "Bundesliga (GER)"),
+    ("ligue1_france", "**Ligue 1**\n\nFRA", "Ligue 1 (FRA)"),
+    ("eredivisie_netherlands", "**Eredivisie**\n\nNED", "Eredivisie (NED)"),
+    ("seriea_brazil", "**Serie A**\n\nBRA", "Serie A (BRA)"),
 ]
 league_header_labels = {key: header for key, pill, header in LEAGUES}
 
