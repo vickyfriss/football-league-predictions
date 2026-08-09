@@ -338,12 +338,18 @@ div.stButton > button {
 }
 /* Hide Streamlit's own chrome (hamburger menu, "Deploy" button, "Made with
    Streamlit" footer) -- a polished page shouldn't visibly announce the
-   dev tool it was built with. header uses display:none (not visibility) so it
-   stops reserving space -- fixed-position elements like #contact-panel are
-   positioned relative to the viewport, not the header, so this doesn't move them. */
+   dev tool it was built with. display:none (not visibility) so nothing keeps
+   reserving space -- fixed-position elements like #contact-panel are
+   positioned relative to the viewport, not the header, so this doesn't move them.
+   Plain tag selectors AND the newer data-testid ones are both included since
+   which one actually matches has changed across Streamlit versions. */
 #MainMenu { visibility: hidden; }
 footer { visibility: hidden; }
 header { display: none; }
+[data-testid="stHeader"] { display: none !important; }
+[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+[data-testid="stStatusWidget"] { display: none !important; }
 
 /* Streamlit still pads .block-container to make room for that header even
    once it's hidden -- without this the page keeps a large empty gap up top. */
