@@ -289,6 +289,17 @@ div.stButton > button[kind="primary"]:hover {
     background-color: #245f27 !important;
     color: #ffffff !important;
 }
+/* Every pill label is "League name\n\nCODE" so they're all the same shape
+   regardless of how long the league name is (previously sized by whatever
+   text happened to wrap to, so some pills looked bigger than others).
+   white-space:pre-line is the safety net if Streamlit renders the label as
+   plain text rather than parsing the \n\n as a markdown paragraph break. */
+div.stButton > button {
+    min-height: 60px;
+    white-space: pre-line;
+    line-height: 1.3;
+    text-align: center;
+}
 
 /* Mobile: st.columns stacks into 8 full-width rows below Streamlit's own
    responsive breakpoint by default -- that's a lot of vertical space for a
@@ -414,10 +425,10 @@ st.markdown("""
 
 st.markdown("""
 <div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto; text-align:center;">
-    <h1 style="margin:0; font-size:34px; font-weight:700; letter-spacing:0.4px;">
+    <h1 style="margin:0; font-size:34px; font-weight:700;">
         Football League Simulator
     </h1>
-    <p style="margin:6px 0 0 0; font-size:14px; font-weight:500; color:#777; letter-spacing:0.3px;">
+    <p style="margin:6px 0 0 0; font-size:14px; font-weight:500; color:#777;">
         by Victoria Friss de Kereki
     </p>
     <div style="height:4px; width:80px; background:#2E7D32; margin:14px auto 20px auto; border-radius:2px;"></div>
