@@ -75,7 +75,7 @@ def style_probabilities_table(df):
         })
         .hide(axis="index")
         .set_table_styles([
-            {"selector": "th", "props":[("background-color","#dfe7ee"),("color","#333"),
+            {"selector": "th", "props":[("background-color","#dfeee2"),("color","#333"),
                                         ("text-align","center"),
                                         ("font-family","Inter, Roboto, Arial, sans-serif"),
                                         ("font-size","13px"),("font-weight","600")]},
@@ -110,12 +110,114 @@ def load_simulation_data():
 # ------------------------------- 
 # 5️⃣ PAGE STYLING + SELECTBOX + CONTACT PANEL
 
+# The CSS below referenced "Inter" as a font-family all along, but nothing ever loaded
+# it -- so every element silently fell back to Roboto/Arial. This actually loads it.
+st.markdown("""
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 st.markdown("""
 <style>
-body, .main { background-color: #f2f2f2; font-family: Inter, Roboto, Arial, sans-serif; }
+/* ================================
+   DESIGN TOKENS
+   Light mode is the deliberate default (grey page, white cards). Dark mode is a
+   bonus layered on top via prefers-color-scheme -- everything below reads these
+   variables, so redefining them here is the only place dark mode needs to touch.
+================================ */
+:root {
+    --page-bg: #f2f2f2;
+    --card-bg: #ffffff;
+    --text-main: #222222;
+    --card-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    --card-shadow-hover: 0 6px 18px rgba(0,0,0,0.10);
+    --border-light: #e3e3e3;
+    --accent-text: #2E7D32;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page-bg: #121212;
+        --card-bg: #1e1e1e;
+        --text-main: #e6e6e6;
+        --card-shadow: 0 2px 10px rgba(0,0,0,0.45);
+        --card-shadow-hover: 0 6px 18px rgba(0,0,0,0.55);
+        --border-light: #3a3a3a;
+        --accent-text: #66bb6a;
+    }
+}
+
+/* One consistent typeface everywhere -- native Streamlit widgets included, not
+   just the custom HTML sections -- so nothing looks like it belongs to a
+   different page. */
+.stApp, .stApp * {
+    font-family: 'Inter', Roboto, Arial, sans-serif !important;
+}
+
+body, .main, .stApp {
+    background-color: var(--page-bg) !important;
+    color: var(--text-main);
+}
 h1, h2, h3, .stMarkdown p, .stSelectbox label { text-align: center !important; }
 
-/* Table wrapper remains scrollable */
+/* Shared white "page section" card -- hero, methodology and about-me all use
+   this for a consistent surface, radius and shadow. Each section keeps its own
+   inline padding/max-width/margin so widths can still differ on purpose. */
+.app-card {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.app-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
+.app-card a, .app-card h1, .app-card h3 { color: var(--accent-text); }
+.app-card p, .app-card li { color: var(--text-main); }
+
+/* Numbered step badges in the methodology list -- fixed brand green (not a
+   dark-mode variable): it's a solid-fill badge with guaranteed white text, so
+   it doesn't need to adapt to the page theme the way body text does. */
+.step-circle {
+    background-color: #2E7D32; color: #fff; font-weight: 600; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; flex-shrink: 0; margin-right: 12px;
+    transition: background-color 0.2s ease;
+}
+li:hover .step-circle { background-color: #245f27; }
+
+/* Small white chip behind each social icon in the About Me footer -- icons are
+   fixed-black PNGs, so they need a guaranteed-light backdrop in any theme. */
+.icon-chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; margin: 0 8px;
+    background: #ffffff; border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    text-decoration: none; transition: transform 0.2s ease;
+}
+.icon-chip:hover { transform: scale(1.08); }
+
+/* Branded replacement for st.info() -- Streamlit's built-in info box is a fixed
+   blue with no easy way to retheme it, so this is a plain styled div instead. */
+.status-banner {
+    max-width: 900px; margin: 14px auto; padding: 10px 18px;
+    background-color: #eaf5ec; border-left: 2px solid #a5d6a7; border-right: 2px solid #a5d6a7;
+    border-radius: 8px; color: #245f27; font-size: 14px; text-align: center;
+}
+@media (prefers-color-scheme: dark) {
+    .status-banner { background-color: #1b3320; color: #a5d6a7; }
+}
+
+/* Data table: deliberately a fixed light card in any theme, same reasoning as
+   the icon chips -- the pandas-rendered cells inside are colour-graded assuming
+   a light background, so the frame around them stays light too. */
+.table-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 20px 24px;
+    width: 100%;
+    margin: 24px auto;
+}
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
 /* Desktop: normal table, nothing changes */
@@ -152,20 +254,26 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     }
 }
 
-            
 /* ================================
-   STREAMLIT SELECTBOX FIX (SAFE) — light theme forced, no dark hover
+   LEAGUE SELECTBOX
+   Fixed light in any theme (deliberate, same as the table/icons above): an
+   earlier fix here forced light mode to avoid a Streamlit/baseweb bug where the
+   dropdown's hover state rendered pure black and illegible. Restyled to match
+   the card language (radius, shadow, border) without touching that fix.
 ================================ */
-
+div[data-testid="stSelectbox"] {
+    max-width: 900px;
+    margin: 16px auto !important;
+}
 div.stSelectbox label {
     color: #333 !important;
 }
-
-/* control box */
 div[data-baseweb="select"] > div {
     background-color: #ffffff !important;
     color: #111 !important;
-    border-radius: 6px;
+    border-radius: 10px !important;
+    border: 1px solid #e3e3e3 !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
 /* dropdown container + list */
@@ -203,7 +311,7 @@ div[aria-selected="true"] {
     font-weight: 600;
 }
 
-/* Top-right contact panel */
+/* Top-right contact panel -- also fixed white; same black-icon reasoning */
 #contact-panel { 
     position: fixed; 
     top: 60px;              
@@ -221,7 +329,6 @@ div[aria-selected="true"] {
 #contact-panel a:first-child { margin-top: 4px; }
 #contact-panel a:hover img { transform: scale(1.3); }
 
-            
 /* Responsive adjustments for other elements */
 @media (max-width: 600px) {
     /* Horizontal top-right bar with margin from top */
@@ -236,6 +343,21 @@ div[aria-selected="true"] {
         padding: 8px 12px !important;
     }
     div.stSelectbox > div[role="combobox"] > div { font-size: 14px !important; }
+}
+
+/* Buttons (download button uses this) -- fixed brand green, same reasoning as
+   the step-circle badges: solid fill with guaranteed white text. */
+div.stButton > button, div[data-testid="stDownloadButton"] button {
+    background-color: #2E7D32 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: background-color 0.2s ease;
+}
+div.stButton > button:hover, div[data-testid="stDownloadButton"] button:hover {
+    background-color: #245f27 !important;
+    color: #ffffff !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -264,19 +386,17 @@ st.markdown("""
 # 7️⃣ HERO SECTION
 
 st.markdown("""
-<div style="background: linear-gradient(90deg, #f9fbff, #ffffff); padding:25px 30px; 
-            border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:920px; 
-            margin:auto; text-align:center; font-family:Inter, Roboto, Arial, sans-serif;">
-    <h1 style="margin:0; font-size:36px; font-weight:700; color:#2E7D32; letter-spacing:1px; text-transform:uppercase;">
+<div class="app-card" style="padding:28px 32px; max-width:900px; margin:24px auto; text-align:center;">
+    <h1 style="margin:0; font-size:36px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">
         Football League Simulator
     </h1>
     <div style="height:4px; width:80px; background:#2E7D32; margin:10px auto 20px auto; border-radius:2px;"></div>
-    <p style="font-size:16px; line-height:1.7; color:#333; margin:0;">
+    <p style="font-size:16px; line-height:1.7; margin:0;">
         Data-driven forecasts for final positions across football leagues worldwide.<br>
         Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables.
     </p>
-    <p style="margin-top:15px; font-weight:600; color:#2E7D32;">
-        <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none; color:#2E7D32;">
+    <p style="margin-top:15px; font-weight:600;">
+        <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none;">
         Learn more about the creator & connect →
         </a>
     </p>
@@ -332,8 +452,10 @@ if not position_distribution_pct_all:
 else:
     pct_file = "data/precomputed_pos_pct.pkl"
     pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    st.markdown('<div style="height:10px;"></div>', unsafe_allow_html=True)
-    st.info(f"Simulations last run on: {pct_mtime.strftime('%d/%B/%Y %H:%M')} UTC")
+    st.markdown(
+        f'<div class="status-banner">Simulations last run on: {pct_mtime.strftime("%d/%B/%Y %H:%M")} UTC</div>',
+        unsafe_allow_html=True
+    )
 
 # -------------------------------
 # 10️⃣ PREPARE DATAFRAME
@@ -366,7 +488,10 @@ st.header(f"{selected_display_name} Simulation Results")
 # 11️⃣ STYLE AND DISPLAY TABLE
 
 styled_table, num_cols = style_probabilities_table(pos_pct_df)
-st.markdown(f'<div class="table-wrapper">{styled_table.to_html(escape=False)}</div>', unsafe_allow_html=True)
+st.markdown(
+    f'<div class="table-card"><div class="table-wrapper">{styled_table.to_html(escape=False)}</div></div>',
+    unsafe_allow_html=True
+)
 st.caption("Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.")
 
 # -------------------------------
@@ -379,39 +504,39 @@ st.download_button("Download table as CSV", data=csv, file_name=f"{league}_final
 # -------------------------------
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown("""
-<div style="background-color:#fff; padding:25px 30px; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.1); max-width:920px; margin:auto; margin-top:30px;">
-<h3 style="color:#2E7D32; margin-bottom:15px;">📌 How This Simulation Works</h3>
-<p style="font-size:15px; line-height:1.8; color:#333;">
+<div class="app-card" style="padding:28px 32px; max-width:900px; margin:24px auto;">
+<h3 style="margin-bottom:15px;">How This Simulation Works</h3>
+<p style="font-size:15px; line-height:1.8;">
 This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  
 We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position.
 </p>
-<ul style="font-size:15px; line-height:1.8; color:#333; padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
+<ul style="font-size:15px; line-height:1.8; padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>1</div>
+<div class="step-circle">1</div>
 <div><b>Historical Data:</b> Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>2</div>
+<div class="step-circle">2</div>
 <div><b>Fixtures:</b> Historical match results and remaining fixtures obtained via the <a href="https://www.football-data.org/" target="_blank">Football-Data.org API</a>.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>3</div>
+<div class="step-circle">3</div>
 <div><b>Betting Odds:</b> Incorporate market expectations from <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> to boost accuracy.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>4</div>
+<div class="step-circle">4</div>
 <div><b>Team Strengths:</b> Estimate attacking and defensive strengths for each team.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>5</div>
+<div class="step-circle">5</div>
 <div><b>Match Probabilities:</b> Generate outcome probabilities using Poisson and betting-based models.</div>
 </li>
 <li style="margin-bottom:15px; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>6</div>
+<div class="step-circle">6</div>
 <div><b>Monte Carlo Simulations:</b> Run 10,000 full season simulations to cover all possible scenarios.</div>
 </li>
 <li style="margin-bottom:0; display:flex; align-items:flex-start;">
-<div style='background-color:#2E7D32;color:#fff;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;margin-right:12px;'>7</div>
+<div class="step-circle">7</div>
 <div><b>Final Positions:</b> Aggregate the simulation results into probability distributions.</div>
 </li>
 </ul>
@@ -423,27 +548,27 @@ We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to 
 # 14️⃣ BOTTOM ABOUT ME
 
 st.markdown("""
-<div id="about-me" style="background: #f0f7ff; padding:35px 25px; border-radius:10px; max-width:700px; 
-            margin:auto; text-align:center; font-size:18px; line-height:1.8; margin-top:50px; margin-bottom:60px;">
-<h3 style="color:#2E7D32; font-size:28px; margin-bottom:15px;">About Me</h3>
+<div id="about-me" class="app-card" style="padding:35px 25px; max-width:700px; 
+            margin:40px auto; text-align:center; font-size:18px; line-height:1.8;">
+<h3 style="font-size:28px; margin-bottom:15px;">About Me</h3>
 <p>Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.</p>
 <p>I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.</p>
-<p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="color:#2E7D32;">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
-<p style="margin-top:20px; font-size:19px; font-weight:600; color:#2E7D32;">
+<p>My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, where I share projects on football analytics, player performance, and simulations.</p>
+<p style="margin-top:20px; font-size:19px; font-weight:600; color:var(--accent-text);">
 Interested in collaborating or discussing sports analytics? <br><b>Let’s connect!</b>
 </p>
 <div style="margin-top:20px;">
-<a href="mailto:vicky_friss@hotmail.com" style="margin:0 15px; text-decoration:none;">
-  <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
+<a href="mailto:vicky_friss@hotmail.com" class="icon-chip">
+  <img src="https://img.icons8.com/ios-filled/20/000000/new-post.png"/>
 </a>
-<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="margin:0 15px; text-decoration:none;">
-  <img src="https://img.icons8.com/ios-filled/30/000000/linkedin.png"/>
+<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" class="icon-chip">
+  <img src="https://img.icons8.com/ios-filled/20/000000/linkedin.png"/>
 </a>
-<a href="https://medium.com/@vickyfrissdekereki" target="_blank" style="margin:0 15px; text-decoration:none;">
-  <img src="https://img.icons8.com/ios-filled/30/000000/medium-monogram.png"/>
+<a href="https://medium.com/@vickyfrissdekereki" target="_blank" class="icon-chip">
+  <img src="https://img.icons8.com/ios-filled/20/000000/medium-monogram.png"/>
 </a>
-<a href="https://github.com/vickyfriss" target="_blank" style="margin:0 15px; text-decoration:none;">
-  <img src="https://img.icons8.com/ios-filled/30/000000/github.png"/>
+<a href="https://github.com/vickyfriss" target="_blank" class="icon-chip">
+  <img src="https://img.icons8.com/ios-filled/20/000000/github.png"/>
 </a>
 </div>
 </div>
