@@ -131,6 +131,19 @@ for lg in dataset_processing.leagues:
         seasons_to_blend = sorted_seasons[-2:]
         non_empty = [league_results[s] for s in seasons_to_blend if not league_results[s].empty]
         past_matches_blended = pd.concat(non_empty, ignore_index=True) if non_empty else pd.DataFrame()
+
+        # process_datasets() below renames raw team-name spellings (e.g. "PSV" ->
+        # "PSV Eindhoven") on past_matches_{lg}_all, future_matches_{lg} and
+        # betting_odds_{lg} -- but it has no idea this new _blended key exists,
+        # so without this, any team whose previous-season data needs renaming
+        # (about half of them, typically) would silently split into two
+        # unrelated "teams": their real rating sits under the raw name nobody
+        # else uses, while their mapped name gets treated as brand new with
+        # near-zero history. That's exactly what made Feyenoord (whose raw name
+        # already matched, so no renaming needed) look artificially dominant
+        # next to PSV (needs renaming, so its real history was invisible).
+        if not past_matches_blended.empty:
+            past_matches_blended = past_matches_blended.replace(dataset_processing.mappings.get(lg, {}))
     else:
         past_matches_current = pd.DataFrame()
         past_matches_blended = pd.DataFrame()
