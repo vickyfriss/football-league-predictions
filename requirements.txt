@@ -5,5 +5,6 @@ scipy
 matplotlib
 python-dotenv
 dataframe-image
+playwright  # headless Chromium for scrape_standings() -- ESPN's AWS WAF challenges plain HTTP clients from cloud IPs, real Chromium executes the JS challenge and gets through.
 streamlit  # altair was previously pinned here but is never imported directly -- dropped, streamlit pulls whatever version it needs on its own.
 standard-imghdr; python_version >= "3.13"

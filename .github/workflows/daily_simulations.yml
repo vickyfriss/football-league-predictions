@@ -36,6 +36,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # 3️⃣.5 Install Playwright's headless Chromium (pip install alone only
+      # gets the Python package, not the browser binary + OS deps it drives)
+      - name: Install Playwright browser
+        run: playwright install --with-deps chromium
+
       # 4️⃣ Prepare folders
       - name: Prepare folders
         run: |
