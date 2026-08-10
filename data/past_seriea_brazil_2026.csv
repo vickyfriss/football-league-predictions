@@ -211,3 +211,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-09T14:00:00Z,22,FINISHED,Cruzeiro EC,Mirassol FC,3,1,HOME_TEAM
 2026-08-09T19:00:00Z,22,FINISHED,EC Bahia,CR Vasco da Gama,0,0,DRAW
 2026-08-09T19:00:00Z,22,FINISHED,SE Palmeiras,SC Internacional,0,0,DRAW
+2026-08-09T21:30:00Z,22,FINISHED,RB Bragantino,SC Corinthians Paulista,0,2,AWAY_TEAM
+2026-08-09T21:30:00Z,22,FINISHED,Santos FC,CA Paranaense,0,2,AWAY_TEAM
+2026-08-09T22:30:00Z,22,FINISHED,CR Flamengo,EC Vitória,2,0,HOME_TEAM

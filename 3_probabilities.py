@@ -87,9 +87,13 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             goals_scored = (home_goals * home_weight).sum() + (away_goals * away_weight).sum()
             goals_against = (home_games.get("awayGoals", pd.Series([0]*len(home_games))) * home_weight).sum() + \
                             (away_games.get("homeGoals", pd.Series([0]*len(away_games))) * away_weight).sum()
-            matches = home_weight.sum() + away_weight.sum()
-            matches = matches if matches > 0 else 1
-            team_stats[team] = {"scored": goals_scored / matches, "against": goals_against / matches}
+            matches_weighted = home_weight.sum() + away_weight.sum()
+            matches_weighted = matches_weighted if matches_weighted > 0 else 1
+            team_stats[team] = {
+                "scored": goals_scored / matches_weighted,
+                "against": goals_against / matches_weighted,
+                "matches_played": len(home_games) + len(away_games),
+            }
 
         # League averages
         league_avg = ((df_all.get("homeGoals", pd.Series([0])) + df_all.get("awayGoals", pd.Series([0]))).mean()) / 2
@@ -98,22 +102,23 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             attack[team] = team_stats[team]["scored"] / league_avg
             defense[team] = team_stats[team]["against"] / league_avg
 
-        # === Shrink toward mean early season (deterministic uncertainty) ===
+        # === Shrink toward mean for teams with little/no history (per-team, not league-wide) ===
+        # A team's OWN sample size decides how much of its rating is "real" signal vs.
+        # mean. Blending current+previous season (see precompute_simulations.py) already
+        # gives returning teams ~a full season of matches, so they keep close to their
+        # true rating here. A newly-promoted team has no previous-season matches at all --
+        # only its handful played so far this season -- so it gets pulled hard toward the
+        # league mean, starting close to a coin-flip instead of near-certain off 1-2 results.
         num_teams = len(teams)
-        total_matches_season = num_teams * (num_teams - 1)
-        matches_played = len(df_all)
-        season_progress = matches_played / total_matches_season if total_matches_season > 0 else 1.0
+        target_matches = max((num_teams - 1) * 2, 1)  # one full double round-robin season
+        min_shrink = 0.1  # a team with 0 matches keeps only 10% of its raw rating's distance from the mean
+        team_matches = pd.Series({t: team_stats[t]["matches_played"] for t in teams})
+        shrink_per_team = min_shrink + (1 - min_shrink) * (team_matches / target_matches).clip(upper=1.0)
+
         mean_attack = attack.mean()
         mean_defense = defense.mean()
-
-        if season_progress < 0.5:
-            # Flatten toward mean more strongly early season
-            # Max shrink: factor = 0.5 → ratings halfway to mean. 0.3 means only 30% of the original distance from the mean remains, so the ratings are closer to the mean.
-            max_shrink = 0.3  # smaller = stronger flattening
-            shrink_factor = max_shrink + (1 - max_shrink) * season_progress*2  # linear up to half season
-            shrink_factor = min(shrink_factor, 1.0)
-            attack = mean_attack + shrink_factor * (attack - mean_attack)
-            defense = mean_defense + shrink_factor * (defense - mean_defense)
+        attack = mean_attack + shrink_per_team * (attack - mean_attack)
+        defense = mean_defense + shrink_per_team * (defense - mean_defense)
 
         # Compute Poisson probabilities
         df_future = normalize_columns(fixtures_dict[league])
