@@ -242,6 +242,7 @@ df_simulation_all = dataset_probabilities.compute_final_probabilities(
     {lg: globals_dict.get(f"past_matches_{lg}_blended", pd.DataFrame()) for lg in active_leagues},
     {lg: normalize_fixtures(globals_dict.get(f"future_matches_{lg}")) for lg in active_leagues},
     {lg: normalize_odds(globals_dict.get(f"betting_odds_{lg}")) for lg in active_leagues},
+    current_season_matches_dict={lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame()) for lg in active_leagues},
 )
 
 print("✅ Probabilities computed.")

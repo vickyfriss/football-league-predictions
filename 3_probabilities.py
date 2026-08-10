@@ -26,12 +26,14 @@ def normalize_columns(df, kind="fixtures"):
 def extract_teams(df):
     return set(df["homeTeam"]).union(set(df["awayTeam"]))
 
-def filter_current_season(df, season_start=pd.Timestamp("2026-08-01")):
-    df = df.copy()
-    if "utcDate" in df.columns:
-        df["utcDate"] = pd.to_datetime(df["utcDate"], errors='coerce', utc=True).dt.tz_localize(None)
-        return df[df["utcDate"] >= season_start]
-    return df
+def weighted_mean(values, weights):
+    """Recency-weighted mean, matching the weighting already used for attack/defense
+    below -- home advantage and the league scoring baseline should discount older
+    (last-season) matches the same way, not treat them as equal to this week's."""
+    values = values.fillna(0)
+    weights = weights.reindex(values.index).fillna(0)
+    total_weight = weights.sum()
+    return (values * weights).sum() / total_weight if total_weight > 0 else 0.0
 
 def match_probabilities_league(home, away, attack, defense, league_avg, home_adv, max_goals=6):
     exp_home = np.exp(np.log(league_avg) + np.log(attack.get(home, 1.0)) + np.log(defense.get(away, 1.0)) + home_adv)
@@ -53,7 +55,7 @@ def match_probabilities_league(home, away, attack, defense, league_avg, home_adv
 
 # === 2. MAIN FUNCTION ===
 
-def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betting_odds_dict):
+def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betting_odds_dict, current_season_matches_dict=None):
     df_final_all = {}
     home_adv_by_league = {}
 
@@ -66,7 +68,8 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         past_matches_dict[league + "_weighted"] = df_all
 
         # Home advantage
-        home_adv = (df_all.get("homeGoals", pd.Series([0])) - df_all.get("awayGoals", pd.Series([0]))).mean()
+        goal_diff = df_all.get("homeGoals", pd.Series([0])) - df_all.get("awayGoals", pd.Series([0]))
+        home_adv = weighted_mean(goal_diff, df_all["weight"])
         home_adv_by_league[league] = home_adv
 
         # Team attack/defense
@@ -96,7 +99,8 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             }
 
         # League averages
-        league_avg = ((df_all.get("homeGoals", pd.Series([0])) + df_all.get("awayGoals", pd.Series([0]))).mean()) / 2
+        total_goals = df_all.get("homeGoals", pd.Series([0])) + df_all.get("awayGoals", pd.Series([0]))
+        league_avg = weighted_mean(total_goals, df_all["weight"]) / 2
         league_avg = league_avg if league_avg > 0 else 1.0
         for team in teams:
             attack[team] = team_stats[team]["scored"] / league_avg
@@ -109,7 +113,15 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         # true rating here. A newly-promoted team has no previous-season matches at all --
         # only its handful played so far this season -- so it gets pulled hard toward the
         # league mean, starting close to a coin-flip instead of near-certain off 1-2 results.
-        num_teams = len(teams)
+        # num_teams should reflect THIS season's league size, not the blended
+        # 2-season set -- otherwise a team relegated/promoted between the two
+        # seasons inflates the count and pushes the "fully trusted" threshold
+        # above what a real full season actually requires.
+        current_df = None
+        if current_season_matches_dict is not None:
+            current_df = normalize_columns(current_season_matches_dict.get(league, pd.DataFrame()))
+        current_teams = extract_teams(current_df) if current_df is not None and not current_df.empty else set(teams)
+        num_teams = len(current_teams) if current_teams else len(teams)
         target_matches = max((num_teams - 1) * 2, 1)  # one full double round-robin season
         min_shrink = 0.1  # a team with 0 matches keeps only 10% of its raw rating's distance from the mean
         team_matches = pd.Series({t: team_stats[t]["matches_played"] for t in teams})
