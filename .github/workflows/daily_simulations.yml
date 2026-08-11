@@ -55,7 +55,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "Running simulations at $(date -u +"%Y-%m-%d_%H%M%S_UTC")"
-          python precompute_simulations.py 2>&1 | tee logs/github_actions_run.log
+          python -u precompute_simulations.py 2>&1 | tee logs/github_actions_run.log
 
       # 6️⃣ Update redeploy trigger
       - name: Update redeploy trigger
