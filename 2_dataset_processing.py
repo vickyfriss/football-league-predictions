@@ -336,15 +336,28 @@ def season_fixtures(past_matches, future_matches):
     )
 
 
-def find_missing_reverse_fixture(team, opponent, fixtures):
-    team_home = ((fixtures.homeTeam == team) & (fixtures.awayTeam == opponent)).any()
-    team_away = ((fixtures.homeTeam == opponent) & (fixtures.awayTeam == team)).any()
+def find_missing_fixture_legs(team, opponent, fixtures):
+    """Return the missing (home, away) leg(s) for this pair.
 
-    if team_home and not team_away:
-        return opponent, team
-    if team_away and not team_home:
-        return team, opponent
-    return None
+    If exactly one leg exists, only the reverse leg is missing. If NEITHER
+    leg exists -- e.g. the live fixtures fetch ran before the feed published
+    that pairing yet -- both legs are missing and need to be added, or this
+    pair silently never gets simulated for the rest of the season (this is
+    what caused two blocks of teams to never cross in any of the 10,000
+    simulated Eredivisie seasons on 2026-08-11: the fixtures fetched that
+    run were missing every cross-half pairing, and the old reverse-only
+    check couldn't see a pair with both legs absent).
+    """
+    team_home = ((fixtures.homeTeam == team) & (fixtures.awayTeam == opponent)).any()
+    opponent_home = ((fixtures.homeTeam == opponent) & (fixtures.awayTeam == team)).any()
+
+    if team_home and not opponent_home:
+        return [(opponent, team)]
+    if opponent_home and not team_home:
+        return [(team, opponent)]
+    if not team_home and not opponent_home:
+        return [(team, opponent), (opponent, team)]
+    return []
 
 
 # ===============================
@@ -442,10 +455,7 @@ def process_datasets(globals_dict):
         for team in teams:
             for opponent in teams - {team}:
 
-                result = find_missing_reverse_fixture(team, opponent, fixtures)
-
-                if result:
-                    home, away = result
+                for home, away in find_missing_fixture_legs(team, opponent, fixtures):
 
                     # already exists somewhere → skip
                     if (home, away) in future_set or (home, away) in past_set:
@@ -488,6 +498,7 @@ def process_datasets(globals_dict):
         for league in missing_df["league"].unique():
 
             future_matches = globals_dict[f"future_matches_{league}"]
+            past_matches_all = globals_dict[f"past_matches_{league}_all"]
             league_missing = missing_df[missing_df["league"] == league]
 
             for _, row in league_missing.iterrows():
@@ -507,6 +518,7 @@ def process_datasets(globals_dict):
                 }
 
             globals_dict[f"future_matches_{league}"] = future_matches
+            globals_dict[f"past_matches_{league}_all"] = past_matches_all
 
     else:
         print("\n✅ No reverse fixtures missing")
