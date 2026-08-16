@@ -1,2 +1,10 @@
 utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-14T19:00:00Z,1,FINISHED,Wolverhampton Wanderers FC,Blackburn Rovers FC,2,2,DRAW
+2026-08-15T11:30:00Z,1,FINISHED,Bolton Wanderers FC,Preston North End FC,2,1,HOME_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Norwich City FC,West Bromwich Albion FC,1,2,AWAY_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Bristol City FC,Millwall FC,0,2,AWAY_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Middlesbrough FC,Lincoln City FC,2,1,HOME_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Stoke City FC,Swansea City AFC,1,2,AWAY_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Charlton Athletic FC,Derby County FC,2,1,HOME_TEAM
+2026-08-15T14:00:00Z,1,FINISHED,Portsmouth FC,Queens Park Rangers FC,1,3,AWAY_TEAM
+2026-08-15T16:30:00Z,1,FINISHED,Sheffield United FC,Birmingham City FC,0,0,DRAW

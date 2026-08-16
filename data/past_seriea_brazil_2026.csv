@@ -214,3 +214,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-09T21:30:00Z,22,FINISHED,RB Bragantino,SC Corinthians Paulista,0,2,AWAY_TEAM
 2026-08-09T21:30:00Z,22,FINISHED,Santos FC,CA Paranaense,0,2,AWAY_TEAM
 2026-08-09T22:30:00Z,22,FINISHED,CR Flamengo,EC Vitória,2,0,HOME_TEAM
+2026-08-15T19:30:00Z,23,FINISHED,Fluminense FC,SE Palmeiras,3,2,HOME_TEAM
+2026-08-15T21:30:00Z,23,FINISHED,CA Paranaense,RB Bragantino,1,1,DRAW
+2026-08-16T00:00:00Z,23,FINISHED,São Paulo FC,Coritiba FBC,1,1,DRAW
