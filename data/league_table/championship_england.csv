@@ -6,14 +6,14 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 5,Bolton Wanderers,1,1,0,0,2,1,1,3
 6,Charlton Athletic,1,1,0,0,2,1,1,3
 7,Middlesbrough,1,1,0,0,2,1,1,3
-8,Blackburn Rovers,1,0,1,0,2,2,0,1
-9,Wolverhampton Wanderers,1,0,1,0,2,2,0,1
-10,Birmingham City,1,0,1,0,0,0,0,1
-11,Sheffield United,1,0,1,0,0,0,0,1
-12,Burnley,0,0,0,0,0,0,0,0
-13,Cardiff City,0,0,0,0,0,0,0,0
-14,Watford,0,0,0,0,0,0,0,0
-15,West Ham United,0,0,0,0,0,0,0,0
+8,Watford,1,1,0,0,2,1,1,3
+9,Blackburn Rovers,1,0,1,0,2,2,0,1
+10,West Ham United,1,0,1,0,2,2,0,1
+11,Burnley,1,0,1,0,2,2,0,1
+12,Wolverhampton Wanderers,1,0,1,0,2,2,0,1
+13,Birmingham City,1,0,1,0,0,0,0,1
+14,Sheffield United,1,0,1,0,0,0,0,1
+15,Cardiff City,0,0,0,0,0,0,0,0
 16,Wrexham,0,0,0,0,0,0,0,0
 17,Derby County,1,0,0,1,1,2,-1,0
 18,Lincoln City,1,0,0,1,1,2,-1,0
@@ -22,4 +22,4 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 21,Stoke City,1,0,0,1,1,2,-1,0
 22,Portsmouth,1,0,0,1,1,3,-2,0
 23,Bristol City,1,0,0,1,0,2,-2,0
-24,Southampton,0,0,0,0,0,0,0,-4
+24,Southampton,1,0,0,1,1,2,-1,-4

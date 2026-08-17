@@ -8,3 +8,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-15T14:00:00Z,1,FINISHED,Charlton Athletic FC,Derby County FC,2,1,HOME_TEAM
 2026-08-15T14:00:00Z,1,FINISHED,Portsmouth FC,Queens Park Rangers FC,1,3,AWAY_TEAM
 2026-08-15T16:30:00Z,1,FINISHED,Sheffield United FC,Birmingham City FC,0,0,DRAW
+2026-08-16T12:30:00Z,1,FINISHED,Watford FC,Southampton FC,2,1,HOME_TEAM
+2026-08-16T15:00:00Z,1,FINISHED,Burnley FC,West Ham United FC,2,2,DRAW

@@ -1,3 +1,5 @@
 utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-15T17:30:00Z,1,FINISHED,Deportivo Alavés,Getafe CF,3,0,HOME_TEAM
 2026-08-15T19:30:00Z,1,FINISHED,Sevilla FC,Rayo Vallecano de Madrid,2,1,HOME_TEAM
+2026-08-16T15:00:00Z,1,FINISHED,Real Racing Club de Santander,Villarreal CF,2,2,DRAW
+2026-08-16T17:00:00Z,1,FINISHED,RCD Espanyol de Barcelona,Levante UD,3,0,HOME_TEAM
