@@ -112,6 +112,7 @@ mappings = {
         "RC Deportivo de La Coruña": "Deportivo La Coruña",
         "Deportivo de La Coruña": "Deportivo La Coruña",
         "RC Deportivo La Coruña": "Deportivo La Coruña",  # actual fixtures-feed spelling (no "de")
+        "Deportivo": "Deportivo La Coruña",  # ESPN's standings widget truncates this one club's long name
         "Málaga CF": "Málaga"
     },
     "bundesliga_germany": {
@@ -385,6 +386,17 @@ def process_datasets(globals_dict):
             df = normalize_columns(df)
             df.replace(mapping, inplace=True)
             globals_dict[dataset] = df
+
+        # The standings table itself was never covered by the loop above --
+        # it's keyed by the league name directly and has a "team" column
+        # rather than homeTeam/awayTeam, so it silently kept ESPN's raw
+        # names (e.g. "Deportivo" for "Deportivo La Coruña") while every
+        # other dataset used the mapped name, causing KeyErrors in simulation.
+        table_df = globals_dict.get(league)
+        if table_df is not None and not table_df.empty and "team" in table_df.columns:
+            table_df = table_df.copy()
+            table_df["team"] = table_df["team"].replace(mapping)
+            globals_dict[league] = table_df
 
     # -------------------------------
     # ACTIVE LEAGUE FILTER
