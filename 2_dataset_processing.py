@@ -11,7 +11,8 @@ SEASON_START_DATES = {
     "bundesliga_germany": pd.Timestamp("2026-08-01", tz="UTC"),
     "ligue1_france": pd.Timestamp("2026-08-01", tz="UTC"),
     "eredivisie_netherlands": pd.Timestamp("2026-08-01", tz="UTC"),
-    "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC")  # calendar-year league, still mid-season — unchanged
+    "seriea_brazil": pd.Timestamp("2026-01-01", tz="UTC"),  # calendar-year league, still mid-season — unchanged
+    "primeiraliga_portugal": pd.Timestamp("2026-08-01", tz="UTC")
 }
 
 leagues = [
@@ -22,7 +23,8 @@ leagues = [
     "ligue1_france",
     "championship_england",
     "eredivisie_netherlands",
-    "seriea_brazil"
+    "seriea_brazil",
+    "primeiraliga_portugal"
 ]
 
 # ===============================
@@ -257,6 +259,35 @@ mappings = {
         "Atletico Paranaense": "Athletico Paranaense",
         "Chapecoense AF": "Chapecoense",
         "Clube do Remo": "Remo"
+    },
+
+    "primeiraliga_portugal": {
+        # football-data.org's full club names -> ESPN's standings display name
+        "Rio Ave FC": "Rio Ave",
+        "Sporting Clube de Portugal": "Sporting CP",
+        "GD Estoril Praia": "Estoril",
+        "Moreirense FC": "Moreirense",
+        "FC Arouca": "Arouca",
+        "Sport Lisboa e Benfica": "Benfica",
+        "Académico de Viseu FC": "Académico de Viseu",
+        "CD Nacional": "C.D. Nacional",
+        "CD Santa Clara": "Santa Clara",
+        "FC Famalicão": "FC Famalicao",
+        "Gil Vicente FC": "Gil Vicente",
+        # ESPN's standings widget calls this club by its city (Guimarães),
+        # not its "Vitória SC" name -- football-data.org and the-odds-api
+        # both use "Vitória SC", so without this they'd look like two teams.
+        "Vitória SC": "Vitória de Guimaraes",
+        "CS Marítimo": "Maritimo",
+        "Sporting Clube de Braga": "Braga",
+        "Casa Pia AC": "Casa Pia",
+        "FC Alverca": "Alverca",
+        "CF Estrela da Amadora": "Estrela",
+        # the-odds-api spells a handful of these differently again
+        "CS Maritimo": "Maritimo",
+        "Famalicão": "FC Famalicao",
+        "Nacional": "C.D. Nacional",
+        "Sporting Lisbon": "Sporting CP"
     }
 }
 

@@ -63,6 +63,13 @@ TEAM_NAME_MAPPING = {
     "ZMetz": "Metz",
     "ORemo": "Remo",
     "Z Alkmaar": "AZ Alkmaar",
+    # Primeira Liga: several clubs' ESPN abbreviation codes run 4 characters
+    # (e.g. Santa Clara -> "CDSC"), one more than [A-Z0-9]{2,3} strips, so a
+    # single leftover capital stays glued to the name (e.g. "CSanta Clara").
+    "CSanta Clara": "Santa Clara",
+    "CGil Vicente": "Gil Vicente",
+    "CRio Ave": "Rio Ave",
+    "CCasa Pia": "Casa Pia",
 }
 
 def clean_team_names(df, column="team"):
@@ -114,6 +121,7 @@ def scrape_standings():
         "FRA.1": ("ligue1_france", 2026),
         "NED.1": ("eredivisie_netherlands", 2026),
         "BRA.1": ("seriea_brazil", 2026),  # calendar-year league, still mid-season — unchanged
+        "POR.1": ("primeiraliga_portugal", 2026),
     }
 
     standings = {}
@@ -219,6 +227,7 @@ def load_betting_odds():
         "soccer_france_ligue_one": "odds_ligue1_france",
         "soccer_netherlands_eredivisie": "odds_eredivisie_netherlands",
         "soccer_brazil_campeonato": "odds_seriea_brazil",
+        "soccer_portugal_primeira_liga": "odds_primeiraliga_portugal",
     }
 
     base_url = "https://api.the-odds-api.com/v4/sports/{}/odds"
@@ -337,6 +346,7 @@ def load_fixtures():
         "FL1": "fixtures_ligue1_france",
         "DED": "fixtures_eredivisie_netherlands",
         "BSA": "fixtures_seriea_brazil",
+        "PPL": "fixtures_primeiraliga_portugal",
     }
 
     headers = {"X-Auth-Token": API_KEY}
@@ -396,6 +406,7 @@ def fetch_past_season_results(data_folder="data/previous_season"):
         "FL1": ("ligue1_france", [2026, 2025]),
         "DED": ("eredivisie_netherlands", [2026, 2025]),
         "BSA": ("seriea_brazil", [2026, 2025]),  # calendar-year league, still mid-season — unchanged
+        "PPL": ("primeiraliga_portugal", [2026, 2025]),
     }
 
     headers = {"X-Auth-Token": API_KEY}

@@ -480,6 +480,7 @@ LEAGUES = [
     ("bundesliga_germany", "**Bundesliga**\n\nGER", "Bundesliga (GER)"),
     ("ligue1_france", "**Ligue 1**\n\nFRA", "Ligue 1 (FRA)"),
     ("eredivisie_netherlands", "**Eredivisie**\n\nNED", "Eredivisie (NED)"),
+    ("primeiraliga_portugal", "**Primeira Liga**\n\nPOR", "Primeira Liga (POR)"),
     ("seriea_brazil", "**Serie A**\n\nBRA", "Serie A (BRA)"),
 ]
 league_header_labels = {key: header for key, pill, header in LEAGUES}
