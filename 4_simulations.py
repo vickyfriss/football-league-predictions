@@ -29,6 +29,22 @@ def match_probabilities_league(home, away, attack, defense, league_avg_scored, h
 
 # === 2. SIMULATION FUNCTIONS ===
 
+def drop_unknown_teams(fixtures, table):
+    """Filter out fixtures referencing a team not present in the standings table.
+
+    A team-name mismatch upstream (an unmapped alias, or a promoted team ESPN
+    hasn't listed yet) otherwise reaches simulate_once's points dict and
+    crashes the whole run with a KeyError. Warn and skip rather than fail.
+    """
+    known = set(table["team"])
+    mask = fixtures["homeTeam"].isin(known) & fixtures["awayTeam"].isin(known)
+    dropped = fixtures.loc[~mask]
+    if len(dropped):
+        unknown = sorted(set(dropped["homeTeam"]) | set(dropped["awayTeam"]) - known)
+        print(f"⚠️ Dropping {len(dropped)} fixture(s) with unrecognized team name(s) {unknown} -- check mappings")
+    return fixtures.loc[mask].copy()
+
+
 def simulate_once(fixtures, table):
     """Simulate remaining fixtures once."""
     table_sim = table.copy()
@@ -130,6 +146,7 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
         print(f"\n=== {league.replace('_', ' ').title()} ===")
         fixtures = df_simulation_all[league].copy()
         table = tables_all[league].copy()
+        fixtures = drop_unknown_teams(fixtures, table)
 
         pos_counts, pos_pct = run_simulations(fixtures, table, n_sim)
         position_distribution_all[league] = pos_counts
