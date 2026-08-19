@@ -72,16 +72,17 @@ def simulate_once(fixtures, table):
     table_sim["position"] = np.arange(1, len(table_sim)+1)
     return table_sim
 
-def run_simulations(fixtures, table, n_sim=10000):
+def run_simulations(fixtures, table, n_sim=10000, league_name=None):
     """Run multiple simulations and return position counts and percentage tables."""
     position_counts = {team: np.zeros(len(table)) for team in table["team"]}
+    label = f"{league_name}: " if league_name else ""
 
     for i in range(n_sim):
         final_table = simulate_once(fixtures, table)
         for _, row in final_table.iterrows():
             position_counts[row["team"]][row["position"]-1] += 1
         if (i+1) % 1000 == 0:
-            print(f"{i+1}/{n_sim} simulations done...")
+            print(f"{label}{i+1}/{n_sim} simulations done...")
 
     pos_df = pd.DataFrame(position_counts, index=np.arange(1, len(table)+1))
     pos_df_pct = pos_df.T.div(pos_df.T.sum(axis=1), axis=0) * 100
@@ -163,7 +164,7 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
     ctx = multiprocessing.get_context("fork")
     with ProcessPoolExecutor(max_workers=max_workers, mp_context=ctx) as executor:
         futures = {
-            league: executor.submit(run_simulations, fixtures, table, n_sim)
+            league: executor.submit(run_simulations, fixtures, table, n_sim, league)
             for league, (fixtures, table) in prepared.items()
         }
         for league, future in futures.items():
