@@ -83,198 +83,198 @@ utcDate,status,homeTeam,awayTeam
 2026-09-19T14:00:00Z,TIMED,Birmingham City FC,Middlesbrough FC
 2026-09-19T14:00:00Z,TIMED,Lincoln City FC,Swansea City AFC
 2026-09-20T11:00:00Z,TIMED,Wolverhampton Wanderers FC,West Bromwich Albion FC
-2026-10-10T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Birmingham City FC
-2026-10-10T00:00:00Z,SCHEDULED,Sheffield United FC,Lincoln City FC
-2026-10-10T00:00:00Z,SCHEDULED,Southampton FC,Portsmouth FC
-2026-10-10T00:00:00Z,SCHEDULED,Swansea City AFC,Norwich City FC
-2026-10-10T00:00:00Z,SCHEDULED,Watford FC,Burnley FC
-2026-10-10T00:00:00Z,SCHEDULED,West Ham United FC,Queens Park Rangers FC
-2026-10-10T00:00:00Z,SCHEDULED,Charlton Athletic FC,Bristol City FC
-2026-10-10T00:00:00Z,SCHEDULED,Derby County FC,Wrexham AFC
-2026-10-10T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Cardiff City FC
-2026-10-10T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Stoke City FC
-2026-10-10T00:00:00Z,SCHEDULED,Preston North End FC,Millwall FC
-2026-10-10T00:00:00Z,SCHEDULED,Middlesbrough FC,Wolverhampton Wanderers FC
-2026-10-13T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Bolton Wanderers FC
-2026-10-13T00:00:00Z,SCHEDULED,Wrexham AFC,West Bromwich Albion FC
-2026-10-13T00:00:00Z,SCHEDULED,Millwall FC,Swansea City AFC
-2026-10-13T00:00:00Z,SCHEDULED,Cardiff City FC,Watford FC
-2026-10-13T00:00:00Z,SCHEDULED,Burnley FC,Charlton Athletic FC
-2026-10-13T00:00:00Z,SCHEDULED,Bristol City FC,Blackburn Rovers FC
-2026-10-13T00:00:00Z,SCHEDULED,Birmingham City FC,Preston North End FC
-2026-10-13T00:00:00Z,SCHEDULED,Stoke City FC,Middlesbrough FC
-2026-10-14T00:00:00Z,SCHEDULED,Portsmouth FC,Sheffield United FC
-2026-10-14T00:00:00Z,SCHEDULED,Lincoln City FC,West Ham United FC
-2026-10-14T00:00:00Z,SCHEDULED,Norwich City FC,Southampton FC
-2026-10-14T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Derby County FC
-2026-10-17T00:00:00Z,SCHEDULED,Norwich City FC,Portsmouth FC
-2026-10-17T00:00:00Z,SCHEDULED,Southampton FC,Bolton Wanderers FC
-2026-10-17T00:00:00Z,SCHEDULED,Burnley FC,Wolverhampton Wanderers FC
-2026-10-17T00:00:00Z,SCHEDULED,Millwall FC,Lincoln City FC
-2026-10-17T00:00:00Z,SCHEDULED,Bristol City FC,Sheffield United FC
-2026-10-17T00:00:00Z,SCHEDULED,Birmingham City FC,Queens Park Rangers FC
-2026-10-17T00:00:00Z,SCHEDULED,Middlesbrough FC,Cardiff City FC
-2026-10-17T00:00:00Z,SCHEDULED,Derby County FC,Stoke City FC
-2026-10-17T00:00:00Z,SCHEDULED,Watford FC,Charlton Athletic FC
-2026-10-17T00:00:00Z,SCHEDULED,Swansea City AFC,West Ham United FC
-2026-10-17T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Blackburn Rovers FC
-2026-10-17T00:00:00Z,SCHEDULED,Wrexham AFC,Preston North End FC
-2026-10-24T00:00:00Z,SCHEDULED,Cardiff City FC,Birmingham City FC
-2026-10-24T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Middlesbrough FC
-2026-10-24T00:00:00Z,SCHEDULED,Sheffield United FC,Derby County FC
-2026-10-24T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Swansea City AFC
-2026-10-24T00:00:00Z,SCHEDULED,Stoke City FC,Bristol City FC
-2026-10-24T00:00:00Z,SCHEDULED,Preston North End FC,West Bromwich Albion FC
-2026-10-24T00:00:00Z,SCHEDULED,Lincoln City FC,Burnley FC
-2026-10-24T00:00:00Z,SCHEDULED,West Ham United FC,Southampton FC
-2026-10-24T00:00:00Z,SCHEDULED,Charlton Athletic FC,Norwich City FC
-2026-10-24T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Wrexham AFC
-2026-10-24T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Watford FC
-2026-10-24T00:00:00Z,SCHEDULED,Portsmouth FC,Millwall FC
-2026-10-31T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Cardiff City FC
-2026-10-31T00:00:00Z,SCHEDULED,West Ham United FC,West Bromwich Albion FC
-2026-10-31T00:00:00Z,SCHEDULED,Swansea City AFC,Blackburn Rovers FC
-2026-10-31T00:00:00Z,SCHEDULED,Stoke City FC,Preston North End FC
-2026-10-31T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Bristol City FC
-2026-10-31T00:00:00Z,SCHEDULED,Norwich City FC,Watford FC
-2026-10-31T00:00:00Z,SCHEDULED,Middlesbrough FC,Charlton Athletic FC
-2026-10-31T00:00:00Z,SCHEDULED,Burnley FC,Portsmouth FC
-2026-10-31T00:00:00Z,SCHEDULED,Millwall FC,Derby County FC
-2026-10-31T00:00:00Z,SCHEDULED,Southampton FC,Queens Park Rangers FC
-2026-10-31T00:00:00Z,SCHEDULED,Lincoln City FC,Birmingham City FC
-2026-10-31T00:00:00Z,SCHEDULED,Sheffield United FC,Wrexham AFC
-2026-11-03T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Burnley FC
-2026-11-03T00:00:00Z,SCHEDULED,Derby County FC,Norwich City FC
-2026-11-03T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Stoke City FC
-2026-11-03T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Southampton FC
-2026-11-03T00:00:00Z,SCHEDULED,Watford FC,Lincoln City FC
-2026-11-03T00:00:00Z,SCHEDULED,Birmingham City FC,Millwall FC
-2026-11-03T00:00:00Z,SCHEDULED,Portsmouth FC,Swansea City AFC
-2026-11-03T00:00:00Z,SCHEDULED,Preston North End FC,Sheffield United FC
-2026-11-04T00:00:00Z,SCHEDULED,Cardiff City FC,West Ham United FC
-2026-11-04T00:00:00Z,SCHEDULED,Bristol City FC,Wolverhampton Wanderers FC
-2026-11-04T00:00:00Z,SCHEDULED,Wrexham AFC,Middlesbrough FC
-2026-11-04T00:00:00Z,SCHEDULED,Charlton Athletic FC,Bolton Wanderers FC
-2026-11-07T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Lincoln City FC
-2026-11-07T00:00:00Z,SCHEDULED,Cardiff City FC,Burnley FC
-2026-11-07T00:00:00Z,SCHEDULED,Charlton Athletic FC,Sheffield United FC
-2026-11-07T00:00:00Z,SCHEDULED,Derby County FC,Bolton Wanderers FC
-2026-11-07T00:00:00Z,SCHEDULED,Wrexham AFC,Wolverhampton Wanderers FC
-2026-11-07T00:00:00Z,SCHEDULED,Watford FC,Middlesbrough FC
-2026-11-07T00:00:00Z,SCHEDULED,Blackburn Rovers FC,West Ham United FC
-2026-11-07T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Millwall FC
-2026-11-07T00:00:00Z,SCHEDULED,Preston North End FC,Southampton FC
-2026-11-07T00:00:00Z,SCHEDULED,Portsmouth FC,Stoke City FC
-2026-11-07T00:00:00Z,SCHEDULED,Bristol City FC,Norwich City FC
-2026-11-07T00:00:00Z,SCHEDULED,Birmingham City FC,Swansea City AFC
-2026-11-21T00:00:00Z,SCHEDULED,Sheffield United FC,Watford FC
-2026-11-21T00:00:00Z,SCHEDULED,Swansea City AFC,West Bromwich Albion FC
-2026-11-21T00:00:00Z,SCHEDULED,Middlesbrough FC,Bristol City FC
-2026-11-21T00:00:00Z,SCHEDULED,Southampton FC,Derby County FC
-2026-11-21T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Portsmouth FC
-2026-11-21T00:00:00Z,SCHEDULED,Stoke City FC,Birmingham City FC
-2026-11-21T00:00:00Z,SCHEDULED,Burnley FC,Blackburn Rovers FC
-2026-11-21T00:00:00Z,SCHEDULED,Norwich City FC,Cardiff City FC
-2026-11-21T00:00:00Z,SCHEDULED,Lincoln City FC,Wrexham AFC
-2026-11-21T00:00:00Z,SCHEDULED,Millwall FC,Queens Park Rangers FC
-2026-11-21T00:00:00Z,SCHEDULED,West Ham United FC,Preston North End FC
-2026-11-21T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Charlton Athletic FC
-2026-11-24T00:00:00Z,SCHEDULED,Cardiff City FC,Preston North End FC
-2026-11-24T00:00:00Z,SCHEDULED,Middlesbrough FC,Swansea City AFC
-2026-11-24T00:00:00Z,SCHEDULED,Portsmouth FC,West Ham United FC
-2026-11-24T00:00:00Z,SCHEDULED,Sheffield United FC,Southampton FC
-2026-11-24T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Derby County FC
-2026-11-24T00:00:00Z,SCHEDULED,Charlton Athletic FC,Lincoln City FC
-2026-11-24T00:00:00Z,SCHEDULED,Bristol City FC,Wrexham AFC
-2026-11-24T00:00:00Z,SCHEDULED,Norwich City FC,Queens Park Rangers FC
-2026-11-25T00:00:00Z,SCHEDULED,Watford FC,Blackburn Rovers FC
-2026-11-25T00:00:00Z,SCHEDULED,Stoke City FC,Millwall FC
-2026-11-25T00:00:00Z,SCHEDULED,Bolton Wanderers FC,West Bromwich Albion FC
-2026-11-25T00:00:00Z,SCHEDULED,Burnley FC,Birmingham City FC
-2026-11-28T00:00:00Z,SCHEDULED,Wrexham AFC,Portsmouth FC
-2026-11-28T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Sheffield United FC
-2026-11-28T00:00:00Z,SCHEDULED,Millwall FC,Burnley FC
-2026-11-28T00:00:00Z,SCHEDULED,Southampton FC,Middlesbrough FC
-2026-11-28T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Charlton Athletic FC
-2026-11-28T00:00:00Z,SCHEDULED,Birmingham City FC,Bolton Wanderers FC
-2026-11-28T00:00:00Z,SCHEDULED,Derby County FC,Watford FC
-2026-11-28T00:00:00Z,SCHEDULED,Lincoln City FC,Wolverhampton Wanderers FC
-2026-11-28T00:00:00Z,SCHEDULED,Preston North End FC,Norwich City FC
-2026-11-28T00:00:00Z,SCHEDULED,West Ham United FC,Stoke City FC
-2026-11-28T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Bristol City FC
-2026-11-28T00:00:00Z,SCHEDULED,Swansea City AFC,Cardiff City FC
-2026-12-05T00:00:00Z,SCHEDULED,Bristol City FC,Swansea City AFC
-2026-12-05T00:00:00Z,SCHEDULED,Cardiff City FC,Lincoln City FC
-2026-12-05T00:00:00Z,SCHEDULED,Sheffield United FC,West Ham United FC
-2026-12-05T00:00:00Z,SCHEDULED,Norwich City FC,Wrexham AFC
-2026-12-05T00:00:00Z,SCHEDULED,Charlton Athletic FC,Birmingham City FC
-2026-12-05T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Southampton FC
-2026-12-05T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Blackburn Rovers FC
-2026-12-05T00:00:00Z,SCHEDULED,Watford FC,Millwall FC
-2026-12-05T00:00:00Z,SCHEDULED,Portsmouth FC,West Bromwich Albion FC
-2026-12-05T00:00:00Z,SCHEDULED,Stoke City FC,Queens Park Rangers FC
-2026-12-05T00:00:00Z,SCHEDULED,Burnley FC,Preston North End FC
-2026-12-05T00:00:00Z,SCHEDULED,Middlesbrough FC,Derby County FC
-2026-12-08T00:00:00Z,SCHEDULED,West Ham United FC,Middlesbrough FC
-2026-12-08T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Norwich City FC
-2026-12-08T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Cardiff City FC
-2026-12-08T00:00:00Z,SCHEDULED,Wrexham AFC,Charlton Athletic FC
-2026-12-08T00:00:00Z,SCHEDULED,Millwall FC,Sheffield United FC
-2026-12-08T00:00:00Z,SCHEDULED,Swansea City AFC,Bolton Wanderers FC
-2026-12-08T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Wolverhampton Wanderers FC
-2026-12-08T00:00:00Z,SCHEDULED,Birmingham City FC,Watford FC
-2026-12-09T00:00:00Z,SCHEDULED,Southampton FC,Burnley FC
-2026-12-09T00:00:00Z,SCHEDULED,Preston North End FC,Portsmouth FC
-2026-12-09T00:00:00Z,SCHEDULED,Lincoln City FC,Stoke City FC
-2026-12-09T00:00:00Z,SCHEDULED,Derby County FC,Bristol City FC
-2026-12-12T00:00:00Z,SCHEDULED,Charlton Athletic FC,Swansea City AFC
-2026-12-12T00:00:00Z,SCHEDULED,West Ham United FC,Bristol City FC
-2026-12-12T00:00:00Z,SCHEDULED,Preston North End FC,Middlesbrough FC
-2026-12-12T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Watford FC
-2026-12-12T00:00:00Z,SCHEDULED,Stoke City FC,West Bromwich Albion FC
-2026-12-12T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Wrexham AFC
-2026-12-12T00:00:00Z,SCHEDULED,Lincoln City FC,Norwich City FC
-2026-12-12T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Derby County FC
-2026-12-12T00:00:00Z,SCHEDULED,Portsmouth FC,Birmingham City FC
-2026-12-12T00:00:00Z,SCHEDULED,Sheffield United FC,Burnley FC
-2026-12-12T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Millwall FC
-2026-12-12T00:00:00Z,SCHEDULED,Cardiff City FC,Southampton FC
-2026-12-19T00:00:00Z,SCHEDULED,Middlesbrough FC,Portsmouth FC
-2026-12-19T00:00:00Z,SCHEDULED,Bristol City FC,Cardiff City FC
-2026-12-19T00:00:00Z,SCHEDULED,Norwich City FC,Wolverhampton Wanderers FC
-2026-12-19T00:00:00Z,SCHEDULED,Millwall FC,Charlton Athletic FC
-2026-12-19T00:00:00Z,SCHEDULED,Burnley FC,Stoke City FC
-2026-12-19T00:00:00Z,SCHEDULED,Derby County FC,Lincoln City FC
-2026-12-19T00:00:00Z,SCHEDULED,Wrexham AFC,Queens Park Rangers FC
-2026-12-19T00:00:00Z,SCHEDULED,Southampton FC,Blackburn Rovers FC
-2026-12-19T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Sheffield United FC
-2026-12-19T00:00:00Z,SCHEDULED,Birmingham City FC,West Ham United FC
-2026-12-19T00:00:00Z,SCHEDULED,Swansea City AFC,Preston North End FC
-2026-12-19T00:00:00Z,SCHEDULED,Watford FC,Bolton Wanderers FC
-2026-12-26T00:00:00Z,SCHEDULED,Bolton Wanderers FC,Burnley FC
-2026-12-26T00:00:00Z,SCHEDULED,Sheffield United FC,Middlesbrough FC
-2026-12-26T00:00:00Z,SCHEDULED,Portsmouth FC,Watford FC
-2026-12-26T00:00:00Z,SCHEDULED,Blackburn Rovers FC,Birmingham City FC
-2026-12-26T00:00:00Z,SCHEDULED,West Ham United FC,Norwich City FC
-2026-12-26T00:00:00Z,SCHEDULED,Wolverhampton Wanderers FC,Swansea City AFC
-2026-12-26T00:00:00Z,SCHEDULED,Queens Park Rangers FC,Bristol City FC
-2026-12-26T00:00:00Z,SCHEDULED,Stoke City FC,Wrexham AFC
-2026-12-26T00:00:00Z,SCHEDULED,Cardiff City FC,Millwall FC
-2026-12-26T00:00:00Z,SCHEDULED,Lincoln City FC,West Bromwich Albion FC
-2026-12-26T00:00:00Z,SCHEDULED,Preston North End FC,Derby County FC
-2026-12-26T00:00:00Z,SCHEDULED,Charlton Athletic FC,Southampton FC
-2026-12-29T00:00:00Z,SCHEDULED,West Bromwich Albion FC,Preston North End FC
-2026-12-29T00:00:00Z,SCHEDULED,Derby County FC,Sheffield United FC
-2026-12-29T00:00:00Z,SCHEDULED,Swansea City AFC,Queens Park Rangers FC
-2026-12-29T00:00:00Z,SCHEDULED,Watford FC,Wolverhampton Wanderers FC
-2026-12-29T00:00:00Z,SCHEDULED,Southampton FC,West Ham United FC
-2026-12-29T00:00:00Z,SCHEDULED,Norwich City FC,Charlton Athletic FC
-2026-12-29T00:00:00Z,SCHEDULED,Burnley FC,Lincoln City FC
-2026-12-29T00:00:00Z,SCHEDULED,Wrexham AFC,Blackburn Rovers FC
-2026-12-29T00:00:00Z,SCHEDULED,Birmingham City FC,Cardiff City FC
-2026-12-29T00:00:00Z,SCHEDULED,Middlesbrough FC,Bolton Wanderers FC
-2026-12-29T00:00:00Z,SCHEDULED,Bristol City FC,Stoke City FC
-2026-12-29T00:00:00Z,SCHEDULED,Millwall FC,Portsmouth FC
+2026-10-09T19:00:00Z,TIMED,West Ham United FC,Queens Park Rangers FC
+2026-10-10T11:30:00Z,TIMED,West Bromwich Albion FC,Birmingham City FC
+2026-10-10T11:30:00Z,TIMED,Swansea City AFC,Norwich City FC
+2026-10-10T11:30:00Z,TIMED,Charlton Athletic FC,Bristol City FC
+2026-10-10T14:00:00Z,TIMED,Sheffield United FC,Lincoln City FC
+2026-10-10T14:00:00Z,TIMED,Watford FC,Burnley FC
+2026-10-10T14:00:00Z,TIMED,Derby County FC,Wrexham AFC
+2026-10-10T14:00:00Z,TIMED,Blackburn Rovers FC,Cardiff City FC
+2026-10-10T14:00:00Z,TIMED,Bolton Wanderers FC,Stoke City FC
+2026-10-10T14:00:00Z,TIMED,Preston North End FC,Millwall FC
+2026-10-10T14:00:00Z,TIMED,Middlesbrough FC,Wolverhampton Wanderers FC
+2026-10-11T11:00:00Z,TIMED,Southampton FC,Portsmouth FC
+2026-10-13T18:45:00Z,TIMED,Wolverhampton Wanderers FC,Bolton Wanderers FC
+2026-10-13T18:45:00Z,TIMED,Wrexham AFC,West Bromwich Albion FC
+2026-10-13T18:45:00Z,TIMED,Millwall FC,Swansea City AFC
+2026-10-13T18:45:00Z,TIMED,Cardiff City FC,Watford FC
+2026-10-13T18:45:00Z,TIMED,Burnley FC,Charlton Athletic FC
+2026-10-13T18:45:00Z,TIMED,Bristol City FC,Blackburn Rovers FC
+2026-10-13T18:45:00Z,TIMED,Birmingham City FC,Preston North End FC
+2026-10-13T19:00:00Z,TIMED,Stoke City FC,Middlesbrough FC
+2026-10-14T18:45:00Z,TIMED,Portsmouth FC,Sheffield United FC
+2026-10-14T18:45:00Z,TIMED,Norwich City FC,Southampton FC
+2026-10-14T18:45:00Z,TIMED,Queens Park Rangers FC,Derby County FC
+2026-10-14T19:00:00Z,TIMED,Lincoln City FC,West Ham United FC
+2026-10-16T19:00:00Z,TIMED,Burnley FC,Wolverhampton Wanderers FC
+2026-10-17T11:30:00Z,TIMED,Millwall FC,Lincoln City FC
+2026-10-17T11:30:00Z,TIMED,Middlesbrough FC,Cardiff City FC
+2026-10-17T11:30:00Z,TIMED,Watford FC,Charlton Athletic FC
+2026-10-17T14:00:00Z,TIMED,Norwich City FC,Portsmouth FC
+2026-10-17T14:00:00Z,TIMED,Southampton FC,Bolton Wanderers FC
+2026-10-17T14:00:00Z,TIMED,Bristol City FC,Sheffield United FC
+2026-10-17T14:00:00Z,TIMED,Birmingham City FC,Queens Park Rangers FC
+2026-10-17T14:00:00Z,TIMED,Derby County FC,Stoke City FC
+2026-10-17T14:00:00Z,TIMED,Swansea City AFC,West Ham United FC
+2026-10-17T14:00:00Z,TIMED,West Bromwich Albion FC,Blackburn Rovers FC
+2026-10-17T14:00:00Z,TIMED,Wrexham AFC,Preston North End FC
+2026-10-23T19:00:00Z,TIMED,Bolton Wanderers FC,Middlesbrough FC
+2026-10-24T11:30:00Z,TIMED,Sheffield United FC,Derby County FC
+2026-10-24T11:30:00Z,TIMED,Charlton Athletic FC,Norwich City FC
+2026-10-24T11:30:00Z,TIMED,Portsmouth FC,Millwall FC
+2026-10-24T14:00:00Z,TIMED,Cardiff City FC,Birmingham City FC
+2026-10-24T14:00:00Z,TIMED,Queens Park Rangers FC,Swansea City AFC
+2026-10-24T14:00:00Z,TIMED,Stoke City FC,Bristol City FC
+2026-10-24T14:00:00Z,TIMED,Preston North End FC,West Bromwich Albion FC
+2026-10-24T14:00:00Z,TIMED,Lincoln City FC,Burnley FC
+2026-10-24T14:00:00Z,TIMED,West Ham United FC,Southampton FC
+2026-10-24T14:00:00Z,TIMED,Blackburn Rovers FC,Wrexham AFC
+2026-10-24T14:00:00Z,TIMED,Wolverhampton Wanderers FC,Watford FC
+2026-10-30T20:00:00Z,TIMED,Sheffield United FC,Wrexham AFC
+2026-10-31T12:30:00Z,TIMED,Stoke City FC,Preston North End FC
+2026-10-31T12:30:00Z,TIMED,Norwich City FC,Watford FC
+2026-10-31T12:30:00Z,TIMED,Lincoln City FC,Birmingham City FC
+2026-10-31T15:00:00Z,TIMED,Wolverhampton Wanderers FC,Cardiff City FC
+2026-10-31T15:00:00Z,TIMED,West Ham United FC,West Bromwich Albion FC
+2026-10-31T15:00:00Z,TIMED,Swansea City AFC,Blackburn Rovers FC
+2026-10-31T15:00:00Z,TIMED,Bolton Wanderers FC,Bristol City FC
+2026-10-31T15:00:00Z,TIMED,Middlesbrough FC,Charlton Athletic FC
+2026-10-31T15:00:00Z,TIMED,Burnley FC,Portsmouth FC
+2026-10-31T15:00:00Z,TIMED,Millwall FC,Derby County FC
+2026-10-31T15:00:00Z,TIMED,Southampton FC,Queens Park Rangers FC
+2026-11-03T19:45:00Z,TIMED,Queens Park Rangers FC,Burnley FC
+2026-11-03T19:45:00Z,TIMED,Derby County FC,Norwich City FC
+2026-11-03T19:45:00Z,TIMED,Blackburn Rovers FC,Stoke City FC
+2026-11-03T19:45:00Z,TIMED,Watford FC,Lincoln City FC
+2026-11-03T19:45:00Z,TIMED,Charlton Athletic FC,Bolton Wanderers FC
+2026-11-03T19:45:00Z,TIMED,Birmingham City FC,Millwall FC
+2026-11-03T19:45:00Z,TIMED,Portsmouth FC,Swansea City AFC
+2026-11-03T19:45:00Z,TIMED,Preston North End FC,Sheffield United FC
+2026-11-03T20:00:00Z,TIMED,West Bromwich Albion FC,Southampton FC
+2026-11-04T19:45:00Z,TIMED,Cardiff City FC,West Ham United FC
+2026-11-04T19:45:00Z,TIMED,Wrexham AFC,Middlesbrough FC
+2026-11-04T20:00:00Z,TIMED,Bristol City FC,Wolverhampton Wanderers FC
+2026-11-06T20:00:00Z,TIMED,Derby County FC,Bolton Wanderers FC
+2026-11-07T12:30:00Z,TIMED,Wrexham AFC,Wolverhampton Wanderers FC
+2026-11-07T12:30:00Z,TIMED,Portsmouth FC,Stoke City FC
+2026-11-07T12:30:00Z,TIMED,Bristol City FC,Norwich City FC
+2026-11-07T15:00:00Z,TIMED,Queens Park Rangers FC,Lincoln City FC
+2026-11-07T15:00:00Z,TIMED,Cardiff City FC,Burnley FC
+2026-11-07T15:00:00Z,TIMED,Charlton Athletic FC,Sheffield United FC
+2026-11-07T15:00:00Z,TIMED,Watford FC,Middlesbrough FC
+2026-11-07T15:00:00Z,TIMED,Blackburn Rovers FC,West Ham United FC
+2026-11-07T15:00:00Z,TIMED,West Bromwich Albion FC,Millwall FC
+2026-11-07T15:00:00Z,TIMED,Preston North End FC,Southampton FC
+2026-11-07T15:00:00Z,TIMED,Birmingham City FC,Swansea City AFC
+2026-11-21T12:30:00Z,TIMED,Sheffield United FC,Watford FC
+2026-11-21T12:30:00Z,TIMED,Southampton FC,Derby County FC
+2026-11-21T12:30:00Z,TIMED,Millwall FC,Queens Park Rangers FC
+2026-11-21T15:00:00Z,TIMED,Swansea City AFC,West Bromwich Albion FC
+2026-11-21T15:00:00Z,TIMED,Middlesbrough FC,Bristol City FC
+2026-11-21T15:00:00Z,TIMED,Bolton Wanderers FC,Portsmouth FC
+2026-11-21T15:00:00Z,TIMED,Stoke City FC,Birmingham City FC
+2026-11-21T15:00:00Z,TIMED,Norwich City FC,Cardiff City FC
+2026-11-21T15:00:00Z,TIMED,Lincoln City FC,Wrexham AFC
+2026-11-21T15:00:00Z,TIMED,West Ham United FC,Preston North End FC
+2026-11-21T15:00:00Z,TIMED,Wolverhampton Wanderers FC,Charlton Athletic FC
+2026-11-22T12:00:00Z,TIMED,Burnley FC,Blackburn Rovers FC
+2026-11-24T19:45:00Z,TIMED,Cardiff City FC,Preston North End FC
+2026-11-24T19:45:00Z,TIMED,Middlesbrough FC,Swansea City AFC
+2026-11-24T19:45:00Z,TIMED,Portsmouth FC,West Ham United FC
+2026-11-24T19:45:00Z,TIMED,Sheffield United FC,Southampton FC
+2026-11-24T19:45:00Z,TIMED,Charlton Athletic FC,Lincoln City FC
+2026-11-24T19:45:00Z,TIMED,Bristol City FC,Wrexham AFC
+2026-11-24T19:45:00Z,TIMED,Norwich City FC,Queens Park Rangers FC
+2026-11-24T20:00:00Z,TIMED,Wolverhampton Wanderers FC,Derby County FC
+2026-11-25T19:45:00Z,TIMED,Watford FC,Blackburn Rovers FC
+2026-11-25T19:45:00Z,TIMED,Bolton Wanderers FC,West Bromwich Albion FC
+2026-11-25T19:45:00Z,TIMED,Burnley FC,Birmingham City FC
+2026-11-25T20:00:00Z,TIMED,Stoke City FC,Millwall FC
+2026-11-27T20:00:00Z,TIMED,Southampton FC,Middlesbrough FC
+2026-11-28T12:30:00Z,TIMED,Blackburn Rovers FC,Charlton Athletic FC
+2026-11-28T12:30:00Z,TIMED,Lincoln City FC,Wolverhampton Wanderers FC
+2026-11-28T12:30:00Z,TIMED,Preston North End FC,Norwich City FC
+2026-11-28T15:00:00Z,TIMED,Wrexham AFC,Portsmouth FC
+2026-11-28T15:00:00Z,TIMED,Queens Park Rangers FC,Sheffield United FC
+2026-11-28T15:00:00Z,TIMED,Millwall FC,Burnley FC
+2026-11-28T15:00:00Z,TIMED,Birmingham City FC,Bolton Wanderers FC
+2026-11-28T15:00:00Z,TIMED,Derby County FC,Watford FC
+2026-11-28T15:00:00Z,TIMED,West Ham United FC,Stoke City FC
+2026-11-28T15:00:00Z,TIMED,West Bromwich Albion FC,Bristol City FC
+2026-11-29T12:00:00Z,TIMED,Swansea City AFC,Cardiff City FC
+2026-12-04T20:00:00Z,TIMED,Sheffield United FC,West Ham United FC
+2026-12-05T12:30:00Z,TIMED,Bristol City FC,Swansea City AFC
+2026-12-05T12:30:00Z,TIMED,Bolton Wanderers FC,Blackburn Rovers FC
+2026-12-05T12:30:00Z,TIMED,Middlesbrough FC,Derby County FC
+2026-12-05T15:00:00Z,TIMED,Cardiff City FC,Lincoln City FC
+2026-12-05T15:00:00Z,TIMED,Norwich City FC,Wrexham AFC
+2026-12-05T15:00:00Z,TIMED,Charlton Athletic FC,Birmingham City FC
+2026-12-05T15:00:00Z,TIMED,Wolverhampton Wanderers FC,Southampton FC
+2026-12-05T15:00:00Z,TIMED,Watford FC,Millwall FC
+2026-12-05T15:00:00Z,TIMED,Portsmouth FC,West Bromwich Albion FC
+2026-12-05T15:00:00Z,TIMED,Stoke City FC,Queens Park Rangers FC
+2026-12-06T12:00:00Z,TIMED,Burnley FC,Preston North End FC
+2026-12-08T19:45:00Z,TIMED,Blackburn Rovers FC,Norwich City FC
+2026-12-08T19:45:00Z,TIMED,West Bromwich Albion FC,Cardiff City FC
+2026-12-08T19:45:00Z,TIMED,Wrexham AFC,Charlton Athletic FC
+2026-12-08T19:45:00Z,TIMED,Millwall FC,Sheffield United FC
+2026-12-08T19:45:00Z,TIMED,Swansea City AFC,Bolton Wanderers FC
+2026-12-08T19:45:00Z,TIMED,Queens Park Rangers FC,Wolverhampton Wanderers FC
+2026-12-08T19:45:00Z,TIMED,Birmingham City FC,Watford FC
+2026-12-08T20:45:00Z,TIMED,West Ham United FC,Middlesbrough FC
+2026-12-09T19:45:00Z,TIMED,Preston North End FC,Portsmouth FC
+2026-12-09T19:45:00Z,TIMED,Lincoln City FC,Stoke City FC
+2026-12-09T19:45:00Z,TIMED,Derby County FC,Bristol City FC
+2026-12-09T20:00:00Z,TIMED,Southampton FC,Burnley FC
+2026-12-11T20:00:00Z,TIMED,Bolton Wanderers FC,Wrexham AFC
+2026-12-12T12:30:00Z,TIMED,Preston North End FC,Middlesbrough FC
+2026-12-12T12:30:00Z,TIMED,Queens Park Rangers FC,Watford FC
+2026-12-12T12:30:00Z,TIMED,Stoke City FC,West Bromwich Albion FC
+2026-12-12T15:00:00Z,TIMED,Charlton Athletic FC,Swansea City AFC
+2026-12-12T15:00:00Z,TIMED,West Ham United FC,Bristol City FC
+2026-12-12T15:00:00Z,TIMED,Lincoln City FC,Norwich City FC
+2026-12-12T15:00:00Z,TIMED,Blackburn Rovers FC,Derby County FC
+2026-12-12T15:00:00Z,TIMED,Portsmouth FC,Birmingham City FC
+2026-12-12T15:00:00Z,TIMED,Sheffield United FC,Burnley FC
+2026-12-12T15:00:00Z,TIMED,Wolverhampton Wanderers FC,Millwall FC
+2026-12-12T15:00:00Z,TIMED,Cardiff City FC,Southampton FC
+2026-12-18T20:00:00Z,TIMED,West Bromwich Albion FC,Sheffield United FC
+2026-12-19T12:30:00Z,TIMED,Bristol City FC,Cardiff City FC
+2026-12-19T12:30:00Z,TIMED,Millwall FC,Charlton Athletic FC
+2026-12-19T12:30:00Z,TIMED,Birmingham City FC,West Ham United FC
+2026-12-19T12:30:00Z,TIMED,Swansea City AFC,Preston North End FC
+2026-12-19T12:30:00Z,TIMED,Watford FC,Bolton Wanderers FC
+2026-12-19T15:00:00Z,TIMED,Middlesbrough FC,Portsmouth FC
+2026-12-19T15:00:00Z,TIMED,Norwich City FC,Wolverhampton Wanderers FC
+2026-12-19T15:00:00Z,TIMED,Burnley FC,Stoke City FC
+2026-12-19T15:00:00Z,TIMED,Derby County FC,Lincoln City FC
+2026-12-19T15:00:00Z,TIMED,Wrexham AFC,Queens Park Rangers FC
+2026-12-19T15:00:00Z,TIMED,Southampton FC,Blackburn Rovers FC
+2026-12-26T12:30:00Z,TIMED,Bolton Wanderers FC,Burnley FC
+2026-12-26T12:30:00Z,TIMED,Sheffield United FC,Middlesbrough FC
+2026-12-26T15:00:00Z,TIMED,Portsmouth FC,Watford FC
+2026-12-26T15:00:00Z,TIMED,Blackburn Rovers FC,Birmingham City FC
+2026-12-26T15:00:00Z,TIMED,West Ham United FC,Norwich City FC
+2026-12-26T15:00:00Z,TIMED,Wolverhampton Wanderers FC,Swansea City AFC
+2026-12-26T15:00:00Z,TIMED,Queens Park Rangers FC,Bristol City FC
+2026-12-26T15:00:00Z,TIMED,Stoke City FC,Wrexham AFC
+2026-12-26T15:00:00Z,TIMED,Cardiff City FC,Millwall FC
+2026-12-26T15:00:00Z,TIMED,Lincoln City FC,West Bromwich Albion FC
+2026-12-26T15:00:00Z,TIMED,Preston North End FC,Derby County FC
+2026-12-26T15:00:00Z,TIMED,Charlton Athletic FC,Southampton FC
+2026-12-29T18:00:00Z,TIMED,Wrexham AFC,Blackburn Rovers FC
+2026-12-29T19:45:00Z,TIMED,West Bromwich Albion FC,Preston North End FC
+2026-12-29T19:45:00Z,TIMED,Derby County FC,Sheffield United FC
+2026-12-29T19:45:00Z,TIMED,Swansea City AFC,Queens Park Rangers FC
+2026-12-29T19:45:00Z,TIMED,Watford FC,Wolverhampton Wanderers FC
+2026-12-29T19:45:00Z,TIMED,Norwich City FC,Charlton Athletic FC
+2026-12-29T19:45:00Z,TIMED,Burnley FC,Lincoln City FC
+2026-12-29T19:45:00Z,TIMED,Birmingham City FC,Cardiff City FC
+2026-12-29T19:45:00Z,TIMED,Middlesbrough FC,Bolton Wanderers FC
+2026-12-29T19:45:00Z,TIMED,Bristol City FC,Stoke City FC
+2026-12-29T19:45:00Z,TIMED,Millwall FC,Portsmouth FC
+2026-12-29T20:15:00Z,TIMED,Southampton FC,West Ham United FC
 2027-01-01T00:00:00Z,SCHEDULED,Middlesbrough FC,Preston North End FC
 2027-01-01T00:00:00Z,SCHEDULED,Southampton FC,Cardiff City FC
 2027-01-01T00:00:00Z,SCHEDULED,Watford FC,Queens Park Rangers FC
