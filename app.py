@@ -318,7 +318,16 @@ div.stButton > button[kind="primary"]:hover {
    removes the gap; white-space:pre-line is a safety net for any Streamlit
    version that renders the label as plain text instead. */
 div.stButton > button {
-    min-height: 60px;
+    /* Fixed (not just minimum) height, tall enough for a name that wraps to
+       two lines (e.g. "Premier League" once Primeira Liga's addition
+       narrowed each column) -- otherwise that one pill grows past the
+       others' natural single-line height instead of them matching it.
+       Flex-centering keeps shorter single-line labels looking centered in
+       the taller box rather than stuck at the top. */
+    height: 78px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     white-space: pre-line;
     line-height: 1.3;
     text-align: center;
