@@ -72,7 +72,26 @@ jobs:
 
           git commit -m "Update precomputed simulations [skip ci]" || echo "No changes to commit"
 
-          git push origin HEAD:main
+          # The simulation run + Playwright install take several minutes, so
+          # main can move in the meantime (e.g. a manual push landing mid-run)
+          # -- a plain push then gets rejected as non-fast-forward. Rebase
+          # onto the latest main and retry rather than fail the whole job.
+          success=false
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              success=true
+              break
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push attempt $attempt failed, retrying..."
+            sleep $((5 + RANDOM % 10))
+          done
+
+          if [ "$success" != "true" ]; then
+            echo "::error::Failed to push updated data after multiple attempts"
+            exit 1
+          fi
 
       # 8️⃣ Upload logs
       - name: Upload logs
