@@ -259,23 +259,33 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
        the frozen columns overlap the scrolling ones. */
     table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 4px 6px !important; }
-    th:nth-child(n+5), td:nth-child(n+5) { width: 60px; }
+
+    /* Every column except TEAM must never wrap -- a wrapped cell makes its
+       whole row taller, which looks broken for a results table. Widths below
+       are sized from the actual rendered font (measured against the live
+       page, 14px/600 for headers, 14px/500 for data): "100.00%" -- the
+       longest a percentage cell can ever be -- needs ~71px including the
+       6px+6px cell padding, so 78px leaves real headroom rather than being
+       exactly on the edge like the previous 60px (which is why cells were
+       wrapping to "12.26" / "%" on two lines). Same story for "POS": the
+       header text alone needs ~41px, more than the previous 40px column. */
+    th:nth-child(n+5), td:nth-child(n+5) { width: 78px; white-space: nowrap !important; }
 
     th:nth-child(1), td:nth-child(1) {
-        width: 40px;
+        width: 46px; white-space: nowrap !important;
         position: sticky; left: 0; z-index: 4; background-color: inherit;
     }
     th:nth-child(2), td:nth-child(2) {
         width: 170px; text-align: left !important;
-        position: sticky; left: 40px; z-index: 3; background-color: inherit;
+        position: sticky; left: 46px; z-index: 3; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
-        width: 50px;
-        position: sticky; left: 210px; z-index: 2; background-color: inherit;
+        width: 42px; white-space: nowrap !important;
+        position: sticky; left: 216px; z-index: 2; background-color: inherit;
     }
     th:nth-child(4), td:nth-child(4) {
-        width: 50px;
-        position: sticky; left: 260px; z-index: 1; background-color: inherit;
+        width: 46px; white-space: nowrap !important;
+        position: sticky; left: 258px; z-index: 1; background-color: inherit;
     }
 }
 
