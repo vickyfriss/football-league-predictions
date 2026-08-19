@@ -240,15 +240,43 @@ li:hover .step-circle { background-color: #245f27; }
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
-/* Desktop: normal table, nothing changes */
+/* Desktop: freeze the first four columns (POS, TEAM, GP, PTS) while
+   scrolling horizontally through the position-percentage columns -- same
+   sticky technique as the mobile block below, just extended from two
+   columns to four since desktop has the width to spare and a 20-column
+   table otherwise loses the team/points context off-screen to the left.
+   Fixed (not min-) widths on the frozen columns are required here, not
+   just cosmetic -- each one's sticky "left" offset is the running total of
+   the widths before it, so if a column were allowed to grow past its
+   assumed width the next one's offset would be wrong and they'd overlap. */
 @media (min-width: 601px) {
-    table { width: 100%; border-collapse: collapse; }
+    /* table-layout:fixed is what makes the explicit widths below (and so the
+       sticky "left" offsets, which are a running total of them) reliable --
+       under the default "auto" layout the browser sizes columns from their
+       content instead and silently shrinks a specified width below what's
+       asked for (measured: a 170px TEAM column collapsed to 83px for a short
+       name like "Espanyol"), which desyncs every offset after it and makes
+       the frozen columns overlap the scrolling ones. */
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 4px 6px !important; }
-    th:nth-child(2), td:nth-child(2) { text-align: left !important; min-width: 150px; }
-    th:nth-child(1), td:nth-child(1) { width: 40px; }
-    th:nth-child(3), td:nth-child(3) { min-width: 50px; }
-    th:nth-child(4), td:nth-child(4) { min-width: 50px; }
-    th:nth-child(n+5), td:nth-child(n+5) { min-width: 60px; }
+    th:nth-child(n+5), td:nth-child(n+5) { width: 60px; }
+
+    th:nth-child(1), td:nth-child(1) {
+        width: 40px;
+        position: sticky; left: 0; z-index: 4; background-color: inherit;
+    }
+    th:nth-child(2), td:nth-child(2) {
+        width: 170px; text-align: left !important;
+        position: sticky; left: 40px; z-index: 3; background-color: inherit;
+    }
+    th:nth-child(3), td:nth-child(3) {
+        width: 50px;
+        position: sticky; left: 210px; z-index: 2; background-color: inherit;
+    }
+    th:nth-child(4), td:nth-child(4) {
+        width: 50px;
+        position: sticky; left: 260px; z-index: 1; background-color: inherit;
+    }
 }
 
 /* Mobile: fix first two columns when scrolling horizontally */
