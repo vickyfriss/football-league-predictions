@@ -1,5 +1,8 @@
 # 4_simulations.py
 
+import os
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor
 import pandas as pd
 import numpy as np
 from scipy.stats import poisson
@@ -142,20 +145,41 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
     position_distribution_pct_all = {}
     styled_position_pct_all = {}
 
+    prepared = {}
     for league in leagues:
-        print(f"\n=== {league.replace('_', ' ').title()} ===")
         fixtures = df_simulation_all[league].copy()
         table = tables_all[league].copy()
         fixtures = drop_unknown_teams(fixtures, table)
+        prepared[league] = (fixtures, table)
 
-        pos_counts, pos_pct = run_simulations(fixtures, table, n_sim)
-        position_distribution_all[league] = pos_counts
-        position_distribution_pct_all[league] = pos_pct
+    # Each league's 10,000-simulation Monte Carlo run is independent, CPU-bound
+    # work with no shared state -- run them in separate processes instead of
+    # one after another. "fork" is requested explicitly rather than relying on
+    # the platform default: this pipeline is loaded via importlib with a
+    # made-up module name (see precompute_simulations.py), which only a
+    # forked child inherits -- a "spawn" child starts fresh and can't
+    # re-import a module that was never really installed under that name.
+    max_workers = min(len(leagues), os.cpu_count() or 1)
+    ctx = multiprocessing.get_context("fork")
+    with ProcessPoolExecutor(max_workers=max_workers, mp_context=ctx) as executor:
+        futures = {
+            league: executor.submit(run_simulations, fixtures, table, n_sim)
+            for league, (fixtures, table) in prepared.items()
+        }
+        for league, future in futures.items():
+            print(f"\n=== {league.replace('_', ' ').title()} ===")
+            pos_counts, pos_pct = future.result()
+            position_distribution_all[league] = pos_counts
+            position_distribution_pct_all[league] = pos_pct
+            print(f"Finished simulations for {league} ✅")
 
-        # Slice top N positions if requested
+    # Styling is cheap and easiest kept in the main process -- Styler objects
+    # carry callables (colormaps, formatters) that aren't guaranteed to
+    # survive a round-trip through another process, so there's nothing to
+    # gain from parallelizing this part anyway.
+    for league, (_, table) in prepared.items():
+        pos_pct = position_distribution_pct_all[league]
         pos_pct_to_style = pos_pct.head(top_n) if top_n else pos_pct
         styled_position_pct_all[league] = style_position_table(pos_pct_to_style, table)
-
-        print(f"Finished simulations for {league} ✅")
 
     return position_distribution_all, position_distribution_pct_all, styled_position_pct_all

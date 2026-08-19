@@ -5,7 +5,32 @@ import time
 import pandas as pd
 import requests
 from datetime import datetime, timedelta
-from playwright.sync_api import sync_playwright
+import asyncio
+from playwright.async_api import async_playwright
+
+# -------------------------------
+# football-data.org rate limiting -- shared across load_fixtures() and
+# fetch_past_season_results(), which together fire ~19-20 requests at that
+# API back-to-back for 9 leagues. Its free tier allows ~10 requests/minute
+# *total*, not per function, so without this the fixtures calls alone burn
+# through the budget and the very next historical-results call gets a 429 --
+# which used to cost a wasted request plus a blind 60s sleep in
+# request_with_retry. Proactively spacing every call to stay just under the
+# limit means that never happens.
+import collections
+_FOOTBALL_DATA_REQUEST_TIMES = collections.deque()
+_FOOTBALL_DATA_MAX_PER_MINUTE = 9
+
+def throttle_football_data():
+    now = time.time()
+    while _FOOTBALL_DATA_REQUEST_TIMES and now - _FOOTBALL_DATA_REQUEST_TIMES[0] > 60:
+        _FOOTBALL_DATA_REQUEST_TIMES.popleft()
+    if len(_FOOTBALL_DATA_REQUEST_TIMES) >= _FOOTBALL_DATA_MAX_PER_MINUTE:
+        sleep_for = 60 - (now - _FOOTBALL_DATA_REQUEST_TIMES[0]) + 0.5
+        if sleep_for > 0:
+            print(f"Pacing football-data.org requests -- waiting {sleep_for:.1f}s to stay under the rate limit...")
+            time.sleep(sleep_for)
+    _FOOTBALL_DATA_REQUEST_TIMES.append(time.time())
 
 # -------------------------------
 # Robust API request with retry
@@ -77,23 +102,23 @@ def clean_team_names(df, column="team"):
     df[column] = df[column].replace(TEAM_NAME_MAPPING)
     return df
 
-def fetch_html(page, url, retries=5, wait_selector="table"):
+async def fetch_html_async(page, url, retries=5, wait_selector="table"):
     """ESPN's edge (AWS WAF Bot Control) returns HTTP 202 with an empty body and
     an `x-amzn-waf-action: challenge` header to plain HTTP clients from
     datacenter IPs (GitHub Actions' hosted runners included) -- confirmed by
     hitting the same URL directly with curl/requests from an equivalent cloud
     IP and getting the identical empty 202. No header spoofing or backoff
     fixes that; it's a JS proof-of-work challenge, so it needs a real browser
-    to execute it. `page` is a Playwright page (real headless Chromium,
-    reused across leagues by the caller) -- it runs the challenge JS itself
-    and lands on the actual standings page, same as a human visit would."""
+    to execute it. `page` is a Playwright page (real headless Chromium) --
+    it runs the challenge JS itself and lands on the actual standings page,
+    same as a human visit would."""
 
     for i in range(retries):
 
         try:
-            page.goto(url, timeout=45000, wait_until="domcontentloaded")
-            page.wait_for_selector(wait_selector, timeout=30000)
-            html = page.content()
+            await page.goto(url, timeout=45000, wait_until="domcontentloaded")
+            await page.wait_for_selector(wait_selector, timeout=30000)
+            html = await page.content()
 
             print(f"Attempt {i+1}: got {len(html)} bytes")
 
@@ -104,9 +129,49 @@ def fetch_html(page, url, retries=5, wait_selector="table"):
             print(f"Request error: {e}")
 
         if i < retries - 1:
-            time.sleep(min(5 * (2 ** i), 60))
+            await asyncio.sleep(min(5 * (2 ** i), 60))
 
     raise RuntimeError(f"❌ Failed to fetch valid HTML after retries for {url}")
+
+
+async def _scrape_one_league(browser, semaphore, league_code, df_name, year):
+    async with semaphore:
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            locale="en-US",
+        )
+        try:
+            page = await context.new_page()
+            url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
+            html = await fetch_html_async(page, url)
+            return df_name, html
+        finally:
+            await context.close()
+
+
+async def _scrape_standings_async(leagues_codes):
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        try:
+            # Concurrency capped at 3 (not all 9 at once) -- ESPN's WAF is
+            # already known to be sensitive to datacenter IPs (see
+            # fetch_html_async's docstring); a burst of 9 simultaneous
+            # challenge-solving page loads from the same IP looks more
+            # bot-like than sequential requests and risks harder blocking,
+            # not just a race to load faster.
+            semaphore = asyncio.Semaphore(3)
+            results = await asyncio.gather(
+                *[
+                    _scrape_one_league(browser, semaphore, code, name, year)
+                    for code, (name, year) in leagues_codes.items()
+                ],
+                return_exceptions=True,
+            )
+        finally:
+            await browser.close()
+    return results
+
 
 # -------------------------------
 # Scrape standings
@@ -124,60 +189,52 @@ def scrape_standings():
         "POR.1": ("primeiraliga_portugal", 2026),
     }
 
+    results = asyncio.run(_scrape_standings_async(leagues_codes))
+
     standings = {}
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            locale="en-US",
+    for item in results:
+
+        if isinstance(item, Exception):
+            print(f"⚠️ Failed to scrape a league: {item}")
+            continue
+
+        df_name, html = item
+
+        try:
+            tables = pd.read_html(StringIO(html))
+        except Exception as e:
+            print(f"⚠️ Failed parsing HTML for {df_name}: {e}")
+            continue
+
+        teams_raw = tables[0]
+        stats = tables[1]
+
+        teams = pd.DataFrame()
+        teams["position"] = teams_raw.iloc[:, 0].str.extract(r"^(\d+)").astype(int)
+
+        teams["team"] = (
+            teams_raw.iloc[:, 0]
+            .str.replace(r"^\d+", "", regex=True)
+            # Some clubs' ESPN abbreviation codes mix letters and digits (e.g.
+            # Schalke 04 -> "S04"), which [A-Z]{2,3} alone doesn't match, leaving
+            # the code stuck to the front of the name (e.g. "S04Schalke 04").
+            .str.replace(r"^[A-Z0-9]{2,3}", "", regex=True)
+            .str.strip()
         )
-        page = context.new_page()
 
-        for league_code, (df_name, year) in leagues_codes.items():
+        stats.columns = ["gp", "w", "d", "l", "gf", "ga", "gd", "pts"]
 
-            url = f"https://www.espn.com/soccer/standings/_/league/{league_code}/season/{year}"
+        stats = stats.apply(
+            lambda c: c.astype(str)
+            .str.replace("+", "", regex=False)
+            .astype(int)
+        )
 
-            html = fetch_html(page, url)
+        df = pd.concat([teams, stats], axis=1)
+        df = clean_team_names(df)
 
-            try:
-                from io import StringIO
-                tables = pd.read_html(StringIO(html))
-            except Exception as e:
-                print(f"⚠️ Failed parsing HTML for {league_code}: {e}")
-                continue
-
-            teams_raw = tables[0]
-            stats = tables[1]
-
-            teams = pd.DataFrame()
-            teams["position"] = teams_raw.iloc[:, 0].str.extract(r"^(\d+)").astype(int)
-
-            teams["team"] = (
-                teams_raw.iloc[:, 0]
-                .str.replace(r"^\d+", "", regex=True)
-                # Some clubs' ESPN abbreviation codes mix letters and digits (e.g.
-                # Schalke 04 -> "S04"), which [A-Z]{2,3} alone doesn't match, leaving
-                # the code stuck to the front of the name (e.g. "S04Schalke 04").
-                .str.replace(r"^[A-Z0-9]{2,3}", "", regex=True)
-                .str.strip()
-            )
-
-            stats.columns = ["gp", "w", "d", "l", "gf", "ga", "gd", "pts"]
-
-            stats = stats.apply(
-                lambda c: c.astype(str)
-                .str.replace("+", "", regex=False)
-                .astype(int)
-            )
-
-            df = pd.concat([teams, stats], axis=1)
-            df = clean_team_names(df)
-
-            standings[df_name] = df
-
-        browser.close()
+        standings[df_name] = df
 
     return standings
 
@@ -367,6 +424,7 @@ def load_fixtures():
         try:
             url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
 
+            throttle_football_data()
             response = request_with_retry(url, headers=headers, params=params)
 
             data = response.json().get("matches", [])
@@ -438,6 +496,7 @@ def fetch_past_season_results(data_folder="data/previous_season"):
 
             params = {"season": season, "status": "FINISHED"}
 
+            throttle_football_data()
             response = request_with_retry(url, headers=headers, params=params)
 
             matches = response.json().get("matches")
@@ -463,8 +522,6 @@ def fetch_past_season_results(data_folder="data/previous_season"):
                 df.to_csv(file_path, index=False)
 
             past_matches[league_name][season] = df
-
-            time.sleep(10)
 
     return past_matches
 
