@@ -485,10 +485,10 @@ LEAGUES = [
 league_header_labels = {key: header for key, pill, header in LEAGUES}
 
 # Temporary default: most leagues haven't kicked off their 2026/27 season yet (0 games
-# played), so land on a league that's already actually playing. Eredivisie is mid-season
-# while the Premier League etc. are still empty tables. Revert DEFAULT_LEAGUE_KEY to
-# "premierleague_england" once the PL season is underway.
-DEFAULT_LEAGUE_KEY = "eredivisie_netherlands"
+# played), so land on a league that's already actually playing. La Liga kicked off
+# 2026-08-15, while the Premier League etc. are still empty tables. Revert
+# DEFAULT_LEAGUE_KEY to "premierleague_england" once the PL season is underway.
+DEFAULT_LEAGUE_KEY = "laliga_spain"
 
 # Built from plain st.button + st.columns rather than st.segmented_control --
 # see the CSS comment above for why. st.columns naturally divides the full
