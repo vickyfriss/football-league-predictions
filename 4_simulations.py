@@ -48,16 +48,61 @@ def drop_unknown_teams(fixtures, table):
     return fixtures.loc[mask].copy()
 
 
-def simulate_once(fixtures, table):
-    """Simulate remaining fixtures once."""
+def simulate_once(fixtures, table, ratings=None, rng=None):
+    """Simulate remaining fixtures once.
+
+    `ratings` (optional): the {"attack", "defense", "league_avg", "home_adv",
+    "low_trust_teams"} bundle from 3_probabilities.py's compute_final_probabilities.
+    When given, any fixture involving a team still short on current-season
+    data gets ONE fresh, noisy draw of that team's rating for this whole
+    simulated season (every match it plays in this draw uses the same
+    perturbation, not a new one per match) instead of the fixed, pre-blended
+    probability everyone else uses. A first attempt perturbed each match's
+    probability independently and it did nothing -- the noise just averaged
+    out over a full season. It has to be correlated across a team's whole
+    season to actually widen the simulated outcome, which is the point:
+    the fixed probability is not wrong on average, it's just false certainty
+    for any one team in any one simulated season."""
     table_sim = table.copy()
     points = dict(zip(table_sim["team"], table_sim["pts"]))
+    rng = rng or np.random
 
+    noisy_attack, noisy_defense = None, None
+    low_trust_teams = ratings["low_trust_teams"] if ratings else set()
+    if low_trust_teams:
+        noisy_attack = ratings["attack"].copy()
+        noisy_defense = ratings["defense"].copy()
+        for t in low_trust_teams:
+            if t not in noisy_attack.index:
+                continue
+            shrink = float(ratings["shrink_per_team"].get(t, 0.1))
+            spread = (1 - shrink) * 0.35
+            noisy_attack[t] = ratings["attack"][t] * rng.lognormal(0, spread)
+            noisy_defense[t] = ratings["defense"][t] * rng.lognormal(0, spread)
+
+    cache = {}
     for _, row in fixtures.iterrows():
         home = row["homeTeam"]
         away = row["awayTeam"]
-        probs = [row["p_home_final"], row["p_draw_final"], row["p_away_final"]]
-        outcome = np.random.choice(["H", "D", "A"], p=probs)
+
+        if low_trust_teams and (home in low_trust_teams or away in low_trust_teams):
+            key = (home, away)
+            if key not in cache:
+                try:
+                    cache[key] = match_probabilities_league(
+                        home, away, noisy_attack, noisy_defense, ratings["league_avg"], ratings["home_adv"]
+                    )
+                except KeyError:
+                    cache[key] = None  # one side has no rating at all yet (0 matches played) -- fall back below
+            cached = cache[key]
+            probs = np.array(cached) if cached is not None else np.array(
+                [row["p_home_final"], row["p_draw_final"], row["p_away_final"]]
+            )
+            probs = probs / probs.sum()
+        else:
+            probs = [row["p_home_final"], row["p_draw_final"], row["p_away_final"]]
+
+        outcome = rng.choice(["H", "D", "A"], p=probs)
 
         if outcome == "H":
             points[home] += 3
@@ -72,13 +117,14 @@ def simulate_once(fixtures, table):
     table_sim["position"] = np.arange(1, len(table_sim)+1)
     return table_sim
 
-def run_simulations(fixtures, table, n_sim=10000, league_name=None):
+def run_simulations(fixtures, table, n_sim=10000, league_name=None, ratings=None):
     """Run multiple simulations and return position counts and percentage tables."""
     position_counts = {team: np.zeros(len(table)) for team in table["team"]}
     label = f"{league_name}: " if league_name else ""
+    rng = np.random.default_rng()
 
     for i in range(n_sim):
-        final_table = simulate_once(fixtures, table)
+        final_table = simulate_once(fixtures, table, ratings=ratings, rng=rng)
         for _, row in final_table.iterrows():
             position_counts[row["team"]][row["position"]-1] += 1
         if (i+1) % 1000 == 0:
@@ -140,11 +186,18 @@ def style_position_table(pos_pct, table):
 
 # === 4. MAIN FUNCTION ===
 
-def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=None):
-    """Run league simulations and return raw counts, percentages, and styled tables (optionally top N)."""
+def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=None, ratings_by_league=None):
+    """Run league simulations and return raw counts, percentages, and styled tables (optionally top N).
+
+    ratings_by_league (optional): per-league {"attack","defense","league_avg",
+    "home_adv","shrink_per_team","low_trust_teams"} from compute_final_probabilities
+    in 3_probabilities.py. When given, fixtures involving a team still short on
+    current-season data get widened, per-simulation uncertainty instead of one
+    fixed, falsely-certain probability (see simulate_once)."""
     position_distribution_all = {}
     position_distribution_pct_all = {}
     styled_position_pct_all = {}
+    ratings_by_league = ratings_by_league or {}
 
     prepared = {}
     for league in leagues:
@@ -164,7 +217,7 @@ def simulate_leagues(leagues, df_simulation_all, tables_all, n_sim=10000, top_n=
     ctx = multiprocessing.get_context("fork")
     with ProcessPoolExecutor(max_workers=max_workers, mp_context=ctx) as executor:
         futures = {
-            league: executor.submit(run_simulations, fixtures, table, n_sim, league)
+            league: executor.submit(run_simulations, fixtures, table, n_sim, league, ratings_by_league.get(league))
             for league, (fixtures, table) in prepared.items()
         }
         for league, future in futures.items():

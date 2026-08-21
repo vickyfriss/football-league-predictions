@@ -6,7 +6,7 @@ import os
 from datetime import datetime, UTC
 import numpy as np
 
-RUN_CREATION = True  # OFFLINE MODE
+RUN_CREATION = True
 
 # =========================
 # 0️⃣ HELPER: dynamic import
@@ -92,6 +92,35 @@ if RUN_CREATION:
 else:
     print("⚡ OFFLINE MODE → loading from CSV")
     standings, odds_book, fixtures, past_season_results = load_cached_odds_fixtures_and_history()
+
+
+# =========================
+# 1️⃣.5 PRIOR-SEASON ROSTERS (for telling relegated teams apart from promoted ones)
+# =========================
+# Built from the RAW per-season history, before the active/finished filtering
+# below -- a league that hasn't started yet this season (e.g. the Premier
+# League in August) still needs its LAST season's roster on hand, so
+# Championship can tell "just relegated from the Premier League" apart from
+# "just promoted from League One" for its own newly-arrived teams. Cheap:
+# just team-name sets, not full match data.
+prior_rosters_by_league_season = {}
+for lg in dataset_processing.leagues:
+    rosters = {}
+    mapping = dataset_processing.mappings.get(lg, {})
+    for season, df in past_season_results.get(lg, {}).items():
+        if df is None or df.empty:
+            rosters[season] = set()
+        else:
+            # This history is raw football-data.org output (e.g. "West Ham
+            # United FC") -- it needs the same name mapping every other
+            # dataset gets before comparing against it, or a real relegated
+            # team simply never matches its own name here. Confirmed by a
+            # real test run: "West Ham United" (mapped) against a roster
+            # still holding "West Ham United FC" (raw) matched nothing.
+            df_norm = dataset_processing.normalize_columns(df).replace(mapping)
+            cols = [c for c in ["homeTeam", "awayTeam"] if c in df_norm.columns]
+            rosters[season] = set(pd.unique(df_norm[cols].values.ravel("K"))) if cols else set()
+    prior_rosters_by_league_season[lg] = rosters
 
 
 # =========================
@@ -237,12 +266,13 @@ def normalize_odds(df):
 # =========================
 print("3️⃣ Computing match probabilities...")
 
-df_simulation_all = dataset_probabilities.compute_final_probabilities(
+df_simulation_all, ratings_by_league, _home_adv_by_league = dataset_probabilities.compute_final_probabilities(
     active_leagues,
     {lg: globals_dict.get(f"past_matches_{lg}_blended", pd.DataFrame()) for lg in active_leagues},
     {lg: normalize_fixtures(globals_dict.get(f"future_matches_{lg}")) for lg in active_leagues},
     {lg: normalize_odds(globals_dict.get(f"betting_odds_{lg}")) for lg in active_leagues},
     current_season_matches_dict={lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame()) for lg in active_leagues},
+    prior_rosters_by_league_season=prior_rosters_by_league_season,
 )
 
 print("✅ Probabilities computed.")
@@ -259,7 +289,8 @@ position_distribution_all, position_distribution_pct_all, _ = dataset_simulation
     active_leagues,
     df_simulation_all,
     tables_all,
-    n_sim=10000
+    n_sim=10000,
+    ratings_by_league=ratings_by_league,
 )
 
 

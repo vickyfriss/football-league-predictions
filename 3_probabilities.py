@@ -55,9 +55,44 @@ def match_probabilities_league(home, away, attack, defense, league_avg, home_adv
 
 # === 2. MAIN FUNCTION ===
 
-def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betting_odds_dict, current_season_matches_dict=None):
+LOW_TRUST_THRESHOLD = 0.3  # shrink_per_team below this -> flagged for Option 2's simulation-time uncertainty
+
+# Leagues with a tracked tier directly above them, for telling a relegated
+# team apart from a promoted one when both arrive in a league "new" this
+# season. Every other league in this pipeline is already a top flight, so
+# every newly-arrived team there is a promotion by definition.
+RELEGATED_FROM_ABOVE = {
+    "championship_england": "premierleague_england",
+}
+
+# Historical priors for newly-arrived teams' first-season attack/defense,
+# as a ratio to their new league's own mean (1.0 = league average). Fixed
+# constants, not recomputed from the current season's 1-2 games played --
+# an earlier attempt did that and it was too noisy to trust (a single early
+# scoreline swings the ratio wildly). These come from real full completed
+# seasons instead:
+#   PROMOTED: every team promoted into a "big 5" league (Premier League,
+#   La Liga, Bundesliga, Serie A, Ligue 1) across the last 2 completed
+#   seasons that a football-data.org free-tier token can see -- n=28,
+#   consistently below average, no real outliers.
+#   RELEGATED: every team relegated from the Premier League into the
+#   Championship across the last 3 completed seasons -- n=9. Consistently
+#   *above* average (median finish: 3rd, playoff position), but genuinely
+#   bimodal -- 6 of 9 were clearly strong, 2 of 9 (Luton 2024/25, Leicester
+#   2025/26) badly underperformed even Championship level. A single point
+#   estimate will be wrong more often here than for promoted teams; treat
+#   this one as the rougher of the two priors.
+PROMOTED_TEAM_ATTACK_RATIO = 0.769
+PROMOTED_TEAM_DEFENSE_RATIO = 1.224
+RELEGATED_TEAM_ATTACK_RATIO = 1.220
+RELEGATED_TEAM_DEFENSE_RATIO = 0.811
+
+
+def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betting_odds_dict,
+                                 current_season_matches_dict=None, prior_rosters_by_league_season=None):
     df_final_all = {}
     home_adv_by_league = {}
+    ratings_by_league = {}
 
     for league in leagues:
         df_all = past_matches_dict[league].copy()
@@ -67,12 +102,10 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         df_all["weight"] = np.linspace(1, 2, len(df_all)) if len(df_all) > 0 else 1
         past_matches_dict[league + "_weighted"] = df_all
 
-        # Home advantage
         goal_diff = df_all.get("homeGoals", pd.Series([0])) - df_all.get("awayGoals", pd.Series([0]))
         home_adv = weighted_mean(goal_diff, df_all["weight"])
         home_adv_by_league[league] = home_adv
 
-        # Team attack/defense
         df_all = normalize_columns(df_all)
         teams = pd.unique(df_all[["homeTeam", "awayTeam"]].values.ravel("K")) if not df_all.empty else []
         attack = pd.Series(1.0, index=teams)
@@ -98,7 +131,6 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
                 "matches_played": len(home_games) + len(away_games),
             }
 
-        # League averages
         total_goals = df_all.get("homeGoals", pd.Series([0])) + df_all.get("awayGoals", pd.Series([0]))
         league_avg = weighted_mean(total_goals, df_all["weight"]) / 2
         league_avg = league_avg if league_avg > 0 else 1.0
@@ -106,17 +138,6 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             attack[team] = team_stats[team]["scored"] / league_avg
             defense[team] = team_stats[team]["against"] / league_avg
 
-        # === Shrink toward mean for teams with little/no history (per-team, not league-wide) ===
-        # A team's OWN sample size decides how much of its rating is "real" signal vs.
-        # mean. Blending current+previous season (see precompute_simulations.py) already
-        # gives returning teams ~a full season of matches, so they keep close to their
-        # true rating here. A newly-promoted team has no previous-season matches at all --
-        # only its handful played so far this season -- so it gets pulled hard toward the
-        # league mean, starting close to a coin-flip instead of near-certain off 1-2 results.
-        # num_teams should reflect THIS season's league size, not the blended
-        # 2-season set -- otherwise a team relegated/promoted between the two
-        # seasons inflates the count and pushes the "fully trusted" threshold
-        # above what a real full season actually requires.
         current_df = None
         if current_season_matches_dict is not None:
             current_df = normalize_columns(current_season_matches_dict.get(league, pd.DataFrame()))
@@ -127,10 +148,67 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         team_matches = pd.Series({t: team_stats[t]["matches_played"] for t in teams})
         shrink_per_team = min_shrink + (1 - min_shrink) * (team_matches / target_matches).clip(upper=1.0)
 
+        # A team is "new to this league" if every one of its blended matches
+        # is actually from THIS season -- i.e. it has zero matches in the
+        # previous-season portion of the blend, because last season it was
+        # playing somewhere else entirely (a different division).
+        current_only_counts = {}
+        if current_df is not None and not current_df.empty:
+            for team in teams:
+                current_only_counts[team] = int(
+                    ((current_df["homeTeam"] == team) | (current_df["awayTeam"] == team)).sum()
+                )
+        newly_arrived = {
+            t for t in teams
+            if team_stats[t]["matches_played"] > 0
+            and current_only_counts.get(t, 0) == team_stats[t]["matches_played"]
+        }
+
+        relegated_teams = set()
+        above_league = RELEGATED_FROM_ABOVE.get(league)
+        if above_league and prior_rosters_by_league_season:
+            above_rosters = prior_rosters_by_league_season.get(above_league, {})
+            if above_rosters:
+                # The OLDEST of the two seasons on file, not the newest --
+                # this pipeline always fetches exactly [current, previous]
+                # (see PAST_SEASONS in 1_dataset_creation.py), and the above
+                # league's "current" season is very often still empty (0
+                # games played) at exactly the point this detection matters
+                # most, i.e. right when a newly-relegated team needs to be
+                # recognised. Picking the max season number silently picked
+                # that empty roster and made every relegated team fall
+                # through to "promoted" instead -- confirmed by a real test
+                # run where relegated teams' outlook got WORSE, not better.
+                last_completed_season = sorted(above_rosters.keys())[0]
+                relegated_teams = newly_arrived & above_rosters.get(last_completed_season, set())
+        promoted_teams = newly_arrived - relegated_teams
+
+        # Every other team (returning, or new but undetected as either)
+        # shrinks toward the plain league mean; promoted/relegated teams
+        # shrink toward the historical priors defined above the function.
         mean_attack = attack.mean()
         mean_defense = defense.mean()
-        attack = mean_attack + shrink_per_team * (attack - mean_attack)
-        defense = mean_defense + shrink_per_team * (defense - mean_defense)
+        target_attack = pd.Series(mean_attack, index=teams)
+        target_defense = pd.Series(mean_defense, index=teams)
+        for t in promoted_teams:
+            target_attack[t] = mean_attack * PROMOTED_TEAM_ATTACK_RATIO
+            target_defense[t] = mean_defense * PROMOTED_TEAM_DEFENSE_RATIO
+        for t in relegated_teams:
+            target_attack[t] = mean_attack * RELEGATED_TEAM_ATTACK_RATIO
+            target_defense[t] = mean_defense * RELEGATED_TEAM_DEFENSE_RATIO
+
+        attack = target_attack + shrink_per_team * (attack - target_attack)
+        defense = target_defense + shrink_per_team * (defense - target_defense)
+
+        # Full post-shrink ratings, not just the low-trust subset -- the
+        # simulator needs BOTH sides of a fixture to recompute a Poisson
+        # probability, and a low-trust team's opponent is very often an
+        # established one with no entry of its own otherwise.
+        ratings_by_league[league] = {
+            "attack": attack, "defense": defense, "league_avg": league_avg, "home_adv": home_adv,
+            "shrink_per_team": shrink_per_team,
+            "low_trust_teams": {t for t in teams if shrink_per_team[t] < LOW_TRUST_THRESHOLD},
+        }
 
         # Compute Poisson probabilities
         df_future = normalize_columns(fixtures_dict[league])
@@ -172,7 +250,7 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
 
         df_final_all[league] = df_final[["utcDate", "homeTeam", "awayTeam", "p_home_final", "p_draw_final", "p_away_final"]]
 
-    return df_final_all
+    return df_final_all, ratings_by_league, home_adv_by_league
 
 # === MAIN BLOCK ===
 if __name__ == "__main__":
@@ -189,7 +267,7 @@ if __name__ == "__main__":
     fixtures_all = {league: globals().get(f"fixtures_{league}", pd.DataFrame()) for league in leagues}
     betting_odds_all = {league: globals().get(f"betting_odds_{league}", pd.DataFrame()) for league in leagues}
 
-    df_sim_all = compute_final_probabilities(leagues, past_matches_all, fixtures_all, betting_odds_all)
+    df_sim_all, low_trust_all, home_adv_all = compute_final_probabilities(leagues, past_matches_all, fixtures_all, betting_odds_all)
     for league, df in df_sim_all.items():
         print(f"\n=== {league.replace('_', ' ').title()} ===")
         print(df.head(3))
