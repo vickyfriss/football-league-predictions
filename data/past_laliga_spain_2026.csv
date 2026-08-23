@@ -7,3 +7,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-19T19:00:00Z,1,FINISHED,Club Atlético de Madrid,Málaga CF,2,0,HOME_TEAM
 2026-08-20T19:00:00Z,2,FINISHED,Rayo Vallecano de Madrid,Deportivo Alavés,1,1,DRAW
 2026-08-21T19:00:00Z,2,FINISHED,Real Betis Balompié,Real Sociedad de Fútbol,1,0,HOME_TEAM
+2026-08-22T15:00:00Z,2,FINISHED,Athletic Club,Sevilla FC,1,3,AWAY_TEAM
+2026-08-22T17:30:00Z,2,FINISHED,Valencia CF,RC Celta de Vigo,0,0,DRAW
+2026-08-22T19:30:00Z,2,FINISHED,RCD Espanyol de Barcelona,Real Madrid CF,1,2,AWAY_TEAM

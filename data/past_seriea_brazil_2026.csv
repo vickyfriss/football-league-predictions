@@ -224,3 +224,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-16T21:30:00Z,23,FINISHED,EC Vitória,Botafogo FR,1,0,HOME_TEAM
 2026-08-16T22:30:00Z,23,FINISHED,SC Corinthians Paulista,Cruzeiro EC,1,2,AWAY_TEAM
 2026-08-17T23:00:00Z,23,FINISHED,SC Internacional,Clube do Remo,1,1,DRAW
+2026-08-22T19:00:00Z,24,FINISHED,Fluminense FC,Clube do Remo,2,1,HOME_TEAM
+2026-08-22T21:30:00Z,24,FINISHED,SC Internacional,CA Mineiro,0,0,DRAW
+2026-08-22T23:30:00Z,24,FINISHED,Cruzeiro EC,CR Flamengo,2,1,HOME_TEAM

@@ -1,2 +1,7 @@
 utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-21T19:00:00Z,1,FINISHED,Arsenal FC,Coventry City FC,3,0,HOME_TEAM
+2026-08-22T11:30:00Z,1,FINISHED,Hull City AFC,Manchester United FC,2,0,HOME_TEAM
+2026-08-22T14:00:00Z,1,FINISHED,Ipswich Town FC,Sunderland AFC,2,1,HOME_TEAM
+2026-08-22T14:00:00Z,1,FINISHED,Nottingham Forest FC,Leeds United FC,0,1,AWAY_TEAM
+2026-08-22T14:00:00Z,1,FINISHED,Everton FC,Crystal Palace FC,2,0,HOME_TEAM
+2026-08-22T16:30:00Z,1,FINISHED,Brentford FC,Tottenham Hotspur FC,3,0,HOME_TEAM

@@ -17,3 +17,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-16T12:30:00Z,2,FINISHED,Feyenoord Rotterdam,Go Ahead Eagles,2,2,DRAW
 2026-08-16T12:30:00Z,2,FINISHED,FC Twente '65,PEC Zwolle,3,1,HOME_TEAM
 2026-08-16T14:45:00Z,2,FINISHED,AFC Ajax,SC Heerenveen,2,2,DRAW
+2026-08-22T14:30:00Z,3,FINISHED,Fortuna Sittard,AZ,0,2,AWAY_TEAM
+2026-08-22T16:45:00Z,3,FINISHED,Sparta Rotterdam,FC Utrecht,3,3,DRAW
+2026-08-22T19:00:00Z,3,FINISHED,SC Heerenveen,PEC Zwolle,0,2,AWAY_TEAM
