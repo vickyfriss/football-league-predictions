@@ -3,3 +3,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-22T16:30:00Z,1,FINISHED,FC Internazionale Milano,AC Monza,4,1,HOME_TEAM
 2026-08-22T18:45:00Z,1,FINISHED,Genoa CFC,SSC Napoli,0,2,AWAY_TEAM
 2026-08-22T18:45:00Z,1,FINISHED,Parma Calcio 1913,Cagliari Calcio,0,1,AWAY_TEAM
+2026-08-23T16:30:00Z,1,FINISHED,Frosinone Calcio,Juventus FC,0,1,AWAY_TEAM
+2026-08-23T16:30:00Z,1,FINISHED,Venezia FC,US Lecce,0,2,AWAY_TEAM
+2026-08-23T18:45:00Z,1,FINISHED,Atalanta BC,US Sassuolo Calcio,2,1,HOME_TEAM
+2026-08-23T18:45:00Z,1,FINISHED,Torino FC,AC Milan,1,2,AWAY_TEAM

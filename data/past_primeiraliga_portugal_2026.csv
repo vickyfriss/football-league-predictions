@@ -19,3 +19,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-22T14:30:00Z,3,FINISHED,CS Marítimo,Académico de Viseu FC,2,2,DRAW
 2026-08-22T17:00:00Z,3,FINISHED,GD Estoril Praia,Rio Ave FC,0,2,AWAY_TEAM
 2026-08-22T19:30:00Z,3,FINISHED,Sporting Clube de Portugal,FC Alverca,3,1,HOME_TEAM
+2026-08-23T14:30:00Z,3,FINISHED,Vitória SC,CD Nacional,1,0,HOME_TEAM
+2026-08-23T17:00:00Z,3,FINISHED,CD Santa Clara,FC Famalicão,1,0,HOME_TEAM
+2026-08-23T19:30:00Z,3,FINISHED,FC Porto,FC Arouca,2,0,HOME_TEAM

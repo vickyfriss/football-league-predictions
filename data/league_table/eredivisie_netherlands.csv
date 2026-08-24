@@ -1,10 +1,10 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,AZ Alkmaar,3,3,0,0,8,1,7,9
-2,FC Groningen,2,2,0,0,6,2,4,6
-3,Go Ahead Eagles,2,1,1,0,6,3,3,4
-4,Ajax Amsterdam,2,1,1,0,4,2,2,4
-5,PSV Eindhoven,2,1,1,0,4,3,1,4
-6,Feyenoord Rotterdam,2,1,1,0,3,2,1,4
+2,Go Ahead Eagles,3,2,1,0,9,4,5,7
+3,PSV Eindhoven,3,2,1,0,9,4,5,7
+4,Feyenoord Rotterdam,3,2,1,0,8,4,4,7
+5,FC Groningen,3,2,0,1,7,7,0,6
+6,Ajax Amsterdam,2,1,1,0,4,2,2,4
 7,Sparta Rotterdam,3,1,1,1,6,5,1,4
 8,Fortuna Sittard,3,1,1,1,5,5,0,4
 9,Heerenveen,3,1,1,1,3,4,-1,4
@@ -14,6 +14,6 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 13,Telstar,2,1,0,1,3,4,-1,3
 14,PEC Zwolle,3,1,0,2,3,5,-2,3
 15,FC Utrecht,3,0,1,2,5,9,-4,1
-16,ADO Den Haag,2,0,0,2,1,6,-5,0
-17,Willem II,2,0,0,2,2,8,-6,0
-18,SC Cambuur,2,0,0,2,1,7,-6,0
+16,Willem II,2,0,0,2,2,8,-6,0
+17,ADO Den Haag,3,0,0,3,2,9,-7,0
+18,SC Cambuur,3,0,0,3,3,12,-9,0
