@@ -233,3 +233,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-23T21:30:00Z,24,FINISHED,Chapecoense AF,São Paulo FC,1,0,HOME_TEAM
 2026-08-23T21:30:00Z,24,FINISHED,Santos FC,Mirassol FC,1,1,DRAW
 2026-08-23T22:30:00Z,24,FINISHED,Coritiba FBC,SC Corinthians Paulista,2,1,HOME_TEAM
+2026-08-24T23:00:00Z,24,FINISHED,Botafogo FR,CA Paranaense,2,3,AWAY_TEAM

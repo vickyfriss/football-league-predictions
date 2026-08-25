@@ -1,5 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-08-24T19:15:00Z,TIMED,Gil Vicente FC,Casa Pia AC
 2026-08-28T19:15:00Z,TIMED,Rio Ave FC,Sporting Clube de Portugal
 2026-08-29T14:30:00Z,TIMED,FC Alverca,CD Santa Clara
 2026-08-29T14:30:00Z,TIMED,FC Arouca,CS Marítimo
@@ -7,8 +6,8 @@ utcDate,status,homeTeam,awayTeam
 2026-08-30T14:30:00Z,TIMED,CD Nacional,CF Estrela da Amadora
 2026-08-30T17:00:00Z,TIMED,Casa Pia AC,Moreirense FC
 2026-08-30T19:30:00Z,TIMED,FC Famalicão,Gil Vicente FC
-2026-08-31T17:45:00Z,TIMED,Sport Lisboa e Benfica,GD Estoril Praia
-2026-08-31T19:45:00Z,TIMED,Sporting Clube de Braga,Vitória SC
+2026-08-31T19:15:00Z,TIMED,Sport Lisboa e Benfica,GD Estoril Praia
+2026-08-31T19:15:00Z,TIMED,Sporting Clube de Braga,Vitória SC
 2026-09-05T00:00:00Z,SCHEDULED,FC Alverca,Sporting Clube de Braga
 2026-09-05T00:00:00Z,SCHEDULED,CF Estrela da Amadora,FC Famalicão
 2026-09-05T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,CD Nacional

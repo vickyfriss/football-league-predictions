@@ -4,13 +4,13 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 3,Brentford,1,1,0,0,3,0,3,3
 4,Everton,1,1,0,0,2,0,2,3
 5,Hull City,1,1,0,0,2,0,2,3
-6,Ipswich Town,1,1,0,0,2,1,1,3
-7,Manchester City,1,1,0,0,2,1,1,3
-8,Leeds United,1,1,0,0,1,0,1,3
-9,Liverpool,1,0,1,0,2,2,0,1
-10,Newcastle United,1,0,1,0,2,2,0,1
-11,Chelsea,0,0,0,0,0,0,0,0
-12,Fulham,0,0,0,0,0,0,0,0
+6,Chelsea,1,1,0,0,3,2,1,3
+7,Ipswich Town,1,1,0,0,2,1,1,3
+8,Manchester City,1,1,0,0,2,1,1,3
+9,Leeds United,1,1,0,0,1,0,1,3
+10,Liverpool,1,0,1,0,2,2,0,1
+11,Newcastle United,1,0,1,0,2,2,0,1
+12,Fulham,1,0,0,1,2,3,-1,0
 13,AFC Bournemouth,1,0,0,1,1,2,-1,0
 14,Sunderland,1,0,0,1,1,2,-1,0
 15,Nottingham Forest,1,0,0,1,0,1,-1,0

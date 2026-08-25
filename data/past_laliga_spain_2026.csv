@@ -13,3 +13,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-23T15:00:00Z,2,FINISHED,Club Atlético de Madrid,Villarreal CF,2,2,DRAW
 2026-08-23T17:30:00Z,2,FINISHED,Getafe CF,Real Racing Club de Santander,1,0,HOME_TEAM
 2026-08-23T19:30:00Z,2,FINISHED,Elche CF,FC Barcelona,0,5,AWAY_TEAM
+2026-08-24T17:30:00Z,2,FINISHED,CA Osasuna,Levante UD,0,0,DRAW
+2026-08-24T19:30:00Z,2,FINISHED,Málaga CF,RC Deportivo La Coruña,1,1,DRAW
