@@ -6,7 +6,7 @@ concurrency:
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # Run daily at 06:00 UTC
+    - cron: '30 3 * * *'   # Run daily at 03:30 UTC (04:30 UK time / 05:30 CEST during BST)
   workflow_dispatch:
 
 jobs:
