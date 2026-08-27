@@ -37,6 +37,19 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
     else:
         return 0.5 + (val - mid) / (max_val - mid) * 0.5
 
+def humanize_time_since(dt):
+    seconds = (datetime.now(timezone.utc) - dt).total_seconds()
+    if seconds < 3600:
+        n = max(int(seconds // 60), 1)
+        return f"{n} minute{'s' if n != 1 else ''} ago"
+    elif seconds < 86400:
+        n = int(seconds // 3600)
+        return f"{n} hour{'s' if n != 1 else ''} ago"
+    else:
+        n = int(seconds // 86400)
+        return f"{n} day{'s' if n != 1 else ''} ago"
+
+
 def style_probabilities_table(df):
     display_df = df.copy()
 
@@ -573,8 +586,9 @@ if not position_distribution_pct_all:
 else:
     pct_file = "data/precomputed_pos_pct.pkl"
     pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
+    freshness = humanize_time_since(pct_mtime)
     st.markdown(
-        f'<div class="status-banner">Simulations last run on: {pct_mtime.strftime("%d/%B/%Y %H:%M")} UTC</div>',
+        f'<div class="status-banner">Last updated {pct_mtime.strftime("%d %B %Y, %H:%M")} UTC ({freshness})</div>',
         unsafe_allow_html=True
     )
 
