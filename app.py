@@ -37,18 +37,6 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
     else:
         return 0.5 + (val - mid) / (max_val - mid) * 0.5
 
-def humanize_time_since(dt):
-    seconds = (datetime.now(timezone.utc) - dt).total_seconds()
-    if seconds < 3600:
-        n = max(int(seconds // 60), 1)
-        return f"{n} minute{'s' if n != 1 else ''} ago"
-    elif seconds < 86400:
-        n = int(seconds // 3600)
-        return f"{n} hour{'s' if n != 1 else ''} ago"
-    else:
-        n = int(seconds // 86400)
-        return f"{n} day{'s' if n != 1 else ''} ago"
-
 
 def style_probabilities_table(df):
     display_df = df.copy()
@@ -585,10 +573,14 @@ if not position_distribution_pct_all:
     st.warning("⚠️ Simulation data not ready yet. Please reload later.")
 else:
     pct_file = "data/precomputed_pos_pct.pkl"
-    pct_mtime = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    freshness = humanize_time_since(pct_mtime)
+    last_updated_file = "data/last_updated.txt"
+    if os.path.exists(last_updated_file):
+        with open(last_updated_file) as f:
+            run_dt = datetime.strptime(f.read().strip(), "%Y-%m-%d %H:%M:%S UTC").replace(tzinfo=timezone.utc)
+    else:
+        run_dt = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
     st.markdown(
-        f'<div class="status-banner">Last updated {pct_mtime.strftime("%d %B %Y, %H:%M")} UTC ({freshness})</div>',
+        f'<div class="status-banner">Simulations last run on: {run_dt.strftime("%d %B %Y, %H:%M")} UTC</div>',
         unsafe_allow_html=True
     )
 
