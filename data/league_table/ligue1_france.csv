@@ -1,12 +1,12 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Marseille,1,1,0,0,4,0,4,3
-2,Lens,1,1,0,0,5,2,3,3
-3,Lille,1,1,0,0,2,0,2,3
+1,Lille,2,1,1,0,4,2,2,4
+2,Marseille,1,1,0,0,4,0,4,3
+3,Lens,1,1,0,0,5,2,3,3
 4,Lyon,1,1,0,0,2,0,2,3
 5,AS Monaco,1,1,0,0,1,0,1,3
-6,Brest,1,0,1,0,2,2,0,1
-7,Le Mans,1,0,1,0,2,2,0,1
-8,Paris Saint-Germain,1,0,1,0,2,2,0,1
+6,Paris Saint-Germain,2,0,2,0,4,4,0,2
+7,Brest,1,0,1,0,2,2,0,1
+8,Le Mans,1,0,1,0,2,2,0,1
 9,Stade Rennais,1,0,1,0,2,2,0,1
 10,Lorient,1,0,1,0,0,0,0,1
 11,Nice,1,0,1,0,0,0,0,1

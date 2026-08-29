@@ -9,3 +9,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-23T18:45:00Z,1,FINISHED,Torino FC,AC Milan,1,2,AWAY_TEAM
 2026-08-24T16:30:00Z,1,FINISHED,Bologna FC 1909,SS Lazio,0,1,AWAY_TEAM
 2026-08-24T18:45:00Z,1,FINISHED,AS Roma,ACF Fiorentina,4,0,HOME_TEAM
+2026-08-28T18:45:00Z,2,FINISHED,AC Milan,Venezia FC,2,0,HOME_TEAM

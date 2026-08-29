@@ -1,7 +1,7 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,FC Augsburg,0,0,0,0,0,0,0,0
-2,Bayer Leverkusen,0,0,0,0,0,0,0,0
-3,Bayern Munich,0,0,0,0,0,0,0,0
+1,Bayern Munich,1,1,0,0,5,1,4,3
+2,FC Augsburg,0,0,0,0,0,0,0,0
+3,Bayer Leverkusen,0,0,0,0,0,0,0,0
 4,Borussia Dortmund,0,0,0,0,0,0,0,0
 5,Borussia Mönchengladbach,0,0,0,0,0,0,0,0
 6,Eintracht Frankfurt,0,0,0,0,0,0,0,0
@@ -14,6 +14,6 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 13,SC Paderborn 07,0,0,0,0,0,0,0,0
 14,RB Leipzig,0,0,0,0,0,0,0,0
 15,Schalke 04,0,0,0,0,0,0,0,0
-16,VfB Stuttgart,0,0,0,0,0,0,0,0
-17,1. FC Union Berlin,0,0,0,0,0,0,0,0
-18,Werder Bremen,0,0,0,0,0,0,0,0
+16,1. FC Union Berlin,0,0,0,0,0,0,0,0
+17,Werder Bremen,0,0,0,0,0,0,0,0
+18,VfB Stuttgart,1,0,0,1,1,5,-4,0

@@ -19,3 +19,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-26T19:00:00Z,1,FINISHED,Real Madrid CF,Real Sociedad de Fútbol,4,1,HOME_TEAM
 2026-08-27T18:30:00Z,1,FINISHED,RC Celta de Vigo,CA Osasuna,1,2,AWAY_TEAM
 2026-08-27T19:00:00Z,1,FINISHED,FC Barcelona,Athletic Club,2,0,HOME_TEAM
+2026-08-28T17:00:00Z,3,FINISHED,Real Racing Club de Santander,Elche CF,3,2,HOME_TEAM
+2026-08-28T19:30:00Z,3,FINISHED,Deportivo Alavés,Villarreal CF,1,0,HOME_TEAM

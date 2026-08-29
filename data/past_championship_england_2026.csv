@@ -23,3 +23,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-22T14:00:00Z,2,FINISHED,Southampton FC,Stoke City FC,3,1,HOME_TEAM
 2026-08-22T14:00:00Z,2,FINISHED,Queens Park Rangers FC,Bolton Wanderers FC,0,0,DRAW
 2026-08-23T11:00:00Z,2,FINISHED,West Bromwich Albion FC,Burnley FC,3,1,HOME_TEAM
+2026-08-28T19:00:00Z,3,FINISHED,Wrexham AFC,Birmingham City FC,1,2,AWAY_TEAM
