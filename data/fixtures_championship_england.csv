@@ -1,15 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-08-29T11:30:00Z,TIMED,Wolverhampton Wanderers FC,Stoke City FC
-2026-08-29T11:30:00Z,TIMED,Derby County FC,Swansea City AFC
-2026-08-29T11:30:00Z,TIMED,Middlesbrough FC,West Bromwich Albion FC
-2026-08-29T14:00:00Z,TIMED,Norwich City FC,Burnley FC
-2026-08-29T14:00:00Z,TIMED,Bolton Wanderers FC,Lincoln City FC
-2026-08-29T14:00:00Z,TIMED,Bristol City FC,Portsmouth FC
-2026-08-29T14:00:00Z,TIMED,Southampton FC,Millwall FC
-2026-08-29T14:00:00Z,TIMED,Charlton Athletic FC,Preston North End FC
-2026-08-29T14:00:00Z,TIMED,Blackburn Rovers FC,Queens Park Rangers FC
-2026-08-29T14:00:00Z,TIMED,Cardiff City FC,Sheffield United FC
-2026-08-29T14:00:00Z,TIMED,Watford FC,West Ham United FC
 2026-09-01T18:45:00Z,TIMED,Preston North End FC,Bristol City FC
 2026-09-01T18:45:00Z,TIMED,West Ham United FC,Wolverhampton Wanderers FC
 2026-09-01T18:45:00Z,TIMED,Lincoln City FC,Blackburn Rovers FC
@@ -38,11 +27,8 @@ utcDate,status,homeTeam,awayTeam
 2026-09-08T18:45:00Z,TIMED,Southampton FC,Swansea City AFC
 2026-09-08T18:45:00Z,TIMED,Watford FC,Preston North End FC
 2026-09-08T18:45:00Z,TIMED,Cardiff City FC,Stoke City FC
-2026-09-08T18:45:00Z,TIMED,Middlesbrough FC,Millwall FC
-2026-09-08T18:45:00Z,TIMED,Bristol City FC,Lincoln City FC
 2026-09-08T18:45:00Z,TIMED,Wrexham AFC,Burnley FC
 2026-09-08T19:00:00Z,TIMED,Bolton Wanderers FC,West Ham United FC
-2026-09-09T18:45:00Z,TIMED,Wolverhampton Wanderers FC,Portsmouth FC
 2026-09-09T18:45:00Z,TIMED,Derby County FC,West Bromwich Albion FC
 2026-09-09T18:45:00Z,TIMED,Norwich City FC,Birmingham City FC
 2026-09-09T19:00:00Z,TIMED,Charlton Athletic FC,Queens Park Rangers FC
@@ -69,7 +55,6 @@ utcDate,status,homeTeam,awayTeam
 2026-09-19T14:00:00Z,TIMED,Birmingham City FC,Middlesbrough FC
 2026-09-19T14:00:00Z,TIMED,Lincoln City FC,Swansea City AFC
 2026-09-20T11:00:00Z,TIMED,Wolverhampton Wanderers FC,West Bromwich Albion FC
-2026-09-20T12:30:00Z,TIMED,Norwich City FC,Bolton Wanderers FC
 2026-10-09T19:00:00Z,TIMED,West Ham United FC,Queens Park Rangers FC
 2026-10-10T11:30:00Z,TIMED,West Bromwich Albion FC,Birmingham City FC
 2026-10-10T11:30:00Z,TIMED,Swansea City AFC,Norwich City FC
