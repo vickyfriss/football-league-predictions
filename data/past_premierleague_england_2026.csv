@@ -10,3 +10,11 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-23T15:30:00Z,1,FINISHED,Newcastle United FC,Liverpool FC,2,2,DRAW
 2026-08-24T19:00:00Z,1,FINISHED,Fulham FC,Chelsea FC,2,3,AWAY_TEAM
 2026-08-28T19:00:00Z,2,FINISHED,Crystal Palace FC,Manchester City FC,1,4,AWAY_TEAM
+2026-08-29T11:30:00Z,2,FINISHED,Liverpool FC,Nottingham Forest FC,2,2,DRAW
+2026-08-29T14:00:00Z,2,FINISHED,AFC Bournemouth,Everton FC,1,1,DRAW
+2026-08-29T14:00:00Z,2,FINISHED,Coventry City FC,Hull City AFC,0,1,AWAY_TEAM
+2026-08-29T16:30:00Z,2,FINISHED,Tottenham Hotspur FC,Newcastle United FC,0,2,AWAY_TEAM
+2026-08-30T13:00:00Z,2,FINISHED,Sunderland AFC,Fulham FC,1,0,HOME_TEAM
+2026-08-30T13:00:00Z,2,FINISHED,Chelsea FC,Brighton & Hove Albion FC,4,3,HOME_TEAM
+2026-08-30T13:00:00Z,2,FINISHED,Leeds United FC,Brentford FC,1,1,DRAW
+2026-08-30T15:30:00Z,2,FINISHED,Manchester United FC,Ipswich Town FC,5,2,HOME_TEAM

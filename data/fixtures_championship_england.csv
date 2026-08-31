@@ -29,6 +29,7 @@ utcDate,status,homeTeam,awayTeam
 2026-09-08T18:45:00Z,TIMED,Cardiff City FC,Stoke City FC
 2026-09-08T18:45:00Z,TIMED,Wrexham AFC,Burnley FC
 2026-09-08T19:00:00Z,TIMED,Bolton Wanderers FC,West Ham United FC
+2026-09-09T18:45:00Z,TIMED,Wolverhampton Wanderers FC,Portsmouth FC
 2026-09-09T18:45:00Z,TIMED,Derby County FC,West Bromwich Albion FC
 2026-09-09T18:45:00Z,TIMED,Norwich City FC,Birmingham City FC
 2026-09-09T19:00:00Z,TIMED,Charlton Athletic FC,Queens Park Rangers FC
@@ -44,6 +45,8 @@ utcDate,status,homeTeam,awayTeam
 2026-09-12T14:00:00Z,TIMED,Swansea City AFC,Burnley FC
 2026-09-12T14:00:00Z,TIMED,Middlesbrough FC,Norwich City FC
 2026-09-13T11:00:00Z,TIMED,Sheffield United FC,Wolverhampton Wanderers FC
+2026-09-15T18:45:00Z,TIMED,Middlesbrough FC,Millwall FC
+2026-09-15T18:45:00Z,TIMED,Bristol City FC,Lincoln City FC
 2026-09-18T19:00:00Z,TIMED,Bristol City FC,Watford FC
 2026-09-19T11:30:00Z,TIMED,Stoke City FC,Sheffield United FC
 2026-09-19T11:30:00Z,TIMED,Millwall FC,West Ham United FC
@@ -55,6 +58,7 @@ utcDate,status,homeTeam,awayTeam
 2026-09-19T14:00:00Z,TIMED,Birmingham City FC,Middlesbrough FC
 2026-09-19T14:00:00Z,TIMED,Lincoln City FC,Swansea City AFC
 2026-09-20T11:00:00Z,TIMED,Wolverhampton Wanderers FC,West Bromwich Albion FC
+2026-09-20T12:30:00Z,TIMED,Norwich City FC,Bolton Wanderers FC
 2026-10-09T19:00:00Z,TIMED,West Ham United FC,Queens Park Rangers FC
 2026-10-10T11:30:00Z,TIMED,West Bromwich Albion FC,Birmingham City FC
 2026-10-10T11:30:00Z,TIMED,Swansea City AFC,Norwich City FC

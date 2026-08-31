@@ -1,7 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-08-30T16:30:00Z,TIMED,SSC Napoli,Como 1907
-2026-08-30T18:45:00Z,TIMED,SS Lazio,Genoa CFC
-2026-08-30T18:45:00Z,TIMED,Cagliari Calcio,FC Internazionale Milano
 2026-08-31T16:30:00Z,TIMED,US Lecce,AS Roma
 2026-08-31T18:45:00Z,TIMED,Atalanta BC,Bologna FC 1909
 2026-09-04T18:45:00Z,TIMED,Genoa CFC,Como 1907
@@ -12,7 +9,7 @@ utcDate,status,homeTeam,awayTeam
 2026-09-06T13:00:00Z,TIMED,Frosinone Calcio,Venezia FC
 2026-09-06T16:00:00Z,TIMED,Bologna FC 1909,US Sassuolo Calcio
 2026-09-06T18:45:00Z,TIMED,Juventus FC,AC Milan
-2026-09-07T16:00:00Z,TIMED,Cagliari Calcio,US Lecce
+2026-09-07T16:30:00Z,TIMED,Cagliari Calcio,US Lecce
 2026-09-07T18:45:00Z,TIMED,Udinese Calcio,SS Lazio
 2026-09-11T18:45:00Z,TIMED,Venezia FC,ACF Fiorentina
 2026-09-12T13:00:00Z,TIMED,Genoa CFC,Frosinone Calcio
