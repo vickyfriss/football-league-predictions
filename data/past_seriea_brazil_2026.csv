@@ -240,4 +240,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T14:00:00Z,25,FINISHED,CA Paranaense,Fluminense FC,3,3,DRAW
 2026-08-30T19:00:00Z,25,FINISHED,SC Corinthians Paulista,Santos FC,0,1,AWAY_TEAM
 2026-08-30T19:00:00Z,25,FINISHED,CR Flamengo,Botafogo FR,3,0,HOME_TEAM
+2026-08-30T21:30:00Z,25,FINISHED,Grêmio FBPA,Chapecoense AF,3,1,HOME_TEAM
+2026-08-30T21:30:00Z,25,FINISHED,Mirassol FC,SE Palmeiras,1,1,DRAW
 2026-08-30T22:30:00Z,25,FINISHED,EC Bahia,SC Internacional,3,2,HOME_TEAM
+2026-08-31T23:00:00Z,25,FINISHED,Clube do Remo,Coritiba FBC,2,3,AWAY_TEAM

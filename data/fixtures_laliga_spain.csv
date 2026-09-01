@@ -1,6 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-08-31T17:30:00Z,TIMED,CA Osasuna,Getafe CF
-2026-08-31T19:30:00Z,TIMED,FC Barcelona,Rayo Vallecano de Madrid
 2026-09-03T19:00:00Z,TIMED,Real Sociedad de Fútbol,RC Celta de Vigo
 2026-09-04T19:00:00Z,TIMED,Real Betis Balompié,Real Madrid CF
 2026-09-05T14:15:00Z,TIMED,Athletic Club,Club Atlético de Madrid
@@ -12,35 +10,35 @@ utcDate,status,homeTeam,awayTeam
 2026-09-06T19:00:00Z,TIMED,RCD Espanyol de Barcelona,Sevilla FC
 2026-09-07T17:00:00Z,TIMED,Getafe CF,RC Celta de Vigo
 2026-09-07T19:30:00Z,TIMED,Elche CF,Real Sociedad de Fútbol
-2026-09-13T00:00:00Z,SCHEDULED,Getafe CF,RC Deportivo La Coruña
-2026-09-13T00:00:00Z,SCHEDULED,Sevilla FC,Valencia CF
-2026-09-13T00:00:00Z,SCHEDULED,Real Racing Club de Santander,Deportivo Alavés
-2026-09-13T00:00:00Z,SCHEDULED,Villarreal CF,Real Betis Balompié
-2026-09-13T00:00:00Z,SCHEDULED,RC Celta de Vigo,Málaga CF
-2026-09-13T00:00:00Z,SCHEDULED,CA Osasuna,RCD Espanyol de Barcelona
-2026-09-13T00:00:00Z,SCHEDULED,Real Sociedad de Fútbol,Club Atlético de Madrid
-2026-09-13T00:00:00Z,SCHEDULED,Levante UD,FC Barcelona
-2026-09-13T00:00:00Z,SCHEDULED,Athletic Club,Elche CF
-2026-09-13T00:00:00Z,SCHEDULED,Real Madrid CF,Rayo Vallecano de Madrid
-2026-09-16T00:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,RCD Espanyol de Barcelona
-2026-09-16T00:00:00Z,SCHEDULED,RC Deportivo La Coruña,Sevilla FC
-2026-09-16T00:00:00Z,SCHEDULED,Deportivo Alavés,Valencia CF
-2026-09-16T00:00:00Z,SCHEDULED,Elche CF,Real Madrid CF
-2026-09-16T00:00:00Z,SCHEDULED,Málaga CF,Villarreal CF
-2026-09-16T00:00:00Z,SCHEDULED,Club Atlético de Madrid,CA Osasuna
-2026-09-16T00:00:00Z,SCHEDULED,Levante UD,Athletic Club
-2026-09-16T00:00:00Z,SCHEDULED,Real Betis Balompié,Getafe CF
-2026-09-16T00:00:00Z,SCHEDULED,FC Barcelona,Real Racing Club de Santander
-2026-09-20T00:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Madrid CF
+2026-09-11T19:00:00Z,TIMED,Sevilla FC,Valencia CF
+2026-09-12T12:00:00Z,TIMED,Real Racing Club de Santander,Deportivo Alavés
+2026-09-12T14:15:00Z,TIMED,CA Osasuna,RCD Espanyol de Barcelona
+2026-09-12T16:30:00Z,TIMED,Athletic Club,Elche CF
+2026-09-12T19:00:00Z,TIMED,Real Madrid CF,Rayo Vallecano de Madrid
+2026-09-13T12:00:00Z,TIMED,RC Celta de Vigo,Málaga CF
+2026-09-13T14:15:00Z,TIMED,Levante UD,FC Barcelona
+2026-09-13T16:30:00Z,TIMED,Getafe CF,RC Deportivo La Coruña
+2026-09-13T19:00:00Z,TIMED,Real Sociedad de Fútbol,Club Atlético de Madrid
+2026-09-14T19:00:00Z,TIMED,Villarreal CF,Real Betis Balompié
+2026-09-15T17:00:00Z,TIMED,Rayo Vallecano de Madrid,RCD Espanyol de Barcelona
+2026-09-15T18:00:00Z,TIMED,Deportivo Alavés,Valencia CF
+2026-09-15T19:30:00Z,TIMED,Elche CF,Real Madrid CF
+2026-09-16T17:00:00Z,TIMED,RC Deportivo La Coruña,Sevilla FC
+2026-09-16T17:00:00Z,TIMED,Club Atlético de Madrid,CA Osasuna
+2026-09-16T19:30:00Z,TIMED,Levante UD,Athletic Club
+2026-09-16T19:30:00Z,TIMED,FC Barcelona,Real Racing Club de Santander
+2026-09-17T17:00:00Z,TIMED,Real Betis Balompié,Getafe CF
+2026-09-17T19:30:00Z,TIMED,Málaga CF,Villarreal CF
+2026-09-19T12:00:00Z,TIMED,CA Osasuna,Rayo Vallecano de Madrid
+2026-09-19T14:15:00Z,TIMED,Athletic Club,Deportivo Alavés
+2026-09-19T16:30:00Z,TIMED,RC Celta de Vigo,Real Racing Club de Santander
+2026-09-19T19:00:00Z,TIMED,Sevilla FC,FC Barcelona
 2026-09-20T00:00:00Z,SCHEDULED,Valencia CF,Real Sociedad de Fútbol
-2026-09-20T00:00:00Z,SCHEDULED,Sevilla FC,FC Barcelona
-2026-09-20T00:00:00Z,SCHEDULED,Athletic Club,Deportivo Alavés
 2026-09-20T00:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Elche CF
-2026-09-20T00:00:00Z,SCHEDULED,CA Osasuna,Rayo Vallecano de Madrid
-2026-09-20T00:00:00Z,SCHEDULED,RC Celta de Vigo,Real Racing Club de Santander
-2026-09-20T00:00:00Z,SCHEDULED,RC Deportivo La Coruña,Real Betis Balompié
-2026-09-20T00:00:00Z,SCHEDULED,Villarreal CF,Levante UD
-2026-09-20T00:00:00Z,SCHEDULED,Getafe CF,Málaga CF
+2026-09-20T12:00:00Z,TIMED,Getafe CF,Málaga CF
+2026-09-20T14:15:00Z,TIMED,Club Atlético de Madrid,Real Madrid CF
+2026-09-20T16:30:00Z,TIMED,RC Deportivo La Coruña,Real Betis Balompié
+2026-09-20T16:30:00Z,TIMED,Villarreal CF,Levante UD
 2026-10-11T00:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Athletic Club
 2026-10-11T00:00:00Z,SCHEDULED,Deportivo Alavés,Club Atlético de Madrid
 2026-10-11T00:00:00Z,SCHEDULED,FC Barcelona,Getafe CF

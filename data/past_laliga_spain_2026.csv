@@ -25,3 +25,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-29T17:00:00Z,3,FINISHED,Real Sociedad de Fútbol,RCD Espanyol de Barcelona,2,1,HOME_TEAM
 2026-08-29T19:30:00Z,3,FINISHED,Sevilla FC,Club Atlético de Madrid,1,3,AWAY_TEAM
 2026-08-30T15:00:00Z,3,FINISHED,Real Madrid CF,Málaga CF,4,0,HOME_TEAM
+2026-08-30T17:30:00Z,3,FINISHED,RC Deportivo La Coruña,Valencia CF,3,1,HOME_TEAM
+2026-08-30T19:30:00Z,3,FINISHED,RC Celta de Vigo,Athletic Club,0,2,AWAY_TEAM
+2026-08-31T17:30:00Z,3,FINISHED,CA Osasuna,Getafe CF,1,0,HOME_TEAM
+2026-08-31T19:30:00Z,3,FINISHED,FC Barcelona,Rayo Vallecano de Madrid,5,2,HOME_TEAM

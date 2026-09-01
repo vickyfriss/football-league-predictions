@@ -29,3 +29,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-29T17:00:00Z,4,FINISHED,Académico de Viseu FC,FC Porto,0,3,AWAY_TEAM
 2026-08-30T14:30:00Z,4,FINISHED,CD Nacional,CF Estrela da Amadora,2,3,AWAY_TEAM
 2026-08-30T17:00:00Z,4,FINISHED,Casa Pia AC,Moreirense FC,0,1,AWAY_TEAM
+2026-08-30T19:30:00Z,4,FINISHED,FC Famalicão,Gil Vicente FC,0,0,DRAW
+2026-08-31T19:15:00Z,4,FINISHED,Sport Lisboa e Benfica,GD Estoril Praia,2,1,HOME_TEAM
+2026-08-31T19:15:00Z,4,FINISHED,Sporting Clube de Braga,Vitória SC,1,0,HOME_TEAM

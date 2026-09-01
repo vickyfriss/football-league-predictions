@@ -18,3 +18,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T13:00:00Z,2,FINISHED,Chelsea FC,Brighton & Hove Albion FC,4,3,HOME_TEAM
 2026-08-30T13:00:00Z,2,FINISHED,Leeds United FC,Brentford FC,1,1,DRAW
 2026-08-30T15:30:00Z,2,FINISHED,Manchester United FC,Ipswich Town FC,5,2,HOME_TEAM
+2026-08-31T19:00:00Z,2,FINISHED,Aston Villa FC,Arsenal FC,0,1,AWAY_TEAM
