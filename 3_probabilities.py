@@ -151,8 +151,6 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         num_teams = len(current_teams) if current_teams else len(teams)
         target_matches = max((num_teams - 1) * 2, 1)  # one full double round-robin season
         min_shrink = 0.1  # a team with 0 matches keeps only 10% of its raw rating's distance from the mean
-        team_matches = pd.Series({t: team_stats[t]["matches_played"] for t in teams})
-        shrink_per_team = min_shrink + (1 - min_shrink) * (team_matches / target_matches).clip(upper=1.0)
 
         # A team is "new to this league" if every one of its blended matches
         # is actually from THIS season -- i.e. it has zero matches in the
@@ -164,6 +162,19 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
                 current_only_counts[team] = int(
                     ((current_df["homeTeam"] == team) | (current_df["awayTeam"] == team)).sum()
                 )
+
+        # Shrinkage must track how many of THIS season's matches a team has
+        # played, not its blended (current + prior season) match count --
+        # otherwise an established team's last season alone (a full ~38
+        # games) already clears target_matches, so shrink_per_team hits 1.0
+        # before a ball's been kicked this season, silently skipping the
+        # early-season uncertainty this is meant to model. Confirmed live:
+        # 2 matches into 2026/27, five different Premier League teams (each
+        # with a full 2025/26 season on file) came out at shrink=1.0, using
+        # their blended rating completely unshrunk.
+        team_matches = pd.Series({t: current_only_counts.get(t, 0) for t in teams})
+        shrink_per_team = min_shrink + (1 - min_shrink) * (team_matches / target_matches).clip(upper=1.0)
+
         newly_arrived = {
             t for t in teams
             if team_stats[t]["matches_played"] > 0
