@@ -79,6 +79,22 @@ def load_cached_odds_fixtures_and_history():
     return standings_cached, odds_book_cached, fixtures_cached, past_season_results_cached
 
 
+# Snapshot today's on-disk fixtures BEFORE create_datasets(save_csv=True) below
+# overwrites them with whatever the live API returns right now. If that live
+# pull is incomplete for a team (a transient upstream gap), the snapshot is
+# the only remaining record of its actual remaining schedule -- see
+# backfill_missing_team_fixtures() further down, which uses it to recover
+# from exactly the failure that produced false 100%-certain positions for
+# Bournemouth, Nottingham Forest, Coventry City and Spurs on 2026-08-30/31:
+# their remaining fixtures came back empty for that run, so simulate_once()
+# had nothing left to play for them and their points -- and therefore final
+# position -- were identical in all 10,000 simulated seasons.
+PRE_RUN_FIXTURES_SNAPSHOT = {
+    lg: load_csv(f"data/fixtures_{lg}.csv")
+    for lg in dataset_processing.leagues
+    if os.path.exists(f"data/fixtures_{lg}.csv")
+}
+
 if RUN_CREATION:
     standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
 
@@ -198,6 +214,72 @@ missing_df, _ = dataset_processing.process_datasets(globals_dict)
 
 print("\n📊 Missing fixtures:")
 print(missing_df if missing_df is not None else "None")
+
+
+# =========================
+# 3️⃣.5 GUARANTEE EVERY TEAM STILL HAS ITS REMAINING FIXTURES
+# =========================
+def backfill_missing_team_fixtures(globals_dict, snapshot, leagues, mappings):
+    """A team with games left in the season must have at least one row in
+    future_matches_{lg} -- otherwise simulate_once() plays nothing for it,
+    its points freeze at today's total, and its final position comes out
+    100% certain in every one of the 10,000 simulated seasons (see the
+    2026-08-30/31 incident). Detect that state per team and recover from the
+    pre-run snapshot rather than silently publishing the false-certainty
+    result."""
+    for lg in leagues:
+        table = globals_dict.get(lg)
+        future_matches = globals_dict.get(f"future_matches_{lg}")
+        past_matches_all = globals_dict.get(f"past_matches_{lg}_all")
+
+        if table is None or table.empty or future_matches is None:
+            continue
+        if "team" not in table.columns or "gp" not in table.columns:
+            continue
+
+        future_matches = dataset_processing.normalize_columns(future_matches)
+
+        num_teams = table["team"].nunique()
+        expected_gp = (num_teams - 1) * 2
+        gp = pd.to_numeric(table["gp"], errors="coerce").fillna(0)
+        teams_with_games_left = set(table.loc[gp < expected_gp, "team"])
+
+        teams_in_future = set(future_matches["homeTeam"]) | set(future_matches["awayTeam"])
+        missing_teams = teams_with_games_left - teams_in_future
+        if not missing_teams:
+            continue
+
+        print(f"⚠️ {lg}: {sorted(missing_teams)} have games left but zero fixtures came back from today's pull -- backfilling from yesterday's cache")
+
+        cached = snapshot.get(lg)
+        if cached is None or cached.empty:
+            print(f"   ❌ no cached fixtures on disk for {lg} either -- {sorted(missing_teams)} will be simulated with no remaining matches")
+            continue
+
+        cached = dataset_processing.normalize_columns(cached).replace(mappings.get(lg, {}))
+
+        played = set()
+        if past_matches_all is not None and not past_matches_all.empty:
+            past_norm = dataset_processing.normalize_columns(past_matches_all)
+            played = set(zip(past_norm["homeTeam"], past_norm["awayTeam"]))
+
+        involves_missing = cached["homeTeam"].isin(missing_teams) | cached["awayTeam"].isin(missing_teams)
+        not_already_played = ~cached.apply(lambda r: (r["homeTeam"], r["awayTeam"]) in played, axis=1)
+        recovered = cached.loc[involves_missing & not_already_played]
+
+        if recovered.empty:
+            print(f"   ❌ yesterday's cache didn't cover {sorted(missing_teams)} either -- still missing")
+            continue
+
+        globals_dict[f"future_matches_{lg}"] = pd.concat([future_matches, recovered], ignore_index=True)
+        still_missing = missing_teams - (set(recovered["homeTeam"]) | set(recovered["awayTeam"]))
+        if still_missing:
+            print(f"   ⚠️ recovered some fixtures, but still missing: {sorted(still_missing)}")
+        else:
+            print(f"   ✅ recovered {len(recovered)} fixture(s) from yesterday's cache, all affected teams now covered")
+
+
+backfill_missing_team_fixtures(globals_dict, PRE_RUN_FIXTURES_SNAPSHOT, dataset_processing.leagues, dataset_processing.mappings)
 
 
 # =========================
