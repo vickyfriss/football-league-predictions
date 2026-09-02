@@ -69,19 +69,25 @@ RELEGATED_FROM_ABOVE = {
 # as a ratio to their new league's own mean (1.0 = league average). Fixed
 # constants, not recomputed from the current season's 1-2 games played --
 # an earlier attempt did that and it was too noisy to trust (a single early
-# scoreline swings the ratio wildly). These come from real full completed
-# seasons instead:
+# scoreline swings the ratio wildly). These come from real completed
+# seasons instead, computed in the "Priors for Promoted and Relegated
+# Teams" notebook (Football-analytics repo):
 #   PROMOTED: every team promoted into a "big 5" league (Premier League,
-#   La Liga, Bundesliga, Serie A, Ligue 1) across the last 2 completed
-#   seasons that a football-data.org free-tier token can see -- n=28,
-#   consistently below average, no real outliers.
-#   RELEGATED: every team relegated from the Premier League into the
-#   Championship across the last 3 completed seasons -- n=9. Consistently
-#   *above* average (median finish: 3rd, playoff position), but genuinely
-#   bimodal -- 6 of 9 were clearly strong, 2 of 9 (Luton 2024/25, Leicester
-#   2025/26) badly underperformed even Championship level. A single point
-#   estimate will be wrong more often here than for promoted teams; treat
-#   this one as the rougher of the two priors.
+#   La Liga, Bundesliga, Serie A, Ligue 1) for the one completed season
+#   football-data.org's free tier exposes -- n=14, consistently below
+#   average on attack, and worse than average on defense for all but a
+#   couple of teams.
+#   RELEGATED: the three teams relegated from the Premier League into the
+#   Championship in 2024/25 (Ipswich, Leicester, Southampton), over their
+#   following Championship season -- n=3. Two of three came back well
+#   above the Championship average on attack; Leicester was the outlier,
+#   finishing below average on attack and worse than average on defense.
+#   A single point estimate will be wrong more often here than for
+#   promoted teams; treat this one as the rougher of the two priors.
+#   football-data.org's free tier only exposes the current season plus
+#   one prior, so this is the one full cohort available for either group
+#   right now -- revisit both once another promoted/relegated cohort
+#   completes a season and rolls into the cached data.
 PROMOTED_TEAM_ATTACK_RATIO = 0.769
 PROMOTED_TEAM_DEFENSE_RATIO = 1.224
 RELEGATED_TEAM_ATTACK_RATIO = 1.220
