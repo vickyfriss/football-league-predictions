@@ -26,8 +26,6 @@ utcDate,status,homeTeam,awayTeam
 2026-09-19T14:00:00Z,TIMED,Newcastle United FC,Hull City AFC
 2026-09-19T16:30:00Z,TIMED,Nottingham Forest FC,Coventry City FC
 2026-09-20T13:00:00Z,TIMED,AFC Bournemouth,Liverpool FC
-2026-09-20T13:00:00Z,TIMED,Leeds United FC,Crystal Palace FC
-2026-09-20T13:00:00Z,TIMED,Manchester City FC,Sunderland AFC
 2026-09-20T15:30:00Z,TIMED,Fulham FC,Manchester United FC
 2026-10-10T11:30:00Z,TIMED,Arsenal FC,Leeds United FC
 2026-10-10T14:00:00Z,TIMED,Sunderland AFC,Brighton & Hove Albion FC
@@ -51,7 +49,6 @@ utcDate,status,homeTeam,awayTeam
 2026-10-19T19:00:00Z,TIMED,Tottenham Hotspur FC,Coventry City FC
 2026-10-23T19:00:00Z,TIMED,Ipswich Town FC,Nottingham Forest FC
 2026-10-24T11:30:00Z,TIMED,Aston Villa FC,Manchester City FC
-2026-10-24T14:00:00Z,TIMED,Liverpool FC,Brighton & Hove Albion FC
 2026-10-24T14:00:00Z,TIMED,Arsenal FC,Everton FC
 2026-10-24T14:00:00Z,TIMED,Coventry City FC,Fulham FC
 2026-10-24T16:30:00Z,TIMED,Chelsea FC,Tottenham Hotspur FC
@@ -66,7 +63,6 @@ utcDate,status,homeTeam,awayTeam
 2026-10-31T15:00:00Z,TIMED,Hull City AFC,Ipswich Town FC
 2026-10-31T15:00:00Z,TIMED,Brentford FC,Nottingham Forest FC
 2026-10-31T17:30:00Z,TIMED,Tottenham Hotspur FC,Crystal Palace FC
-2026-11-01T14:00:00Z,TIMED,Aston Villa FC,Fulham FC
 2026-11-01T16:30:00Z,TIMED,Liverpool FC,Arsenal FC
 2026-11-02T20:00:00Z,TIMED,Newcastle United FC,Everton FC
 2026-11-07T15:00:00Z,TIMED,Arsenal FC,Hull City AFC
