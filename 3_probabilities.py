@@ -149,8 +149,8 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             current_df = normalize_columns(current_season_matches_dict.get(league, pd.DataFrame()))
         current_teams = extract_teams(current_df) if current_df is not None and not current_df.empty else set(teams)
         num_teams = len(current_teams) if current_teams else len(teams)
-        target_matches = max((num_teams - 1) * 2, 1)  # one full double round-robin season
-        min_shrink = 0.25  # a team with 0 matches keeps 25% of its raw rating's distance from the mean
+        target_matches = max(num_teams - 1, 1)  # half a season -- one single round-robin
+        min_shrink = 0.5  # a team with 0 matches keeps 50% of its raw rating's distance from the mean
 
         # A team is "new to this league" if every one of its blended matches
         # is actually from THIS season -- i.e. it has zero matches in the
