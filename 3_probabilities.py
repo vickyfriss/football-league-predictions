@@ -153,16 +153,16 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         # Two different shrinkage schedules. Established teams shrink toward
         # the plain league mean and get the benefit of the doubt fast: a raw
         # rating built on a real prior season is already meaningful, so it
-        # keeps 60% of its own signal from kickoff and is fully trusted by
-        # half a season (one single round-robin) in. Promoted/relegated teams
-        # shrink toward the historical prior instead of the mean, and keep
-        # the original, more cautious schedule -- their raw rating this early
-        # is a handful of matches at a level they've never played before, not
-        # last season's form, so there's much less reason to trust it fast.
-        min_shrink_established = 0.6
+        # keeps 50% of its own signal from kickoff. Promoted/relegated teams
+        # shrink toward the historical prior instead of the mean, and start
+        # from a more cautious 10% -- their raw rating this early is a
+        # handful of matches at a level they've never played before, not last
+        # season's form. Both schedules reach full trust at the same point,
+        # half a season (one single round-robin) in.
+        min_shrink_established = 0.5
         target_matches_established = max(num_teams - 1, 1)
         min_shrink_new_arrival = 0.1
-        target_matches_new_arrival = max((num_teams - 1) * 2, 1)
+        target_matches_new_arrival = max(num_teams - 1, 1)
 
         # A team is "new to this league" if every one of its blended matches
         # is actually from THIS season -- i.e. it has zero matches in the
