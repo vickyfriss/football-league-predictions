@@ -1,6 +1,5 @@
 # 4_simulations.py
 
-import os
 import math
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
