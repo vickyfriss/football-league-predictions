@@ -1,34 +1,29 @@
 # 4_simulations.py
 
 import os
+import math
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 import pandas as pd
 import numpy as np
-from scipy.stats import poisson
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 # === 1. HELPER FUNCTIONS ===
 
-def match_probabilities_league(home, away, attack, defense, league_avg_scored, home_advantage, max_goals=6):
-    """Compute Poisson probabilities for a single match."""
-    exp_home = np.exp(np.log(league_avg_scored) + np.log(attack[home]) + np.log(defense[away]) + home_advantage)
-    exp_away = np.exp(np.log(league_avg_scored) + np.log(attack[away]) + np.log(defense[home]))
-    p_home = poisson.pmf(range(max_goals + 1), exp_home)
-    p_away = poisson.pmf(range(max_goals + 1), exp_away)
+_POISSON_FACTORIALS = np.array([math.factorial(k) for k in range(7)], dtype=float)
 
-    p_win = p_draw = p_loss = 0.0
-    for i in range(max_goals + 1):
-        for j in range(max_goals + 1):
-            prob = p_home[i] * p_away[j]
-            if i > j:
-                p_win += prob
-            elif i == j:
-                p_draw += prob
-            else:
-                p_loss += prob
-    return p_win, p_draw, p_loss
+def poisson_pmf(lam, max_goals=6):
+    """Poisson pmf for k=0..max_goals, vectorized over any leading shape of `lam`.
+
+    Hand-rolled instead of scipy.stats.poisson.pmf: scipy's per-call parameter
+    validation and broadcasting machinery dominated profiled runtime once this
+    got called per-simulation instead of once per fixture (see run_simulations
+    below) -- this version is a plain array formula, no per-call overhead.
+    """
+    lam = np.asarray(lam)[..., None]
+    k = np.arange(max_goals + 1)
+    return np.exp(-lam) * lam**k / _POISSON_FACTORIALS[: max_goals + 1]
 
 # === 2. SIMULATION FUNCTIONS ===
 

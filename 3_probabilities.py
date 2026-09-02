@@ -201,10 +201,20 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         promoted_teams = newly_arrived - relegated_teams
 
         # Every other team (returning, or new but undetected as either)
-        # shrinks toward the plain league mean; promoted/relegated teams
-        # shrink toward the historical priors defined above the function.
-        mean_attack = attack.mean()
-        mean_defense = defense.mean()
+        # shrinks toward the plain league mean -- exactly 1.0 by definition,
+        # since attack/defense are each team's own rate divided by league_avg,
+        # and every goal in the dataset is scored by exactly one team, so
+        # goals-scored summed back across all teams reproduces league_avg
+        # exactly. attack.mean()/defense.mean() used to stand in for this,
+        # but that's an UNWEIGHTED mean across teams with very unequal match
+        # counts (a team present in only one of the two blended seasons
+        # counts the same as one present in both), which drifts away from
+        # 1.0 -- confirmed on real data at 0.978/1.028, not the intended
+        # neutral midpoint. Promoted/relegated teams shrink toward the
+        # historical priors defined above the function, still expressed as
+        # a ratio to this same 1.0 baseline.
+        mean_attack = 1.0
+        mean_defense = 1.0
         target_attack = pd.Series(mean_attack, index=teams)
         target_defense = pd.Series(mean_defense, index=teams)
         for t in promoted_teams:
