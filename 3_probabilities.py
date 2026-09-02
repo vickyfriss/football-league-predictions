@@ -149,8 +149,20 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
             current_df = normalize_columns(current_season_matches_dict.get(league, pd.DataFrame()))
         current_teams = extract_teams(current_df) if current_df is not None and not current_df.empty else set(teams)
         num_teams = len(current_teams) if current_teams else len(teams)
-        target_matches = max(num_teams - 1, 1)  # half a season -- one single round-robin
-        min_shrink = 0.5  # a team with 0 matches keeps 50% of its raw rating's distance from the mean
+
+        # Two different shrinkage schedules. Established teams shrink toward
+        # the plain league mean and get the benefit of the doubt fast: a raw
+        # rating built on a real prior season is already meaningful, so it
+        # keeps 60% of its own signal from kickoff and is fully trusted by
+        # half a season (one single round-robin) in. Promoted/relegated teams
+        # shrink toward the historical prior instead of the mean, and keep
+        # the original, more cautious schedule -- their raw rating this early
+        # is a handful of matches at a level they've never played before, not
+        # last season's form, so there's much less reason to trust it fast.
+        min_shrink_established = 0.6
+        target_matches_established = max(num_teams - 1, 1)
+        min_shrink_new_arrival = 0.1
+        target_matches_new_arrival = max((num_teams - 1) * 2, 1)
 
         # A team is "new to this league" if every one of its blended matches
         # is actually from THIS season -- i.e. it has zero matches in the
@@ -162,18 +174,6 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
                 current_only_counts[team] = int(
                     ((current_df["homeTeam"] == team) | (current_df["awayTeam"] == team)).sum()
                 )
-
-        # Shrinkage must track how many of THIS season's matches a team has
-        # played, not its blended (current + prior season) match count --
-        # otherwise an established team's last season alone (a full ~38
-        # games) already clears target_matches, so shrink_per_team hits 1.0
-        # before a ball's been kicked this season, silently skipping the
-        # early-season uncertainty this is meant to model. Confirmed live:
-        # 2 matches into 2026/27, five different Premier League teams (each
-        # with a full 2025/26 season on file) came out at shrink=1.0, using
-        # their blended rating completely unshrunk.
-        team_matches = pd.Series({t: current_only_counts.get(t, 0) for t in teams})
-        shrink_per_team = min_shrink + (1 - min_shrink) * (team_matches / target_matches).clip(upper=1.0)
 
         newly_arrived = {
             t for t in teams
@@ -199,6 +199,25 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
                 last_completed_season = sorted(above_rosters.keys())[0]
                 relegated_teams = newly_arrived & above_rosters.get(last_completed_season, set())
         promoted_teams = newly_arrived - relegated_teams
+
+        # Shrinkage must track how many of THIS season's matches a team has
+        # played, not its blended (current + prior season) match count --
+        # otherwise an established team's last season alone (a full ~38
+        # games) already clears target_matches, so shrink_per_team hits 1.0
+        # before a ball's been kicked this season, silently skipping the
+        # early-season uncertainty this is meant to model. Confirmed live:
+        # 2 matches into 2026/27, five different Premier League teams (each
+        # with a full 2025/26 season on file) came out at shrink=1.0, using
+        # their blended rating completely unshrunk.
+        team_matches = pd.Series({t: current_only_counts.get(t, 0) for t in teams})
+        min_shrink_per_team = pd.Series(min_shrink_established, index=teams)
+        target_matches_per_team = pd.Series(target_matches_established, index=teams)
+        for t in newly_arrived:
+            min_shrink_per_team[t] = min_shrink_new_arrival
+            target_matches_per_team[t] = target_matches_new_arrival
+        shrink_per_team = min_shrink_per_team + (1 - min_shrink_per_team) * (
+            team_matches / target_matches_per_team
+        ).clip(upper=1.0)
 
         # Every other team (returning, or new but undetected as either)
         # shrinks toward the plain league mean -- exactly 1.0 by definition,
