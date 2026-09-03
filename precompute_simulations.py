@@ -348,7 +348,7 @@ def normalize_odds(df):
 # =========================
 print("3️⃣ Computing match probabilities...")
 
-df_simulation_all, ratings_by_league, _home_adv_by_league = dataset_probabilities.compute_final_probabilities(
+df_simulation_all, _ratings_by_league, _home_adv_by_league = dataset_probabilities.compute_final_probabilities(
     active_leagues,
     {lg: globals_dict.get(f"past_matches_{lg}_blended", pd.DataFrame()) for lg in active_leagues},
     {lg: normalize_fixtures(globals_dict.get(f"future_matches_{lg}")) for lg in active_leagues},
@@ -372,7 +372,6 @@ position_distribution_all, position_distribution_pct_all, _ = dataset_simulation
     df_simulation_all,
     tables_all,
     n_sim=10000,
-    ratings_by_league=ratings_by_league,
 )
 
 

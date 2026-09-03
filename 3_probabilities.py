@@ -55,8 +55,6 @@ def match_probabilities_league(home, away, attack, defense, league_avg, home_adv
 
 # === 2. MAIN FUNCTION ===
 
-LOW_TRUST_THRESHOLD = 0.3  # shrink_per_team below this -> flagged for Option 2's simulation-time uncertainty
-
 # Leagues with a tracked tier directly above them, for telling a relegated
 # team apart from a promoted one when both arrive in a league "new" this
 # season. Every other league in this pipeline is already a top flight, so
@@ -246,14 +244,8 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         attack = target_attack + shrink_per_team * (attack - target_attack)
         defense = target_defense + shrink_per_team * (defense - target_defense)
 
-        # Full post-shrink ratings, not just the low-trust subset -- the
-        # simulator needs BOTH sides of a fixture to recompute a Poisson
-        # probability, and a low-trust team's opponent is very often an
-        # established one with no entry of its own otherwise.
         ratings_by_league[league] = {
             "attack": attack, "defense": defense, "league_avg": league_avg, "home_adv": home_adv,
-            "shrink_per_team": shrink_per_team,
-            "low_trust_teams": {t for t in teams if shrink_per_team[t] < LOW_TRUST_THRESHOLD},
         }
 
         # Compute Poisson probabilities
