@@ -305,7 +305,7 @@ if __name__ == "__main__":
     fixtures_all = {league: globals().get(f"fixtures_{league}", pd.DataFrame()) for league in leagues}
     betting_odds_all = {league: globals().get(f"betting_odds_{league}", pd.DataFrame()) for league in leagues}
 
-    df_sim_all, low_trust_all, home_adv_all = compute_final_probabilities(leagues, past_matches_all, fixtures_all, betting_odds_all)
+    df_sim_all, ratings_all, home_adv_all = compute_final_probabilities(leagues, past_matches_all, fixtures_all, betting_odds_all)
     for league, df in df_sim_all.items():
         print(f"\n=== {league.replace('_', ' ').title()} ===")
         print(df.head(3))
