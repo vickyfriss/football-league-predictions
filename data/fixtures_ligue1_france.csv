@@ -17,7 +17,41 @@ utcDate,status,homeTeam,awayTeam
 2026-09-13T13:00:00Z,TIMED,Lille OSC,ES Troyes AC
 2026-09-13T15:15:00Z,TIMED,Le Mans FC,Racing Club de Lens
 2026-09-13T18:45:00Z,TIMED,Stade Brestois 29,Paris Saint-Germain FC
+2026-09-18T18:45:00Z,TIMED,AS Monaco FC,Racing Club de Lens
+2026-09-19T15:15:00Z,TIMED,Paris FC,RC Strasbourg Alsace
+2026-09-19T18:45:00Z,TIMED,Le Mans FC,FC Lorient
+2026-09-19T18:45:00Z,TIMED,Toulouse FC,Le Havre AC
+2026-09-19T18:45:00Z,TIMED,Angers SCO,ES Troyes AC
+2026-09-19T18:45:00Z,TIMED,Olympique Lyonnais,Stade Rennais FC 1901
+2026-09-20T13:00:00Z,TIMED,AJ Auxerre,Stade Brestois 29
+2026-09-20T15:15:00Z,TIMED,OGC Nice,Lille OSC
 2026-09-20T18:45:00Z,TIMED,Olympique de Marseille,Paris Saint-Germain FC
+2026-10-09T18:45:00Z,TIMED,Racing Club de Lens,Olympique Lyonnais
+2026-10-10T15:15:00Z,TIMED,Lille OSC,Le Havre AC
+2026-10-10T18:45:00Z,TIMED,Stade Brestois 29,Angers SCO
+2026-10-10T18:45:00Z,TIMED,FC Lorient,Paris FC
+2026-10-10T18:45:00Z,TIMED,Paris Saint-Germain FC,Le Mans FC
+2026-10-10T18:45:00Z,TIMED,AS Monaco FC,Toulouse FC
+2026-10-11T13:00:00Z,TIMED,OGC Nice,RC Strasbourg Alsace
+2026-10-11T15:15:00Z,TIMED,Stade Rennais FC 1901,AJ Auxerre
+2026-10-11T18:45:00Z,TIMED,ES Troyes AC,Olympique de Marseille
+2026-10-16T18:45:00Z,TIMED,Le Mans FC,Toulouse FC
+2026-10-17T15:15:00Z,TIMED,RC Strasbourg Alsace,Paris Saint-Germain FC
+2026-10-17T18:45:00Z,TIMED,ES Troyes AC,Racing Club de Lens
+2026-10-17T18:45:00Z,TIMED,Lille OSC,Stade Brestois 29
+2026-10-18T13:00:00Z,TIMED,Angers SCO,Olympique de Marseille
+2026-10-18T15:15:00Z,TIMED,FC Lorient,AS Monaco FC
+2026-10-18T15:15:00Z,TIMED,Paris FC,Stade Rennais FC 1901
+2026-10-18T15:15:00Z,TIMED,Le Havre AC,AJ Auxerre
+2026-10-18T18:45:00Z,TIMED,Olympique Lyonnais,OGC Nice
+2026-10-23T18:45:00Z,TIMED,Stade Brestois 29,OGC Nice
+2026-10-24T15:15:00Z,TIMED,Toulouse FC,ES Troyes AC
+2026-10-24T18:45:00Z,TIMED,Racing Club de Lens,Paris FC
+2026-10-25T14:00:00Z,TIMED,AS Monaco FC,Lille OSC
+2026-10-25T16:15:00Z,TIMED,Olympique de Marseille,Le Havre AC
+2026-10-25T16:15:00Z,TIMED,Stade Rennais FC 1901,RC Strasbourg Alsace
+2026-10-25T16:15:00Z,TIMED,Angers SCO,FC Lorient
+2026-10-25T16:15:00Z,TIMED,AJ Auxerre,Le Mans FC
 2026-10-25T19:45:00Z,TIMED,Paris Saint-Germain FC,Olympique Lyonnais
 2026-10-31T00:00:00Z,SCHEDULED,Lille OSC,Racing Club de Lens
 2026-10-31T00:00:00Z,SCHEDULED,Olympique Lyonnais,Angers SCO
@@ -81,6 +115,7 @@ utcDate,status,homeTeam,awayTeam
 2027-01-02T00:00:00Z,SCHEDULED,Paris FC,Le Havre AC
 2027-01-02T00:00:00Z,SCHEDULED,FC Lorient,AJ Auxerre
 2027-01-02T00:00:00Z,SCHEDULED,Lille OSC,RC Strasbourg Alsace
+2027-01-03T19:45:00Z,TIMED,Racing Club de Lens,Paris Saint-Germain FC
 2027-01-16T00:00:00Z,SCHEDULED,Olympique de Marseille,Lille OSC
 2027-01-16T00:00:00Z,SCHEDULED,Olympique Lyonnais,FC Lorient
 2027-01-16T00:00:00Z,SCHEDULED,Paris FC,Toulouse FC
@@ -116,6 +151,7 @@ utcDate,status,homeTeam,awayTeam
 2027-02-06T00:00:00Z,SCHEDULED,Stade Rennais FC 1901,Olympique Lyonnais
 2027-02-06T00:00:00Z,SCHEDULED,RC Strasbourg Alsace,Paris FC
 2027-02-06T00:00:00Z,SCHEDULED,AJ Auxerre,AS Monaco FC
+2027-02-07T19:45:00Z,TIMED,Paris Saint-Germain FC,Olympique de Marseille
 2027-02-13T00:00:00Z,SCHEDULED,Stade Brestois 29,Stade Rennais FC 1901
 2027-02-13T00:00:00Z,SCHEDULED,Paris FC,ES Troyes AC
 2027-02-13T00:00:00Z,SCHEDULED,Le Mans FC,Paris Saint-Germain FC
@@ -142,6 +178,7 @@ utcDate,status,homeTeam,awayTeam
 2027-02-27T00:00:00Z,SCHEDULED,Olympique de Marseille,Stade Rennais FC 1901
 2027-02-27T00:00:00Z,SCHEDULED,Olympique Lyonnais,Toulouse FC
 2027-02-27T00:00:00Z,SCHEDULED,Le Mans FC,Paris FC
+2027-02-28T19:45:00Z,TIMED,Paris Saint-Germain FC,Racing Club de Lens
 2027-03-06T00:00:00Z,SCHEDULED,Le Havre AC,OGC Nice
 2027-03-06T00:00:00Z,SCHEDULED,Paris Saint-Germain FC,Stade Rennais FC 1901
 2027-03-06T00:00:00Z,SCHEDULED,Racing Club de Lens,RC Strasbourg Alsace
@@ -168,6 +205,7 @@ utcDate,status,homeTeam,awayTeam
 2027-03-20T00:00:00Z,SCHEDULED,Paris Saint-Germain FC,RC Strasbourg Alsace
 2027-03-20T00:00:00Z,SCHEDULED,Racing Club de Lens,Lille OSC
 2027-03-20T00:00:00Z,SCHEDULED,FC Lorient,OGC Nice
+2027-03-21T19:45:00Z,TIMED,Olympique de Marseille,Olympique Lyonnais
 2027-04-03T00:00:00Z,SCHEDULED,Le Havre AC,ES Troyes AC
 2027-04-03T00:00:00Z,SCHEDULED,Angers SCO,AS Monaco FC
 2027-04-03T00:00:00Z,SCHEDULED,Le Mans FC,Olympique de Marseille
@@ -221,6 +259,7 @@ utcDate,status,homeTeam,awayTeam
 2027-05-08T00:00:00Z,SCHEDULED,Racing Club de Lens,AS Monaco FC
 2027-05-08T00:00:00Z,SCHEDULED,Angers SCO,Toulouse FC
 2027-05-08T00:00:00Z,SCHEDULED,OGC Nice,Olympique de Marseille
+2027-05-09T18:45:00Z,TIMED,Olympique Lyonnais,Paris Saint-Germain FC
 2027-05-16T00:00:00Z,SCHEDULED,AS Monaco FC,Paris FC
 2027-05-16T00:00:00Z,SCHEDULED,Olympique Lyonnais,Le Mans FC
 2027-05-16T00:00:00Z,SCHEDULED,Paris Saint-Germain FC,OGC Nice
