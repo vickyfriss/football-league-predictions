@@ -184,17 +184,22 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         if above_league and prior_rosters_by_league_season:
             above_rosters = prior_rosters_by_league_season.get(above_league, {})
             if above_rosters:
-                # The OLDEST of the two seasons on file, not the newest --
-                # this pipeline always fetches exactly [current, previous]
-                # (see PAST_SEASONS in 1_dataset_creation.py), and the above
+                # Want the most recently COMPLETED season for the above
+                # league, not its current in-progress one -- the above
                 # league's "current" season is very often still empty (0
                 # games played) at exactly the point this detection matters
                 # most, i.e. right when a newly-relegated team needs to be
-                # recognised. Picking the max season number silently picked
-                # that empty roster and made every relegated team fall
-                # through to "promoted" instead -- confirmed by a real test
-                # run where relegated teams' outlook got WORSE, not better.
-                last_completed_season = sorted(above_rosters.keys())[0]
+                # recognised. Excluding the current season (the max season
+                # number) and taking the max of what's left gets this right
+                # even when older season files pile up in the cache: an
+                # earlier version just took the OLDEST season on file,
+                # assuming exactly two seasons were ever cached -- confirmed
+                # live to silently misclassify a team relegated only last
+                # season (present in the cache's newest completed season,
+                # but not its oldest) as promoted instead, once a third,
+                # older season file had accumulated in data/ from a past run.
+                seasons = sorted(above_rosters.keys())
+                last_completed_season = seasons[-2] if len(seasons) > 1 else seasons[-1]
                 relegated_teams = newly_arrived & above_rosters.get(last_completed_season, set())
         promoted_teams = newly_arrived - relegated_teams
 
