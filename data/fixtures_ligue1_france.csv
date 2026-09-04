@@ -1,5 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-09-03T18:45:00Z,TIMED,Toulouse FC,Lille OSC
 2026-09-04T17:00:00Z,TIMED,Olympique Lyonnais,AJ Auxerre
 2026-09-04T19:05:00Z,TIMED,Paris Saint-Germain FC,AS Monaco FC
 2026-09-05T15:15:00Z,TIMED,Racing Club de Lens,FC Lorient
@@ -53,15 +52,15 @@ utcDate,status,homeTeam,awayTeam
 2026-10-25T16:15:00Z,TIMED,Angers SCO,FC Lorient
 2026-10-25T16:15:00Z,TIMED,AJ Auxerre,Le Mans FC
 2026-10-25T19:45:00Z,TIMED,Paris Saint-Germain FC,Olympique Lyonnais
-2026-10-31T00:00:00Z,SCHEDULED,Lille OSC,Racing Club de Lens
-2026-10-31T00:00:00Z,SCHEDULED,Olympique Lyonnais,Angers SCO
-2026-10-31T00:00:00Z,SCHEDULED,FC Lorient,Stade Brestois 29
-2026-10-31T00:00:00Z,SCHEDULED,Paris FC,AS Monaco FC
-2026-10-31T00:00:00Z,SCHEDULED,ES Troyes AC,Le Mans FC
-2026-10-31T00:00:00Z,SCHEDULED,Le Havre AC,Paris Saint-Germain FC
-2026-10-31T00:00:00Z,SCHEDULED,Olympique de Marseille,Toulouse FC
-2026-10-31T00:00:00Z,SCHEDULED,OGC Nice,Stade Rennais FC 1901
-2026-10-31T00:00:00Z,SCHEDULED,RC Strasbourg Alsace,AJ Auxerre
+2026-10-30T18:00:00Z,TIMED,Le Havre AC,Paris Saint-Germain FC
+2026-10-30T20:05:00Z,TIMED,Lille OSC,Racing Club de Lens
+2026-10-31T16:15:00Z,TIMED,OGC Nice,Stade Rennais FC 1901
+2026-10-31T19:45:00Z,TIMED,Olympique Lyonnais,Angers SCO
+2026-10-31T19:45:00Z,TIMED,FC Lorient,Stade Brestois 29
+2026-10-31T19:45:00Z,TIMED,ES Troyes AC,Le Mans FC
+2026-11-01T14:00:00Z,TIMED,RC Strasbourg Alsace,AJ Auxerre
+2026-11-01T16:15:00Z,TIMED,Paris FC,AS Monaco FC
+2026-11-01T19:45:00Z,TIMED,Olympique de Marseille,Toulouse FC
 2026-11-07T00:00:00Z,SCHEDULED,Le Mans FC,AS Monaco FC
 2026-11-07T00:00:00Z,SCHEDULED,Stade Brestois 29,Olympique Lyonnais
 2026-11-07T00:00:00Z,SCHEDULED,Le Havre AC,FC Lorient

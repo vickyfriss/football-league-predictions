@@ -17,3 +17,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T13:00:00Z,2,FINISHED,Paris FC,OGC Nice,3,0,HOME_TEAM
 2026-08-30T15:15:00Z,2,FINISHED,Stade Rennais FC 1901,Le Mans FC,3,2,HOME_TEAM
 2026-08-30T18:45:00Z,2,FINISHED,AS Monaco FC,Olympique de Marseille,2,0,HOME_TEAM
+2026-09-03T18:45:00Z,3,FINISHED,Toulouse FC,Lille OSC,0,1,AWAY_TEAM

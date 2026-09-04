@@ -1,7 +1,7 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,AS Monaco,2,2,0,0,3,0,3,6
-2,Paris FC,2,1,1,0,3,0,3,4
-3,Lille,2,1,1,0,4,2,2,4
+1,Lille,3,2,1,0,5,2,3,7
+2,AS Monaco,2,2,0,0,3,0,3,6
+3,Paris FC,2,1,1,0,3,0,3,4
 4,Lyon,2,1,1,0,3,1,2,4
 5,Stade Rennais,2,1,1,0,5,4,1,4
 6,Troyes,2,1,1,0,2,1,1,4
@@ -14,6 +14,6 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 13,Le Mans,2,0,1,1,4,5,-1,1
 14,Lorient,2,0,1,1,1,2,-1,1
 15,Le Havre AC,2,0,1,1,1,2,-1,1
-16,Toulouse,2,0,1,1,2,4,-2,1
+16,Toulouse,3,0,1,2,2,5,-3,1
 17,Nice,2,0,1,1,0,3,-3,1
 18,AJ Auxerre,2,0,0,2,3,8,-5,0
