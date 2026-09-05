@@ -19,3 +19,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T18:45:00Z,2,FINISHED,Cagliari Calcio,FC Internazionale Milano,0,1,AWAY_TEAM
 2026-08-31T16:30:00Z,2,FINISHED,US Lecce,AS Roma,0,4,AWAY_TEAM
 2026-08-31T18:45:00Z,2,FINISHED,Atalanta BC,Bologna FC 1909,1,0,HOME_TEAM
+2026-09-04T18:45:00Z,3,FINISHED,Genoa CFC,Como 1907,1,4,AWAY_TEAM

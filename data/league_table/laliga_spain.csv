@@ -1,11 +1,11 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Barcelona,3,3,0,0,12,2,10,9
-2,Real Madrid,3,3,0,0,10,2,8,9
-3,Atlético Madrid,3,2,1,0,7,3,4,7
-4,Alavés,3,2,1,0,5,1,4,7
-5,Osasuna,3,2,1,0,3,1,2,7
-6,Sevilla,3,2,0,1,6,5,1,6
-7,Real Betis,3,2,0,1,4,5,-1,6
+2,Real Madrid,4,3,0,1,10,3,7,9
+3,Real Betis,4,3,0,1,5,5,0,9
+4,Atlético Madrid,3,2,1,0,7,3,4,7
+5,Alavés,3,2,1,0,5,1,4,7
+6,Osasuna,3,2,1,0,3,1,2,7
+7,Sevilla,3,2,0,1,6,5,1,6
 8,Deportivo,3,1,2,0,5,3,2,5
 9,Levante,3,1,1,1,5,5,0,4
 10,Racing Santander,3,1,1,1,5,5,0,4

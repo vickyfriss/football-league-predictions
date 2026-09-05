@@ -32,3 +32,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T19:30:00Z,4,FINISHED,FC Famalicão,Gil Vicente FC,0,0,DRAW
 2026-08-31T19:15:00Z,4,FINISHED,Sport Lisboa e Benfica,GD Estoril Praia,2,1,HOME_TEAM
 2026-08-31T19:15:00Z,4,FINISHED,Sporting Clube de Braga,Vitória SC,1,0,HOME_TEAM
+2026-09-04T19:15:00Z,5,FINISHED,FC Porto,Moreirense FC,2,1,HOME_TEAM

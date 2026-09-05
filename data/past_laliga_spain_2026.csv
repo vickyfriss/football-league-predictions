@@ -29,3 +29,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T19:30:00Z,3,FINISHED,RC Celta de Vigo,Athletic Club,0,2,AWAY_TEAM
 2026-08-31T17:30:00Z,3,FINISHED,CA Osasuna,Getafe CF,1,0,HOME_TEAM
 2026-08-31T19:30:00Z,3,FINISHED,FC Barcelona,Rayo Vallecano de Madrid,5,2,HOME_TEAM
+2026-09-03T19:00:00Z,6,FINISHED,Real Sociedad de Fútbol,RC Celta de Vigo,0,0,DRAW
+2026-09-04T19:00:00Z,4,FINISHED,Real Betis Balompié,Real Madrid CF,1,0,HOME_TEAM

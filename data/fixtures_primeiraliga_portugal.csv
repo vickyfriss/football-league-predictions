@@ -1,5 +1,4 @@
 utcDate,status,homeTeam,awayTeam
-2026-09-04T19:15:00Z,TIMED,FC Porto,Moreirense FC
 2026-09-05T14:30:00Z,TIMED,CF Estrela da Amadora,FC Famalicão
 2026-09-05T17:00:00Z,TIMED,FC Alverca,Sporting Clube de Braga
 2026-09-05T17:00:00Z,TIMED,CS Marítimo,Sport Lisboa e Benfica
@@ -10,69 +9,69 @@ utcDate,status,homeTeam,awayTeam
 2026-09-07T19:15:00Z,TIMED,GD Estoril Praia,FC Arouca
 2026-09-09T19:45:00Z,TIMED,Moreirense FC,Sport Lisboa e Benfica
 2026-09-10T19:15:00Z,TIMED,CF Estrela da Amadora,Sporting Clube de Braga
-2026-09-13T00:00:00Z,SCHEDULED,Moreirense FC,CS Marítimo
-2026-09-13T00:00:00Z,SCHEDULED,Rio Ave FC,CF Estrela da Amadora
-2026-09-13T00:00:00Z,SCHEDULED,Sport Lisboa e Benfica,Gil Vicente FC
-2026-09-13T00:00:00Z,SCHEDULED,FC Famalicão,Sporting Clube de Portugal
-2026-09-13T00:00:00Z,SCHEDULED,CD Nacional,FC Alverca
-2026-09-13T00:00:00Z,SCHEDULED,Casa Pia AC,FC Porto
-2026-09-13T00:00:00Z,SCHEDULED,Sporting Clube de Braga,GD Estoril Praia
-2026-09-13T00:00:00Z,SCHEDULED,Académico de Viseu FC,Vitória SC
-2026-09-13T00:00:00Z,SCHEDULED,FC Arouca,CD Santa Clara
-2026-09-20T00:00:00Z,SCHEDULED,CD Nacional,FC Famalicão
-2026-09-20T00:00:00Z,SCHEDULED,Gil Vicente FC,CS Marítimo
-2026-09-20T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,FC Arouca
-2026-09-20T00:00:00Z,SCHEDULED,CD Santa Clara,Sporting Clube de Braga
-2026-09-20T00:00:00Z,SCHEDULED,Vitória SC,Moreirense FC
-2026-09-20T00:00:00Z,SCHEDULED,FC Porto,Sport Lisboa e Benfica
-2026-09-20T00:00:00Z,SCHEDULED,CF Estrela da Amadora,Académico de Viseu FC
-2026-09-20T00:00:00Z,SCHEDULED,FC Alverca,Rio Ave FC
-2026-09-20T00:00:00Z,SCHEDULED,GD Estoril Praia,Casa Pia AC
-2026-10-11T00:00:00Z,SCHEDULED,Sport Lisboa e Benfica,Vitória SC
-2026-10-11T00:00:00Z,SCHEDULED,Casa Pia AC,CD Santa Clara
-2026-10-11T00:00:00Z,SCHEDULED,Académico de Viseu FC,GD Estoril Praia
-2026-10-11T00:00:00Z,SCHEDULED,CS Marítimo,FC Porto
-2026-10-11T00:00:00Z,SCHEDULED,FC Arouca,CF Estrela da Amadora
-2026-10-11T00:00:00Z,SCHEDULED,FC Famalicão,FC Alverca
-2026-10-11T00:00:00Z,SCHEDULED,Sporting Clube de Braga,Sporting Clube de Portugal
-2026-10-11T00:00:00Z,SCHEDULED,Moreirense FC,Gil Vicente FC
-2026-10-11T00:00:00Z,SCHEDULED,Rio Ave FC,CD Nacional
-2026-10-25T00:00:00Z,SCHEDULED,Vitória SC,CS Marítimo
-2026-10-25T00:00:00Z,SCHEDULED,Rio Ave FC,FC Famalicão
-2026-10-25T00:00:00Z,SCHEDULED,CD Santa Clara,Sport Lisboa e Benfica
-2026-10-25T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,Académico de Viseu FC
-2026-10-25T00:00:00Z,SCHEDULED,FC Alverca,FC Arouca
-2026-10-25T00:00:00Z,SCHEDULED,CD Nacional,Sporting Clube de Braga
-2026-10-25T00:00:00Z,SCHEDULED,Gil Vicente FC,FC Porto
-2026-10-25T00:00:00Z,SCHEDULED,GD Estoril Praia,Moreirense FC
-2026-10-25T00:00:00Z,SCHEDULED,CF Estrela da Amadora,Casa Pia AC
-2026-11-01T00:00:00Z,SCHEDULED,FC Porto,GD Estoril Praia
-2026-11-01T00:00:00Z,SCHEDULED,Sporting Clube de Braga,FC Famalicão
-2026-11-01T00:00:00Z,SCHEDULED,CS Marítimo,CD Santa Clara
-2026-11-01T00:00:00Z,SCHEDULED,FC Arouca,CD Nacional
-2026-11-01T00:00:00Z,SCHEDULED,Sport Lisboa e Benfica,FC Alverca
-2026-11-01T00:00:00Z,SCHEDULED,Moreirense FC,CF Estrela da Amadora
-2026-11-01T00:00:00Z,SCHEDULED,Casa Pia AC,Sporting Clube de Portugal
-2026-11-01T00:00:00Z,SCHEDULED,Académico de Viseu FC,Rio Ave FC
-2026-11-01T00:00:00Z,SCHEDULED,Gil Vicente FC,Vitória SC
-2026-11-08T00:00:00Z,SCHEDULED,FC Alverca,Casa Pia AC
-2026-11-08T00:00:00Z,SCHEDULED,GD Estoril Praia,CS Marítimo
-2026-11-08T00:00:00Z,SCHEDULED,Vitória SC,FC Porto
-2026-11-08T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,Moreirense FC
-2026-11-08T00:00:00Z,SCHEDULED,CD Santa Clara,Gil Vicente FC
-2026-11-08T00:00:00Z,SCHEDULED,CD Nacional,Académico de Viseu FC
-2026-11-08T00:00:00Z,SCHEDULED,FC Famalicão,FC Arouca
-2026-11-08T00:00:00Z,SCHEDULED,Rio Ave FC,Sporting Clube de Braga
-2026-11-08T00:00:00Z,SCHEDULED,CF Estrela da Amadora,Sport Lisboa e Benfica
-2026-11-29T00:00:00Z,SCHEDULED,Vitória SC,CF Estrela da Amadora
-2026-11-29T00:00:00Z,SCHEDULED,Moreirense FC,CD Santa Clara
-2026-11-29T00:00:00Z,SCHEDULED,FC Porto,Sporting Clube de Portugal
-2026-11-29T00:00:00Z,SCHEDULED,Casa Pia AC,Sporting Clube de Braga
-2026-11-29T00:00:00Z,SCHEDULED,Sport Lisboa e Benfica,FC Famalicão
-2026-11-29T00:00:00Z,SCHEDULED,CS Marítimo,CD Nacional
-2026-11-29T00:00:00Z,SCHEDULED,FC Arouca,Rio Ave FC
+2026-09-12T14:30:00Z,TIMED,CD Nacional,FC Alverca
+2026-09-12T17:00:00Z,TIMED,Casa Pia AC,FC Porto
+2026-09-12T19:30:00Z,TIMED,Académico de Viseu FC,Vitória SC
+2026-09-13T17:00:00Z,TIMED,Sport Lisboa e Benfica,Gil Vicente FC
+2026-09-13T17:00:00Z,TIMED,FC Arouca,CD Santa Clara
+2026-09-13T19:30:00Z,TIMED,FC Famalicão,Sporting Clube de Portugal
+2026-09-14T17:45:00Z,TIMED,Rio Ave FC,CF Estrela da Amadora
+2026-09-14T19:15:00Z,TIMED,Moreirense FC,CS Marítimo
+2026-09-14T19:45:00Z,TIMED,Sporting Clube de Braga,GD Estoril Praia
+2026-09-19T14:30:00Z,TIMED,CD Nacional,FC Famalicão
+2026-09-19T14:30:00Z,TIMED,Gil Vicente FC,CS Marítimo
+2026-09-19T17:00:00Z,TIMED,FC Alverca,Rio Ave FC
+2026-09-19T19:30:00Z,TIMED,Sporting Clube de Portugal,FC Arouca
+2026-09-20T14:30:00Z,TIMED,Vitória SC,Moreirense FC
+2026-09-20T14:30:00Z,TIMED,CF Estrela da Amadora,Académico de Viseu FC
+2026-09-20T17:00:00Z,TIMED,CD Santa Clara,Sporting Clube de Braga
+2026-09-20T17:00:00Z,TIMED,GD Estoril Praia,Casa Pia AC
+2026-09-20T19:30:00Z,TIMED,FC Porto,Sport Lisboa e Benfica
+2026-10-09T17:45:00Z,TIMED,Moreirense FC,Gil Vicente FC
+2026-10-09T19:15:00Z,TIMED,Sporting Clube de Braga,Sporting Clube de Portugal
+2026-10-10T14:30:00Z,TIMED,Casa Pia AC,CD Santa Clara
+2026-10-10T17:00:00Z,TIMED,CS Marítimo,FC Porto
+2026-10-10T19:30:00Z,TIMED,Académico de Viseu FC,GD Estoril Praia
+2026-10-11T14:30:00Z,TIMED,Rio Ave FC,CD Nacional
+2026-10-11T17:00:00Z,TIMED,Sport Lisboa e Benfica,Vitória SC
+2026-10-11T19:30:00Z,TIMED,FC Arouca,CF Estrela da Amadora
+2026-10-12T19:15:00Z,TIMED,FC Famalicão,FC Alverca
+2026-10-23T19:45:00Z,TIMED,Vitória SC,CS Marítimo
+2026-10-24T14:30:00Z,TIMED,CF Estrela da Amadora,Casa Pia AC
+2026-10-24T17:00:00Z,TIMED,FC Alverca,FC Arouca
+2026-10-24T19:30:00Z,TIMED,Gil Vicente FC,FC Porto
+2026-10-25T15:30:00Z,TIMED,GD Estoril Praia,Moreirense FC
+2026-10-25T18:00:00Z,TIMED,Rio Ave FC,FC Famalicão
+2026-10-25T18:00:00Z,TIMED,CD Nacional,Sporting Clube de Braga
+2026-10-25T20:30:00Z,TIMED,Sporting Clube de Portugal,Académico de Viseu FC
+2026-10-26T18:45:00Z,TIMED,CD Santa Clara,Sport Lisboa e Benfica
+2026-10-30T20:15:00Z,TIMED,Casa Pia AC,Sporting Clube de Portugal
+2026-10-31T15:30:00Z,TIMED,Moreirense FC,CF Estrela da Amadora
+2026-10-31T20:30:00Z,TIMED,FC Porto,GD Estoril Praia
+2026-11-01T15:30:00Z,TIMED,FC Arouca,CD Nacional
+2026-11-01T18:00:00Z,TIMED,CS Marítimo,CD Santa Clara
+2026-11-01T18:00:00Z,TIMED,Académico de Viseu FC,Rio Ave FC
+2026-11-01T20:30:00Z,TIMED,Sporting Clube de Braga,FC Famalicão
+2026-11-02T20:15:00Z,TIMED,Sport Lisboa e Benfica,FC Alverca
+2026-11-02T20:15:00Z,TIMED,Gil Vicente FC,Vitória SC
+2026-11-06T20:45:00Z,TIMED,FC Famalicão,FC Arouca
+2026-11-07T15:30:00Z,TIMED,CD Nacional,Académico de Viseu FC
+2026-11-07T18:00:00Z,TIMED,FC Alverca,Casa Pia AC
+2026-11-07T20:30:00Z,TIMED,Sporting Clube de Portugal,Moreirense FC
+2026-11-08T15:30:00Z,TIMED,GD Estoril Praia,CS Marítimo
+2026-11-08T15:30:00Z,TIMED,CD Santa Clara,Gil Vicente FC
+2026-11-08T18:00:00Z,TIMED,Vitória SC,FC Porto
+2026-11-08T20:30:00Z,TIMED,Rio Ave FC,Sporting Clube de Braga
+2026-11-08T20:30:00Z,TIMED,CF Estrela da Amadora,Sport Lisboa e Benfica
+2026-11-27T20:15:00Z,TIMED,CS Marítimo,CD Nacional
+2026-11-28T15:30:00Z,TIMED,Moreirense FC,CD Santa Clara
+2026-11-28T15:30:00Z,TIMED,FC Arouca,Rio Ave FC
+2026-11-28T18:00:00Z,TIMED,Académico de Viseu FC,FC Alverca
+2026-11-28T20:30:00Z,TIMED,Vitória SC,CF Estrela da Amadora
 2026-11-29T00:00:00Z,SCHEDULED,Gil Vicente FC,GD Estoril Praia
-2026-11-29T00:00:00Z,SCHEDULED,Académico de Viseu FC,FC Alverca
+2026-11-29T20:30:00Z,TIMED,FC Porto,Sporting Clube de Portugal
+2026-11-30T00:00:00Z,SCHEDULED,Casa Pia AC,Sporting Clube de Braga
+2026-11-30T20:15:00Z,TIMED,Sport Lisboa e Benfica,FC Famalicão
 2026-12-06T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,CS Marítimo
 2026-12-06T00:00:00Z,SCHEDULED,CF Estrela da Amadora,Gil Vicente FC
 2026-12-06T00:00:00Z,SCHEDULED,FC Alverca,Moreirense FC
