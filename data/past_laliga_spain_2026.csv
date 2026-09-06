@@ -31,3 +31,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-31T19:30:00Z,3,FINISHED,FC Barcelona,Rayo Vallecano de Madrid,5,2,HOME_TEAM
 2026-09-03T19:00:00Z,6,FINISHED,Real Sociedad de Fútbol,RC Celta de Vigo,0,0,DRAW
 2026-09-04T19:00:00Z,4,FINISHED,Real Betis Balompié,Real Madrid CF,1,0,HOME_TEAM
+2026-09-05T14:15:00Z,4,FINISHED,Athletic Club,Club Atlético de Madrid,3,0,HOME_TEAM
+2026-09-05T16:30:00Z,4,FINISHED,Rayo Vallecano de Madrid,Real Racing Club de Santander,3,2,HOME_TEAM
+2026-09-05T19:00:00Z,4,FINISHED,Villarreal CF,RC Deportivo La Coruña,2,3,AWAY_TEAM

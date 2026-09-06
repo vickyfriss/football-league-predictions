@@ -47,3 +47,14 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-02T18:45:00Z,4,FINISHED,Queens Park Rangers FC,Cardiff City FC,2,1,HOME_TEAM
 2026-09-02T18:45:00Z,4,FINISHED,West Bromwich Albion FC,Charlton Athletic FC,1,1,DRAW
 2026-09-02T19:00:00Z,4,FINISHED,Burnley FC,Middlesbrough FC,1,1,DRAW
+2026-09-05T11:30:00Z,5,FINISHED,Preston North End FC,Blackburn Rovers FC,2,1,HOME_TEAM
+2026-09-05T11:30:00Z,5,FINISHED,Stoke City FC,Charlton Athletic FC,4,0,HOME_TEAM
+2026-09-05T11:30:00Z,5,FINISHED,Lincoln City FC,Southampton FC,1,1,DRAW
+2026-09-05T14:00:00Z,5,FINISHED,Queens Park Rangers FC,Middlesbrough FC,0,1,AWAY_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,Sheffield United FC,Norwich City FC,1,3,AWAY_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,Portsmouth FC,Cardiff City FC,2,0,HOME_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,West Bromwich Albion FC,Watford FC,1,0,HOME_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,West Ham United FC,Derby County FC,3,0,HOME_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,Burnley FC,Bristol City FC,1,2,AWAY_TEAM
+2026-09-05T14:00:00Z,5,FINISHED,Millwall FC,Bolton Wanderers FC,4,0,HOME_TEAM
+2026-09-05T19:00:00Z,5,FINISHED,Swansea City AFC,Wrexham AFC,0,0,DRAW
