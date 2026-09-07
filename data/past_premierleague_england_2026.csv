@@ -27,3 +27,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T14:00:00Z,3,FINISHED,Brentford FC,Sunderland AFC,1,1,DRAW
 2026-09-05T14:00:00Z,3,FINISHED,Fulham FC,Crystal Palace FC,2,3,AWAY_TEAM
 2026-09-05T16:30:00Z,3,FINISHED,Hull City AFC,Aston Villa FC,0,0,DRAW
+2026-09-06T13:00:00Z,3,FINISHED,Everton FC,Manchester United FC,2,2,DRAW
+2026-09-06T15:30:00Z,3,FINISHED,Arsenal FC,Chelsea FC,2,1,HOME_TEAM

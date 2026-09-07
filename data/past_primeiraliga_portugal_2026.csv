@@ -37,3 +37,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T17:00:00Z,5,FINISHED,FC Alverca,Sporting Clube de Braga,1,2,AWAY_TEAM
 2026-09-05T17:00:00Z,5,FINISHED,CS Marítimo,Sport Lisboa e Benfica,0,3,AWAY_TEAM
 2026-09-05T19:30:00Z,5,FINISHED,Sporting Clube de Portugal,CD Nacional,2,0,HOME_TEAM
+2026-09-06T14:30:00Z,5,FINISHED,CD Santa Clara,Rio Ave FC,4,0,HOME_TEAM
+2026-09-06T17:00:00Z,5,FINISHED,Vitória SC,Casa Pia AC,0,0,DRAW
+2026-09-06T19:30:00Z,5,FINISHED,Gil Vicente FC,Académico de Viseu FC,0,1,AWAY_TEAM

@@ -58,3 +58,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T14:00:00Z,5,FINISHED,Burnley FC,Bristol City FC,1,2,AWAY_TEAM
 2026-09-05T14:00:00Z,5,FINISHED,Millwall FC,Bolton Wanderers FC,4,0,HOME_TEAM
 2026-09-05T19:00:00Z,5,FINISHED,Swansea City AFC,Wrexham AFC,0,0,DRAW
+2026-09-06T11:00:00Z,5,FINISHED,Birmingham City FC,Wolverhampton Wanderers FC,2,2,DRAW

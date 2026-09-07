@@ -34,3 +34,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T14:15:00Z,4,FINISHED,Athletic Club,Club Atlético de Madrid,3,0,HOME_TEAM
 2026-09-05T16:30:00Z,4,FINISHED,Rayo Vallecano de Madrid,Real Racing Club de Santander,3,2,HOME_TEAM
 2026-09-05T19:00:00Z,4,FINISHED,Villarreal CF,RC Deportivo La Coruña,2,3,AWAY_TEAM
+2026-09-06T14:15:00Z,4,FINISHED,Valencia CF,FC Barcelona,0,5,AWAY_TEAM
+2026-09-06T16:30:00Z,4,FINISHED,Deportivo Alavés,CA Osasuna,5,2,HOME_TEAM
+2026-09-06T16:30:00Z,4,FINISHED,Málaga CF,Levante UD,0,0,DRAW
+2026-09-06T19:00:00Z,4,FINISHED,RCD Espanyol de Barcelona,Sevilla FC,1,1,DRAW

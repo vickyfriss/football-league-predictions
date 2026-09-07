@@ -15,3 +15,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T13:30:00Z,2,FINISHED,Borussia Mönchengladbach,SV 07 Elversberg,3,4,AWAY_TEAM
 2026-09-05T13:30:00Z,2,FINISHED,SC Paderborn 07,SC Freiburg,0,1,AWAY_TEAM
 2026-09-05T16:30:00Z,2,FINISHED,FC Schalke 04,FC Bayern München,0,0,DRAW
+2026-09-06T13:30:00Z,2,FINISHED,Hamburger SV,1. FSV Mainz 05,0,5,AWAY_TEAM
+2026-09-06T15:30:00Z,2,FINISHED,Eintracht Frankfurt,FC Augsburg,1,4,AWAY_TEAM

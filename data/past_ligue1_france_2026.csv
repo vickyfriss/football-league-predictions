@@ -23,3 +23,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T15:15:00Z,3,FINISHED,Racing Club de Lens,FC Lorient,0,1,AWAY_TEAM
 2026-09-05T18:45:00Z,3,FINISHED,Le Havre AC,Stade Brestois 29,1,2,AWAY_TEAM
 2026-09-05T18:45:00Z,3,FINISHED,OGC Nice,Le Mans FC,1,1,DRAW
+2026-09-06T13:00:00Z,3,FINISHED,ES Troyes AC,RC Strasbourg Alsace,2,6,AWAY_TEAM
+2026-09-06T15:15:00Z,3,FINISHED,Angers SCO,Stade Rennais FC 1901,1,2,AWAY_TEAM
+2026-09-06T18:45:00Z,3,FINISHED,Olympique de Marseille,Paris FC,2,3,AWAY_TEAM
