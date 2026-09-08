@@ -27,3 +27,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T13:00:00Z,3,FINISHED,Frosinone Calcio,Venezia FC,3,2,HOME_TEAM
 2026-09-06T16:00:00Z,3,FINISHED,Bologna FC 1909,US Sassuolo Calcio,2,2,DRAW
 2026-09-06T18:45:00Z,3,FINISHED,Juventus FC,AC Milan,1,1,DRAW
+2026-09-07T16:30:00Z,3,FINISHED,Cagliari Calcio,US Lecce,1,0,HOME_TEAM
+2026-09-07T18:45:00Z,3,FINISHED,Udinese Calcio,SS Lazio,1,2,AWAY_TEAM

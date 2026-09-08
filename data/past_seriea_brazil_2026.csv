@@ -254,3 +254,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T19:00:00Z,26,FINISHED,Clube do Remo,CR Flamengo,0,1,AWAY_TEAM
 2026-09-06T21:30:00Z,26,FINISHED,Botafogo FR,SE Palmeiras,0,0,DRAW
 2026-09-06T22:30:00Z,26,FINISHED,SC Corinthians Paulista,Chapecoense AF,1,2,AWAY_TEAM
+2026-09-07T23:00:00Z,26,FINISHED,EC Vitória,Grêmio FBPA,1,0,HOME_TEAM
