@@ -496,21 +496,30 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
        header text alone needs ~41px, more than the previous 40px column. */
     th:nth-child(n+5), td:nth-child(n+5) { width: 78px; white-space: nowrap !important; }
 
+    /* left offsets below are each 1px less than the exact running-total
+       width (46, 216, 258): at rest this changes nothing, since a sticky
+       element's resting position comes from normal table layout, not from
+       "left" (that only kicks in once actively stuck). While scrolled,
+       though, Chromium occasionally rounds two adjacent stuck sticky cells
+       to different device pixels and leaves a hairline gap between them
+       that shows the scrolling content behind it through the seam. A
+       deliberate 1px overlap, safely covered by the earlier column's
+       higher z-index, absorbs that rounding error instead of exposing it. */
     th:nth-child(1), td:nth-child(1) {
         width: 46px; white-space: nowrap !important;
         position: sticky; left: 0; z-index: 4; background-color: inherit;
     }
     th:nth-child(2), td:nth-child(2) {
         width: 170px; text-align: left !important;
-        position: sticky; left: 46px; z-index: 3; background-color: inherit;
+        position: sticky; left: 43px; z-index: 3; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
         width: 42px; white-space: nowrap !important;
-        position: sticky; left: 216px; z-index: 2; background-color: inherit;
+        position: sticky; left: 211px; z-index: 2; background-color: inherit;
     }
     th:nth-child(4), td:nth-child(4) {
         width: 46px; white-space: nowrap !important;
-        position: sticky; left: 258px; z-index: 1; background-color: inherit;
+        position: sticky; left: 251px; z-index: 1; background-color: inherit;
     }
 }
 
@@ -527,10 +536,11 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
         background-color: inherit;
     }
 
-    /* Sticky second column: TEAM */
+    /* Sticky second column: TEAM. 1px less than the POS column's width on
+       purpose -- see the desktop block's comment above for why. */
     th:nth-child(2), td:nth-child(2) {
         position: sticky;
-        left: 40px; /* match the width of the POS column */
+        left: 39px;
         z-index: 2;
         background-color: inherit;
         text-align: left !important;
