@@ -480,7 +480,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     background: rgba(255,255,255,0.14);
     border: 1px solid rgba(255,255,255,0.35);
     color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -503,8 +503,8 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 .hero-banner .hero-description {
     color: rgba(255,255,255,0.97);
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.6;
     margin: 0;
 }
 .hero-banner .hero-description b { color: #ffffff; }
@@ -527,7 +527,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     .hero-banner { padding: 116px 20px 24px; }
     .hero-banner h1 { font-size: 22px; }
 }
-.app-card p, .app-card li { color: var(--text-main); font-size: 16px; line-height: 1.7; }
+.app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
 
 /* Numbered step badges in the methodology list -- fixed brand green (not a
    dark-mode variable): it's a solid-fill badge with guaranteed white text, so
@@ -556,7 +556,7 @@ li:hover .step-circle { background-color: #245f27; }
 .status-banner {
     max-width: 900px; margin: 28px auto; padding: 10px 18px;
     background-color: #eaf5ec; border-left: 2px solid #a5d6a7; border-right: 2px solid #a5d6a7;
-    border-radius: 8px; color: #245f27; font-size: 14px; text-align: center;
+    border-radius: 8px; color: #245f27; font-size: 13px; text-align: center;
 }
 @media (prefers-color-scheme: dark) {
     .status-banner { background-color: #1b3320; color: #a5d6a7; }
@@ -1072,9 +1072,9 @@ pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
 st.markdown(f"""
-<div style="text-align:center; margin: 1rem 0 0.5rem;">
+<div style="text-align:center; margin: 0.75rem 0 0.5rem;">
     <span class="section-eyebrow">{t("results_eyebrow")}</span>
-    <h2 style="margin:0; font-size:2rem; font-weight:800;">{t("results_header", league=selected_display_name)}</h2>
+    <h2 style="margin:0; font-size:22px; font-weight:700;">{selected_display_name.split(" (")[0]}</h2>
 </div>
 """, unsafe_allow_html=True)
 
@@ -1144,8 +1144,10 @@ st.markdown(f"""
 st.markdown(f"""
 <div id="about-me" class="app-card" style="padding:28px 32px; max-width:900px;
             margin:28px auto; text-align:center;">
+<div style="text-align:left;">
 <span class="section-eyebrow">{t("about_eyebrow")}</span>
 <h3 style="margin-bottom:15px;">{t("about_title")}</h3>
+</div>
 <p>{t("about_p1")}</p>
 <p>{t("about_p2")}</p>
 <p>{t("about_p3")}</p>
