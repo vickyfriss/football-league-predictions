@@ -605,11 +605,14 @@ div.stButton > button p:last-child {
     }
 }
 
-/* Top-right contact panel -- also fixed white; same black-icon reasoning */
-#contact-panel { 
-    position: fixed; 
-    top: 60px;              
-    right: 20px; 
+/* Top-right contact panel -- also fixed white; same black-icon reasoning.
+   Sits well below the language pills (44px lower than the pills' own
+   bottom edge) so the two clusters read as two distinct, deliberately
+   spaced groups rather than one crowded corner. */
+#contact-panel {
+    position: fixed;
+    top: 88px;
+    right: 20px;
     background-color: #ffffff; 
     padding: 10px 12px; 
     border-radius: 10px; 
@@ -777,23 +780,8 @@ with st.container(key="lang_switcher"):
 
 # -------------------------------
 # 6️⃣ TOP-RIGHT CONTACT PANEL
-
-st.markdown("""
-<div id="contact-panel">
-    <a href="mailto:vicky_friss@hotmail.com" title="Email">
-        <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
-    </a>
-    <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" title="LinkedIn">
-        <img src="https://img.icons8.com/ios-filled/30/000000/linkedin.png"/>
-    </a>
-    <a href="https://medium.com/@vickyfrissdekereki" target="_blank" title="Medium">
-        <img src="https://img.icons8.com/ios-filled/30/000000/medium-monogram.png"/>
-    </a>
-    <a href="https://github.com/vickyfriss" target="_blank" title="GitHub">
-        <img src="https://img.icons8.com/ios-filled/30/000000/github.png"/>
-    </a>
-</div>
-""", unsafe_allow_html=True)
+# (rendered above, merged into the same st.markdown call as the stylesheet --
+# see the comment there for why)
 
 # -------------------------------
 # 7️⃣ HERO SECTION
