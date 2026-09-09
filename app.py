@@ -40,6 +40,7 @@ COLUMN_LABELS = {
 
 TRANSLATIONS = {
     "en": {
+        "hero_badge": "9 Leagues · Updated Daily",
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
         "hero_description": (
@@ -80,6 +81,7 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Built with Python & Streamlit",
     },
     "es": {
+        "hero_badge": "9 Ligas · Actualizado a Diario",
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
@@ -120,6 +122,7 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Hecho con Python y Streamlit",
     },
     "pt-BR": {
+        "hero_badge": "9 Ligas · Atualizado Diariamente",
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
@@ -160,6 +163,7 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Feito com Python e Streamlit",
     },
     "fr": {
+        "hero_badge": "9 Ligues · Mis à Jour Chaque Jour",
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
         "hero_description": (
@@ -417,6 +421,80 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 .app-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
 .app-card a, .app-card h1, .app-card h3 { color: var(--accent-text); }
 .app-card h3 { font-size: 22px; font-weight: 700; }
+
+/* Full-bleed hero banner -- breaks out of Streamlit's centered, padded
+   content column to run edge-to-edge, the way a masthead does on a real
+   sports-media site. The margin-left/right calc(-50vw + 50%) trick (not
+   width:100vw + left:50%) is the version that plays nicely with
+   scrollbar-gutter:stable further up this stylesheet: 100vw includes the
+   reserved scrollbar gutter and would overshoot the true viewport width by
+   that amount, this doesn't. Fixed brand green regardless of theme, same
+   reasoning as .step-circle and the table card elsewhere: it's a deliberate
+   solid-colour surface, not body text that should adapt to dark mode.
+   margin-top cancels .block-container's own 2rem top padding so the colour
+   actually touches the top of the page instead of leaving a grey sliver. */
+.hero-banner {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: -2rem;
+    margin-bottom: 24px;
+    padding: 30px 24px 28px;
+    background: linear-gradient(135deg, #2E7D32 0%, #1e5c22 100%);
+    text-align: center;
+}
+.hero-banner-inner { max-width: 720px; margin: 0 auto; }
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}
+.hero-banner h1 {
+    color: #ffffff !important;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0 0 5px 0;
+}
+.hero-banner .hero-byline {
+    color: rgba(255,255,255,0.82);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+}
+.hero-banner .hero-description {
+    color: rgba(255,255,255,0.97);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+}
+.hero-banner .hero-description b { color: #ffffff; }
+.hero-banner-cta {
+    display: inline-block;
+    margin-top: 12px;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none !important;
+    border-bottom: 2px solid rgba(255,255,255,0.55);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+}
+.hero-banner-cta:hover { border-bottom-color: #ffffff; }
+@media (max-width: 600px) {
+    /* Extra top padding clears the language-switcher pills (which wrap to
+       two rows on narrow screens) plus the contact-icon row below them,
+       both fixed-position and floating over the top of this banner. */
+    .hero-banner { padding: 116px 20px 24px; }
+    .hero-banner h1 { font-size: 22px; }
+}
 .app-card p, .app-card li { color: var(--text-main); font-size: 16px; line-height: 1.7; }
 
 /* Numbered step badges in the methodology list -- fixed brand green (not a
@@ -745,27 +823,33 @@ header { display: none; }
     white-space: nowrap !important;
     transition: transform 0.15s ease, background-color 0.2s ease;
 }
+/* Sitting on the green hero banner now, not the grey page background --
+   inactive pills use the same translucent "glass" treatment as the hero
+   badge (readable on green, but visibly secondary), while the active pill
+   flips to solid white with dark green text: the one combination with
+   real contrast against a green backdrop, and an unmistakable "selected"
+   state (the old solid-green-on-green pairing nearly disappeared here). */
 .st-key-lang_switcher div.stButton > button[kind="secondary"] {
-    background-color: #ffffff !important;
-    color: #555 !important;
-    border: none !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15) !important;
+    background-color: rgba(255,255,255,0.14) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    box-shadow: none !important;
 }
 .st-key-lang_switcher div.stButton > button[kind="secondary"]:hover {
-    background-color: #ffffff !important;
-    color: #2E7D32 !important;
+    background-color: rgba(255,255,255,0.26) !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.6) !important;
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
 }
 .st-key-lang_switcher div.stButton > button[kind="primary"] {
-    background-color: #2E7D32 !important;
-    color: #ffffff !important;
-    border: none !important;
-    box-shadow: 0 2px 6px rgba(46,125,50,0.4) !important;
+    background-color: #ffffff !important;
+    color: #1e5c22 !important;
+    border: 1px solid #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
 }
 .st-key-lang_switcher div.stButton > button[kind="primary"]:hover {
-    background-color: #245f27 !important;
-    color: #ffffff !important;
+    background-color: #f0f0f0 !important;
+    color: #1e5c22 !important;
 }
 @media (max-width: 600px) {
     .st-key-lang_switcher { top: 8px; right: 8px; width: 190px; }
@@ -839,22 +923,16 @@ with st.container(key="lang_switcher"):
 # 7️⃣ HERO SECTION
 
 st.markdown(f"""
-<div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto; text-align:center;">
-    <h1 style="margin:0; font-size:34px; font-weight:700;">
-        {t("hero_title")}
-    </h1>
-    <p style="margin:6px 0 0 0; font-size:14px; font-weight:500; color:#777;">
-        {t("hero_byline")}
-    </p>
-    <div style="height:4px; width:80px; background:#2E7D32; margin:14px auto 20px auto; border-radius:2px;"></div>
-    <p style="margin:0;">
-        {t("hero_description")}
-    </p>
-    <p style="margin-top:15px; font-weight:600;">
-        <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" style="text-decoration:none;">
-        {t("hero_cta")}
+<div class="hero-banner">
+    <div class="hero-banner-inner">
+        <span class="hero-badge">{t("hero_badge")}</span>
+        <h1>{t("hero_title")}</h1>
+        <p class="hero-byline">{t("hero_byline")}</p>
+        <p class="hero-description">{t("hero_description")}</p>
+        <a class="hero-banner-cta" href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">
+            {t("hero_cta")}
         </a>
-    </p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
