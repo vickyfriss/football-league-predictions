@@ -511,15 +511,15 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     }
     th:nth-child(2), td:nth-child(2) {
         width: 170px; text-align: left !important;
-        position: sticky; left: 43px; z-index: 3; background-color: inherit;
+        position: sticky; left: 46px; z-index: 3; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
         width: 42px; white-space: nowrap !important;
-        position: sticky; left: 211px; z-index: 2; background-color: inherit;
+        position: sticky; left: 216px; z-index: 2; background-color: inherit;
     }
     th:nth-child(4), td:nth-child(4) {
         width: 46px; white-space: nowrap !important;
-        position: sticky; left: 251px; z-index: 1; background-color: inherit;
+        position: sticky; left: 258px; z-index: 1; background-color: inherit;
     }
 }
 
