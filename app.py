@@ -524,7 +524,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     /* Extra top padding clears the language-switcher pills (which wrap to
        two rows on narrow screens) plus the contact-icon row below them,
        both fixed-position and floating over the top of this banner. */
-    .hero-banner { padding: 116px 20px 24px; }
+    .hero-banner { padding: 128px 20px 24px; }
     .hero-banner h1 { font-size: 22px; }
 }
 .app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
