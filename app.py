@@ -83,7 +83,7 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Predicciones sobre la clasificación final en ligas de fútbol de todo el mundo, basadas en datos.<br>"
+            "Predicciones sobre la clasificación final en nueve grandes ligas de fútbol, basadas en datos.<br>"
             "Simula cada partido restante <b>10.000 veces</b> y resume los resultados en tablas de probabilidad."
         ),
         "hero_cta": "Conoce más sobre la creadora y conéctate →",
@@ -123,7 +123,7 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Previsões sobre a classificação final de ligas de futebol ao redor do mundo, baseadas em dados.<br>"
+            "Previsões sobre a classificação final em nove grandes ligas de futebol, baseadas em dados.<br>"
             "Simula cada partida restante <b>10.000 vezes</b> e resume os resultados em tabelas de probabilidade."
         ),
         "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
@@ -163,7 +163,7 @@ TRANSLATIONS = {
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
         "hero_description": (
-            "Prévisions sur le classement final des ligues de football du monde entier, basées sur les données.<br>"
+            "Prévisions sur le classement final de neuf grandes ligues de football, basées sur les données.<br>"
             "Simule chaque match restant <b>10 000 fois</b> et agrège les résultats dans des tableaux de probabilité."
         ),
         "hero_cta": "En savoir plus sur la créatrice et se connecter →",
@@ -301,6 +301,14 @@ def style_probabilities_table(df, column_labels=None):
             {"selector": "td:nth-child(-n+4)", "props":[("border-bottom","1px solid #ccc")]},
             {"selector": "tr:nth-child(odd) td:nth-child(-n+4)", "props":[("background-color","#f9f9f9")]},
             {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
+            # Row hover: a solid, opaque tint on just the frozen POS/TEAM/GP/PTS
+            # columns (the percentage cells keep their own gradient colour --
+            # their background comes from an inline style, which beats this rule
+            # anyway). An inset box-shadow line spanning the full row was tried
+            # first, but at the boundary between the sticky frozen columns and
+            # the scrolling percentage columns it let the different backgrounds
+            # underneath show through unevenly instead of reading as one clean line.
+            {"selector": "tbody tr:hover td:nth-child(-n+4)", "props":[("background-color","#d7ecdb")]},
         ])
     )
 
