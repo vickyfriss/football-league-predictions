@@ -314,18 +314,13 @@ def load_simulation_data():
 
 # The CSS below referenced "Inter" as a font-family all along, but nothing ever loaded
 # it -- so every element silently fell back to Roboto/Arial. This actually loads it.
-#
-# The font links, the big stylesheet and the contact panel's HTML are all sent
-# through this single st.markdown call on purpose: each st.markdown is its own
-# flex item in Streamlit's vertical layout, and every one of them (even a pure
-# <style> tag with zero visible height) still gets the standard inter-element
-# gap reserved around it. Three separate calls here used to mean three stacked
-# gaps of completely dead space above the hero card for no visual benefit --
-# merging them into one call collapses that to a single element's worth.
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+st.markdown("""
 <style>
 /* ================================
    DESIGN TOKENS
