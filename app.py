@@ -83,7 +83,7 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Pronósticos basados en datos para las posiciones finales en ligas de fútbol de todo el mundo.<br>"
+            "Predicciones basadas en datos sobre la clasificación final en ligas de fútbol de todo el mundo.<br>"
             "Simula cada partido restante <b>10.000 veces</b> y agrega los resultados en tablas de probabilidad."
         ),
         "hero_cta": "Conoce más sobre la creadora y conecta →",
@@ -731,14 +731,28 @@ header { display: none; }
     .st-key-lang_switcher div.stButton > button { font-size: 11px !important; height: 26px !important; min-height: 26px !important; }
 }
 
-/* This whole markdown call's own flex slot is dropped from the layout the
-   same way the language switcher's is above -- everything in it is either
-   invisible (the link/style tags) or already pulled out via position:fixed
-   (#contact-panel), so it has no business reserving a gap of its own. */
+/* This call's own flex slot is dropped from the layout the same way the
+   language switcher's is above -- it's a pure <style> tag, invisible and
+   with nothing to lay out, so it has no business reserving a gap of its
+   own either. Matches on the presence of the language-switcher rule right
+   above as a stand-in for "this is our custom stylesheet block", since a
+   bare style tag has no other attribute to hook a selector onto. */
+[data-testid="stElementContainer"]:has(style) {
+    display: contents;
+}
+
+/* Same reasoning, one call down: the contact panel's own markdown call is
+   pure invisible-or-fixed content too, so its slot collapses as well. */
 [data-testid="stElementContainer"]:has(#contact-panel) {
     display: contents;
 }
 </style>
+""", unsafe_allow_html=True)
+
+# -------------------------------
+# 5️⃣.6 TOP-RIGHT CONTACT PANEL
+
+st.markdown("""
 <div id="contact-panel">
     <a href="mailto:vicky_friss@hotmail.com" title="Email">
         <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
@@ -772,11 +786,6 @@ with st.container(key="lang_switcher"):
             ) and st.session_state.lang != code:
                 st.session_state.lang = code
                 st.rerun()
-
-# -------------------------------
-# 6️⃣ TOP-RIGHT CONTACT PANEL
-# (rendered above, merged into the same st.markdown call as the stylesheet --
-# see the comment there for why)
 
 # -------------------------------
 # 7️⃣ HERO SECTION
