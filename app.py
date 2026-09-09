@@ -554,7 +554,7 @@ li:hover .step-circle { background-color: #245f27; }
 /* Branded replacement for st.info() -- Streamlit's built-in info box is a fixed
    blue with no easy way to retheme it, so this is a plain styled div instead. */
 .status-banner {
-    max-width: 900px; margin: 28px auto; padding: 10px 18px;
+    max-width: 900px; margin: 18px auto; padding: 10px 18px;
     background-color: #eaf5ec; border-left: 2px solid #a5d6a7; border-right: 2px solid #a5d6a7;
     border-radius: 8px; color: #245f27; font-size: 13px; text-align: center;
 }
@@ -571,7 +571,7 @@ li:hover .step-circle { background-color: #245f27; }
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     padding: 20px 24px;
     width: 100%;
-    margin: 28px auto;
+    margin: 18px auto;
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
@@ -1072,7 +1072,7 @@ pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
 st.markdown(f"""
-<div style="text-align:center; margin: 0.75rem 0 0.5rem;">
+<div style="text-align:center; margin: 0 0 0.25rem;">
     <span class="section-eyebrow">{t("results_eyebrow")}</span>
     <h2 style="margin:0; font-size:22px; font-weight:700;">{selected_display_name.split(" (")[0]}</h2>
 </div>
@@ -1098,7 +1098,7 @@ st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_po
 # -------------------------------
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown(f"""
-<div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto;">
+<div class="app-card" style="padding:24px 28px; max-width:900px; margin:18px auto;">
 <span class="section-eyebrow">{t("methodology_eyebrow")}</span>
 <h3 style="margin-bottom:15px;">{t("methodology_title")}</h3>
 <p>
@@ -1143,7 +1143,7 @@ st.markdown(f"""
 
 st.markdown(f"""
 <div id="about-me" class="app-card" style="padding:28px 32px; max-width:900px;
-            margin:28px auto; text-align:center;">
+            margin:18px auto; text-align:center;">
 <div style="text-align:left;">
 <span class="section-eyebrow">{t("about_eyebrow")}</span>
 <h3 style="margin-bottom:15px;">{t("about_title")}</h3>
