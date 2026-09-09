@@ -43,7 +43,7 @@ TRANSLATIONS = {
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
         "hero_description": (
-            "Data-driven forecasts for final positions across football leagues worldwide.<br>"
+            "Data-driven forecasts for final positions across nine major football leagues.<br>"
             "Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables."
         ),
         "hero_cta": "Learn more about the creator & connect →",
@@ -83,12 +83,12 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Predicciones basadas en datos sobre la clasificación final en ligas de fútbol de todo el mundo.<br>"
-            "Simula cada partido restante <b>10.000 veces</b> y agrega los resultados en tablas de probabilidad."
+            "Predicciones sobre la clasificación final en ligas de fútbol de todo el mundo, basadas en datos.<br>"
+            "Simula cada partido restante <b>10.000 veces</b> y resume los resultados en tablas de probabilidad."
         ),
-        "hero_cta": "Conoce más sobre la creadora y conecta →",
+        "hero_cta": "Conoce más sobre la creadora y conéctate →",
         "loading_spinner": "Cargando datos de la simulación...",
-        "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a cargar más tarde.",
+        "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
         "last_run": "Última ejecución de las simulaciones: {date} UTC",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
@@ -99,32 +99,32 @@ TRANSLATIONS = {
             "Luego ejecutamos <b>10.000 simulaciones de Monte Carlo</b> sobre todos los partidos restantes para calcular la probabilidad de que cada equipo termine en cada posición de la liga."
         ),
         "step1_title": "Datos Históricos:",
-        "step1_desc": 'Recopila la tabla de posiciones actual mediante web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Partidos:",
+        "step1_desc": 'Recopila la clasificación actual mediante web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
+        "step2_title": "Calendario:",
         "step2_desc": 'Resultados históricos y partidos restantes obtenidos a través de la <a href="https://www.football-data.org/" target="_blank">API de Football-Data.org</a>.',
         "step3_title": "Cuotas de Apuestas:",
         "step3_desc": 'Incorpora las expectativas del mercado desde <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> para mejorar la precisión.',
         "step4_title": "Fuerza de los Equipos:",
         "step4_desc": "Estima la fuerza ofensiva y defensiva de cada equipo.",
         "step5_title": "Probabilidades de Partido:",
-        "step5_desc": "Genera probabilidades de resultado usando modelos de Poisson y basados en cuotas.",
+        "step5_desc": "Genera probabilidades de resultado combinando modelos de Poisson con las cuotas del mercado.",
         "step6_title": "Simulaciones de Monte Carlo:",
         "step6_desc": "Ejecuta 10.000 simulaciones completas de la temporada para cubrir todos los escenarios posibles.",
         "step7_title": "Posiciones Finales:",
-        "step7_desc": "Agrega los resultados de la simulación en distribuciones de probabilidad.",
+        "step7_desc": "Resume los resultados de la simulación en distribuciones de probabilidad.",
         "about_title": "Sobre Mí",
-        "about_p1": 'Hola, soy <b>Victoria Friss de Kereki</b>, <b>analista de datos de fútbol</b> que convierte datos futbolísticos en <b>insights basados en datos</b>, con un enfoque creciente en modelado probabilístico y simulación.',
-        "about_p2": "Construyo <b>insights basados en datos</b>, <b>simulaciones probabilísticas</b> y <b>modelos predictivos</b> para ayudar a organizaciones deportivas y analistas a tomar decisiones informadas respaldadas por datos.",
+        "about_p1": 'Hola, soy <b>Victoria Friss de Kereki</b>, <b>analista de datos de fútbol</b> que transforma datos futbolísticos en <b>insights valiosos</b>, con un enfoque creciente en modelado probabilístico y simulación.',
+        "about_p2": "Construyo <b>insights basados en datos</b>, <b>simulaciones probabilísticas</b> y <b>modelos predictivos</b> para ayudar a organizaciones deportivas y analistas a tomar decisiones más informadas.",
         "about_p3": 'Puedes explorar mi trabajo en <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, donde comparto proyectos sobre análisis de fútbol, rendimiento de jugadores y simulaciones.',
-        "about_cta": "¿Interesada en colaborar o hablar sobre análisis deportivo? <br><b>¡Conectemos!</b>",
+        "about_cta": "¿Interesado(a) en colaborar o hablar sobre análisis deportivo? <br><b>¡Conectemos!</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Hecho con Python y Streamlit",
     },
     "pt-BR": {
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Previsões baseadas em dados para as posições finais em ligas de futebol de todo o mundo.<br>"
-            "Simula cada partida restante <b>10.000 vezes</b> e agrega os resultados em tabelas de probabilidade."
+            "Previsões sobre a classificação final de ligas de futebol ao redor do mundo, baseadas em dados.<br>"
+            "Simula cada partida restante <b>10.000 vezes</b> e resume os resultados em tabelas de probabilidade."
         ),
         "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
         "loading_spinner": "Carregando dados da simulação...",
@@ -140,30 +140,30 @@ TRANSLATIONS = {
         ),
         "step1_title": "Dados Históricos:",
         "step1_desc": 'Coleta a tabela de classificação atual via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Partidas:",
+        "step2_title": "Calendário:",
         "step2_desc": 'Resultados históricos e partidas restantes obtidos através da <a href="https://www.football-data.org/" target="_blank">API do Football-Data.org</a>.',
         "step3_title": "Odds de Apostas:",
         "step3_desc": 'Incorpora as expectativas do mercado da <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> para aumentar a precisão.',
         "step4_title": "Força dos Times:",
         "step4_desc": "Estima a força ofensiva e defensiva de cada time.",
         "step5_title": "Probabilidades de Partida:",
-        "step5_desc": "Gera probabilidades de resultado usando modelos de Poisson e baseados em odds.",
+        "step5_desc": "Gera probabilidades de resultado combinando modelos de Poisson com as odds do mercado.",
         "step6_title": "Simulações de Monte Carlo:",
         "step6_desc": "Executa 10.000 simulações completas da temporada para cobrir todos os cenários possíveis.",
         "step7_title": "Posições Finais:",
-        "step7_desc": "Agrega os resultados da simulação em distribuições de probabilidade.",
+        "step7_desc": "Resume os resultados da simulação em distribuições de probabilidade.",
         "about_title": "Sobre Mim",
-        "about_p1": 'Olá, sou <b>Victoria Friss de Kereki</b>, <b>analista de dados de futebol</b> que transforma dados do futebol em <b>insights orientados por dados</b>, com foco crescente em modelagem probabilística e simulação.',
-        "about_p2": "Eu crio <b>insights orientados por dados</b>, <b>simulações probabilísticas</b> e <b>modelos preditivos</b> para ajudar organizações esportivas e analistas a tomar decisões informadas com base em dados.",
+        "about_p1": 'Olá, sou <b>Victoria Friss de Kereki</b>, <b>analista de dados de futebol</b> que transforma dados do futebol em <b>insights valiosos</b>, com foco crescente em modelagem probabilística e simulação.',
+        "about_p2": "Eu crio <b>insights orientados por dados</b>, <b>simulações probabilísticas</b> e <b>modelos preditivos</b> para ajudar organizações esportivas e analistas a tomar decisões mais informadas.",
         "about_p3": 'Você pode conhecer meu trabalho no <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, onde compartilho projetos sobre análise de futebol, desempenho de jogadores e simulações.',
-        "about_cta": "Interessado em colaborar ou discutir análise esportiva? <br><b>Vamos nos conectar!</b>",
+        "about_cta": "Interessado(a) em colaborar ou discutir análise esportiva? <br><b>Vamos nos conectar!</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Feito com Python e Streamlit",
     },
     "fr": {
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
         "hero_description": (
-            "Prévisions basées sur les données pour les classements finaux dans les ligues de football du monde entier.<br>"
+            "Prévisions sur le classement final des ligues de football du monde entier, basées sur les données.<br>"
             "Simule chaque match restant <b>10 000 fois</b> et agrège les résultats dans des tableaux de probabilité."
         ),
         "hero_cta": "En savoir plus sur la créatrice et se connecter →",
@@ -171,12 +171,12 @@ TRANSLATIONS = {
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
         "last_run": "Dernière exécution des simulations : {date} UTC",
         "results_header": "Résultats de la Simulation : {league}",
-        "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque position, sur la base de 10 000 saisons simulées.",
+        "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "download_button": "Télécharger le tableau en CSV",
         "methodology_title": "Comment Fonctionne Cette Simulation",
         "methodology_intro": (
             "Cette simulation combine <b>résultats historiques</b> et <b>cotes des paris</b> pour estimer les probabilités de résultat des matchs.  "
-            "Nous exécutons ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants afin de calculer la probabilité que chaque équipe termine à chaque position du classement."
+            "Nous exécutons ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants afin de calculer la probabilité que chaque équipe termine à chaque place du classement."
         ),
         "step1_title": "Données Historiques :",
         "step1_desc": 'Récupère le classement actuel via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
@@ -187,14 +187,14 @@ TRANSLATIONS = {
         "step4_title": "Force des Équipes :",
         "step4_desc": "Estime la force offensive et défensive de chaque équipe.",
         "step5_title": "Probabilités de Match :",
-        "step5_desc": "Génère des probabilités de résultat à l'aide de modèles de Poisson et basés sur les cotes.",
+        "step5_desc": "Génère des probabilités de résultat en combinant des modèles de Poisson et les cotes du marché.",
         "step6_title": "Simulations de Monte-Carlo :",
         "step6_desc": "Exécute 10 000 simulations complètes de la saison pour couvrir tous les scénarios possibles.",
         "step7_title": "Positions Finales :",
         "step7_desc": "Agrège les résultats de la simulation en distributions de probabilité.",
         "about_title": "À Propos de Moi",
-        "about_p1": "Bonjour, je suis <b>Victoria Friss de Kereki</b>, une <b>analyste de données football</b> qui transforme les données du football en <b>insights basés sur les données</b>, avec un intérêt croissant pour la modélisation probabiliste et la simulation.",
-        "about_p2": "Je conçois des <b>insights basés sur les données</b>, des <b>simulations probabilistes</b> et des <b>modèles prédictifs</b> pour aider les organisations sportives et les analystes à prendre des décisions éclairées, appuyées par les données.",
+        "about_p1": "Bonjour, je suis <b>Victoria Friss de Kereki</b>, une <b>analyste de données</b> spécialisée en football, qui transforme les données du jeu en <b>insights précieux</b>, avec un intérêt croissant pour la modélisation probabiliste et la simulation.",
+        "about_p2": "Je conçois des <b>insights basés sur les données</b>, des <b>simulations probabilistes</b> et des <b>modèles prédictifs</b> pour aider les organisations sportives et les analystes à prendre des décisions plus éclairées.",
         "about_p3": 'Vous pouvez découvrir mon travail sur <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, où je partage des projets sur l\'analyse du football, la performance des joueurs et les simulations.',
         "about_cta": "Intéressé(e) par une collaboration ou une discussion sur l'analyse sportive ? <br><b>Connectons-nous !</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Créé avec Python et Streamlit",
@@ -207,6 +207,21 @@ if "lang" not in st.session_state:
 def t(key, **kwargs):
     text = TRANSLATIONS[st.session_state.lang][key]
     return text.format(**kwargs) if kwargs else text
+
+def format_run_date(run_dt, lang):
+    # Each language's date order/particles are real grammar, not just translated
+    # words -- "9 de septiembre de 2026" and "9 septembre 2026" aren't the same
+    # shape as "09 September 2026", and Spanish/French/Portuguese don't
+    # capitalise month names in running text the way English does.
+    day = run_dt.day
+    time_str = run_dt.strftime("%H:%M")
+    if lang == "en":
+        month = MONTH_NAMES[lang][run_dt.month - 1]
+        return f"{day:02d} {month} {run_dt.year}, {time_str}"
+    month = MONTH_NAMES[lang][run_dt.month - 1].lower()
+    if lang == "fr":
+        return f"{day} {month} {run_dt.year}, {time_str}"
+    return f"{day} de {month} de {run_dt.year}, {time_str}"
 
 # -------------------------------
 # 3️⃣ HELPER FUNCTIONS FOR STYLING
@@ -631,6 +646,14 @@ div.stButton > button p:last-child {
 
 }
 
+/* Pulls the download button up onto the same visual row as the caption
+   right above it (the caption is centered full-width text with room to
+   spare on both sides, and this button is narrow and left-aligned, so the
+   two don't collide) instead of sitting on its own line right below it. */
+[data-testid="stDownloadButton"] {
+    margin-top: -40px;
+}
+
 /* Download button -- always solid green regardless of primary/secondary kind
    (it's the only stDownloadButton on the page, no need to differentiate it). */
 div[data-testid="stDownloadButton"] button {
@@ -731,19 +754,26 @@ header { display: none; }
     .st-key-lang_switcher div.stButton > button { font-size: 11px !important; height: 26px !important; min-height: 26px !important; }
 }
 
-/* This call's own flex slot is dropped from the layout the same way the
-   language switcher's is above -- it's a pure <style> tag, invisible and
-   with nothing to lay out, so it has no business reserving a gap of its
-   own either. Matches on the presence of the language-switcher rule right
-   above as a stand-in for "this is our custom stylesheet block", since a
-   bare style tag has no other attribute to hook a selector onto. */
-[data-testid="stElementContainer"]:has(style) {
-    display: contents;
-}
-
-/* Same reasoning, one call down: the contact panel's own markdown call is
-   pure invisible-or-fixed content too, so its slot collapses as well. */
-[data-testid="stElementContainer"]:has(#contact-panel) {
+/* Three st.markdown calls on this page (font links, this stylesheet, the
+   contact panel below) contain nothing but invisible tags or content already
+   pulled out via position:fixed -- none of them should reserve a gap in
+   Streamlit's vertical layout. display:contents on the outer element
+   container alone isn't enough though: Streamlit wraps every markdown call
+   in a couple of real (non-contents) div layers of its own first, and
+   *those* still generate a flex item and consume a gap unless they're
+   collapsed too, so every layer down to the actual content is targeted here. */
+[data-testid="stElementContainer"]:has(link[rel="preconnect"]),
+[data-testid="stElementContainer"]:has(link[rel="preconnect"]) [data-testid="stMarkdown"],
+[data-testid="stElementContainer"]:has(link[rel="preconnect"]) [data-testid="stMarkdown"] > div,
+[data-testid="stElementContainer"]:has(link[rel="preconnect"]) [data-testid="stMarkdownContainer"],
+[data-testid="stElementContainer"]:has(style),
+[data-testid="stElementContainer"]:has(style) [data-testid="stMarkdown"],
+[data-testid="stElementContainer"]:has(style) [data-testid="stMarkdown"] > div,
+[data-testid="stElementContainer"]:has(style) [data-testid="stMarkdownContainer"],
+[data-testid="stElementContainer"]:has(#contact-panel),
+[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdown"],
+[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdown"] > div,
+[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdownContainer"] {
     display: contents;
 }
 </style>
@@ -831,11 +861,7 @@ LEAGUES = [
 ]
 league_header_labels = {key: header for key, pill, header in LEAGUES}
 
-# Temporary default: most leagues haven't kicked off their 2026/27 season yet (0 games
-# played), so land on a league that's already actually playing. La Liga kicked off
-# 2026-08-15, while the Premier League etc. are still empty tables. Revert
-# DEFAULT_LEAGUE_KEY to "premierleague_england" once the PL season is underway.
-DEFAULT_LEAGUE_KEY = "laliga_spain"
+DEFAULT_LEAGUE_KEY = "premierleague_england"
 
 # Built from plain st.button + st.columns rather than st.segmented_control --
 # see the CSS comment above for why. st.columns naturally divides the full
@@ -877,8 +903,7 @@ else:
             run_dt = datetime.strptime(f.read().strip(), "%Y-%m-%d %H:%M:%S UTC").replace(tzinfo=timezone.utc)
     else:
         run_dt = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    month_name = MONTH_NAMES[st.session_state.lang][run_dt.month - 1]
-    formatted_date = f"{run_dt.day:02d} {month_name} {run_dt.year}, {run_dt.strftime('%H:%M')}"
+    formatted_date = format_run_date(run_dt, st.session_state.lang)
     st.markdown(
         f'<div class="status-banner">{t("last_run", date=formatted_date)}</div>',
         unsafe_allow_html=True
@@ -919,11 +944,11 @@ st.markdown(
     f'<div class="table-card"><div class="table-wrapper">{styled_table.to_html(escape=False)}</div></div>',
     unsafe_allow_html=True
 )
-st.caption(t("table_caption"))
 
 # -------------------------------
 # 12️⃣ DOWNLOAD OPTION
 
+st.caption(t("table_caption"))
 csv = pos_pct_df.to_csv(index=False).encode("utf-8")
 st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
 
