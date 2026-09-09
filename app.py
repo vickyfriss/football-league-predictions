@@ -51,9 +51,11 @@ TRANSLATIONS = {
         "loading_spinner": "Loading simulation data...",
         "data_not_ready": "⚠️ Simulation data not ready yet. Please reload later.",
         "last_run": "Simulations last run on: {date} UTC",
+        "results_eyebrow": "Live Predictions",
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "download_button": "Download table as CSV",
+        "methodology_eyebrow": "The Method",
         "methodology_title": "How This Simulation Works",
         "methodology_intro": (
             "This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  "
@@ -73,6 +75,7 @@ TRANSLATIONS = {
         "step6_desc": "Run 10,000 full season simulations to cover all possible scenarios.",
         "step7_title": "Final Positions:",
         "step7_desc": "Aggregate the simulation results into probability distributions.",
+        "about_eyebrow": "The Creator",
         "about_title": "About Me",
         "about_p1": 'Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.',
         "about_p2": "I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.",
@@ -92,9 +95,11 @@ TRANSLATIONS = {
         "loading_spinner": "Cargando datos de la simulación...",
         "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
         "last_run": "Última ejecución de las simulaciones: {date} UTC",
+        "results_eyebrow": "Predicciones en Vivo",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "download_button": "Descargar tabla como CSV",
+        "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
         "methodology_intro": (
             "Esta simulación combina <b>resultados históricos</b> y <b>cuotas de apuestas</b> para estimar las probabilidades de resultado de cada partido.  "
@@ -114,6 +119,7 @@ TRANSLATIONS = {
         "step6_desc": "Ejecuta 10.000 simulaciones completas de la temporada para cubrir todos los escenarios posibles.",
         "step7_title": "Posiciones Finales:",
         "step7_desc": "Resume los resultados de la simulación en distribuciones de probabilidad.",
+        "about_eyebrow": "La Creadora",
         "about_title": "Sobre Mí",
         "about_p1": 'Hola, soy <b>Victoria Friss de Kereki</b>, <b>analista de datos de fútbol</b> que transforma datos futbolísticos en <b>insights valiosos</b>, con un enfoque creciente en modelado probabilístico y simulación.',
         "about_p2": "Construyo <b>insights basados en datos</b>, <b>simulaciones probabilísticas</b> y <b>modelos predictivos</b> para ayudar a organizaciones deportivas y analistas a tomar decisiones más informadas.",
@@ -133,9 +139,11 @@ TRANSLATIONS = {
         "loading_spinner": "Carregando dados da simulação...",
         "data_not_ready": "⚠️ Os dados da simulação ainda não estão prontos. Recarregue mais tarde.",
         "last_run": "Última execução das simulações: {date} UTC",
+        "results_eyebrow": "Previsões ao Vivo",
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "download_button": "Baixar tabela como CSV",
+        "methodology_eyebrow": "O Método",
         "methodology_title": "Como Esta Simulação Funciona",
         "methodology_intro": (
             "Esta simulação combina <b>resultados históricos</b> e <b>odds de apostas</b> para estimar as probabilidades de resultado de cada partida.  "
@@ -155,6 +163,7 @@ TRANSLATIONS = {
         "step6_desc": "Executa 10.000 simulações completas da temporada para cobrir todos os cenários possíveis.",
         "step7_title": "Posições Finais:",
         "step7_desc": "Resume os resultados da simulação em distribuições de probabilidade.",
+        "about_eyebrow": "A Criadora",
         "about_title": "Sobre Mim",
         "about_p1": 'Olá, sou <b>Victoria Friss de Kereki</b>, <b>analista de dados de futebol</b> que transforma dados do futebol em <b>insights valiosos</b>, com foco crescente em modelagem probabilística e simulação.',
         "about_p2": "Eu crio <b>insights orientados por dados</b>, <b>simulações probabilísticas</b> e <b>modelos preditivos</b> para ajudar organizações esportivas e analistas a tomar decisões mais informadas.",
@@ -174,9 +183,11 @@ TRANSLATIONS = {
         "loading_spinner": "Chargement des données de simulation...",
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
         "last_run": "Dernière exécution des simulations : {date} UTC",
+        "results_eyebrow": "Prédictions en Direct",
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "download_button": "Télécharger le tableau en CSV",
+        "methodology_eyebrow": "La Méthode",
         "methodology_title": "Comment Fonctionne Cette Simulation",
         "methodology_intro": (
             "Cette simulation combine <b>résultats historiques</b> et <b>cotes des paris</b> pour estimer les probabilités de résultat des matchs.  "
@@ -196,6 +207,7 @@ TRANSLATIONS = {
         "step6_desc": "Exécute 10 000 simulations complètes de la saison pour couvrir tous les scénarios possibles.",
         "step7_title": "Positions Finales :",
         "step7_desc": "Agrège les résultats de la simulation en distributions de probabilité.",
+        "about_eyebrow": "La Créatrice",
         "about_title": "À Propos de Moi",
         "about_p1": "Bonjour, je suis <b>Victoria Friss de Kereki</b>, une <b>analyste de données</b> spécialisée en football, qui transforme les données du jeu en <b>insights précieux</b>, avec un intérêt croissant pour la modélisation probabiliste et la simulation.",
         "about_p2": "Je conçois des <b>insights basés sur les données</b>, des <b>simulations probabilistes</b> et des <b>modèles prédictifs</b> pour aider les organisations sportives et les analystes à prendre des décisions plus éclairées.",
@@ -305,14 +317,17 @@ def style_probabilities_table(df, column_labels=None):
             {"selector": "td:nth-child(-n+4)", "props":[("border-bottom","1px solid #ccc")]},
             {"selector": "tr:nth-child(odd) td:nth-child(-n+4)", "props":[("background-color","#f9f9f9")]},
             {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
-            # Row hover: a solid, opaque tint on just the frozen POS/TEAM/GP/PTS
-            # columns (the percentage cells keep their own gradient colour --
-            # their background comes from an inline style, which beats this rule
-            # anyway). An inset box-shadow line spanning the full row was tried
-            # first, but at the boundary between the sticky frozen columns and
-            # the scrolling percentage columns it let the different backgrounds
-            # underneath show through unevenly instead of reading as one clean line.
-            {"selector": "tbody tr:hover td:nth-child(-n+4)", "props":[("background-color","#d7ecdb")]},
+            # Row hover: a translucent green wash over the *entire* row, via
+            # box-shadow rather than background-color. box-shadow paints as its
+            # own layer on top of whatever background is already there
+            # (including the percentage cells' inline gradient colour) and
+            # blends with it via alpha, so it tints/enhances the existing
+            # colour instead of replacing it -- and needs no !important, since
+            # it isn't competing with that inline style at all (different
+            # property, no specificity fight). A flat background-color
+            # override was tried first: full visibility everywhere, but it
+            # blanked out the real gradient colour for the hovered row.
+            {"selector": "tbody tr:hover td", "props":[("box-shadow","inset 0 0 0 999px rgba(46,125,50,0.18)")]},
         ])
     )
 
@@ -421,6 +436,23 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 .app-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
 .app-card a, .app-card h1, .app-card h3 { color: var(--accent-text); }
 .app-card h3 { font-size: 22px; font-weight: 700; }
+/* A slim brand-green rule along the top edge of every card below the hero
+   banner -- a small, repeated visual anchor tying the rest of the page
+   back to the banner's colour without repeating its full treatment. */
+.app-card, .table-card { border-top: 4px solid #2E7D32; }
+
+/* Small uppercase "kicker" label above a section heading -- editorial
+   shorthand for "here's what this block is," echoing the hero banner's
+   badge in spirit without repeating its pill shape everywhere. */
+.section-eyebrow {
+    display: block;
+    color: #2E7D32;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
 
 /* Full-bleed hero banner -- breaks out of Streamlit's centered, padded
    content column to run edge-to-edge, the way a masthead does on a real
@@ -823,33 +855,42 @@ header { display: none; }
     white-space: nowrap !important;
     transition: transform 0.15s ease, background-color 0.2s ease;
 }
-/* Sitting on the green hero banner now, not the grey page background --
-   inactive pills use the same translucent "glass" treatment as the hero
-   badge (readable on green, but visibly secondary), while the active pill
-   flips to solid white with dark green text: the one combination with
-   real contrast against a green backdrop, and an unmistakable "selected"
-   state (the old solid-green-on-green pairing nearly disappeared here). */
+/* This switcher is position:fixed, so it stays on screen after the page
+   scrolls the green banner out of view too -- it ends up sitting over the
+   plain grey page background just as often as over the banner. A
+   translucent "glass" treatment (tried first) reads fine on green but goes
+   nearly invisible on grey, so both states are solid white instead, the
+   same guaranteed-visible-on-anything treatment already used for the
+   contact-icon chips below. Active vs inactive is then carried entirely by
+   internal contrast (green border + text vs plain grey text), which reads
+   the same regardless of what's behind the pill. */
 .st-key-lang_switcher div.stButton > button[kind="secondary"] {
-    background-color: rgba(255,255,255,0.14) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(255,255,255,0.4) !important;
-    box-shadow: none !important;
+    background-color: #ffffff !important;
+    color: #555 !important;
+    border: 1px solid transparent !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
 }
 .st-key-lang_switcher div.stButton > button[kind="secondary"]:hover {
-    background-color: rgba(255,255,255,0.26) !important;
-    color: #ffffff !important;
-    border-color: rgba(255,255,255,0.6) !important;
-    transform: translateY(-1px);
-}
-.st-key-lang_switcher div.stButton > button[kind="primary"] {
     background-color: #ffffff !important;
-    color: #1e5c22 !important;
-    border: 1px solid #ffffff !important;
+    color: #2E7D32 !important;
+    transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
 }
+/* A white pill with a thin green ring (tried first) read too close to the
+   plain white inactive pills at this size to register as "selected" at a
+   glance. Solid dark-green fill with a white ring is unambiguous either
+   way: the white ring keeps it readable against the banner's own green,
+   and the green fill itself pops against the grey page background once
+   scrolled past the banner. */
+.st-key-lang_switcher div.stButton > button[kind="primary"] {
+    background-color: #1e5c22 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+}
 .st-key-lang_switcher div.stButton > button[kind="primary"]:hover {
-    background-color: #f0f0f0 !important;
-    color: #1e5c22 !important;
+    background-color: #17481b !important;
+    color: #ffffff !important;
 }
 @media (max-width: 600px) {
     .st-key-lang_switcher { top: 8px; right: 8px; width: 190px; }
@@ -1030,7 +1071,12 @@ pos_pct_df["POS"] = pos_pct_df["POS"].astype(int)
 pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
-st.header(t("results_header", league=selected_display_name))
+st.markdown(f"""
+<div style="text-align:center; margin: 1rem 0 0.5rem;">
+    <span class="section-eyebrow">{t("results_eyebrow")}</span>
+    <h2 style="margin:0; font-size:2rem; font-weight:800;">{t("results_header", league=selected_display_name)}</h2>
+</div>
+""", unsafe_allow_html=True)
 
 # -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
@@ -1053,6 +1099,7 @@ st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_po
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown(f"""
 <div class="app-card" style="padding:28px 32px; max-width:900px; margin:28px auto;">
+<span class="section-eyebrow">{t("methodology_eyebrow")}</span>
 <h3 style="margin-bottom:15px;">{t("methodology_title")}</h3>
 <p>
 {t("methodology_intro")}
@@ -1097,6 +1144,7 @@ st.markdown(f"""
 st.markdown(f"""
 <div id="about-me" class="app-card" style="padding:28px 32px; max-width:900px;
             margin:28px auto; text-align:center;">
+<span class="section-eyebrow">{t("about_eyebrow")}</span>
 <h3 style="margin-bottom:15px;">{t("about_title")}</h3>
 <p>{t("about_p1")}</p>
 <p>{t("about_p2")}</p>
