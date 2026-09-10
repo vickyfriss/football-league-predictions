@@ -304,7 +304,8 @@ def style_probabilities_table(df, column_labels=None):
         .format({col: "{:.2f}%" for col in num_cols})
         .set_properties(subset=[column_labels["POS"], column_labels["GP"], column_labels["PTS"]], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
-            "font-size":"12px","font-weight":"600","color":"#000","white-space":"nowrap"
+            "font-size":"12px","font-weight":"600","color":"#000","white-space":"nowrap",
+            "font-variant-numeric":"tabular-nums"
         })
         .set_properties(subset=[column_labels["TEAM"]], **{
             "text-align":"left","font-family":"Inter, Roboto, Arial, sans-serif",
@@ -312,7 +313,8 @@ def style_probabilities_table(df, column_labels=None):
         })
         .set_properties(subset=num_cols, **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
-            "font-size":"12px","font-weight":"500","color":"#000"
+            "font-size":"12px","font-weight":"500","color":"#000",
+            "font-variant-numeric":"tabular-nums"
         })
         .hide(axis="index")
         .set_table_styles([
