@@ -45,7 +45,7 @@ TRANSLATIONS = {
         "hero_byline": "by Victoria Friss de Kereki",
         "hero_description": (
             "This simulation combines historical results and betting odds to estimate match outcome probabilities.<br>"
-            "We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
+            "It then runs <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
         ),
         "hero_cta": "Learn more about the creator & connect →",
         "loading_spinner": "Loading simulation data...",
@@ -59,7 +59,7 @@ TRANSLATIONS = {
         "methodology_title": "How This Simulation Works",
         "methodology_intro": (
             "This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  "
-            "We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
+            "It then runs <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
         ),
         "step1_title": "Historical Data:",
         "step1_desc": 'Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
@@ -90,8 +90,8 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Esta simulación combina resultados históricos y cuotas de apuestas para estimar las probabilidades de cada partido.<br>"
-            "Luego ejecutamos <b>10.000 simulaciones de Monte Carlo</b> para todos los partidos restantes y calculamos la probabilidad de que cada equipo termine en cada posición de la liga."
+            "Esta simulación combina resultados históricos y las cuotas de las casas de apuestas para estimar las probabilidades de cada partido.<br>"
+            "Luego ejecuta <b>10.000 simulaciones de Monte Carlo</b> para todos los partidos restantes y calcula la probabilidad de que cada equipo termine en cada posición de la liga."
         ),
         "hero_cta": "Conoce más sobre la creadora y conéctate →",
         "loading_spinner": "Cargando datos de la simulación...",
@@ -104,21 +104,21 @@ TRANSLATIONS = {
         "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
         "methodology_intro": (
-            "Esta simulación combina <b>resultados históricos</b> y <b>cuotas de apuestas</b> para estimar las probabilidades de resultado de cada partido.  "
-            "Luego ejecutamos <b>10.000 simulaciones de Monte Carlo</b> sobre todos los partidos restantes para calcular la probabilidad de que cada equipo termine en cada posición de la liga."
+            "Esta simulación combina <b>resultados históricos</b> y <b>cuotas de las casas de apuestas</b> para estimar las probabilidades de resultado de cada partido.  "
+            "Luego ejecuta <b>10.000 simulaciones de Monte Carlo</b> sobre todos los partidos restantes para calcular la probabilidad de que cada equipo termine en cada posición de la liga."
         ),
         "step1_title": "Datos Históricos:",
         "step1_desc": 'Recopila la clasificación actual mediante web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
         "step2_title": "Calendario:",
         "step2_desc": 'Resultados históricos y partidos restantes obtenidos a través de la <a href="https://www.football-data.org/" target="_blank">API de Football-Data.org</a>.',
         "step3_title": "Cuotas de Apuestas:",
-        "step3_desc": 'Incorpora las expectativas del mercado desde <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> para mejorar la precisión.',
+        "step3_desc": 'Incorpora las cuotas de las casas de apuestas, obtenidas de <a href="https://the-odds-api.com/" target="_blank">The Odds API</a>, para mejorar la precisión.',
         "step4_title": "Fuerza de los Equipos:",
         "step4_desc": "Estima la fuerza ofensiva y defensiva de cada equipo.",
         "step_home_title": "Ventaja de Local:",
         "step_home_desc": "Aumenta los goles esperados del equipo local según la diferencia histórica de goles entre local y visitante en cada liga.",
         "step5_title": "Probabilidades de Partido:",
-        "step5_desc": "Genera probabilidades de resultado combinando modelos de Poisson con las cuotas del mercado.",
+        "step5_desc": "Genera probabilidades de resultado combinando modelos de Poisson con las cuotas de las casas de apuestas.",
         "step6_title": "Simulaciones de Monte Carlo:",
         "step6_desc": "Ejecuta 10.000 simulaciones completas de la temporada para cubrir todos los escenarios posibles.",
         "step7_title": "Posiciones Finales:",
@@ -137,7 +137,7 @@ TRANSLATIONS = {
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
             "Esta simulação combina resultados históricos e odds de apostas para estimar as probabilidades de cada partida.<br>"
-            "Em seguida, executamos <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes e calculamos a probabilidade de cada time terminar em cada posição da liga."
+            "Em seguida, executa <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes e calcula a probabilidade de cada time terminar em cada posição da liga."
         ),
         "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
         "loading_spinner": "Carregando dados da simulação...",
@@ -151,7 +151,7 @@ TRANSLATIONS = {
         "methodology_title": "Como Esta Simulação Funciona",
         "methodology_intro": (
             "Esta simulação combina <b>resultados históricos</b> e <b>odds de apostas</b> para estimar as probabilidades de resultado de cada partida.  "
-            "Em seguida, executamos <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes, calculando a probabilidade de cada time terminar em cada posição da liga."
+            "Em seguida, executa <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes, calculando a probabilidade de cada time terminar em cada posição da liga."
         ),
         "step1_title": "Dados Históricos:",
         "step1_desc": 'Coleta a tabela de classificação atual via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
@@ -183,7 +183,7 @@ TRANSLATIONS = {
         "hero_byline": "par Victoria Friss de Kereki",
         "hero_description": (
             "Cette simulation combine résultats historiques et cotes des paris pour estimer les probabilités de chaque match.<br>"
-            "Nous exécutons ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants et calculons la probabilité que chaque équipe termine à chaque position du classement."
+            "Elle exécute ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants et calcule la probabilité que chaque équipe termine à chaque position du classement."
         ),
         "hero_cta": "En savoir plus sur la créatrice et se connecter →",
         "loading_spinner": "Chargement des données de simulation...",
@@ -197,7 +197,7 @@ TRANSLATIONS = {
         "methodology_title": "Comment Fonctionne Cette Simulation",
         "methodology_intro": (
             "Cette simulation combine <b>résultats historiques</b> et <b>cotes des paris</b> pour estimer les probabilités de résultat des matchs.  "
-            "Nous exécutons ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants afin de calculer la probabilité que chaque équipe termine à chaque place du classement."
+            "Elle exécute ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants afin de calculer la probabilité que chaque équipe termine à chaque place du classement."
         ),
         "step1_title": "Données Historiques :",
         "step1_desc": 'Récupère le classement actuel via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
