@@ -69,6 +69,8 @@ TRANSLATIONS = {
         "step3_desc": 'Incorporate market expectations from <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> to boost accuracy.',
         "step4_title": "Team Strengths:",
         "step4_desc": "Estimate attacking and defensive strengths for each team.",
+        "step_home_title": "Home Advantage:",
+        "step_home_desc": "Boost the home team's expected goals using each league's historical home-versus-away scoring gap.",
         "step5_title": "Match Probabilities:",
         "step5_desc": "Generate outcome probabilities using Poisson and betting-based models.",
         "step6_title": "Monte Carlo Simulations:",
@@ -113,6 +115,8 @@ TRANSLATIONS = {
         "step3_desc": 'Incorpora las expectativas del mercado desde <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> para mejorar la precisión.',
         "step4_title": "Fuerza de los Equipos:",
         "step4_desc": "Estima la fuerza ofensiva y defensiva de cada equipo.",
+        "step_home_title": "Ventaja de Local:",
+        "step_home_desc": "Aumenta los goles esperados del equipo local según la diferencia histórica de goles entre local y visitante en cada liga.",
         "step5_title": "Probabilidades de Partido:",
         "step5_desc": "Genera probabilidades de resultado combinando modelos de Poisson con las cuotas del mercado.",
         "step6_title": "Simulaciones de Monte Carlo:",
@@ -157,6 +161,8 @@ TRANSLATIONS = {
         "step3_desc": 'Incorpora as expectativas do mercado da <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> para aumentar a precisão.',
         "step4_title": "Força dos Times:",
         "step4_desc": "Estima a força ofensiva e defensiva de cada time.",
+        "step_home_title": "Vantagem de Jogar em Casa:",
+        "step_home_desc": "Aumenta os gols esperados do time mandante com base na diferença histórica de gols entre mandante e visitante em cada liga.",
         "step5_title": "Probabilidades de Partida:",
         "step5_desc": "Gera probabilidades de resultado combinando modelos de Poisson com as odds do mercado.",
         "step6_title": "Simulações de Monte Carlo:",
@@ -201,6 +207,8 @@ TRANSLATIONS = {
         "step3_desc": 'Intègre les attentes du marché de <a href="https://the-odds-api.com/" target="_blank">The Odds API</a> pour améliorer la précision.',
         "step4_title": "Force des Équipes :",
         "step4_desc": "Estime la force offensive et défensive de chaque équipe.",
+        "step_home_title": "Avantage du Terrain :",
+        "step_home_desc": "Augmente les buts attendus de l'équipe à domicile selon l'écart historique de buts entre domicile et extérieur pour chaque championnat.",
         "step5_title": "Probabilités de Match :",
         "step5_desc": "Génère des probabilités de résultat en combinant des modèles de Poisson et les cotes du marché.",
         "step6_title": "Simulations de Monte-Carlo :",
@@ -378,6 +386,7 @@ st.markdown("""
     --card-shadow-hover: 0 6px 18px rgba(0,0,0,0.10);
     --border-light: #e3e3e3;
     --accent-text: #2E7D32;
+    --section-band-bg: #eaf5ec;
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -388,6 +397,7 @@ st.markdown("""
         --card-shadow-hover: 0 6px 18px rgba(0,0,0,0.55);
         --border-light: #3a3a3a;
         --accent-text: #66bb6a;
+        --section-band-bg: #16241a;
     }
 }
 
@@ -446,10 +456,10 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
    badge in spirit without repeating its pill shape everywhere. */
 .section-eyebrow {
     display: block;
-    color: #2E7D32;
+    color: var(--accent-text);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 6px;
 }
@@ -538,7 +548,89 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     width: 30px; height: 30px; flex-shrink: 0; margin-right: 12px;
     transition: background-color 0.2s ease;
 }
-li:hover .step-circle { background-color: #245f27; }
+.method-step-card:hover .step-circle { background-color: #245f27; }
+
+/* Full-bleed methodology band -- same edge-to-edge technique as .hero-banner,
+   but a light green tint instead of solid brand green: this section needs to
+   read as a distinct "zone" of the page (band / white table card / band)
+   without competing with the hero for visual weight. */
+.methodology-band {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 40px 24px 48px;
+    background-color: var(--section-band-bg);
+    border-top: 1px solid rgba(46,125,50,0.25);
+    border-bottom: 1px solid rgba(46,125,50,0.25);
+    text-align: center;
+}
+.methodology-inner { max-width: 980px; margin: 0 auto; }
+.methodology-band .section-eyebrow { text-align: center; }
+/* Shared type scale for every full-bleed section's title -- one size/weight
+   for "section title", each band only supplies the colour that reads
+   against its own background. */
+.methodology-heading, .about-heading { margin: 0 0 10px; font-size: 26px; font-weight: 800; }
+/* Scoped with the band ancestor (not just the bare class) on purpose --
+   Streamlit injects its own ".st-emotion-cache-XXXX h1,h2,h3 { color:
+   inherit }" rule per container, which is class+type (0,1,1) and silently
+   outranks a bare ".methodology-heading"/".about-heading" class (0,1,0),
+   even though it comes first in source order. One extra ancestor class
+   brings ours to (0,2,0), which wins for real instead of by lucky
+   coincidence (methodology's "inherit" happened to resolve to the same
+   colour anyway; about's did not -- it inherited dark body text onto a
+   green background). */
+.methodology-band .methodology-heading { color: var(--text-main); }
+.methodology-intro-text {
+    max-width: 640px; margin: 0 auto; color: var(--text-main);
+    font-size: 15px; line-height: 1.6;
+    text-align: center !important;
+}
+/* Steps as a responsive card grid instead of one long stacked list -- the
+   list read as sparse and text-heavy at full page width, where a grid of
+   compact cards fills the space the way a real editorial site's "how it
+   works" section does. auto-fit + minmax collapses to a single column on
+   mobile with no separate media query needed. */
+.method-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+    text-align: left;
+}
+.method-step-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.method-step-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+.method-step-card .step-circle { margin: 0 0 12px 0; }
+.method-step-card p { margin: 0; color: var(--text-main); font-size: 14px; line-height: 1.55; text-align: left !important; }
+
+/* Full-bleed "About Me" closing band -- same edge-to-edge technique as the
+   hero, but the methodology band's light tint rather than a solid brand-green
+   gradient, so the page closes on the same quiet register the methodology
+   band opened with instead of bookending with two bold green sections. */
+.about-band {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding: 48px 24px 44px;
+    background-color: var(--section-band-bg);
+    border-top: 1px solid rgba(46,125,50,0.25);
+    text-align: center;
+}
+.about-band-inner { max-width: 680px; margin: 0 auto; }
+.about-band .section-eyebrow { text-align: center; }
+.about-band .about-heading { color: var(--text-main); }
+.about-band p { color: var(--text-main); font-size: 15px; line-height: 1.6; margin: 0 0 12px; }
+.about-band .about-cta-text {
+    margin: 8px 0 0; font-size: 17px; font-weight: 700; color: var(--accent-text);
+}
+.about-band .icon-row { margin-top: 20px; }
 
 /* Small white chip behind each social icon in the About Me footer -- icons are
    fixed-black PNGs, so they need a guaranteed-light backdrop in any theme. */
@@ -1130,42 +1222,46 @@ st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_po
 # -------------------------------
 # 1️⃣4️⃣ METHODOLOGY
 st.markdown(f"""
-<div class="app-card" style="padding:24px 28px; max-width:900px; margin:18px auto;">
+<div class="methodology-band">
+<div class="methodology-inner">
 <span class="section-eyebrow">{t("methodology_eyebrow")}</span>
-<h3 style="margin-bottom:15px;">{t("methodology_title")}</h3>
-<p>
-{t("methodology_intro")}
-</p>
-<ul style="padding-left:0; list-style:none; border-left:3px solid #2E7D32; margin-top:20px;">
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<h2 class="methodology-heading">{t("methodology_title")}</h2>
+<p class="methodology-intro-text">{t("methodology_intro")}</p>
+<div class="method-steps-grid">
+<div class="method-step-card">
 <div class="step-circle">1</div>
-<div><b>{t("step1_title")}</b> {t("step1_desc")}</div>
-</li>
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<p><b>{t("step1_title")}</b> {t("step1_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">2</div>
-<div><b>{t("step2_title")}</b> {t("step2_desc")}</div>
-</li>
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<p><b>{t("step2_title")}</b> {t("step2_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">3</div>
-<div><b>{t("step3_title")}</b> {t("step3_desc")}</div>
-</li>
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<p><b>{t("step3_title")}</b> {t("step3_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">4</div>
-<div><b>{t("step4_title")}</b> {t("step4_desc")}</div>
-</li>
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<p><b>{t("step4_title")}</b> {t("step4_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">5</div>
-<div><b>{t("step5_title")}</b> {t("step5_desc")}</div>
-</li>
-<li style="margin-bottom:15px; display:flex; align-items:flex-start;">
+<p><b>{t("step_home_title")}</b> {t("step_home_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">6</div>
-<div><b>{t("step6_title")}</b> {t("step6_desc")}</div>
-</li>
-<li style="margin-bottom:0; display:flex; align-items:flex-start;">
+<p><b>{t("step5_title")}</b> {t("step5_desc")}</p>
+</div>
+<div class="method-step-card">
 <div class="step-circle">7</div>
-<div><b>{t("step7_title")}</b> {t("step7_desc")}</div>
-</li>
-</ul>
+<p><b>{t("step6_title")}</b> {t("step6_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">8</div>
+<p><b>{t("step7_title")}</b> {t("step7_desc")}</p>
+</div>
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -1174,19 +1270,15 @@ st.markdown(f"""
 # 14️⃣ BOTTOM ABOUT ME
 
 st.markdown(f"""
-<div id="about-me" class="app-card" style="padding:28px 32px; max-width:900px;
-            margin:18px auto; text-align:center;">
-<div style="text-align:left;">
+<div id="about-me" class="about-band">
+<div class="about-band-inner">
 <span class="section-eyebrow">{t("about_eyebrow")}</span>
-<h3 style="margin-bottom:15px;">{t("about_title")}</h3>
-</div>
+<h2 class="about-heading">{t("about_title")}</h2>
 <p>{t("about_p1")}</p>
 <p>{t("about_p2")}</p>
 <p>{t("about_p3")}</p>
-<p style="margin-top:20px; font-size:17px; font-weight:600; color:var(--accent-text);">
-{t("about_cta")}
-</p>
-<div style="margin-top:20px;">
+<p class="about-cta-text">{t("about_cta")}</p>
+<div class="icon-row">
 <a href="mailto:vicky_friss@hotmail.com" class="icon-chip">
   <img src="https://img.icons8.com/ios-filled/20/000000/new-post.png"/>
 </a>
@@ -1199,6 +1291,7 @@ st.markdown(f"""
 <a href="https://github.com/vickyfriss" target="_blank" class="icon-chip">
   <img src="https://img.icons8.com/ios-filled/20/000000/github.png"/>
 </a>
+</div>
 </div>
 </div>
 """, unsafe_allow_html=True)
