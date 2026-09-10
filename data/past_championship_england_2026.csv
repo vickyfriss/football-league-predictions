@@ -65,3 +65,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-08T18:45:00Z,6,FINISHED,Cardiff City FC,Stoke City FC,1,1,DRAW
 2026-09-08T18:45:00Z,6,FINISHED,Wrexham AFC,Burnley FC,1,1,DRAW
 2026-09-08T19:00:00Z,6,FINISHED,Bolton Wanderers FC,West Ham United FC,2,3,AWAY_TEAM
+2026-09-09T18:45:00Z,6,FINISHED,Derby County FC,West Bromwich Albion FC,0,1,AWAY_TEAM
+2026-09-09T18:45:00Z,6,FINISHED,Norwich City FC,Birmingham City FC,2,1,HOME_TEAM
+2026-09-09T19:00:00Z,6,FINISHED,Charlton Athletic FC,Queens Park Rangers FC,0,0,DRAW
