@@ -635,6 +635,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     padding: 48px 24px 44px;
     background-color: var(--section-band-bg);
     border-top: 1px solid rgba(46,125,50,0.25);
+    border-bottom: 1px solid rgba(46,125,50,0.25);
     text-align: center;
 }
 .about-band-inner { max-width: 680px; margin: 0 auto; }
