@@ -44,8 +44,8 @@ TRANSLATIONS = {
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
         "hero_description": (
-            "Data-driven forecasts for final positions across nine major football leagues.<br>"
-            "Simulates every remaining fixture <b>10,000 times</b> and aggregates results into probability tables."
+            "This simulation combines historical results and betting odds to estimate match outcome probabilities.<br>"
+            "We then run <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
         ),
         "hero_cta": "Learn more about the creator & connect →",
         "loading_spinner": "Loading simulation data...",
@@ -90,8 +90,8 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Predicciones sobre la clasificación final en nueve grandes ligas de fútbol, basadas en datos.<br>"
-            "Simula cada partido restante <b>10.000 veces</b> y resume los resultados en tablas de probabilidad."
+            "Esta simulación combina resultados históricos y cuotas de apuestas para estimar las probabilidades de cada partido.<br>"
+            "Luego ejecutamos <b>10.000 simulaciones de Monte Carlo</b> para todos los partidos restantes y calculamos la probabilidad de que cada equipo termine en cada posición de la liga."
         ),
         "hero_cta": "Conoce más sobre la creadora y conéctate →",
         "loading_spinner": "Cargando datos de la simulación...",
@@ -136,8 +136,8 @@ TRANSLATIONS = {
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
         "hero_description": (
-            "Previsões sobre a classificação final em nove grandes ligas de futebol, baseadas em dados.<br>"
-            "Simula cada partida restante <b>10.000 vezes</b> e resume os resultados em tabelas de probabilidade."
+            "Esta simulação combina resultados históricos e odds de apostas para estimar as probabilidades de cada partida.<br>"
+            "Em seguida, executamos <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes e calculamos a probabilidade de cada time terminar em cada posição da liga."
         ),
         "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
         "loading_spinner": "Carregando dados da simulação...",
@@ -182,8 +182,8 @@ TRANSLATIONS = {
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
         "hero_description": (
-            "Prévisions sur le classement final de neuf grandes ligues de football, basées sur les données.<br>"
-            "Simule chaque match restant <b>10 000 fois</b> et agrège les résultats dans des tableaux de probabilité."
+            "Cette simulation combine résultats historiques et cotes des paris pour estimer les probabilités de chaque match.<br>"
+            "Nous exécutons ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants et calculons la probabilité que chaque équipe termine à chaque position du classement."
         ),
         "hero_cta": "En savoir plus sur la créatrice et se connecter →",
         "loading_spinner": "Chargement des données de simulation...",
@@ -409,11 +409,13 @@ st.markdown("""
 }
 
 html {
-    /* Reserves the scrollbar's width permanently instead of only when a
-       scrollbar happens to be showing -- otherwise centered content can sit a
-       few pixels left of true-center, since the scrollbar only ever eats into
-       the right edge. */
-    scrollbar-gutter: stable;
+    /* both-edges (not just stable) reserves matching gutter space on the left
+       too, even though nothing ever scrolls there -- with only the right edge
+       reserved, that space came out of the usable width asymmetrically, which
+       is what was still pulling every calc(-50vw + 50%) full-bleed section
+       (hero, methodology band, about band) a few pixels left of true center
+       even after switching from "no reservation at all" to this. */
+    scrollbar-gutter: stable both-edges;
 }
 body, .main, .stApp {
     background-color: var(--page-bg) !important;
@@ -449,7 +451,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 /* A slim brand-green rule along the top edge of every card below the hero
    banner -- a small, repeated visual anchor tying the rest of the page
    back to the banner's colour without repeating its full treatment. */
-.app-card, .table-card { border-top: 4px solid #2E7D32; }
+.app-card { border-top: 4px solid #2E7D32; }
 
 /* Small uppercase "kicker" label above a section heading -- editorial
    shorthand for "here's what this block is," echoing the hero banner's
@@ -567,10 +569,13 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 .methodology-inner { max-width: 980px; margin: 0 auto; }
 .methodology-band .section-eyebrow { text-align: center; }
-/* Shared type scale for every full-bleed section's title -- one size/weight
-   for "section title", each band only supplies the colour that reads
+/* Shared type scale for every section title on the page -- hero h1 is the one
+   deliberately bigger headline, everything below it (methodology, the league
+   results table, about-me) reads as the same "section title" weight/size so
+   the page has one consistent two-tier heading hierarchy instead of every
+   section inventing its own. Each band only supplies the colour that reads
    against its own background. */
-.methodology-heading, .about-heading { margin: 0 0 10px; font-size: 26px; font-weight: 800; }
+.methodology-heading, .about-heading, .results-heading { margin: 0 0 10px; font-size: 26px; font-weight: 800; }
 /* Scoped with the band ancestor (not just the bare class) on purpose --
    Streamlit injects its own ".st-emotion-cache-XXXX h1,h2,h3 { color:
    inherit }" rule per container, which is class+type (0,1,1) and silently
@@ -582,7 +587,14 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
    green background). */
 .methodology-band .methodology-heading { color: var(--text-main); }
 .methodology-intro-text {
-    max-width: 640px; margin: 0 auto; color: var(--text-main);
+    /* !important on margin too, not just text-align -- Streamlit's own
+       markdown-container rule for <p> sets margin with higher specificity
+       than this bare class, collapsing "0 auto" down to "0 0" and pinning
+       the box flush-left in its parent instead of centering it (each line's
+       text still rendered centered *within* that mispositioned box, which is
+       what made it look like a narrower, off-center paragraph rather than an
+       obviously blank margin bug). */
+    max-width: 640px; margin: 0 auto !important; color: var(--text-main);
     font-size: 15px; line-height: 1.6;
     text-align: center !important;
 }
@@ -926,9 +938,14 @@ header { display: none; }
 [data-testid="stStatusWidget"] { display: none !important; }
 
 /* Streamlit still pads .block-container to make room for that header even
-   once it's hidden -- without this the page keeps a large empty gap up top. */
+   once it's hidden -- without this the page keeps a large empty gap up top.
+   Same story at the bottom -- Streamlit's own default padding-bottom (160px,
+   originally reserved for its floating toolbar) left a big block of dead grey
+   space below the footer text that had nothing to do with our own footer's
+   own 30px padding. */
 .block-container {
     padding-top: 2rem !important;
+    padding-bottom: 0 !important;
 }
 
 /* Language switcher -- three small pill buttons (same st.button + st.columns
@@ -1198,7 +1215,7 @@ pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
     <span class="section-eyebrow">{t("results_eyebrow")}</span>
-    <h2 style="margin:0; font-size:22px; font-weight:700;">{selected_display_name.split(" (")[0]}</h2>
+    <h2 class="results-heading">{selected_display_name.split(" (")[0]}</h2>
 </div>
 """, unsafe_allow_html=True)
 
