@@ -732,11 +732,16 @@ div.stButton > button p:last-child {
    divides evenly into a 2-column grid instead -- every option visible at
    once, no scrolling, no hidden state. */
 @media (max-width: 600px) {
-    div[data-testid="stHorizontalBlock"]:has(div.stButton) {
+    /* :not(.st-key-lang_switcher *) matters here -- without it this also
+       matched the language switcher's own row of 4 buttons (it's a
+       stHorizontalBlock containing stButtons too), forcing it into the same
+       2-column grid and wrapping it to two rows instead of the single
+       centered line it's meant to be. */
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) {
         flex-wrap: wrap !important;
         gap: 8px !important;
     }
-    div[data-testid="stHorizontalBlock"]:has(div.stButton) > div[data-testid="stColumn"] {
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) > div[data-testid="stColumn"] {
         flex: 0 0 calc(50% - 4px) !important;
         width: calc(50% - 4px) !important;
         min-width: unset !important;
@@ -766,20 +771,33 @@ div.stButton > button p:last-child {
 
 /* Responsive adjustments for other elements */
 @media (max-width: 600px) {
-    /* Horizontal top-right bar with margin from top */
-    #contact-panel { flex-direction: row; top: 64px; right: 10px; padding: 8px 10px; border-radius: 8px; }
+    /* On narrow screens there's no room for a permanently pinned corner
+       cluster -- fixed position meant this panel stayed on screen and
+       covered real content (the "last run" banner, the table's top edge)
+       for the entire time the user scrolled through the page. Switching to
+       absolute anchors it to the top of the document instead: it still sits
+       over the hero banner exactly where it does today, but scrolls away
+       with the rest of the page instead of floating over content below. */
+    /* Centered to match the now-single-row, centered language switcher above
+       it, rather than staying right-jammed while the switcher above it is
+       centered -- top is 10px below that switcher's own bottom edge (a
+       single row of 26px pills starting at top:8px ends around 34px). */
+    #contact-panel { position: absolute; flex-direction: row; top: 44px; left: 50%; right: auto; transform: translateX(-50%); padding: 8px 10px; border-radius: 8px; }
     #contact-panel a { margin: 0 8px; }
     #contact-panel a:first-child { margin-left: 0; }
     #contact-panel a img { width: 24px !important; height: 24px !important; }
 
 }
 
-/* Pulls the download button up onto the same visual row as the caption
-   right above it (the caption is centered full-width text with room to
-   spare on both sides, and this button is narrow and left-aligned, so the
-   two don't collide) instead of sitting on its own line right below it. */
+/* Centered on its own line below the caption -- the negative margin-top
+   this used to pull the button up onto the caption's row broke down
+   whenever the caption text wrapped to two lines (translations vary in
+   length, and mobile width wraps sooner), overlapping the button on top of
+   the wrapped second line instead of sitting beside it. */
 [data-testid="stDownloadButton"] {
-    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
 }
 
 /* Download button -- always solid green regardless of primary/secondary kind
@@ -843,6 +861,12 @@ header { display: none; }
 }
 .st-key-lang_switcher [data-testid="stHorizontalBlock"] {
     gap: 6px !important;
+    flex-wrap: nowrap !important;
+}
+.st-key-lang_switcher [data-testid="stColumn"] {
+    width: max-content !important;
+    min-width: unset !important;
+    flex: 0 0 auto !important;
 }
 .st-key-lang_switcher div.stButton > button {
     height: 30px !important;
@@ -893,8 +917,16 @@ header { display: none; }
     color: #ffffff !important;
 }
 @media (max-width: 600px) {
-    .st-key-lang_switcher { top: 8px; right: 8px; width: 190px; }
-    .st-key-lang_switcher div.stButton > button { font-size: 11px !important; height: 26px !important; min-height: 26px !important; }
+    /* Same reasoning as #contact-panel above: fixed position left this
+       pinned over content (the results table, the run-date banner) for the
+       whole scroll. Absolute keeps it in the same spot over the hero banner
+       but lets it scroll away with the page instead of staying on top. */
+    /* Four pills at 190px wide had no choice but to wrap into a cramped 2x2
+       block, right-jammed into the corner. Centering a single row instead
+       needs less width per pill (no flag+code label has to share a row with
+       three others), so all four fit on one line. */
+    .st-key-lang_switcher { position: absolute; top: 8px; left: 50%; right: auto; transform: translateX(-50%); width: max-content; max-width: calc(100% - 16px); }
+    .st-key-lang_switcher div.stButton > button { font-size: 11px !important; height: 26px !important; min-height: 26px !important; padding: 0 8px !important; }
 }
 
 /* Three st.markdown calls on this page (font links, this stylesheet, the
