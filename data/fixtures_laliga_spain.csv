@@ -28,16 +28,16 @@ utcDate,status,homeTeam,awayTeam
 2026-09-20T16:30:00Z,TIMED,RC Deportivo La Coruña,Real Betis Balompié
 2026-09-20T16:30:00Z,TIMED,Villarreal CF,Levante UD
 2026-09-20T19:00:00Z,TIMED,Valencia CF,Real Sociedad de Fútbol
-2026-10-11T00:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Athletic Club
-2026-10-11T00:00:00Z,SCHEDULED,Deportivo Alavés,Club Atlético de Madrid
-2026-10-11T00:00:00Z,SCHEDULED,FC Barcelona,Getafe CF
-2026-10-11T00:00:00Z,SCHEDULED,Real Betis Balompié,CA Osasuna
-2026-10-11T00:00:00Z,SCHEDULED,Real Madrid CF,Villarreal CF
-2026-10-11T00:00:00Z,SCHEDULED,Elche CF,RC Celta de Vigo
-2026-10-11T00:00:00Z,SCHEDULED,Levante UD,Sevilla FC
-2026-10-11T00:00:00Z,SCHEDULED,Real Racing Club de Santander,Valencia CF
-2026-10-11T00:00:00Z,SCHEDULED,Málaga CF,RCD Espanyol de Barcelona
-2026-10-11T00:00:00Z,SCHEDULED,Real Sociedad de Fútbol,RC Deportivo La Coruña
+2026-10-09T19:00:00Z,TIMED,Málaga CF,RCD Espanyol de Barcelona
+2026-10-10T12:00:00Z,TIMED,Rayo Vallecano de Madrid,Athletic Club
+2026-10-10T14:15:00Z,TIMED,Deportivo Alavés,Club Atlético de Madrid
+2026-10-10T16:30:00Z,TIMED,FC Barcelona,Getafe CF
+2026-10-10T19:00:00Z,TIMED,Real Madrid CF,Villarreal CF
+2026-10-11T12:00:00Z,TIMED,Elche CF,RC Celta de Vigo
+2026-10-11T14:15:00Z,TIMED,Real Sociedad de Fútbol,RC Deportivo La Coruña
+2026-10-11T16:30:00Z,TIMED,Real Betis Balompié,CA Osasuna
+2026-10-11T19:00:00Z,TIMED,Real Racing Club de Santander,Valencia CF
+2026-10-12T19:00:00Z,TIMED,Levante UD,Sevilla FC
 2026-10-18T00:00:00Z,SCHEDULED,Villarreal CF,Elche CF
 2026-10-18T00:00:00Z,SCHEDULED,Real Madrid CF,Sevilla FC
 2026-10-18T00:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,Club Atlético de Madrid
