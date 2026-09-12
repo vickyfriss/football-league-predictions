@@ -40,3 +40,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T19:00:00Z,4,FINISHED,RCD Espanyol de Barcelona,Sevilla FC,1,1,DRAW
 2026-09-07T17:00:00Z,4,FINISHED,Getafe CF,RC Celta de Vigo,1,1,DRAW
 2026-09-07T19:30:00Z,4,FINISHED,Elche CF,Real Sociedad de Fútbol,2,3,AWAY_TEAM
+2026-09-11T19:00:00Z,5,FINISHED,Sevilla FC,Valencia CF,1,0,HOME_TEAM

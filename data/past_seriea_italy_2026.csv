@@ -29,3 +29,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T18:45:00Z,3,FINISHED,Juventus FC,AC Milan,1,1,DRAW
 2026-09-07T16:30:00Z,3,FINISHED,Cagliari Calcio,US Lecce,1,0,HOME_TEAM
 2026-09-07T18:45:00Z,3,FINISHED,Udinese Calcio,SS Lazio,1,2,AWAY_TEAM
+2026-09-11T18:45:00Z,4,FINISHED,Venezia FC,ACF Fiorentina,2,4,AWAY_TEAM

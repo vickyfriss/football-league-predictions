@@ -26,3 +26,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T13:00:00Z,3,FINISHED,ES Troyes AC,RC Strasbourg Alsace,2,6,AWAY_TEAM
 2026-09-06T15:15:00Z,3,FINISHED,Angers SCO,Stade Rennais FC 1901,1,2,AWAY_TEAM
 2026-09-06T18:45:00Z,3,FINISHED,Olympique de Marseille,Paris FC,2,3,AWAY_TEAM
+2026-09-11T18:45:00Z,4,FINISHED,Stade Rennais FC 1901,Olympique de Marseille,1,0,HOME_TEAM

@@ -17,3 +17,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-05T16:30:00Z,2,FINISHED,FC Schalke 04,FC Bayern München,0,0,DRAW
 2026-09-06T13:30:00Z,2,FINISHED,Hamburger SV,1. FSV Mainz 05,0,5,AWAY_TEAM
 2026-09-06T15:30:00Z,2,FINISHED,Eintracht Frankfurt,FC Augsburg,1,4,AWAY_TEAM
+2026-09-11T18:30:00Z,3,FINISHED,1. FC Union Berlin,FC Schalke 04,1,3,AWAY_TEAM
