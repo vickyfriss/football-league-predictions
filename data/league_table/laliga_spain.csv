@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Barcelona,4,4,0,0,17,2,15,12
-2,Alavés,4,3,1,0,10,3,7,10
-3,Sevilla,5,3,1,1,8,6,2,10
-4,Real Madrid,4,3,0,1,10,3,7,9
+2,Real Madrid,5,4,0,1,14,4,10,12
+3,Alavés,5,3,1,1,11,5,6,10
+4,Sevilla,5,3,1,1,8,6,2,10
 5,Real Betis,4,3,0,1,5,5,0,9
 6,Deportivo,4,2,2,0,8,5,3,8
-7,Atlético Madrid,4,2,1,1,7,6,1,7
-8,Osasuna,4,2,1,1,5,6,-1,7
-9,Real Sociedad,5,2,1,2,6,8,-2,7
-10,Athletic Club,4,2,0,2,6,5,1,6
-11,Levante,4,1,2,1,5,5,0,5
-12,Espanyol,4,1,1,2,6,5,1,4
-13,Racing Santander,4,1,1,2,7,8,-1,4
-14,Rayo Vallecano,4,1,1,2,7,10,-3,4
-15,Getafe,4,1,1,2,2,5,-3,4
+7,Espanyol,5,2,1,2,8,5,3,7
+8,Atlético Madrid,4,2,1,1,7,6,1,7
+9,Athletic Club,5,2,1,2,7,6,1,7
+10,Racing Santander,5,2,1,2,9,9,0,7
+11,Real Sociedad,5,2,1,2,6,8,-2,7
+12,Osasuna,5,2,1,2,5,8,-3,7
+13,Levante,4,1,2,1,5,5,0,5
+14,Getafe,4,1,1,2,2,5,-3,4
+15,Rayo Vallecano,5,1,1,3,8,14,-6,4
 16,Celta Vigo,5,0,3,2,2,5,-3,3
 17,Villarreal,4,0,2,2,6,8,-2,2
 18,Málaga,4,0,2,2,1,7,-6,2
-19,Elche,4,0,1,3,5,12,-7,1
+19,Elche,5,0,2,3,6,13,-7,2
 20,Valencia,5,0,1,4,1,10,-9,1

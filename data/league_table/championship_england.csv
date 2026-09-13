@@ -1,25 +1,25 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,West Ham United,7,4,2,1,20,9,11,14
-2,West Bromwich Albion,6,4,1,1,9,6,3,13
-3,Swansea City,6,3,2,1,8,4,4,11
-4,Queens Park Rangers,6,3,2,1,7,4,3,11
-5,Charlton Athletic,6,3,2,1,6,7,-1,11
-6,Middlesbrough,5,3,1,1,8,5,3,10
-7,Bristol City,5,3,1,1,9,7,2,10
-8,Millwall,5,3,0,2,10,8,2,9
-9,Norwich City,6,3,0,3,10,9,1,9
-10,Sheffield United,6,2,3,1,8,8,0,9
-11,Wolverhampton Wanderers,5,2,2,1,13,10,3,8
-12,Watford,6,2,2,2,6,7,-1,8
-13,Southampton,6,3,2,1,14,7,7,7
-14,Birmingham City,6,1,4,1,8,8,0,7
-15,Stoke City,6,2,1,3,9,10,-1,7
-16,Wrexham,7,1,4,2,7,11,-4,7
-17,Portsmouth,5,2,0,3,7,8,-1,6
-18,Blackburn Rovers,6,1,2,3,7,9,-2,5
-19,Lincoln City,5,1,2,2,4,6,-2,5
-20,Cardiff City,6,0,4,2,7,10,-3,4
-21,Bolton Wanderers,6,1,1,4,6,12,-6,4
-22,Derby County,6,1,1,4,5,11,-6,4
-23,Burnley,6,0,3,3,7,13,-6,3
-24,Preston North End,6,1,0,5,6,12,-6,3
+2,Swansea City,7,4,2,1,11,5,6,14
+3,West Bromwich Albion,7,4,2,1,10,7,3,14
+4,Middlesbrough,6,4,1,1,12,8,4,13
+5,Queens Park Rangers,7,3,3,1,8,5,3,12
+6,Charlton Athletic,7,3,3,1,6,7,-1,12
+7,Southampton,7,4,2,1,18,8,10,10
+8,Birmingham City,7,2,4,1,10,9,1,10
+9,Stoke City,7,3,1,3,11,11,0,10
+10,Bristol City,6,3,1,2,10,11,-1,10
+11,Norwich City,7,3,0,4,13,13,0,9
+12,Millwall,6,3,0,3,11,11,0,9
+13,Sheffield United,6,2,3,1,8,8,0,9
+14,Wolverhampton Wanderers,5,2,2,1,13,10,3,8
+15,Blackburn Rovers,7,2,2,3,10,10,0,8
+16,Lincoln City,6,2,2,2,5,6,-1,8
+17,Watford,7,2,2,3,7,9,-2,8
+18,Portsmouth,6,2,1,3,7,8,-1,7
+19,Wrexham,7,1,4,2,7,11,-4,7
+20,Bolton Wanderers,7,2,1,4,7,12,-5,7
+21,Cardiff City,7,0,4,3,7,11,-4,4
+22,Derby County,7,1,1,5,6,13,-7,4
+23,Preston North End,7,1,0,6,6,13,-7,3
+24,Burnley,7,0,3,4,8,16,-8,3

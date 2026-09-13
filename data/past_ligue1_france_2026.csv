@@ -27,3 +27,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-06T15:15:00Z,3,FINISHED,Angers SCO,Stade Rennais FC 1901,1,2,AWAY_TEAM
 2026-09-06T18:45:00Z,3,FINISHED,Olympique de Marseille,Paris FC,2,3,AWAY_TEAM
 2026-09-11T18:45:00Z,4,FINISHED,Stade Rennais FC 1901,Olympique de Marseille,1,0,HOME_TEAM
+2026-09-12T15:15:00Z,4,FINISHED,RC Strasbourg Alsace,AS Monaco FC,1,1,DRAW
+2026-09-12T18:45:00Z,4,FINISHED,FC Lorient,Toulouse FC,2,2,DRAW
+2026-09-12T18:45:00Z,4,FINISHED,AJ Auxerre,OGC Nice,1,0,HOME_TEAM
+2026-09-12T18:45:00Z,4,FINISHED,Le Havre AC,Angers SCO,0,0,DRAW
+2026-09-12T18:45:00Z,4,FINISHED,Paris FC,Olympique Lyonnais,0,0,DRAW

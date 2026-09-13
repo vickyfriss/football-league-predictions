@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Manchester City,3,3,0,0,7,2,5,9
-2,Arsenal,3,3,0,0,6,1,5,9
-3,Hull City,3,2,1,0,3,0,3,7
-4,Chelsea,3,2,0,1,8,7,1,6
-5,Brentford,3,1,2,0,5,2,3,5
-6,Liverpool,3,1,2,0,6,4,2,5
-7,Newcastle United,3,1,2,0,6,4,2,5
-8,Everton,3,1,2,0,5,3,2,5
-9,Leeds United,3,1,2,0,3,2,1,5
-10,Brighton & Hove Albion,3,1,1,1,8,5,3,4
-11,Manchester United,3,1,1,1,7,6,1,4
-12,Sunderland,3,1,1,1,3,3,0,4
-13,Crystal Palace,3,1,0,2,4,8,-4,3
-14,Ipswich Town,3,1,0,2,4,8,-4,3
-15,AFC Bournemouth,3,0,2,1,4,5,-1,2
-16,Nottingham Forest,3,0,2,1,2,3,-1,2
-17,Aston Villa,3,0,1,2,0,5,-5,1
-18,Tottenham Hotspur,3,0,1,2,0,5,-5,1
-19,Fulham,3,0,0,3,4,7,-3,0
+1,Arsenal,4,4,0,0,8,1,7,12
+2,Manchester City,3,3,0,0,7,2,5,9
+3,Hull City,4,2,2,0,5,2,3,8
+4,Chelsea,4,2,1,1,10,9,1,7
+5,Brentford,4,1,3,0,7,4,3,6
+6,Liverpool,4,1,3,0,6,4,2,6
+7,Everton,4,1,3,0,5,3,2,6
+8,Ipswich Town,4,2,0,2,7,10,-3,6
+9,Newcastle United,3,1,2,0,6,4,2,5
+10,Leeds United,3,1,2,0,3,2,1,5
+11,Nottingham Forest,4,1,2,1,4,4,0,5
+12,Brighton & Hove Albion,3,1,1,1,8,5,3,4
+13,Manchester United,3,1,1,1,7,6,1,4
+14,Sunderland,4,1,1,2,3,5,-2,4
+15,AFC Bournemouth,4,0,3,1,6,7,-1,3
+16,Crystal Palace,4,1,0,3,6,11,-5,3
+17,Tottenham Hotspur,4,0,2,2,0,5,-5,2
+18,Fulham,4,0,1,3,4,7,-3,1
+19,Aston Villa,4,0,1,3,1,7,-6,1
 20,Coventry City,3,0,0,3,0,5,-5,0
