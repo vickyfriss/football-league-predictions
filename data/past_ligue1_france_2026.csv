@@ -32,3 +32,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-12T18:45:00Z,4,FINISHED,AJ Auxerre,OGC Nice,1,0,HOME_TEAM
 2026-09-12T18:45:00Z,4,FINISHED,Le Havre AC,Angers SCO,0,0,DRAW
 2026-09-12T18:45:00Z,4,FINISHED,Paris FC,Olympique Lyonnais,0,0,DRAW
+2026-09-13T13:00:00Z,4,FINISHED,Lille OSC,ES Troyes AC,2,0,HOME_TEAM
+2026-09-13T15:15:00Z,4,FINISHED,Le Mans FC,Racing Club de Lens,2,2,DRAW
+2026-09-13T18:45:00Z,4,FINISHED,Stade Brestois 29,Paris Saint-Germain FC,0,1,AWAY_TEAM

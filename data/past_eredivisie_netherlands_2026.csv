@@ -48,3 +48,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-12T16:45:00Z,6,FINISHED,Go Ahead Eagles,FC Groningen,1,1,DRAW
 2026-09-12T18:00:00Z,6,FINISHED,Fortuna Sittard,AFC Ajax,1,5,AWAY_TEAM
 2026-09-12T19:00:00Z,6,FINISHED,SC Cambuur-Leeuwarden,NEC,3,0,HOME_TEAM
+2026-09-13T10:15:00Z,6,FINISHED,SBV Excelsior,FC Utrecht,1,2,AWAY_TEAM
+2026-09-13T12:30:00Z,6,FINISHED,SC Heerenveen,Telstar 1963,0,0,DRAW
+2026-09-13T14:45:00Z,6,FINISHED,PEC Zwolle,Feyenoord Rotterdam,0,7,AWAY_TEAM
+2026-09-13T18:00:00Z,6,FINISHED,PSV,Sparta Rotterdam,4,1,HOME_TEAM

@@ -262,3 +262,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-12T21:30:00Z,27,FINISHED,SE Palmeiras,São Paulo FC,2,0,HOME_TEAM
 2026-09-12T23:30:00Z,27,FINISHED,Botafogo FR,RB Bragantino,1,1,DRAW
 2026-09-13T00:00:00Z,27,FINISHED,Santos FC,Cruzeiro EC,2,1,HOME_TEAM
+2026-09-13T19:00:00Z,27,FINISHED,Mirassol FC,EC Vitória,2,2,DRAW
+2026-09-13T20:30:00Z,27,FINISHED,CR Flamengo,SC Corinthians Paulista,2,1,HOME_TEAM
