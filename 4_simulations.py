@@ -20,7 +20,7 @@ def drop_unknown_teams(fixtures, table):
     mask = fixtures["homeTeam"].isin(known) & fixtures["awayTeam"].isin(known)
     dropped = fixtures.loc[~mask]
     if len(dropped):
-        unknown = sorted(set(dropped["homeTeam"]) | set(dropped["awayTeam"]) - known)
+        unknown = sorted((set(dropped["homeTeam"]) | set(dropped["awayTeam"])) - known)
         print(f"⚠️ Dropping {len(dropped)} fixture(s) with unrecognized team name(s) {unknown} -- check mappings")
     return fixtures.loc[mask].copy()
 

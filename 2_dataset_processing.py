@@ -135,7 +135,10 @@ mappings = {
         # Promoted from 2. Bundesliga for 2026/27
         "FC Schalke 04": "Schalke 04",
         "SV 07 Elversberg": "SV Elversberg",
-        "SC Paderborn 07": "SC Paderborn 07"
+        "SC Paderborn 07": "SC Paderborn 07",
+        # the-odds-api spells these shorter than the fixtures feed
+        "Elversberg": "SV Elversberg",
+        "SC Paderborn": "SC Paderborn 07"
     },
     "ligue1_france": {
         "Racing Club de Lens": "Lens",
@@ -287,7 +290,8 @@ mappings = {
         "CS Maritimo": "Maritimo",
         "Famalicão": "FC Famalicao",
         "Nacional": "C.D. Nacional",
-        "Sporting Lisbon": "Sporting CP"
+        "Sporting Lisbon": "Sporting CP",
+        "CF Estrela": "Estrela"
     }
 }
 
