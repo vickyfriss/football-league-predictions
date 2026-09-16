@@ -2,8 +2,8 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 1,PSV Eindhoven,6,5,1,0,22,7,15,16
 2,AZ Alkmaar,6,5,1,0,17,6,11,16
 3,Feyenoord Rotterdam,6,4,2,0,20,7,13,14
-4,FC Twente,6,4,1,1,12,5,7,13
-5,Ajax Amsterdam,5,3,1,1,14,6,8,10
+4,Ajax Amsterdam,6,4,1,1,19,7,12,13
+5,FC Twente,6,4,1,1,12,5,7,13
 6,Excelsior,6,3,1,2,13,7,6,10
 7,Fortuna Sittard,6,3,1,2,12,14,-2,10
 8,Go Ahead Eagles,6,2,3,1,15,13,2,9
@@ -15,5 +15,5 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 14,FC Utrecht,6,1,2,3,11,19,-8,5
 15,SC Cambuur,6,1,1,4,9,18,-9,4
 16,PEC Zwolle,6,1,1,4,6,17,-11,4
-17,Willem II,5,0,2,3,5,14,-9,2
+17,Willem II,6,0,2,4,6,19,-13,2
 18,ADO Den Haag,6,0,1,5,6,16,-10,1

@@ -49,9 +49,9 @@ utcDate,status,homeTeam,awayTeam
 2026-11-28T15:30:00Z,TIMED,FC Arouca,Rio Ave FC
 2026-11-28T18:00:00Z,TIMED,Académico de Viseu FC,FC Alverca
 2026-11-28T20:30:00Z,TIMED,Vitória SC,CF Estrela da Amadora
-2026-11-29T00:00:00Z,SCHEDULED,Gil Vicente FC,GD Estoril Praia
+2026-11-29T18:00:00Z,TIMED,Gil Vicente FC,GD Estoril Praia
 2026-11-29T20:30:00Z,TIMED,FC Porto,Sporting Clube de Portugal
-2026-11-30T00:00:00Z,SCHEDULED,Casa Pia AC,Sporting Clube de Braga
+2026-11-30T20:15:00Z,TIMED,Casa Pia AC,Sporting Clube de Braga
 2026-11-30T20:15:00Z,TIMED,Sport Lisboa e Benfica,FC Famalicão
 2026-12-06T00:00:00Z,SCHEDULED,Sporting Clube de Portugal,CS Marítimo
 2026-12-06T00:00:00Z,SCHEDULED,CF Estrela da Amadora,Gil Vicente FC

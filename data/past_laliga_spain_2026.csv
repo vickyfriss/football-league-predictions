@@ -50,3 +50,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-13T16:30:00Z,5,FINISHED,Getafe CF,RC Deportivo La Coruña,1,1,DRAW
 2026-09-13T19:00:00Z,5,FINISHED,Real Sociedad de Fútbol,Club Atlético de Madrid,0,3,AWAY_TEAM
 2026-09-14T19:00:00Z,5,FINISHED,Villarreal CF,Real Betis Balompié,1,2,AWAY_TEAM
+2026-09-15T17:00:00Z,6,FINISHED,Rayo Vallecano de Madrid,RCD Espanyol de Barcelona,2,1,HOME_TEAM
+2026-09-15T18:00:00Z,6,FINISHED,Deportivo Alavés,Valencia CF,0,1,AWAY_TEAM
+2026-09-15T19:30:00Z,6,FINISHED,Elche CF,Real Madrid CF,2,3,AWAY_TEAM

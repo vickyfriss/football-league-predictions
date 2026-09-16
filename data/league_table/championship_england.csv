@@ -1,20 +1,20 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,West Ham United,7,4,2,1,20,9,11,14
 2,Swansea City,7,4,2,1,11,5,6,14
-3,West Bromwich Albion,7,4,2,1,10,7,3,14
-4,Middlesbrough,6,4,1,1,12,8,4,13
+3,Middlesbrough,7,4,2,1,14,10,4,14
+4,West Bromwich Albion,7,4,2,1,10,7,3,14
 5,Queens Park Rangers,7,3,3,1,8,5,3,12
 6,Charlton Athletic,7,3,3,1,6,7,-1,12
 7,Wolverhampton Wanderers,6,3,2,1,14,10,4,11
-8,Southampton,7,4,2,1,18,8,10,10
-9,Birmingham City,7,2,4,1,10,9,1,10
-10,Stoke City,7,3,1,3,11,11,0,10
-11,Bristol City,6,3,1,2,10,11,-1,10
-12,Norwich City,7,3,0,4,13,13,0,9
-13,Millwall,6,3,0,3,11,11,0,9
-14,Sheffield United,7,2,3,2,8,9,-1,9
-15,Blackburn Rovers,7,2,2,3,10,10,0,8
-16,Lincoln City,6,2,2,2,5,6,-1,8
+8,Lincoln City,7,3,2,2,6,6,0,11
+9,Southampton,7,4,2,1,18,8,10,10
+10,Birmingham City,7,2,4,1,10,9,1,10
+11,Millwall,7,3,1,3,13,13,0,10
+12,Stoke City,7,3,1,3,11,11,0,10
+13,Bristol City,7,3,1,3,10,12,-2,10
+14,Norwich City,7,3,0,4,13,13,0,9
+15,Sheffield United,7,2,3,2,8,9,-1,9
+16,Blackburn Rovers,7,2,2,3,10,10,0,8
 17,Watford,7,2,2,3,7,9,-2,8
 18,Portsmouth,6,2,1,3,7,8,-1,7
 19,Wrexham,7,1,4,2,7,11,-4,7
