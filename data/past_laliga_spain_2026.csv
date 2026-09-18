@@ -56,3 +56,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-16T17:00:00Z,6,FINISHED,RC Deportivo La Coruña,Sevilla FC,0,1,AWAY_TEAM
 2026-09-16T17:00:00Z,6,FINISHED,Club Atlético de Madrid,CA Osasuna,4,0,HOME_TEAM
 2026-09-16T19:30:00Z,6,FINISHED,FC Barcelona,Real Racing Club de Santander,7,2,HOME_TEAM
+2026-09-17T17:00:00Z,6,FINISHED,Real Betis Balompié,Getafe CF,1,0,HOME_TEAM
+2026-09-17T19:30:00Z,6,FINISHED,Málaga CF,Villarreal CF,1,3,AWAY_TEAM
