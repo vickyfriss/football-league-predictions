@@ -58,3 +58,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-16T19:30:00Z,6,FINISHED,FC Barcelona,Real Racing Club de Santander,7,2,HOME_TEAM
 2026-09-17T17:00:00Z,6,FINISHED,Real Betis Balompié,Getafe CF,1,0,HOME_TEAM
 2026-09-17T19:30:00Z,6,FINISHED,Málaga CF,Villarreal CF,1,3,AWAY_TEAM
+2026-09-18T19:00:00Z,7,FINISHED,RCD Espanyol de Barcelona,Elche CF,1,3,AWAY_TEAM

@@ -82,3 +82,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-13T11:00:00Z,7,FINISHED,Sheffield United FC,Wolverhampton Wanderers FC,0,1,AWAY_TEAM
 2026-09-15T18:45:00Z,6,FINISHED,Middlesbrough FC,Millwall FC,2,2,DRAW
 2026-09-15T18:45:00Z,6,FINISHED,Bristol City FC,Lincoln City FC,0,1,AWAY_TEAM
+2026-09-18T19:00:00Z,8,FINISHED,Bristol City FC,Watford FC,1,0,HOME_TEAM
