@@ -54,3 +54,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-13T18:00:00Z,6,FINISHED,PSV,Sparta Rotterdam,4,1,HOME_TEAM
 2026-09-15T18:00:00Z,3,FINISHED,AFC Ajax,Willem II Tilburg,5,1,HOME_TEAM
 2026-09-18T18:00:00Z,7,FINISHED,FC Groningen,PEC Zwolle,3,0,HOME_TEAM
+2026-09-19T14:30:00Z,7,FINISHED,ADO Den Haag,SC Cambuur-Leeuwarden,1,1,DRAW
+2026-09-19T16:45:00Z,7,FINISHED,Sparta Rotterdam,SC Heerenveen,0,4,AWAY_TEAM
+2026-09-19T18:00:00Z,7,FINISHED,AFC Ajax,SBV Excelsior,2,2,DRAW
+2026-09-19T19:00:00Z,7,FINISHED,Willem II Tilburg,Fortuna Sittard,0,1,AWAY_TEAM

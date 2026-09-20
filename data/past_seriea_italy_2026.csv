@@ -40,3 +40,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-14T16:30:00Z,4,FINISHED,Torino FC,AS Roma,0,2,AWAY_TEAM
 2026-09-14T18:45:00Z,4,FINISHED,FC Internazionale Milano,Udinese Calcio,5,3,HOME_TEAM
 2026-09-18T18:45:00Z,5,FINISHED,AC Monza,US Sassuolo Calcio,2,1,HOME_TEAM
+2026-09-19T13:00:00Z,5,FINISHED,Bologna FC 1909,Torino FC,1,1,DRAW
+2026-09-19T13:00:00Z,5,FINISHED,Udinese Calcio,Cagliari Calcio,0,1,AWAY_TEAM
+2026-09-19T16:00:00Z,5,FINISHED,AS Roma,FC Internazionale Milano,2,2,DRAW
+2026-09-19T18:45:00Z,5,FINISHED,Venezia FC,SS Lazio,0,2,AWAY_TEAM

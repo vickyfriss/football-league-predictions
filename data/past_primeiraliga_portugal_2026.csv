@@ -52,3 +52,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-14T17:45:00Z,6,FINISHED,Rio Ave FC,CF Estrela da Amadora,3,3,DRAW
 2026-09-14T19:15:00Z,6,FINISHED,Moreirense FC,CS Marítimo,3,1,HOME_TEAM
 2026-09-14T19:45:00Z,6,FINISHED,Sporting Clube de Braga,GD Estoril Praia,1,0,HOME_TEAM
+2026-09-19T14:30:00Z,7,FINISHED,CD Nacional,FC Famalicão,0,4,AWAY_TEAM
+2026-09-19T14:30:00Z,7,FINISHED,Gil Vicente FC,CS Marítimo,1,1,DRAW
+2026-09-19T17:00:00Z,7,FINISHED,FC Alverca,Rio Ave FC,1,0,HOME_TEAM
+2026-09-19T19:30:00Z,7,FINISHED,Sporting Clube de Portugal,FC Arouca,2,2,DRAW

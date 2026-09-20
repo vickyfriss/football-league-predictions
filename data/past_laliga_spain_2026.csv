@@ -59,3 +59,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-17T17:00:00Z,6,FINISHED,Real Betis Balompié,Getafe CF,1,0,HOME_TEAM
 2026-09-17T19:30:00Z,6,FINISHED,Málaga CF,Villarreal CF,1,3,AWAY_TEAM
 2026-09-18T19:00:00Z,7,FINISHED,RCD Espanyol de Barcelona,Elche CF,1,3,AWAY_TEAM
+2026-09-19T12:00:00Z,7,FINISHED,CA Osasuna,Rayo Vallecano de Madrid,1,1,DRAW
+2026-09-19T14:15:00Z,7,FINISHED,Athletic Club,Deportivo Alavés,0,0,DRAW
+2026-09-19T16:30:00Z,7,FINISHED,RC Celta de Vigo,Real Racing Club de Santander,5,0,HOME_TEAM
+2026-09-19T19:00:00Z,7,FINISHED,Sevilla FC,FC Barcelona,1,3,AWAY_TEAM
