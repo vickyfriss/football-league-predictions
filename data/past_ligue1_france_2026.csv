@@ -41,3 +41,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-19T18:45:00Z,5,FINISHED,Toulouse FC,Le Havre AC,3,2,HOME_TEAM
 2026-09-19T18:45:00Z,5,FINISHED,Angers SCO,ES Troyes AC,2,0,HOME_TEAM
 2026-09-19T18:45:00Z,5,FINISHED,Olympique Lyonnais,Stade Rennais FC 1901,4,0,HOME_TEAM
+2026-09-20T13:00:00Z,5,FINISHED,AJ Auxerre,Stade Brestois 29,2,1,HOME_TEAM
+2026-09-20T15:15:00Z,5,FINISHED,OGC Nice,Lille OSC,2,1,HOME_TEAM
+2026-09-20T18:45:00Z,5,FINISHED,Olympique de Marseille,Paris Saint-Germain FC,1,2,AWAY_TEAM
