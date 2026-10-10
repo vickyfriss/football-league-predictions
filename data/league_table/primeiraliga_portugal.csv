@@ -1,16 +1,16 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,FC Porto,7,7,0,0,18,3,15,21
-2,Benfica,7,5,1,1,22,7,15,16
-3,Sporting CP,7,4,3,0,17,8,9,15
+2,Sporting CP,8,5,3,0,20,9,11,18
+3,Benfica,7,5,1,1,22,7,15,16
 4,Santa Clara,7,4,3,0,11,4,7,15
-5,Arouca,7,3,2,2,10,7,3,11
-6,Braga,6,3,2,1,7,5,2,11
-7,Académico de Viseu,7,3,2,2,9,9,0,11
-8,Estrela,7,2,4,1,14,14,0,10
-9,Moreirense,7,2,2,3,8,14,-6,8
-10,Gil Vicente,6,2,2,2,5,5,0,8
-11,Maritimo,7,2,2,3,8,12,-4,8
-12,Alverca,7,2,2,3,9,11,-2,8
+5,Académico de Viseu,7,3,2,2,9,9,0,11
+6,Arouca,7,3,2,2,10,7,3,11
+7,Gil Vicente,7,3,2,2,6,5,1,11
+8,Braga,7,3,2,2,8,8,0,11
+9,Estrela,7,2,4,1,14,14,0,10
+10,Moreirense,8,2,2,4,8,15,-7,8
+11,Alverca,7,2,2,3,9,11,-2,8
+12,Maritimo,7,2,2,3,8,12,-4,8
 13,FC Famalicao,7,1,4,2,9,7,2,7
 14,Vitória de Guimaraes,7,1,2,4,5,8,-3,5
 15,C.D. Nacional,7,1,1,5,7,15,-8,4

@@ -35,3 +35,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-20T13:30:00Z,4,FINISHED,Bayer 04 Leverkusen,RB Leipzig,2,0,HOME_TEAM
 2026-09-20T15:30:00Z,4,FINISHED,FC Schalke 04,SV 07 Elversberg,0,0,DRAW
 2026-09-20T17:30:00Z,4,FINISHED,SC Paderborn 07,TSG 1899 Hoffenheim,3,1,HOME_TEAM
+2026-10-09T18:30:00Z,5,FINISHED,Borussia Dortmund,SV Werder Bremen,2,2,DRAW
