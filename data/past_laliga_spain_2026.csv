@@ -69,3 +69,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-20T16:30:00Z,7,FINISHED,Villarreal CF,Levante UD,3,1,HOME_TEAM
 2026-09-20T19:00:00Z,7,FINISHED,Valencia CF,Real Sociedad de Fútbol,2,3,AWAY_TEAM
 2026-10-09T19:00:00Z,8,FINISHED,Málaga CF,RCD Espanyol de Barcelona,1,1,DRAW
+2026-10-10T14:15:00Z,8,FINISHED,Deportivo Alavés,Club Atlético de Madrid,1,2,AWAY_TEAM
+2026-10-10T16:30:00Z,8,FINISHED,FC Barcelona,Getafe CF,3,0,HOME_TEAM
+2026-10-10T19:00:00Z,8,FINISHED,Real Madrid CF,Villarreal CF,1,0,HOME_TEAM

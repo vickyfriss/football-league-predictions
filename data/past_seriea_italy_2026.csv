@@ -49,3 +49,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-20T13:00:00Z,5,FINISHED,Parma Calcio 1913,Genoa CFC,2,1,HOME_TEAM
 2026-09-20T16:00:00Z,5,FINISHED,Juventus FC,Atalanta BC,2,0,HOME_TEAM
 2026-09-20T18:45:00Z,5,FINISHED,AC Milan,US Lecce,3,0,HOME_TEAM
+2026-10-10T13:00:00Z,6,FINISHED,Genoa CFC,ACF Fiorentina,2,1,HOME_TEAM
+2026-10-10T16:00:00Z,6,FINISHED,FC Internazionale Milano,Parma Calcio 1913,3,0,HOME_TEAM
+2026-10-10T18:45:00Z,6,FINISHED,SSC Napoli,Frosinone Calcio,3,0,HOME_TEAM

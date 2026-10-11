@@ -45,3 +45,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-20T15:15:00Z,5,FINISHED,OGC Nice,Lille OSC,2,1,HOME_TEAM
 2026-09-20T18:45:00Z,5,FINISHED,Olympique de Marseille,Paris Saint-Germain FC,1,2,AWAY_TEAM
 2026-10-09T18:45:00Z,6,FINISHED,Racing Club de Lens,Olympique Lyonnais,2,1,HOME_TEAM
+2026-10-10T15:15:00Z,6,FINISHED,Lille OSC,Le Havre AC,1,0,HOME_TEAM
+2026-10-10T18:45:00Z,6,FINISHED,Stade Brestois 29,Angers SCO,5,1,HOME_TEAM
+2026-10-10T18:45:00Z,6,FINISHED,FC Lorient,Paris FC,1,0,HOME_TEAM
+2026-10-10T18:45:00Z,6,FINISHED,Paris Saint-Germain FC,Le Mans FC,3,1,HOME_TEAM
+2026-10-10T18:45:00Z,6,FINISHED,AS Monaco FC,Toulouse FC,2,2,DRAW
