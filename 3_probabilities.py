@@ -72,24 +72,26 @@ RELEGATED_FROM_ABOVE = {
 # Teams" notebook (Football-analytics repo):
 #   PROMOTED: every team promoted into a "big 5" league (Premier League,
 #   La Liga, Bundesliga, Serie A, Ligue 1) for the one completed season
-#   football-data.org's free tier exposes -- n=14, consistently below
-#   average on attack, and worse than average on defense for all but a
-#   couple of teams.
+#   football-data.org's free tier exposes -- n=14. All 14 scored below
+#   their new league's average; 12 of 14 conceded more than it (Hamburg and
+#   Sunderland were the exceptions). Means: attack 0.812, conceded 1.184.
 #   RELEGATED: the three teams relegated from the Premier League into the
 #   Championship in 2024/25 (Ipswich, Leicester, Southampton), over their
-#   following Championship season -- n=3. Two of three came back well
-#   above the Championship average on attack; Leicester was the outlier,
+#   following Championship season -- n=3. Ipswich and Southampton came back
+#   well above the Championship average on attack; Leicester was the outlier,
 #   finishing below average on attack and worse than average on defense.
+#   Means: attack 1.221, conceded 0.948.
+#   The constants below are those measured means, rounded to 3 decimals.
 #   A single point estimate will be wrong more often here than for
 #   promoted teams; treat this one as the rougher of the two priors.
 #   football-data.org's free tier only exposes the current season plus
 #   one prior, so this is the one full cohort available for either group
 #   right now -- revisit both once another promoted/relegated cohort
 #   completes a season and rolls into the cached data.
-PROMOTED_TEAM_ATTACK_RATIO = 0.769
-PROMOTED_TEAM_DEFENSE_RATIO = 1.224
-RELEGATED_TEAM_ATTACK_RATIO = 1.220
-RELEGATED_TEAM_DEFENSE_RATIO = 0.811
+PROMOTED_TEAM_ATTACK_RATIO = 0.812
+PROMOTED_TEAM_DEFENSE_RATIO = 1.184
+RELEGATED_TEAM_ATTACK_RATIO = 1.221
+RELEGATED_TEAM_DEFENSE_RATIO = 0.948
 
 
 def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betting_odds_dict,
