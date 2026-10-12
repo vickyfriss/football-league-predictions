@@ -714,7 +714,7 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     th:nth-child(n+5), td:nth-child(n+5) { width: 78px; white-space: nowrap !important; }
 
     /* left offsets below are each 1px less than the exact running-total
-       width (46, 216, 258): at rest this changes nothing, since a sticky
+       width (46, 258, 300): at rest this changes nothing, since a sticky
        element's resting position comes from normal table layout, not from
        "left" (that only kicks in once actively stuck). While scrolled,
        though, Chromium occasionally rounds two adjacent stuck sticky cells
@@ -726,17 +726,21 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
         width: 46px; white-space: nowrap !important;
         position: sticky; left: 0; z-index: 4; background-color: inherit;
     }
+    /* TEAM never wraps either: 212px fits the longest name in any of the 9
+       leagues on one line ("Borussia Mönchengladbach", 188px in Inter
+       600/14px, "Wolverhampton Wanderers" 186px) plus the 6px+6px padding,
+       with a few px to spare. At the old 170px both wrapped onto two lines. */
     th:nth-child(2), td:nth-child(2) {
-        width: 170px; text-align: left !important;
+        width: 212px; text-align: left !important; white-space: nowrap !important;
         position: sticky; left: 46px; z-index: 3; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
         width: 42px; white-space: nowrap !important;
-        position: sticky; left: 216px; z-index: 2; background-color: inherit;
+        position: sticky; left: 258px; z-index: 2; background-color: inherit;
     }
     th:nth-child(4), td:nth-child(4) {
         width: 46px; white-space: nowrap !important;
-        position: sticky; left: 258px; z-index: 1; background-color: inherit;
+        position: sticky; left: 300px; z-index: 1; background-color: inherit;
     }
 }
 

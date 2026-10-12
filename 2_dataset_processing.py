@@ -499,6 +499,18 @@ def process_datasets(globals_dict):
         past_set = set(zip(past_matches_all["homeTeam"], past_matches_all["awayTeam"]))
         future_set = set(zip(future_matches["homeTeam"], future_matches["awayTeam"]))
 
+        # Games each team has played per the table but that are missing from
+        # the results feed (it often lags ESPN by a match or two). A missing
+        # leg can only be "already played" while BOTH teams still have such an
+        # unexplained game left, and each one used up reduces that budget --
+        # otherwise a single lagging result files every remaining pairing for
+        # that team as played, and it's simulated with zero fixtures left.
+        played_counts = pd.concat([past_matches_all["homeTeam"], past_matches_all["awayTeam"]]).value_counts()
+        unexplained_gp = {
+            t: max(int(expected_gp.get(t, 0)) - int(played_counts.get(t, 0)), 0) for t in teams
+        }
+        seen_legs = set()
+
         for team in teams:
             for opponent in teams - {team}:
 
@@ -507,6 +519,10 @@ def process_datasets(globals_dict):
                     # already exists somewhere → skip
                     if (home, away) in future_set or (home, away) in past_set:
                         continue
+                    # each leg is found twice (once from each team's side)
+                    if (home, away) in seen_legs:
+                        continue
+                    seen_legs.add((home, away))
 
                     home_gp = expected_gp.get(home, 0)
                     away_gp = expected_gp.get(away, 0)
@@ -522,6 +538,11 @@ def process_datasets(globals_dict):
                         (past_matches_all["awayTeam"] == away)
                     ].shape[0]
 
+                    played_already = unexplained_gp.get(home, 0) > 0 and unexplained_gp.get(away, 0) > 0
+                    if played_already:
+                        unexplained_gp[home] -= 1
+                        unexplained_gp[away] -= 1
+
                     missing_fixtures.append({
                         "league": league,
                         "homeTeam": home,
@@ -530,7 +551,7 @@ def process_datasets(globals_dict):
                         "away_gp_expected": away_gp,
                         "home_gp_actual": home_played,
                         "away_gp_actual": away_played,
-                        "missing_in": "past" if home_played < home_gp or away_played < away_gp else "future"
+                        "missing_in": "past" if played_already else "future"
                     })
 
     # -------------------------------

@@ -98,6 +98,23 @@ PRE_RUN_FIXTURES_SNAPSHOT = {
 if RUN_CREATION:
     standings, odds_book, fixtures, past_season_results = dataset_creation.create_datasets(save_csv=True)
 
+    # create_datasets() keys fixtures and odds by their CSV file stem
+    # ("fixtures_bundesliga_germany", "odds_bundesliga_germany"), but everything
+    # below looks them up by the plain league name, as the cached loader does.
+    # Without this, every run where the standings changed silently got NO
+    # fixtures and NO odds: process_datasets() then rebuilt the schedule from
+    # "pairs not yet in the results feed", and any team whose results lagged
+    # ESPN's table by a match had all its unplayed pairs filed as already
+    # played -- zero fixtures left, points frozen, a false 100% position
+    # (2026-08-30/31, 2026-09-04, and the Bundesliga on 2026-10-12).
+    def _strip_prefix(d, prefix):
+        if d is None:
+            return None
+        return {(k[len(prefix):] if k.startswith(prefix) else k): v for k, v in d.items()}
+
+    fixtures = _strip_prefix(fixtures, "fixtures_")
+    odds_book = _strip_prefix(odds_book, "odds_")
+
     if odds_book is None or fixtures is None or past_season_results is None:
         print("Standings unchanged — reloading odds/fixtures/history from the CSV cache instead of live APIs.")
         _, cached_odds, cached_fixtures, cached_history = load_cached_odds_fixtures_and_history()
