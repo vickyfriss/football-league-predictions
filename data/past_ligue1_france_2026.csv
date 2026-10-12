@@ -50,3 +50,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-10T18:45:00Z,6,FINISHED,FC Lorient,Paris FC,1,0,HOME_TEAM
 2026-10-10T18:45:00Z,6,FINISHED,Paris Saint-Germain FC,Le Mans FC,3,1,HOME_TEAM
 2026-10-10T18:45:00Z,6,FINISHED,AS Monaco FC,Toulouse FC,2,2,DRAW
+2026-10-11T13:00:00Z,6,FINISHED,OGC Nice,RC Strasbourg Alsace,2,1,HOME_TEAM
+2026-10-11T15:15:00Z,6,FINISHED,Stade Rennais FC 1901,AJ Auxerre,4,1,HOME_TEAM
+2026-10-11T18:45:00Z,6,FINISHED,ES Troyes AC,Olympique de Marseille,0,2,AWAY_TEAM

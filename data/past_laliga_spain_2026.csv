@@ -72,3 +72,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-10T14:15:00Z,8,FINISHED,Deportivo Alavés,Club Atlético de Madrid,1,2,AWAY_TEAM
 2026-10-10T16:30:00Z,8,FINISHED,FC Barcelona,Getafe CF,3,0,HOME_TEAM
 2026-10-10T19:00:00Z,8,FINISHED,Real Madrid CF,Villarreal CF,1,0,HOME_TEAM
+2026-10-11T12:00:00Z,8,FINISHED,Elche CF,RC Celta de Vigo,0,0,DRAW
+2026-10-11T14:15:00Z,8,FINISHED,Real Sociedad de Fútbol,RC Deportivo La Coruña,3,2,HOME_TEAM
+2026-10-11T16:30:00Z,8,FINISHED,Real Betis Balompié,CA Osasuna,5,2,HOME_TEAM
+2026-10-11T19:00:00Z,8,FINISHED,Real Racing Club de Santander,Valencia CF,2,2,DRAW

@@ -105,3 +105,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-10T14:00:00Z,9,FINISHED,Bolton Wanderers FC,Stoke City FC,1,2,AWAY_TEAM
 2026-10-10T14:00:00Z,9,FINISHED,Preston North End FC,Millwall FC,0,1,AWAY_TEAM
 2026-10-10T14:00:00Z,9,FINISHED,Middlesbrough FC,Wolverhampton Wanderers FC,1,0,HOME_TEAM
+2026-10-11T11:00:00Z,9,FINISHED,Southampton FC,Portsmouth FC,1,0,HOME_TEAM

@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Barcelona,8,8,0,0,34,7,27,24
 2,Atlético Madrid,8,6,1,1,18,8,10,19
-3,Real Madrid,8,6,0,2,19,8,11,18
-4,Real Betis,7,5,1,1,9,7,2,16
+3,Real Betis,8,6,1,1,14,9,5,19
+4,Real Madrid,8,6,0,2,19,8,11,18
 5,Sevilla,7,4,1,2,10,9,1,13
-6,Alavés,8,3,2,3,12,8,4,11
-7,Deportivo,7,2,4,1,10,8,2,10
-8,Real Sociedad,7,3,1,3,9,13,-4,10
-9,Athletic Club,6,2,2,2,7,6,1,8
-10,Villarreal,8,2,2,4,13,13,0,8
-11,Espanyol,8,2,2,4,11,11,0,8
-12,Rayo Vallecano,7,2,2,3,11,16,-5,8
-13,Getafe,8,2,2,4,4,10,-6,8
-14,Osasuna,7,2,2,3,6,13,-7,8
-15,Celta Vigo,7,1,4,2,8,6,2,7
-16,Racing Santander,7,2,1,4,11,21,-10,7
-17,Levante,6,1,2,3,8,12,-4,5
-18,Elche,7,1,2,4,11,17,-6,5
-19,Valencia,7,1,1,5,4,13,-9,4
+6,Real Sociedad,8,4,1,3,12,15,-3,13
+7,Alavés,8,3,2,3,12,8,4,11
+8,Deportivo,8,2,4,2,12,11,1,10
+9,Celta Vigo,8,1,5,2,8,6,2,8
+10,Athletic Club,6,2,2,2,7,6,1,8
+11,Villarreal,8,2,2,4,13,13,0,8
+12,Espanyol,8,2,2,4,11,11,0,8
+13,Rayo Vallecano,7,2,2,3,11,16,-5,8
+14,Getafe,8,2,2,4,4,10,-6,8
+15,Racing Santander,8,2,2,4,13,23,-10,8
+16,Osasuna,8,2,2,4,8,18,-10,8
+17,Elche,8,1,3,4,11,17,-6,6
+18,Levante,6,1,2,3,8,12,-4,5
+19,Valencia,8,1,2,5,6,15,-9,5
 20,Málaga,8,0,4,4,4,13,-9,4
