@@ -295,3 +295,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-11T20:30:00Z,30,FINISHED,Grêmio FBPA,SC Internacional,1,1,DRAW
 2026-10-11T20:30:00Z,30,FINISHED,SE Palmeiras,SC Corinthians Paulista,4,1,HOME_TEAM
 2026-10-11T22:30:00Z,30,FINISHED,EC Bahia,Mirassol FC,1,0,HOME_TEAM
+2026-10-12T19:00:00Z,30,FINISHED,Coritiba FBC,Botafogo FR,1,1,DRAW
+2026-10-12T22:30:00Z,30,FINISHED,Chapecoense AF,CA Paranaense,1,4,AWAY_TEAM
+2026-10-13T00:00:00Z,30,FINISHED,RB Bragantino,Cruzeiro EC,4,2,HOME_TEAM
