@@ -122,6 +122,16 @@ if RUN_CREATION:
         fixtures = cached_fixtures if fixtures is None else fixtures
         past_season_results = cached_history if past_season_results is None else past_season_results
 
+    # scrape_standings() drops any league whose ESPN page never loaded (WAF challenge not
+    # cleared after every retry). Without a table that league was silently left out of the
+    # whole run and vanished from the dashboard (Premier League, 2026-10-14). Fall back to its
+    # last saved table instead: at worst a day old, and results/fixtures still come from today.
+    for lg in dataset_processing.leagues:
+        cached_table_path = f"data/league_table/{lg}.csv"
+        if lg not in standings and os.path.exists(cached_table_path):
+            print(f"⚠️ {lg}: standings scrape failed today -- using the last saved table ({cached_table_path})")
+            standings[lg] = load_csv(cached_table_path)
+
 else:
     print("⚡ OFFLINE MODE → loading from CSV")
     standings, odds_book, fixtures, past_season_results = load_cached_odds_fixtures_and_history()
@@ -457,6 +467,24 @@ print("5️⃣ Saving results...")
 
 os.makedirs("data", exist_ok=True)
 os.makedirs("data/simulations", exist_ok=True)
+
+# Last line of defence: any league that still didn't get simulated today (failed pull, no
+# fixtures, an exception upstream...) keeps its last published probabilities rather than
+# disappearing from the dashboard until tomorrow.
+def load_previous_pickle(path):
+    try:
+        with open(path, "rb") as f:
+            return pickle.load(f)
+    except Exception:
+        return {}
+
+previous_counts = load_previous_pickle("data/precomputed_pos_counts.pkl")
+previous_pct = load_previous_pickle("data/precomputed_pos_pct.pkl")
+for lg in dataset_processing.leagues:
+    if lg not in position_distribution_pct_all and lg in previous_pct and lg in previous_counts:
+        print(f"⚠️ {lg}: not simulated in this run -- keeping the last available probabilities")
+        position_distribution_all[lg] = previous_counts[lg]
+        position_distribution_pct_all[lg] = previous_pct[lg]
 
 with open("data/precomputed_pos_counts.pkl", "wb") as f:
     pickle.dump(position_distribution_all, f)
