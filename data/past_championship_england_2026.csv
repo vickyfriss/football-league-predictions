@@ -114,3 +114,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-13T18:45:00Z,10,FINISHED,Bristol City FC,Blackburn Rovers FC,0,1,AWAY_TEAM
 2026-10-13T19:00:00Z,10,FINISHED,Birmingham City FC,Preston North End FC,4,0,HOME_TEAM
 2026-10-13T19:00:00Z,10,FINISHED,Stoke City FC,Middlesbrough FC,2,3,AWAY_TEAM
+2026-10-14T18:45:00Z,10,FINISHED,Portsmouth FC,Sheffield United FC,3,2,HOME_TEAM
+2026-10-14T18:45:00Z,10,FINISHED,Norwich City FC,Southampton FC,0,1,AWAY_TEAM
+2026-10-14T18:45:00Z,10,FINISHED,Queens Park Rangers FC,Derby County FC,4,1,HOME_TEAM
+2026-10-14T19:00:00Z,10,FINISHED,Lincoln City FC,West Ham United FC,0,6,AWAY_TEAM
