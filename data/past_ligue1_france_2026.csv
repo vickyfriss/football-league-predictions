@@ -53,3 +53,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-11T13:00:00Z,6,FINISHED,OGC Nice,RC Strasbourg Alsace,2,1,HOME_TEAM
 2026-10-11T15:15:00Z,6,FINISHED,Stade Rennais FC 1901,AJ Auxerre,4,1,HOME_TEAM
 2026-10-11T18:45:00Z,6,FINISHED,ES Troyes AC,Olympique de Marseille,0,2,AWAY_TEAM
+2026-10-16T18:45:00Z,7,FINISHED,Le Mans FC,Toulouse FC,0,3,AWAY_TEAM

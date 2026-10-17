@@ -66,7 +66,3 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-10T17:00:00Z,8,FINISHED,CS Marítimo,FC Porto,1,2,AWAY_TEAM
 2026-10-10T19:30:00Z,8,FINISHED,Casa Pia AC,CD Santa Clara,0,1,AWAY_TEAM
 2026-10-10T19:30:00Z,8,FINISHED,Académico de Viseu FC,GD Estoril Praia,2,1,HOME_TEAM
-2026-10-11T14:30:00Z,8,FINISHED,Rio Ave FC,CD Nacional,3,2,HOME_TEAM
-2026-10-11T17:00:00Z,8,FINISHED,Sport Lisboa e Benfica,Vitória SC,2,0,HOME_TEAM
-2026-10-11T19:30:00Z,8,FINISHED,FC Arouca,CF Estrela da Amadora,1,0,HOME_TEAM
-2026-10-12T19:15:00Z,8,FINISHED,FC Famalicão,FC Alverca,1,4,AWAY_TEAM

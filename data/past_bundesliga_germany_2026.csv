@@ -44,3 +44,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-10T16:30:00Z,5,FINISHED,RB Leipzig,Eintracht Frankfurt,6,0,HOME_TEAM
 2026-10-11T13:30:00Z,5,FINISHED,1. FC Köln,Borussia Mönchengladbach,2,1,HOME_TEAM
 2026-10-11T15:30:00Z,5,FINISHED,SC Freiburg,FC Schalke 04,2,1,HOME_TEAM
+2026-10-16T18:30:00Z,6,FINISHED,Eintracht Frankfurt,1. FC Köln,1,0,HOME_TEAM

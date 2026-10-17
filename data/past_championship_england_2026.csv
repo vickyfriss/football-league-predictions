@@ -118,3 +118,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-14T18:45:00Z,10,FINISHED,Norwich City FC,Southampton FC,0,1,AWAY_TEAM
 2026-10-14T18:45:00Z,10,FINISHED,Queens Park Rangers FC,Derby County FC,4,1,HOME_TEAM
 2026-10-14T19:00:00Z,10,FINISHED,Lincoln City FC,West Ham United FC,0,6,AWAY_TEAM
+2026-10-16T19:00:00Z,11,FINISHED,Burnley FC,Wolverhampton Wanderers FC,1,2,AWAY_TEAM

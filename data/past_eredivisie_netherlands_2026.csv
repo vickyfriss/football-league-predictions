@@ -71,3 +71,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-11T12:30:00Z,8,FINISHED,PEC Zwolle,SC Cambuur-Leeuwarden,0,1,AWAY_TEAM
 2026-10-11T12:30:00Z,8,FINISHED,Telstar 1963,ADO Den Haag,2,2,DRAW
 2026-10-11T14:45:00Z,8,FINISHED,SBV Excelsior,FC Groningen,1,5,AWAY_TEAM
+2026-10-16T18:00:00Z,9,FINISHED,SC Heerenveen,SBV Excelsior,4,0,HOME_TEAM
