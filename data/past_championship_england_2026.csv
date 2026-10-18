@@ -119,3 +119,14 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-14T18:45:00Z,10,FINISHED,Queens Park Rangers FC,Derby County FC,4,1,HOME_TEAM
 2026-10-14T19:00:00Z,10,FINISHED,Lincoln City FC,West Ham United FC,0,6,AWAY_TEAM
 2026-10-16T19:00:00Z,11,FINISHED,Burnley FC,Wolverhampton Wanderers FC,1,2,AWAY_TEAM
+2026-10-17T11:30:00Z,11,FINISHED,Millwall FC,Lincoln City FC,2,2,DRAW
+2026-10-17T11:30:00Z,11,FINISHED,Middlesbrough FC,Cardiff City FC,2,2,DRAW
+2026-10-17T11:30:00Z,11,FINISHED,Watford FC,Charlton Athletic FC,2,0,HOME_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Norwich City FC,Portsmouth FC,0,1,AWAY_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Southampton FC,Bolton Wanderers FC,0,0,DRAW
+2026-10-17T14:00:00Z,11,FINISHED,Bristol City FC,Sheffield United FC,0,1,AWAY_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Birmingham City FC,Queens Park Rangers FC,3,0,HOME_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Derby County FC,Stoke City FC,0,1,AWAY_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Swansea City AFC,West Ham United FC,0,1,AWAY_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,West Bromwich Albion FC,Blackburn Rovers FC,3,2,HOME_TEAM
+2026-10-17T14:00:00Z,11,FINISHED,Wrexham AFC,Preston North End FC,4,1,HOME_TEAM

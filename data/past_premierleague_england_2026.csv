@@ -59,3 +59,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-11T13:00:00Z,6,FINISHED,Crystal Palace FC,Nottingham Forest FC,3,1,HOME_TEAM
 2026-10-11T15:30:00Z,6,FINISHED,Liverpool FC,Manchester City FC,0,3,AWAY_TEAM
 2026-10-12T19:00:00Z,6,FINISHED,Coventry City FC,Newcastle United FC,4,1,HOME_TEAM
+2026-10-17T11:30:00Z,7,FINISHED,Everton FC,Chelsea FC,0,2,AWAY_TEAM
+2026-10-17T14:00:00Z,7,FINISHED,Fulham FC,Hull City AFC,1,0,HOME_TEAM
+2026-10-17T14:00:00Z,7,FINISHED,Manchester City FC,Ipswich Town FC,3,2,HOME_TEAM
+2026-10-17T14:00:00Z,7,FINISHED,Brentford FC,Liverpool FC,1,2,AWAY_TEAM
+2026-10-17T16:30:00Z,7,FINISHED,Newcastle United FC,Aston Villa FC,0,1,AWAY_TEAM
