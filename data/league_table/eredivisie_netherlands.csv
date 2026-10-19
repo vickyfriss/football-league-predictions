@@ -1,19 +1,19 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Feyenoord Rotterdam,9,7,2,0,31,10,21,23
-2,AZ Alkmaar,8,6,1,1,18,8,10,19
+2,AZ Alkmaar,9,6,2,1,20,10,10,20
 3,PSV Eindhoven,9,6,1,2,27,12,15,19
-4,FC Twente,8,5,2,1,16,8,8,17
-5,Ajax Amsterdam,8,4,3,1,22,10,12,15
-6,FC Groningen,8,4,2,2,20,14,6,14
-7,Fortuna Sittard,8,4,2,2,14,15,-1,14
+4,Ajax Amsterdam,9,5,3,1,27,12,15,18
+5,FC Twente,9,5,2,2,17,10,7,17
+6,Fortuna Sittard,9,4,3,2,16,17,-1,15
+7,FC Groningen,9,4,2,3,22,19,3,14
 8,Heerenveen,9,3,3,3,15,11,4,12
-9,Go Ahead Eagles,8,2,5,1,19,17,2,11
+9,Go Ahead Eagles,9,2,5,2,20,21,-1,11
 10,Excelsior,9,3,2,4,16,18,-2,11
-11,NEC Nijmegen,8,2,3,3,13,14,-1,9
-12,Sparta Rotterdam,9,2,3,4,16,22,-6,9
-13,SC Cambuur,8,2,2,4,11,19,-8,8
-14,FC Utrecht,8,2,2,4,14,25,-11,8
-15,Telstar,9,1,3,5,10,18,-8,6
-16,ADO Den Haag,9,1,3,5,11,20,-9,6
-17,PEC Zwolle,8,1,1,6,6,21,-15,4
+11,FC Utrecht,9,3,2,4,16,26,-10,11
+12,NEC Nijmegen,9,2,4,3,15,16,-1,10
+13,Sparta Rotterdam,9,2,3,4,16,22,-6,9
+14,SC Cambuur,9,2,3,4,13,21,-8,9
+15,PEC Zwolle,9,2,1,6,10,22,-12,7
+16,Telstar,9,1,3,5,10,18,-8,6
+17,ADO Den Haag,9,1,3,5,11,20,-9,6
 18,Willem II,9,0,2,7,9,26,-17,2
