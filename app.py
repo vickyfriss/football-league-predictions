@@ -310,10 +310,6 @@ def style_probabilities_table(df, column_labels=None):
             "font-size":"12px","font-weight":"500","color":"#555","white-space":"nowrap",
             "font-variant-numeric":"tabular-nums"
         })
-        # Goal difference right-aligned (units under units), as numbers usually are in a table
-        .set_properties(subset=[c for c in [column_labels.get("GD")] if c in display_df.columns], **{
-            "text-align":"right","padding-right":"12px"
-        })
         # Points are what people read first in a league table: bold, full black
         .set_properties(subset=[column_labels["PTS"]], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
@@ -338,7 +334,6 @@ def style_probabilities_table(df, column_labels=None):
             {"selector": "tr", "props":[("height","25px")]},
             {"selector": "th:nth-child(5), td:nth-child(5)", "props":[("border-right","2px solid #999")]},
             {"selector": "th:nth-child(5)", "props":[("font-weight","800"),("color","#000")]},
-            {"selector": "th:nth-child(4)", "props":[("text-align","right"),("padding-right","12px")]},
             {"selector": "td:nth-child(-n+5)", "props":[("border-bottom","1px solid #ccc")]},
             {"selector": "tr:nth-child(odd) td:nth-child(-n+5)", "props":[("background-color","#f9f9f9")]},
             {"selector": "tr:nth-child(even) td:nth-child(-n+5)", "props":[("background-color","#f2f2f2")]},
@@ -753,10 +748,9 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
         width: 42px; white-space: nowrap !important;
         position: sticky; left: 258px; z-index: 3; background-color: inherit;
     }
-    /* GD: "−100" is the widest it ever needs, same width as PTS. Right-aligned (header too) so
-       units sit under units whatever the length: "12", "6", "−4". */
+    /* GD: "−100" is the widest it ever needs, same width as PTS */
     th:nth-child(4), td:nth-child(4) {
-        width: 46px; white-space: nowrap !important; text-align: right !important; padding-right: 12px !important;
+        width: 46px; white-space: nowrap !important;
         position: sticky; left: 300px; z-index: 2; background-color: inherit;
     }
     th:nth-child(5), td:nth-child(5) {
