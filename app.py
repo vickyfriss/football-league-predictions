@@ -1240,7 +1240,17 @@ pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 _table_file = f"data/league_table/{league}.csv"
 if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
     try:
-        _gd = pd.read_csv(_table_file).set_index("team")["gd"]
+        _tbl = pd.read_csv(_table_file)
+        # Same name mapping the pipeline applies to the standings (e.g. ESPN's "Deportivo" -> "Deportivo La Coruña"),
+        # so every team in the simulation finds its row
+        try:
+            import importlib.util
+            _spec = importlib.util.spec_from_file_location("dataset_processing", "2_dataset_processing.py")
+            _dp = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_dp)
+            _tbl["team"] = _tbl["team"].replace(_dp.mappings.get(league, {}))
+        except Exception:
+            pass
+        _gd = _tbl.drop_duplicates("team").set_index("team")["gd"]
         _gd_col = pos_pct_df["TEAM"].map(_gd)
         pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", _gd_col.astype("Int64"))
     except Exception:
