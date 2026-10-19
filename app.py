@@ -32,7 +32,7 @@ MONTH_NAMES = {
 }
 
 COLUMN_LABELS = {
-    "en": {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "GD": "GD", "PTS": "PTS"},
+    "en": {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "PTS": "PTS", "GD": "GD"},
     "es": {"POS": "POS", "TEAM": "EQUIPO", "GP": "PJ", "GD": "DG", "PTS": "PTS"},
     "pt-BR": {"POS": "POS", "TEAM": "TIME", "GP": "J", "GD": "SG", "PTS": "PTS"},
     "fr": {"POS": "POS", "TEAM": "ÉQUIPE", "GP": "MJ", "GD": "DB", "PTS": "PTS"},
@@ -291,7 +291,7 @@ def style_probabilities_table(df, column_labels=None):
 
     # -------------------------------
     # TEXT / NUMERIC SPLIT
-    text_cols = [column_labels[c] for c in ["POS", "TEAM", "GP", "GD", "PTS"] if column_labels[c] in display_df.columns]
+    text_cols = [column_labels[c] for c in ["POS", "TEAM", "GP", "PTS", "GD"] if column_labels[c] in display_df.columns]
     num_cols = display_df.columns.difference(text_cols)
 
     vmax = max(display_df[num_cols].max().max(), 1) if not display_df[num_cols].empty else 1
@@ -682,7 +682,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
-/* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
+/* Desktop: freeze the first five columns (POS, TEAM, GP, PTS, GD) while
    scrolling horizontally through the position-percentage columns -- same
    sticky technique as the mobile block below, just extended from two
    columns to four since desktop has the width to spare and a 20-column
@@ -738,11 +738,11 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
         width: 42px; white-space: nowrap !important;
         position: sticky; left: 258px; z-index: 3; background-color: inherit;
     }
-    /* GD: "+100" is the widest it ever needs, same width as PTS */
     th:nth-child(4), td:nth-child(4) {
         width: 46px; white-space: nowrap !important;
         position: sticky; left: 300px; z-index: 2; background-color: inherit;
     }
+    /* GD: "+100" is the widest it ever needs, same width as PTS */
     th:nth-child(5), td:nth-child(5) {
         width: 46px; white-space: nowrap !important;
         position: sticky; left: 346px; z-index: 1; background-color: inherit;
@@ -1231,12 +1231,12 @@ if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
     try:
         _gd = pd.read_csv(_table_file).set_index("team")["gd"]
         _gd_col = pos_pct_df["TEAM"].map(_gd)
-        pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD",
+        pos_pct_df.insert(pos_pct_df.columns.get_loc("PTS") + 1, "GD",
                           _gd_col.map(lambda v: "" if pd.isna(v) else f"{int(v):+d}" if int(v) != 0 else "0"))
     except Exception:
         pass
 if "GD" not in pos_pct_df.columns:   # the frozen-column CSS assumes 5 leading columns, so always have one
-    pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", "")
+    pos_pct_df.insert(pos_pct_df.columns.get_loc("PTS") + 1, "GD", "")
 
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
