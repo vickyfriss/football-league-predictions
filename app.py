@@ -288,6 +288,9 @@ def style_probabilities_table(df, column_labels=None):
     # their job everywhere else in the app.
     column_labels = column_labels or {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "GD": "GD", "PTS": "PTS"}
     display_df = display_df.rename(columns=column_labels)
+    # GD shown as text with a true minus sign ("−4"); the underlying data (and the CSV) stays numeric
+    if column_labels.get("GD") in display_df.columns:
+        display_df[column_labels["GD"]] = display_df[column_labels["GD"]].map(lambda v: "" if pd.isna(v) else str(int(v)).replace("-", "\u2212"))
 
     # -------------------------------
     # TEXT / NUMERIC SPLIT
@@ -302,7 +305,6 @@ def style_probabilities_table(df, column_labels=None):
         .background_gradient(cmap=green_cmap, vmin=0, vmax=vmax, gmap=color_data, axis=None)
         .map(zero_style, subset=num_cols)
         .format({col: "{:.2f}%" for col in num_cols})
-        .format({c: (lambda v: "" if pd.isna(v) else str(int(v)).replace("-", "\u2212")) for c in [column_labels.get("GD")] if c in display_df.columns})
         .set_properties(subset=[c for c in text_cols if c not in (column_labels["TEAM"], column_labels["PTS"])], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"500","color":"#555","white-space":"nowrap",
