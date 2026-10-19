@@ -291,7 +291,7 @@ def style_probabilities_table(df, column_labels=None):
 
     # -------------------------------
     # TEXT / NUMERIC SPLIT
-    text_cols = [column_labels[c] for c in ["POS", "TEAM", "GP", "GD", "PTS"] if column_labels[c] in display_df.columns]
+    text_cols = [column_labels[c] for c in ["POS", "TEAM", "PTS", "GP", "GD"] if column_labels[c] in display_df.columns]
     num_cols = display_df.columns.difference(text_cols)
 
     vmax = max(display_df[num_cols].max().max(), 1) if not display_df[num_cols].empty else 1
@@ -302,10 +302,15 @@ def style_probabilities_table(df, column_labels=None):
         .background_gradient(cmap=green_cmap, vmin=0, vmax=vmax, gmap=color_data, axis=None)
         .map(zero_style, subset=num_cols)
         .format({col: "{:.2f}%" for col in num_cols})
+        .format({c: (lambda v: "" if pd.isna(v) else str(int(v)).replace("-", "\u2212")) for c in [column_labels.get("GD")] if c in display_df.columns})
         .set_properties(subset=[c for c in text_cols if c not in (column_labels["TEAM"], column_labels["PTS"])], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"500","color":"#555","white-space":"nowrap",
             "font-variant-numeric":"tabular-nums"
+        })
+        # Goal difference right-aligned (units under units), as numbers usually are in a table
+        .set_properties(subset=[c for c in [column_labels.get("GD")] if c in display_df.columns], **{
+            "text-align":"right","padding-right":"12px"
         })
         # Points are what people read first in a league table: bold, full black
         .set_properties(subset=[column_labels["PTS"]], **{
@@ -330,7 +335,8 @@ def style_probabilities_table(df, column_labels=None):
                                         ("font-size","13px"),("font-weight","600")]},
             {"selector": "tr", "props":[("height","25px")]},
             {"selector": "th:nth-child(5), td:nth-child(5)", "props":[("border-right","2px solid #999")]},
-            {"selector": "th:nth-child(5)", "props":[("font-weight","800"),("color","#000")]},
+            {"selector": "th:nth-child(3)", "props":[("font-weight","800"),("color","#000")]},
+            {"selector": "th:nth-child(5)", "props":[("text-align","right"),("padding-right","12px")]},
             {"selector": "td:nth-child(-n+5)", "props":[("border-bottom","1px solid #ccc")]},
             {"selector": "tr:nth-child(odd) td:nth-child(-n+5)", "props":[("background-color","#f9f9f9")]},
             {"selector": "tr:nth-child(even) td:nth-child(-n+5)", "props":[("background-color","#f2f2f2")]},
@@ -689,7 +695,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
-/* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
+/* Desktop: freeze the first five columns (POS, TEAM, PTS, GP, GD) while
    scrolling horizontally through the position-percentage columns -- same
    sticky technique as the mobile block below, just extended from two
    columns to four since desktop has the width to spare and a 20-column
@@ -721,7 +727,7 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     th:nth-child(n+6), td:nth-child(n+6) { width: 78px; white-space: nowrap !important; }
 
     /* left offsets below are each 1px less than the exact running-total
-       width (46, 258, 300, 346): at rest this changes nothing, since a sticky
+       width (46, 258, 304, 346): at rest this changes nothing, since a sticky
        element's resting position comes from normal table layout, not from
        "left" (that only kicks in once actively stuck). While scrolled,
        though, Chromium occasionally rounds two adjacent stuck sticky cells
@@ -742,16 +748,17 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
         position: sticky; left: 46px; z-index: 4; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
-        width: 42px; white-space: nowrap !important;
+        width: 46px; white-space: nowrap !important;
         position: sticky; left: 258px; z-index: 3; background-color: inherit;
     }
-    /* GD: "+100" is the widest it ever needs, same width as PTS */
     th:nth-child(4), td:nth-child(4) {
-        width: 46px; white-space: nowrap !important;
-        position: sticky; left: 300px; z-index: 2; background-color: inherit;
+        width: 42px; white-space: nowrap !important;
+        position: sticky; left: 304px; z-index: 2; background-color: inherit;
     }
+    /* GD: "−100" is the widest it ever needs, same width as PTS. Right-aligned (header too) so
+       units sit under units whatever the length: "12", "6", "−4". */
     th:nth-child(5), td:nth-child(5) {
-        width: 46px; white-space: nowrap !important;
+        width: 46px; white-space: nowrap !important; text-align: right !important; padding-right: 12px !important;
         position: sticky; left: 346px; z-index: 1; background-color: inherit;
     }
 }
@@ -1232,18 +1239,21 @@ pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
 # Goal difference isn't in the simulation output, but the league table saved alongside it each
-# morning has it: shown as "+8" / "0" / "-3", blank if a team can't be matched.
+# morning has it. Kept numeric (the CSV download stays parseable); the table shows "8" / "0" / "−3"
+# with a true minus sign, blank if a team can't be matched.
 _table_file = f"data/league_table/{league}.csv"
 if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
     try:
         _gd = pd.read_csv(_table_file).set_index("team")["gd"]
         _gd_col = pos_pct_df["TEAM"].map(_gd)
-        pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD",
-                          _gd_col.map(lambda v: "" if pd.isna(v) else f"{int(v):+d}" if int(v) != 0 else "0"))
+        pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", _gd_col.astype("Int64"))
     except Exception:
         pass
 if "GD" not in pos_pct_df.columns:   # the frozen-column CSS assumes 5 leading columns, so always have one
-    pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", "")
+    pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", pd.array([pd.NA] * len(pos_pct_df), dtype="Int64"))
+# Points straight after the team, as the column people read first; then games played and goal difference
+_lead = ["POS", "TEAM", "PTS", "GP", "GD"]
+pos_pct_df = pos_pct_df[_lead + [c for c in pos_pct_df.columns if c not in _lead]]
 
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
