@@ -32,10 +32,10 @@ MONTH_NAMES = {
 }
 
 COLUMN_LABELS = {
-    "en": {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "PTS": "PTS"},
-    "es": {"POS": "POS", "TEAM": "EQUIPO", "GP": "PJ", "PTS": "PTS"},
-    "pt-BR": {"POS": "POS", "TEAM": "TIME", "GP": "J", "PTS": "PTS"},
-    "fr": {"POS": "POS", "TEAM": "ÉQUIPE", "GP": "MJ", "PTS": "PTS"},
+    "en": {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "GD": "GD", "PTS": "PTS"},
+    "es": {"POS": "POS", "TEAM": "EQUIPO", "GP": "PJ", "GD": "DG", "PTS": "PTS"},
+    "pt-BR": {"POS": "POS", "TEAM": "TIME", "GP": "J", "GD": "SG", "PTS": "PTS"},
+    "fr": {"POS": "POS", "TEAM": "ÉQUIPE", "GP": "MJ", "GD": "DB", "PTS": "PTS"},
 }
 
 TRANSLATIONS = {
@@ -286,12 +286,12 @@ def style_probabilities_table(df, column_labels=None):
     # columns are renamed here, after the frame's real "POS"/"TEAM"/"GP"/"PTS"
     # names (set upstream from the pickled simulation output) have already done
     # their job everywhere else in the app.
-    column_labels = column_labels or {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "PTS": "PTS"}
+    column_labels = column_labels or {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "GD": "GD", "PTS": "PTS"}
     display_df = display_df.rename(columns=column_labels)
 
     # -------------------------------
     # TEXT / NUMERIC SPLIT
-    text_cols = [column_labels["POS"], column_labels["TEAM"], column_labels["GP"], column_labels["PTS"]]
+    text_cols = [column_labels[c] for c in ["POS", "TEAM", "GP", "GD", "PTS"] if column_labels[c] in display_df.columns]
     num_cols = display_df.columns.difference(text_cols)
 
     vmax = max(display_df[num_cols].max().max(), 1) if not display_df[num_cols].empty else 1
@@ -302,7 +302,7 @@ def style_probabilities_table(df, column_labels=None):
         .background_gradient(cmap=green_cmap, vmin=0, vmax=vmax, gmap=color_data, axis=None)
         .map(zero_style, subset=num_cols)
         .format({col: "{:.2f}%" for col in num_cols})
-        .set_properties(subset=[column_labels["POS"], column_labels["GP"], column_labels["PTS"]], **{
+        .set_properties(subset=[c for c in text_cols if c != column_labels["TEAM"]], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"600","color":"#000","white-space":"nowrap",
             "font-variant-numeric":"tabular-nums"
@@ -323,10 +323,10 @@ def style_probabilities_table(df, column_labels=None):
                                         ("font-family","Inter, Roboto, Arial, sans-serif"),
                                         ("font-size","13px"),("font-weight","600")]},
             {"selector": "tr", "props":[("height","25px")]},
-            {"selector": "th:nth-child(4), td:nth-child(4)", "props":[("border-right","2px solid #999")]},
-            {"selector": "td:nth-child(-n+4)", "props":[("border-bottom","1px solid #ccc")]},
-            {"selector": "tr:nth-child(odd) td:nth-child(-n+4)", "props":[("background-color","#f9f9f9")]},
-            {"selector": "tr:nth-child(even) td:nth-child(-n+4)", "props":[("background-color","#f2f2f2")]},
+            {"selector": "th:nth-child(5), td:nth-child(5)", "props":[("border-right","2px solid #999")]},
+            {"selector": "td:nth-child(-n+5)", "props":[("border-bottom","1px solid #ccc")]},
+            {"selector": "tr:nth-child(odd) td:nth-child(-n+5)", "props":[("background-color","#f9f9f9")]},
+            {"selector": "tr:nth-child(even) td:nth-child(-n+5)", "props":[("background-color","#f2f2f2")]},
             # Row hover: a translucent green wash over the *entire* row, via
             # box-shadow rather than background-color. box-shadow paints as its
             # own layer on top of whatever background is already there
@@ -682,7 +682,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
-/* Desktop: freeze the first four columns (POS, TEAM, GP, PTS) while
+/* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
    scrolling horizontally through the position-percentage columns -- same
    sticky technique as the mobile block below, just extended from two
    columns to four since desktop has the width to spare and a 20-column
@@ -711,10 +711,10 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
        exactly on the edge like the previous 60px (which is why cells were
        wrapping to "12.26" / "%" on two lines). Same story for "POS": the
        header text alone needs ~41px, more than the previous 40px column. */
-    th:nth-child(n+5), td:nth-child(n+5) { width: 78px; white-space: nowrap !important; }
+    th:nth-child(n+6), td:nth-child(n+6) { width: 78px; white-space: nowrap !important; }
 
     /* left offsets below are each 1px less than the exact running-total
-       width (46, 258, 300): at rest this changes nothing, since a sticky
+       width (46, 258, 300, 346): at rest this changes nothing, since a sticky
        element's resting position comes from normal table layout, not from
        "left" (that only kicks in once actively stuck). While scrolled,
        though, Chromium occasionally rounds two adjacent stuck sticky cells
@@ -724,7 +724,7 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
        higher z-index, absorbs that rounding error instead of exposing it. */
     th:nth-child(1), td:nth-child(1) {
         width: 46px; white-space: nowrap !important;
-        position: sticky; left: 0; z-index: 4; background-color: inherit;
+        position: sticky; left: 0; z-index: 5; background-color: inherit;
     }
     /* TEAM never wraps either: 212px fits the longest name in any of the 9
        leagues on one line ("Borussia Mönchengladbach", 188px in Inter
@@ -732,15 +732,20 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
        with a few px to spare. At the old 170px both wrapped onto two lines. */
     th:nth-child(2), td:nth-child(2) {
         width: 212px; text-align: left !important; white-space: nowrap !important;
-        position: sticky; left: 46px; z-index: 3; background-color: inherit;
+        position: sticky; left: 46px; z-index: 4; background-color: inherit;
     }
     th:nth-child(3), td:nth-child(3) {
         width: 42px; white-space: nowrap !important;
-        position: sticky; left: 258px; z-index: 2; background-color: inherit;
+        position: sticky; left: 258px; z-index: 3; background-color: inherit;
     }
+    /* GD: "+100" is the widest it ever needs, same width as PTS */
     th:nth-child(4), td:nth-child(4) {
         width: 46px; white-space: nowrap !important;
-        position: sticky; left: 300px; z-index: 1; background-color: inherit;
+        position: sticky; left: 300px; z-index: 2; background-color: inherit;
+    }
+    th:nth-child(5), td:nth-child(5) {
+        width: 46px; white-space: nowrap !important;
+        position: sticky; left: 346px; z-index: 1; background-color: inherit;
     }
 }
 
@@ -1218,6 +1223,20 @@ pos_pct_df["TEAM"] = pos_pct_df["TEAM"].astype(str)
 pos_pct_df["POS"] = pos_pct_df["POS"].astype(int)
 pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
+
+# Goal difference isn't in the simulation output, but the league table saved alongside it each
+# morning has it: shown as "+8" / "0" / "-3", blank if a team can't be matched.
+_table_file = f"data/league_table/{league}.csv"
+if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
+    try:
+        _gd = pd.read_csv(_table_file).set_index("team")["gd"]
+        _gd_col = pos_pct_df["TEAM"].map(_gd)
+        pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD",
+                          _gd_col.map(lambda v: "" if pd.isna(v) else f"{int(v):+d}" if int(v) != 0 else "0"))
+    except Exception:
+        pass
+if "GD" not in pos_pct_df.columns:   # the frozen-column CSS assumes 5 leading columns, so always have one
+    pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", "")
 
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
