@@ -37,6 +37,43 @@ def load_csv(path):
         return pd.DataFrame()
 
 
+# Every freshly fetched set of odds is kept in data/odds_history/{league}.csv (raw API team names,
+# one row per snapshot and match). The ratings use the last few weeks of it to work out what the
+# market thinks of each team (3_probabilities.py, section 1b): today's odds file alone only ever
+# covers the next matchday or two.
+ODDS_HISTORY_DIR = "data/odds_history"
+ODDS_HISTORY_COLS = ["home_team", "away_team", "p_home_book", "p_draw_book", "p_away_book"]
+
+def append_odds_history(odds_book, when):
+    os.makedirs(ODDS_HISTORY_DIR, exist_ok=True)
+    for lg, df in (odds_book or {}).items():
+        if df is None or df.empty or not set(ODDS_HISTORY_COLS).issubset(df.columns):
+            continue
+        new = df[ODDS_HISTORY_COLS].dropna().copy()
+        if new.empty:
+            continue
+        path = f"{ODDS_HISTORY_DIR}/{lg}.csv"
+        old = load_csv(path)
+        if not old.empty:
+            # skip a snapshot identical to the latest one on file (e.g. a re-run on the same morning)
+            latest = old[old["snap_time"] == old["snap_time"].max()][ODDS_HISTORY_COLS]
+            key = lambda d: d.round(6).sort_values(["home_team", "away_team"]).reset_index(drop=True)
+            if len(latest) == len(new) and key(latest).equals(key(new)):
+                continue
+        new.insert(0, "snap_time", when.strftime("%Y-%m-%d %H:%M:%S"))
+        pd.concat([old, new], ignore_index=True).to_csv(path, index=False)
+
+def load_odds_history(lg):
+    df = load_csv(f"{ODDS_HISTORY_DIR}/{lg}.csv")
+    if df.empty:
+        return df
+    df["snap_time"] = pd.to_datetime(df["snap_time"], utc=True).dt.tz_localize(None)
+    df = df.rename(columns={"home_team": "homeTeam", "away_team": "awayTeam"})
+    mapping = dataset_processing.mappings.get(lg, {})
+    df[["homeTeam", "awayTeam"]] = df[["homeTeam", "awayTeam"]].replace(mapping)
+    return df
+
+
 def load_cached_odds_fixtures_and_history():
     """Reload odds/fixtures/past-season-results from the CSV cache on disk.
     Used for OFFLINE MODE, and also as the fallback below when standings are
@@ -114,6 +151,10 @@ if RUN_CREATION:
 
     fixtures = _strip_prefix(fixtures, "fixtures_")
     odds_book = _strip_prefix(odds_book, "odds_")
+
+    # Fresh odds from the API today (None means the cache below gets used instead): keep them
+    if odds_book is not None:
+        append_odds_history(odds_book, datetime.now(UTC))
 
     if odds_book is None or fixtures is None or past_season_results is None:
         print("Standings unchanged — reloading odds/fixtures/history from the CSV cache instead of live APIs.")
@@ -382,6 +423,7 @@ df_simulation_all, _ratings_by_league, _home_adv_by_league = dataset_probabiliti
     {lg: normalize_odds(globals_dict.get(f"betting_odds_{lg}")) for lg in active_leagues},
     current_season_matches_dict={lg: globals_dict.get(f"past_matches_{lg}_all", pd.DataFrame()) for lg in active_leagues},
     prior_rosters_by_league_season=prior_rosters_by_league_season,
+    odds_history_dict={lg: load_odds_history(lg) for lg in active_leagues},
 )
 
 print("✅ Probabilities computed.")
