@@ -342,6 +342,7 @@ def compute_final_probabilities(leagues, past_matches_dict, fixtures_dict, betti
         ratings_by_league[league] = {
             "attack": attack, "defense": defense, "league_avg": league_avg, "home_adv": home_adv,
             "attack_goals": attack_goals, "defense_goals": defense_goals,
+            "attack_target": target_attack, "defense_target": target_defense,
             "attack_market": market[0] if market is not None else None,
             "defense_market": market[1] if market is not None else None,
         }
