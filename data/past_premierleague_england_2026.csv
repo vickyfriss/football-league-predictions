@@ -68,3 +68,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-18T13:00:00Z,7,FINISHED,Leeds United FC,Manchester United FC,1,1,DRAW
 2026-10-18T13:00:00Z,7,FINISHED,Brighton & Hove Albion FC,Crystal Palace FC,5,0,HOME_TEAM
 2026-10-18T15:30:00Z,7,FINISHED,Nottingham Forest FC,Arsenal FC,0,1,AWAY_TEAM
+2026-10-19T19:00:00Z,7,FINISHED,Tottenham Hotspur FC,Coventry City FC,3,1,HOME_TEAM
