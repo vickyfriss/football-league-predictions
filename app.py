@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import os
 import time
+import html
 from datetime import datetime, timezone
 from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
@@ -54,6 +55,21 @@ TRANSLATIONS = {
         "results_eyebrow": "Live Predictions",
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
+        "card_title_title": "Title race",
+        "card_title_sub": "Chance of winning the league",
+        "card_race_title_ucl": "Champions League race",
+        "card_race_title_promotion": "Automatic promotion race",
+        "card_race_title_libertadores": "Libertadores race",
+        "card_race_sub": "Chance of a top-{n} finish, for the teams closest to the cut-off",
+        "card_rel_title": "Relegation battle",
+        "card_rel_sub": "Chance of finishing in the relegation places",
+        "zone_ucl": "Champions League",
+        "zone_promotion": "Promotion",
+        "zone_libertadores": "Libertadores",
+        "zone_top_playoff": "Promotion play-offs",
+        "zone_rel_playoff": "Relegation play-off",
+        "zone_relegation": "Relegation",
+        "zones_note": "Zones based on current position",
         "download_button": "Download table as CSV",
         "methodology_eyebrow": "The Method",
         "methodology_title": "How This Simulation Works",
@@ -100,6 +116,21 @@ TRANSLATIONS = {
         "results_eyebrow": "Predicciones en Vivo",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
+        "card_title_title": "Carrera por el título",
+        "card_title_sub": "Probabilidad de ganar la liga",
+        "card_race_title_ucl": "Carrera por la Champions League",
+        "card_race_title_promotion": "Carrera por el ascenso directo",
+        "card_race_title_libertadores": "Carrera por la Libertadores",
+        "card_race_sub": "Probabilidad de terminar entre los {n} primeros, para los equipos más cerca del corte",
+        "card_rel_title": "Lucha por la permanencia",
+        "card_rel_sub": "Probabilidad de terminar en puestos de descenso",
+        "zone_ucl": "Champions League",
+        "zone_promotion": "Ascenso",
+        "zone_libertadores": "Libertadores",
+        "zone_top_playoff": "Playoff de ascenso",
+        "zone_rel_playoff": "Playoff de descenso",
+        "zone_relegation": "Descenso",
+        "zones_note": "Zonas según la posición actual",
         "download_button": "Descargar tabla como CSV",
         "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
@@ -146,6 +177,21 @@ TRANSLATIONS = {
         "results_eyebrow": "Previsões ao Vivo",
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
+        "card_title_title": "Disputa pelo título",
+        "card_title_sub": "Chance de ser campeão",
+        "card_race_title_ucl": "Disputa pela Champions League",
+        "card_race_title_promotion": "Disputa pelo acesso direto",
+        "card_race_title_libertadores": "Disputa pela Libertadores",
+        "card_race_sub": "Chance de terminar entre os {n} primeiros, para os times mais perto do corte",
+        "card_rel_title": "Luta contra o rebaixamento",
+        "card_rel_sub": "Chance de terminar na zona de rebaixamento",
+        "zone_ucl": "Champions League",
+        "zone_promotion": "Acesso",
+        "zone_libertadores": "Libertadores",
+        "zone_top_playoff": "Playoff de acesso",
+        "zone_rel_playoff": "Playoff de rebaixamento",
+        "zone_relegation": "Rebaixamento",
+        "zones_note": "Zonas com base na posição atual",
         "download_button": "Baixar tabela como CSV",
         "methodology_eyebrow": "O Método",
         "methodology_title": "Como Esta Simulação Funciona",
@@ -192,6 +238,21 @@ TRANSLATIONS = {
         "results_eyebrow": "Prédictions en Direct",
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
+        "card_title_title": "Course au titre",
+        "card_title_sub": "Probabilité de remporter le championnat",
+        "card_race_title_ucl": "Course à la Ligue des champions",
+        "card_race_title_promotion": "Course à la montée directe",
+        "card_race_title_libertadores": "Course à la Libertadores",
+        "card_race_sub": "Probabilité de finir dans les {n} premiers, pour les équipes les plus proches de la limite",
+        "card_rel_title": "Lutte pour le maintien",
+        "card_rel_sub": "Probabilité de finir en zone de relégation",
+        "zone_ucl": "Ligue des champions",
+        "zone_promotion": "Montée",
+        "zone_libertadores": "Libertadores",
+        "zone_top_playoff": "Barrages de montée",
+        "zone_rel_playoff": "Barrage de relégation",
+        "zone_relegation": "Relégation",
+        "zones_note": "Zones selon le classement actuel",
         "download_button": "Télécharger le tableau en CSV",
         "methodology_eyebrow": "La Méthode",
         "methodology_title": "Comment Fonctionne Cette Simulation",
@@ -271,7 +332,29 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
         return 0.5 + (val - mid) / (max_val - mid) * 0.5
 
 
-def style_probabilities_table(df, column_labels=None):
+# Table zones per league, by position: "top" is the Champions League (or
+# Libertadores / automatic promotion) places, the rest are play-off and
+# relegation spots. Formats as of 2026/27 -- edit here if a competition changes.
+LEAGUE_ZONES = {
+    "premierleague_england": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
+    "championship_england": {"top": (1, 2), "top_kind": "promotion", "top_playoff": (3, 6), "relegation": (22, 24)},
+    "seriea_italy": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
+    "laliga_spain": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
+    "bundesliga_germany": {"top": (1, 4), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
+    "ligue1_france": {"top": (1, 4), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
+    "eredivisie_netherlands": {"top": (1, 2), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
+    "primeiraliga_portugal": {"top": (1, 2), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
+    "seriea_brazil": {"top": (1, 4), "top_kind": "libertadores", "relegation": (17, 20)},
+}
+ZONE_COLORS = {"top": "#2E7D32", "top_playoff": "#81C784", "rel_playoff": "#F0A04B", "relegation": "#D84343"}
+
+def zone_for_pos(pos, zones):
+    for zone in ZONE_COLORS:
+        if zone in zones and zones[zone][0] <= pos <= zones[zone][1]:
+            return zone
+    return None
+
+def style_probabilities_table(df, column_labels=None, zones=None):
     display_df = df.copy()
 
     # -------------------------------
@@ -350,6 +433,16 @@ def style_probabilities_table(df, column_labels=None):
             {"selector": "tbody tr:hover td", "props":[("box-shadow","inset 0 0 0 999px rgba(46,125,50,0.18)")]},
         ])
     )
+
+    # Zone stripe down the left edge of the POS cell, painted as a background
+    # image rather than a border: a border would add width and throw off the
+    # frozen columns' fixed widths/sticky offsets, and a box-shadow would be
+    # wiped out by the row-hover box-shadow above.
+    if zones:
+        def zone_stripe(pos):
+            zone = zone_for_pos(pos, zones)
+            return f"background-image: linear-gradient(to right, {ZONE_COLORS[zone]} 4px, transparent 4px);" if zone else ""
+        styled = styled.map(zone_stripe, subset=[column_labels["POS"]])
 
     return styled, num_cols
 
@@ -696,6 +789,42 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin: 18px auto;
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
+
+/* Zone legend under the table -- fixed light colours, since it sits inside
+   the always-white table card. */
+.zone-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: 12px; color: #555; }
+.zone-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.zone-legend .zone-note { font-style: italic; opacity: 0.8; }
+
+/* Headline cards above the table: title race, race for the top places,
+   relegation. Same card look as the methodology steps; three across on
+   desktop, stacking to one column on phones. */
+.headline-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 16px;
+    margin: 18px 0 4px;
+}
+.headline-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border-top: 3px solid #2E7D32;
+    padding: 16px 18px 10px;
+    text-align: left;
+}
+.headline-card.relegation { border-top-color: #D84343; }
+.headline-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
+.headline-sub { margin: 2px 0 12px; font-size: 12px; color: var(--text-main); opacity: 0.7; }
+.headline-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; align-items: baseline;
+    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
+}
+.headline-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.headline-row .pct { font-weight: 700; font-variant-numeric: tabular-nums; }
+.headline-bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background-color: var(--border-light); overflow: hidden; }
+.headline-bar span { display: block; height: 100%; background-color: #2E7D32; }
+.headline-card.relegation .headline-bar span { background-color: #D84343; }
 
 /* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
    scrolling horizontally through the position-percentage columns -- same
@@ -1191,8 +1320,11 @@ DEFAULT_LEAGUE_KEY = "premierleague_england"
 # see the CSS comment above for why. st.columns naturally divides the full
 # available width evenly, which is also what gives this the same width as the
 # table below without any CSS width-fighting.
+# The chosen league also lives in the page URL (?league=laliga_spain), so a
+# refresh keeps it and a shared link opens straight on that league.
 if "selected_league" not in st.session_state:
-    st.session_state.selected_league = DEFAULT_LEAGUE_KEY
+    url_league = st.query_params.get("league")
+    st.session_state.selected_league = url_league if url_league in league_header_labels else DEFAULT_LEAGUE_KEY
 
 league_cols = st.columns(len(LEAGUES))
 for col, (key, pill_label, header_label) in zip(league_cols, LEAGUES):
@@ -1205,6 +1337,7 @@ for col, (key, pill_label, header_label) in zip(league_cols, LEAGUES):
             use_container_width=True,
         ):
             st.session_state.selected_league = key
+            st.query_params["league"] = key
             st.rerun()
 
 league = st.session_state.selected_league
@@ -1293,11 +1426,49 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # -------------------------------
+# 10️⃣.5 HEADLINE CARDS (title race, race for the top places, relegation)
+
+zones = LEAGUE_ZONES.get(league, {})
+pos_cols = [c for c in pos_pct_df.columns if str(c).isdigit()]
+
+def zone_pct(first, last):
+    return pos_pct_df[[c for c in pos_cols if first <= int(c) <= last]].sum(axis=1)
+
+def headline_card(css_class, title, sub, probs):
+    rows = "".join(
+        f'<div class="headline-row"><span class="team">{html.escape(pos_pct_df.at[i, "TEAM"])}</span>'
+        f'<span class="pct">{"&lt;0.1" if p < 0.1 else f"{p:.1f}"}%</span>'
+        f'<div class="headline-bar"><span style="width:{min(p, 100):.1f}%"></span></div></div>'
+        for i, p in probs.items()
+    )
+    return f'<div class="headline-card {css_class}"><div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>{rows}</div>'
+
+if pos_cols and zones:
+    top_first, top_last = zones["top"]
+    # The race card shows the teams either side of the cut-off (e.g. the 4th,
+    # 5th and 6th most likely to finish top 4), not the top three again --
+    # those are usually near-certain and already in the title card.
+    race = zone_pct(top_first, top_last).sort_values(ascending=False)
+    cards = [
+        headline_card("", t("card_title_title"), t("card_title_sub"), zone_pct(1, 1).nlargest(3)),
+        headline_card("", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last), race.iloc[top_last - 1:top_last + 2]),
+        headline_card("relegation", t("card_rel_title"), t("card_rel_sub"), zone_pct(*zones["relegation"]).nlargest(3)),
+    ]
+    st.markdown(f'<div class="headline-cards">{"".join(cards)}</div>', unsafe_allow_html=True)
+
+# -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
 
-styled_table, num_cols = style_probabilities_table(pos_pct_df, column_labels=COLUMN_LABELS[st.session_state.lang])
+styled_table, num_cols = style_probabilities_table(pos_pct_df, column_labels=COLUMN_LABELS[st.session_state.lang], zones=zones)
+zone_legend = "".join(
+    f'<span><span class="swatch" style="background:{ZONE_COLORS[zone]}"></span>'
+    f'{t("zone_" + zones["top_kind"]) if zone == "top" else t("zone_" + zone)}</span>'
+    for zone in ZONE_COLORS if zone in zones
+)
+if zone_legend:
+    zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
-    f'<div class="table-card"><div class="table-wrapper">{styled_table.to_html(escape=False)}</div></div>',
+    f'<div class="table-card"><div class="table-wrapper">{styled_table.to_html(escape=False)}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
 
