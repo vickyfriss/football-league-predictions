@@ -60,9 +60,11 @@ TRANSLATIONS = {
         "card_race_title_ucl": "Champions League race",
         "card_race_title_promotion": "Automatic promotion race",
         "card_race_title_libertadores": "Libertadores race",
+        "card_playoff_title": "Play-off race",
         "card_race_sub": "Chance of a top-{n} finish, for the teams closest to the cut-off",
         "card_rel_title": "Relegation battle",
-        "card_rel_sub": "Chance of finishing in the relegation places",
+        "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
+        "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last}). Position {po} goes to a relegation play-off, not counted here",
         "zone_ucl": "Champions League",
         "zone_promotion": "Promotion",
         "zone_libertadores": "Libertadores",
@@ -70,6 +72,9 @@ TRANSLATIONS = {
         "zone_rel_playoff": "Relegation play-off",
         "zone_relegation": "Relegation",
         "zones_note": "Zones based on current position",
+        "card_show_more": "Show more",
+        "card_show_less": "Show less",
+        "card_cutoff": "Top-{n} cut-off",
         "download_button": "Download table as CSV",
         "methodology_eyebrow": "The Method",
         "methodology_title": "How This Simulation Works",
@@ -121,9 +126,11 @@ TRANSLATIONS = {
         "card_race_title_ucl": "Carrera por la Champions League",
         "card_race_title_promotion": "Carrera por el ascenso directo",
         "card_race_title_libertadores": "Carrera por la Libertadores",
+        "card_playoff_title": "Carrera por el playoff",
         "card_race_sub": "Probabilidad de terminar entre los {n} primeros, para los equipos más cerca del corte",
         "card_rel_title": "Lucha por la permanencia",
-        "card_rel_sub": "Probabilidad de terminar en puestos de descenso",
+        "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
+        "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last}). El puesto {po} va a un playoff de descenso, no incluido aquí",
         "zone_ucl": "Champions League",
         "zone_promotion": "Ascenso",
         "zone_libertadores": "Libertadores",
@@ -131,6 +138,9 @@ TRANSLATIONS = {
         "zone_rel_playoff": "Playoff de descenso",
         "zone_relegation": "Descenso",
         "zones_note": "Zonas según la posición actual",
+        "card_show_more": "Ver más",
+        "card_show_less": "Ver menos",
+        "card_cutoff": "Corte: top {n}",
         "download_button": "Descargar tabla como CSV",
         "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
@@ -182,9 +192,11 @@ TRANSLATIONS = {
         "card_race_title_ucl": "Disputa pela Champions League",
         "card_race_title_promotion": "Disputa pelo acesso direto",
         "card_race_title_libertadores": "Disputa pela Libertadores",
+        "card_playoff_title": "Disputa pelo playoff",
         "card_race_sub": "Chance de terminar entre os {n} primeiros, para os times mais perto do corte",
         "card_rel_title": "Luta contra o rebaixamento",
-        "card_rel_sub": "Chance de terminar na zona de rebaixamento",
+        "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
+        "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last}). A posição {po} vai para um playoff de rebaixamento, não incluída aqui",
         "zone_ucl": "Champions League",
         "zone_promotion": "Acesso",
         "zone_libertadores": "Libertadores",
@@ -192,6 +204,9 @@ TRANSLATIONS = {
         "zone_rel_playoff": "Playoff de rebaixamento",
         "zone_relegation": "Rebaixamento",
         "zones_note": "Zonas com base na posição atual",
+        "card_show_more": "Ver mais",
+        "card_show_less": "Ver menos",
+        "card_cutoff": "Corte: top {n}",
         "download_button": "Baixar tabela como CSV",
         "methodology_eyebrow": "O Método",
         "methodology_title": "Como Esta Simulação Funciona",
@@ -243,9 +258,11 @@ TRANSLATIONS = {
         "card_race_title_ucl": "Course à la Ligue des champions",
         "card_race_title_promotion": "Course à la montée directe",
         "card_race_title_libertadores": "Course à la Libertadores",
+        "card_playoff_title": "Course aux barrages",
         "card_race_sub": "Probabilité de finir dans les {n} premiers, pour les équipes les plus proches de la limite",
         "card_rel_title": "Lutte pour le maintien",
-        "card_rel_sub": "Probabilité de finir en zone de relégation",
+        "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
+        "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last}). La place {po} mène à un barrage de relégation, non comptée ici",
         "zone_ucl": "Ligue des champions",
         "zone_promotion": "Montée",
         "zone_libertadores": "Libertadores",
@@ -253,6 +270,9 @@ TRANSLATIONS = {
         "zone_rel_playoff": "Barrage de relégation",
         "zone_relegation": "Relégation",
         "zones_note": "Zones selon le classement actuel",
+        "card_show_more": "Voir plus",
+        "card_show_less": "Voir moins",
+        "card_cutoff": "Limite : top {n}",
         "download_button": "Télécharger le tableau en CSV",
         "methodology_eyebrow": "La Méthode",
         "methodology_title": "Comment Fonctionne Cette Simulation",
@@ -825,6 +845,28 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 .headline-bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background-color: var(--border-light); overflow: hidden; }
 .headline-bar span { display: block; height: 100%; background-color: #2E7D32; }
 .headline-card.relegation .headline-bar span { background-color: #D84343; }
+/* Cards expand on click to a longer list. align-items:start keeps the other
+   cards in the row at their own height instead of stretching to match. */
+.headline-cards { align-items: start; }
+details.headline-card { cursor: pointer; transition: box-shadow 0.2s ease; }
+details.headline-card:hover { box-shadow: var(--card-shadow-hover); }
+details.headline-card summary { display: block; list-style: none; }
+details.headline-card summary::-webkit-details-marker { display: none; }
+details.headline-card[open] .headline-short { display: none; }
+.headline-toggle { display: block; margin: 2px 0 4px; font-size: 12px; font-weight: 600; color: var(--accent-text); }
+.headline-toggle .less, details[open] .headline-toggle .more { display: none; }
+details[open] .headline-toggle .less { display: inline; }
+/* The long list sits after the summary in the HTML, but reads better with
+   the toggle at the bottom -- so the summary becomes a flex column and the
+   toggle is pushed to the end visually via the card's own flex order. */
+details[open].headline-card { display: flex; flex-direction: column; }
+details[open].headline-card summary { display: contents; }
+details[open].headline-card .headline-long { order: 1; }
+details[open].headline-card .headline-toggle { order: 2; }
+.headline-cutoff {
+    margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
+    font-size: 11px; font-weight: 600; color: var(--accent-text); text-align: right;
+}
 
 /* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
    scrolling horizontally through the position-percentage columns -- same
@@ -1434,14 +1476,40 @@ pos_cols = [c for c in pos_pct_df.columns if str(c).isdigit()]
 def zone_pct(first, last):
     return pos_pct_df[[c for c in pos_cols if first <= int(c) <= last]].sum(axis=1)
 
-def headline_card(css_class, title, sub, probs):
-    rows = "".join(
-        f'<div class="headline-row"><span class="team">{html.escape(pos_pct_df.at[i, "TEAM"])}</span>'
-        f'<span class="pct">{"&lt;0.1" if p < 0.1 else f"{p:.1f}"}%</span>'
-        f'<div class="headline-bar"><span style="width:{min(p, 100):.1f}%"></span></div></div>'
-        for i, p in probs.items()
+def headline_rows(probs, cutoff_after=None, cutoff_label=""):
+    rows = []
+    for rank, (i, p) in enumerate(probs.items(), start=1):
+        rows.append(
+            f'<div class="headline-row"><span class="team">{html.escape(pos_pct_df.at[i, "TEAM"])}</span>'
+            f'<span class="pct">{"&lt;0.1" if p < 0.1 else f"{p:.1f}"}%</span>'
+            f'<div class="headline-bar"><span style="width:{min(p, 100):.1f}%"></span></div></div>'
+        )
+        if rank == cutoff_after and rank < len(probs):
+            rows.append(f'<div class="headline-cutoff">{cutoff_label}</div>')
+    return "".join(rows)
+
+# Each card shows its three teams and expands on click (a plain <details>, so
+# it works on phones too, where there's no hover) to a longer list. The
+# expanded list replaces the short one rather than adding below it, because
+# for the race card it's a different slice: the full ranking from 1st, with
+# the cut-off marked.
+def headline_card(css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label=""):
+    head = f'<div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>'
+    short_rows = headline_rows(short_probs)
+    if len(long_probs) <= len(short_probs):
+        return f'<div class="headline-card {css_class}">{head}{short_rows}</div>'
+    return (
+        f'<details class="headline-card {css_class}"><summary>{head}'
+        f'<div class="headline-short">{short_rows}</div>'
+        f'<span class="headline-toggle"><span class="more">{t("card_show_more")} ▾</span>'
+        f'<span class="less">{t("card_show_less")} ▴</span></span></summary>'
+        f'<div class="headline-long">{headline_rows(long_probs, cutoff_after, cutoff_label)}</div></details>'
     )
-    return f'<div class="headline-card {css_class}"><div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>{rows}</div>'
+
+def likely_teams(probs, limit=10):
+    # Longer list: teams with a real (>=0.1%) chance, at most `limit` of them
+    probs = probs.sort_values(ascending=False)
+    return probs[probs >= 0.1].head(limit)
 
 if pos_cols and zones:
     top_first, top_last = zones["top"]
@@ -1449,10 +1517,31 @@ if pos_cols and zones:
     # 5th and 6th most likely to finish top 4), not the top three again --
     # those are usually near-certain and already in the title card.
     race = zone_pct(top_first, top_last).sort_values(ascending=False)
+    title_probs = zone_pct(1, 1).sort_values(ascending=False)
+    rel_probs = zone_pct(*zones["relegation"]).sort_values(ascending=False)
     cards = [
-        headline_card("", t("card_title_title"), t("card_title_sub"), zone_pct(1, 1).nlargest(3)),
-        headline_card("", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last), race.iloc[top_last - 1:top_last + 2]),
-        headline_card("relegation", t("card_rel_title"), t("card_rel_sub"), zone_pct(*zones["relegation"]).nlargest(3)),
+        headline_card("", t("card_title_title"), t("card_title_sub"),
+                      title_probs.head(3), likely_teams(title_probs)),
+        headline_card("", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last),
+                      race.iloc[top_last - 1:top_last + 2], race.head(top_last + 6),
+                      cutoff_after=top_last, cutoff_label=t("card_cutoff", n=top_last)),
+    ]
+    # Leagues with promotion play-offs (the Championship) also get a play-off
+    # race: same edge-of-the-cut-off idea, for a top-6 finish.
+    if "top_playoff" in zones:
+        po_last = zones["top_playoff"][1]
+        playoff_race = zone_pct(1, po_last).sort_values(ascending=False)
+        cards.append(headline_card("", t("card_playoff_title"), t("card_race_sub", n=po_last),
+                                   playoff_race.iloc[po_last - 1:po_last + 2], playoff_race.head(po_last + 6),
+                                   cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last)))
+    cards += [
+        # Subtitle names the exact positions counted, and says outright when a
+        # relegation play-off spot exists but isn't included (e.g. Eredivisie 16th)
+        headline_card("relegation", t("card_rel_title"),
+                      t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1], po=zones["rel_playoff"][0])
+                      if "rel_playoff" in zones else
+                      t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
+                      rel_probs.head(3), likely_teams(rel_probs)),
     ]
     st.markdown(f'<div class="headline-cards">{"".join(cards)}</div>', unsafe_allow_html=True)
 
