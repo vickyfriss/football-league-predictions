@@ -423,10 +423,12 @@ def style_probabilities_table(df, column_labels=None, zones=None):
             "text-align":"left","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"600","color":"#000","white-space":"nowrap"
         })
+        # nowrap so a percentage never splits over two lines ("98.18" / "%"),
+        # whatever the screen width, zoom or fallback font
         .set_properties(subset=num_cols, **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"500","color":"#000",
-            "font-variant-numeric":"tabular-nums"
+            "font-variant-numeric":"tabular-nums","white-space":"nowrap"
         })
         .hide(axis="index")
         .set_table_styles([
@@ -841,28 +843,22 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
     margin-bottom: 9px; font-size: 13px; color: var(--text-main);
 }
 .headline-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.headline-row .pct { font-weight: 700; font-variant-numeric: tabular-nums; }
+.headline-row .pct { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .headline-bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background-color: var(--border-light); overflow: hidden; }
 .headline-bar span { display: block; height: 100%; background-color: #2E7D32; }
 .headline-card.relegation .headline-bar span { background-color: #D84343; }
-/* Cards expand on click to a longer list. align-items:start keeps the other
-   cards in the row at their own height instead of stretching to match. */
-.headline-cards { align-items: start; }
-details.headline-card { cursor: pointer; transition: box-shadow 0.2s ease; }
-details.headline-card:hover { box-shadow: var(--card-shadow-hover); }
-details.headline-card summary { display: block; list-style: none; }
-details.headline-card summary::-webkit-details-marker { display: none; }
-details.headline-card[open] .headline-short { display: none; }
-.headline-toggle { display: block; margin: 2px 0 4px; font-size: 12px; font-weight: 600; color: var(--accent-text); }
-.headline-toggle .less, details[open] .headline-toggle .more { display: none; }
-details[open] .headline-toggle .less { display: inline; }
-/* The long list sits after the summary in the HTML, but reads better with
-   the toggle at the bottom -- so the summary becomes a flex column and the
-   toggle is pushed to the end visually via the card's own flex order. */
-details[open].headline-card { display: flex; flex-direction: column; }
-details[open].headline-card summary { display: contents; }
-details[open].headline-card .headline-long { order: 1; }
-details[open].headline-card .headline-toggle { order: 2; }
+/* Cards expand on click to a longer list (hidden checkbox + full-card
+   label). Every card stretches to the tallest in its row, with the toggle
+   pushed to the bottom, so collapsed cards always line up. */
+.headline-card { display: flex; flex-direction: column; cursor: pointer; transition: box-shadow 0.2s ease; }
+.headline-card:hover { box-shadow: var(--card-shadow-hover); }
+.headline-check { display: none; }
+.headline-label { display: flex; flex-direction: column; flex: 1; cursor: pointer; margin: 0; }
+.headline-long, .headline-check:checked + .headline-label .headline-short { display: none; }
+.headline-check:checked + .headline-label .headline-long { display: block; }
+.headline-toggle { display: block; margin: auto 0 4px; padding-top: 2px; font-size: 12px; font-weight: 600; color: var(--accent-text); }
+.headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
+.headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .headline-cutoff {
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
     font-size: 11px; font-weight: 600; color: var(--accent-text); text-align: right;
@@ -938,7 +934,7 @@ details[open].headline-card .headline-toggle { order: 2; }
 /* Mobile: fix first two columns when scrolling horizontally */
 @media (max-width: 600px) {
     table { width: 100%; border-collapse: collapse; }
-    th, td { white-space: nowrap; }
+    th, td { white-space: nowrap !important; }
 
     /* Sticky first column: POS */
     th:nth-child(1), td:nth-child(1) {
@@ -1481,35 +1477,32 @@ def headline_rows(probs, cutoff_after=None, cutoff_label=""):
     for rank, (i, p) in enumerate(probs.items(), start=1):
         rows.append(
             f'<div class="headline-row"><span class="team">{html.escape(pos_pct_df.at[i, "TEAM"])}</span>'
-            f'<span class="pct">{"&lt;0.1" if p < 0.1 else f"{p:.1f}"}%</span>'
+            f'<span class="pct">{"&lt;0.1" if 0 < p < 0.1 else f"{p:.1f}"}%</span>'
             f'<div class="headline-bar"><span style="width:{min(p, 100):.1f}%"></span></div></div>'
         )
         if rank == cutoff_after and rank < len(probs):
             rows.append(f'<div class="headline-cutoff">{cutoff_label}</div>')
     return "".join(rows)
 
-# Each card shows its three teams and expands on click (a plain <details>, so
-# it works on phones too, where there's no hover) to a longer list. The
+# Each card shows its three teams and expands on click to a longer list. Built
+# on a hidden checkbox + <label> (the whole card is the label, so a tap
+# anywhere toggles it -- works on phones, where there's no hover) rather than
+# <details>, which can't be stretched to match its neighbours' height. The
 # expanded list replaces the short one rather than adding below it, because
-# for the race card it's a different slice: the full ranking from 1st, with
+# for the race cards it's a different slice: the full ranking from 1st, with
 # the cut-off marked.
-def headline_card(css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label=""):
-    head = f'<div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>'
-    short_rows = headline_rows(short_probs)
-    if len(long_probs) <= len(short_probs):
-        return f'<div class="headline-card {css_class}">{head}{short_rows}</div>'
+def headline_card(card_id, css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label=""):
     return (
-        f'<details class="headline-card {css_class}"><summary>{head}'
-        f'<div class="headline-short">{short_rows}</div>'
+        f'<div class="headline-card {css_class}">'
+        f'<input type="checkbox" id="{card_id}" class="headline-check">'
+        f'<label for="{card_id}" class="headline-label">'
+        f'<div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>'
+        f'<div class="headline-short">{headline_rows(short_probs)}</div>'
+        f'<div class="headline-long">{headline_rows(long_probs, cutoff_after, cutoff_label)}</div>'
         f'<span class="headline-toggle"><span class="more">{t("card_show_more")} ▾</span>'
-        f'<span class="less">{t("card_show_less")} ▴</span></span></summary>'
-        f'<div class="headline-long">{headline_rows(long_probs, cutoff_after, cutoff_label)}</div></details>'
+        f'<span class="less">{t("card_show_less")} ▴</span></span>'
+        f'</label></div>'
     )
-
-def likely_teams(probs, limit=10):
-    # Longer list: teams with a real (>=0.1%) chance, at most `limit` of them
-    probs = probs.sort_values(ascending=False)
-    return probs[probs >= 0.1].head(limit)
 
 if pos_cols and zones:
     top_first, top_last = zones["top"]
@@ -1520,9 +1513,9 @@ if pos_cols and zones:
     title_probs = zone_pct(1, 1).sort_values(ascending=False)
     rel_probs = zone_pct(*zones["relegation"]).sort_values(ascending=False)
     cards = [
-        headline_card("", t("card_title_title"), t("card_title_sub"),
-                      title_probs.head(3), likely_teams(title_probs)),
-        headline_card("", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last),
+        headline_card(f"hc-{league}-title", "", t("card_title_title"), t("card_title_sub"),
+                      title_probs.head(3), title_probs.head(8)),
+        headline_card(f"hc-{league}-race", "", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last),
                       race.iloc[top_last - 1:top_last + 2], race.head(top_last + 6),
                       cutoff_after=top_last, cutoff_label=t("card_cutoff", n=top_last)),
     ]
@@ -1531,17 +1524,17 @@ if pos_cols and zones:
     if "top_playoff" in zones:
         po_last = zones["top_playoff"][1]
         playoff_race = zone_pct(1, po_last).sort_values(ascending=False)
-        cards.append(headline_card("", t("card_playoff_title"), t("card_race_sub", n=po_last),
+        cards.append(headline_card(f"hc-{league}-playoff", "", t("card_playoff_title"), t("card_race_sub", n=po_last),
                                    playoff_race.iloc[po_last - 1:po_last + 2], playoff_race.head(po_last + 6),
                                    cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last)))
     cards += [
         # Subtitle names the exact positions counted, and says outright when a
         # relegation play-off spot exists but isn't included (e.g. Eredivisie 16th)
-        headline_card("relegation", t("card_rel_title"),
+        headline_card(f"hc-{league}-relegation", "relegation", t("card_rel_title"),
                       t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1], po=zones["rel_playoff"][0])
                       if "rel_playoff" in zones else
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
-                      rel_probs.head(3), likely_teams(rel_probs)),
+                      rel_probs.head(3), rel_probs.head(8)),
     ]
     st.markdown(f'<div class="headline-cards">{"".join(cards)}</div>', unsafe_allow_html=True)
 
