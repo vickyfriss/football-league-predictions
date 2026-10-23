@@ -53,6 +53,7 @@ TRANSLATIONS = {
         "data_not_ready": "⚠️ Simulation data not ready yet. Please reload later.",
         "last_run": "Simulations last run on: {date} UTC",
         "results_eyebrow": "Live Predictions",
+        "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "card_title_title": "Title race",
@@ -120,6 +121,7 @@ TRANSLATIONS = {
         "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
         "last_run": "Última ejecución de las simulaciones: {date} UTC",
         "results_eyebrow": "Predicciones en Vivo",
+        "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "card_title_title": "Carrera por el título",
@@ -187,6 +189,7 @@ TRANSLATIONS = {
         "data_not_ready": "⚠️ Os dados da simulação ainda não estão prontos. Recarregue mais tarde.",
         "last_run": "Última execução das simulações: {date} UTC",
         "results_eyebrow": "Previsões ao Vivo",
+        "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "card_title_title": "Disputa pelo título",
@@ -254,6 +257,7 @@ TRANSLATIONS = {
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
         "last_run": "Dernière exécution des simulations : {date} UTC",
         "results_eyebrow": "Prédictions en Direct",
+        "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "card_title_title": "Course au titre",
@@ -310,8 +314,14 @@ TRANSLATIONS = {
     },
 }
 
+# First visit opens in the browser's own language (e.g. "pt-BR", "es-AR",
+# "fr-FR") when it's one we have, English otherwise; the switcher still works.
 if "lang" not in st.session_state:
-    st.session_state.lang = "en"
+    browser_lang = (st.context.locale or "").lower()
+    st.session_state.lang = next(
+        (code for prefix, code in [("es", "es"), ("fr", "fr"), ("pt", "pt-BR")] if browser_lang.startswith(prefix)),
+        "en",
+    )
 
 def t(key, **kwargs):
     text = TRANSLATIONS[st.session_state.lang][key]
@@ -819,6 +829,9 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin: 18px auto;
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
+
+/* "Matchday 9 of 38 · 29 to play" under the league name */
+.season-progress { margin: -4px 0 0; font-size: 13px; font-weight: 500; color: var(--text-main); opacity: 0.7; }
 
 /* Zone legend under the table -- fixed light colours, since it sits inside
    the always-white table card. */
@@ -1464,10 +1477,20 @@ if "GD" not in pos_pct_df.columns:   # the frozen-column CSS assumes 5 leading c
 _lead = ["POS", "TEAM", "GP", "GD", "PTS"]
 pos_pct_df = pos_pct_df[_lead + [c for c in pos_pct_df.columns if c not in _lead]]
 
+# How far into the season the league is: a double round-robin is 2 x (teams - 1)
+# games, and the furthest-along team's games played is the current matchday.
+# Tells people how much the predictions can still move.
+season_progress = ""
+if len(pos_pct_df):
+    total_games = 2 * (len(pos_pct_df) - 1)
+    matchday = int(pos_pct_df["GP"].max())
+    season_progress = f'<div class="season-progress">{t("season_progress", md=matchday, total=total_games, left=total_games - matchday)}</div>'
+
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
     <span class="section-eyebrow">{t("results_eyebrow")}</span>
     <h2 class="results-heading">{selected_display_name.split(" (")[0]}</h2>
+    {season_progress}
 </div>
 """, unsafe_allow_html=True)
 
