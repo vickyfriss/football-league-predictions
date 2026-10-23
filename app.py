@@ -844,6 +844,18 @@ div.stButton > button {
 div.stButton > button p {
     margin: 0 !important;
 }
+/* Newer Streamlit (seen on 1.66; 1.61 was fine) forces button labels onto a
+   single truncated line -- nowrap + ellipsis on the markdown container and
+   display:inline on its <p>s -- which squashed "Premier League\n\nENG" into
+   "Premier League ...". Undo that so the two-line pill layout above holds. */
+div.stButton > button [data-testid="stMarkdownContainer"] {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+div.stButton > button [data-testid="stMarkdownContainer"] p {
+    display: block !important;
+}
 div.stButton > button p:last-child {
     margin-top: 2px !important;
     font-size: 13px;
