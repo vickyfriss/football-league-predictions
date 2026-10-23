@@ -64,7 +64,7 @@ TRANSLATIONS = {
         "card_race_sub": "Chance of a top-{n} finish, for the teams closest to the cut-off",
         "card_rel_title": "Relegation battle",
         "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
-        "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last}). Position {po} goes to a relegation play-off, not counted here",
+        "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last})",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
@@ -131,7 +131,7 @@ TRANSLATIONS = {
         "card_race_sub": "Probabilidad de terminar entre los {n} primeros, para los equipos más cerca del corte",
         "card_rel_title": "Lucha por la permanencia",
         "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
-        "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last}). El puesto {po} va a un playoff de descenso, no incluido aquí",
+        "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last})",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
@@ -198,7 +198,7 @@ TRANSLATIONS = {
         "card_race_sub": "Chance de terminar entre os {n} primeiros, para os times mais perto do corte",
         "card_rel_title": "Luta contra o rebaixamento",
         "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
-        "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last}). A posição {po} vai para um playoff de rebaixamento, não incluída aqui",
+        "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last})",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
@@ -265,7 +265,7 @@ TRANSLATIONS = {
         "card_race_sub": "Probabilité de finir dans les {n} premiers, pour les équipes les plus proches de la limite",
         "card_rel_title": "Lutte pour le maintien",
         "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
-        "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last}). La place {po} mène à un barrage de relégation, non comptée ici",
+        "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last})",
         "zone_ucl": "Ligue des champions",
         "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
@@ -1536,10 +1536,10 @@ if pos_cols and zones:
                                    playoff_race.iloc[po_last - 1:po_last + 2], playoff_race.head(po_last + 6),
                                    cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last)))
     cards += [
-        # Subtitle names the exact positions counted, and says outright when a
-        # relegation play-off spot exists but isn't included (e.g. Eredivisie 16th)
+        # Subtitle names the exact positions counted; where a relegation
+        # play-off spot exists (e.g. Eredivisie 16th) it says "direct" relegation
         headline_card(f"hc-{league}-relegation", "relegation", t("card_rel_title"),
-                      t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1], po=zones["rel_playoff"][0])
+                      t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1])
                       if "rel_playoff" in zones else
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
                       rel_probs.head(3), rel_probs.head(8)),
