@@ -66,6 +66,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
         "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last}). Position {po} goes to a relegation play-off, not counted here",
         "zone_ucl": "Champions League",
+        "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
         "zone_libertadores": "Libertadores",
         "zone_top_playoff": "Promotion play-offs",
@@ -132,6 +133,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
         "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last}). El puesto {po} va a un playoff de descenso, no incluido aquí",
         "zone_ucl": "Champions League",
+        "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
         "zone_libertadores": "Libertadores",
         "zone_top_playoff": "Playoff de ascenso",
@@ -198,6 +200,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
         "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last}). A posição {po} vai para um playoff de rebaixamento, não incluída aqui",
         "zone_ucl": "Champions League",
+        "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
         "zone_libertadores": "Libertadores",
         "zone_top_playoff": "Playoff de acesso",
@@ -264,6 +267,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
         "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last}). La place {po} mène à un barrage de relégation, non comptée ici",
         "zone_ucl": "Ligue des champions",
+        "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
         "zone_libertadores": "Libertadores",
         "zone_top_playoff": "Barrages de montée",
@@ -355,18 +359,22 @@ def color_scale(val, mid=mid_pct, max_val=max_pct):
 # Table zones per league, by position: "top" is the Champions League (or
 # Libertadores / automatic promotion) places, the rest are play-off and
 # relegation spots. Formats as of 2026/27 -- edit here if a competition changes.
+# "top_maybe" is a possible extra Champions League place: UEFA gives one to the
+# two countries with the best European results that season (Italy + Germany
+# for 2024/25, England + Spain for 2025/26), only settled once the season ends,
+# so it's marked for the four leagues that keep winning it.
 LEAGUE_ZONES = {
-    "premierleague_england": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
+    "premierleague_england": {"top": (1, 4), "top_kind": "ucl", "top_maybe": (5, 5), "relegation": (18, 20)},
     "championship_england": {"top": (1, 2), "top_kind": "promotion", "top_playoff": (3, 6), "relegation": (22, 24)},
-    "seriea_italy": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
-    "laliga_spain": {"top": (1, 4), "top_kind": "ucl", "relegation": (18, 20)},
-    "bundesliga_germany": {"top": (1, 4), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
+    "seriea_italy": {"top": (1, 4), "top_kind": "ucl", "top_maybe": (5, 5), "relegation": (18, 20)},
+    "laliga_spain": {"top": (1, 4), "top_kind": "ucl", "top_maybe": (5, 5), "relegation": (18, 20)},
+    "bundesliga_germany": {"top": (1, 4), "top_kind": "ucl", "top_maybe": (5, 5), "rel_playoff": (16, 16), "relegation": (17, 18)},
     "ligue1_france": {"top": (1, 4), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
     "eredivisie_netherlands": {"top": (1, 2), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
     "primeiraliga_portugal": {"top": (1, 2), "top_kind": "ucl", "rel_playoff": (16, 16), "relegation": (17, 18)},
     "seriea_brazil": {"top": (1, 4), "top_kind": "libertadores", "relegation": (17, 20)},
 }
-ZONE_COLORS = {"top": "#2E7D32", "top_playoff": "#81C784", "rel_playoff": "#F0A04B", "relegation": "#D84343"}
+ZONE_COLORS = {"top": "#2E7D32", "top_maybe": "#A5D6A7", "top_playoff": "#81C784", "rel_playoff": "#F0A04B", "relegation": "#D84343"}
 
 def zone_for_pos(pos, zones):
     for zone in ZONE_COLORS:
