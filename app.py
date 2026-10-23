@@ -889,6 +889,13 @@ div.stButton > button p:last-child {
         width: calc(50% - 4px) !important;
         min-width: unset !important;
     }
+    /* On a 320px phone each half-width pill leaves ~100px for text after
+       Streamlit's 12px side padding -- just short of "Championship", which
+       then broke mid-word ("Championshi / p"). Tighter padding gives it room. */
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) div.stButton > button {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
 }
 
 /* Top-right contact panel -- also fixed white; same black-icon reasoning.
