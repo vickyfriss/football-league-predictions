@@ -543,20 +543,23 @@ def ordinal(n, lang):
     return f"{n}.º" if lang == "es" else f"{n}º"
 
 def add_cell_tooltips(table_html, df):
-    # Hover text on each percentage ("Chelsea: 37.70% chance of finishing 4th")
-    # as a plain title attribute: pandas 2.x's own set_tooltips are CSS pop-ups,
-    # which the table's horizontal-scroll wrapper would clip at the edges.
-    # Styler gives every cell an id ending "_row{r}_col{c}"; columns 5+ are the
-    # finishing positions, in the same order as df's.
+    # Hover text on each percentage ("Chelsea: 37.70% chance of finishing 4th").
+    # A styled span inside the cell, shown instantly on hover by CSS -- the
+    # browser's own title tooltips need the mouse held still for ~1s and often
+    # never appeared. Styler gives every cell an id ending "_row{r}_col{c}";
+    # columns 5+ are the finishing positions, in the same order as df's. The
+    # top rows' tips open below the cell and the right half's open leftwards,
+    # so the table's scroll box doesn't cut them off.
     pos_cols = list(df.columns[5:])
-    def with_title(m):
+    def with_tip(m):
         r, c = int(m.group(2)), int(m.group(3))
         if c < 5:
             return m.group(0)
         text = t("cell_tooltip", team=df.iloc[r]["TEAM"], pct=f"{df.iloc[r, c]:.2f}%",
                  pos=ordinal(int(pos_cols[c - 5]), st.session_state.lang))
-        return f'{m.group(1)} title="{html.escape(text, quote=True)}"'
-    return re.sub(r'(<td id="T_\w+_row(\d+)_col(\d+)")', with_title, table_html)
+        classes = "has-tip" + (" tip-below" if r < 2 else "") + (" tip-left" if c - 5 >= len(pos_cols) / 2 else "")
+        return f'{m.group(1)} class="{m.group(4)} {classes}">{m.group(5)}<span class="cell-tip">{html.escape(text)}</span></td>'
+    return re.sub(r'(<td id="T_\w+_row(\d+)_col(\d+)") class="([^"]*)"\s*>([^<]*)</td>', with_tip, table_html)
 
 # -------------------------------
 # 4️⃣ CACHE SIMULATION DATA LOADING
@@ -918,6 +921,19 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 
 /* "Matchday 9 of 38 · 29 to play" under the league name */
 .season-progress { margin: -4px 0 0; font-size: 13px; font-weight: 500; color: var(--text-main); opacity: 0.7; }
+
+/* Instant hover explanation on each percentage cell (see add_cell_tooltips).
+   z-index clears the sticky frozen columns (z-index up to 5). */
+td.has-tip { position: relative; }
+.cell-tip {
+    display: none; position: absolute; bottom: calc(100% + 6px); left: 0; z-index: 20;
+    padding: 6px 10px; border-radius: 6px; background-color: #1f2a22; color: #ffffff;
+    font-size: 12px !important; font-weight: 500; text-align: left; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); pointer-events: none;
+}
+td.has-tip:hover .cell-tip { display: block; }
+td.tip-below .cell-tip { bottom: auto; top: calc(100% + 6px); }
+td.tip-left .cell-tip { left: auto; right: 0; }
 
 /* Zone legend under the table -- fixed light colours, since it sits inside
    the always-white table card. */
