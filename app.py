@@ -34,6 +34,15 @@ MONTH_NAMES = {
            "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
 }
 
+# Short month names for the team-form dates ("17 Oct") -- written out rather
+# than cut from MONTH_NAMES, since French juin/juillet would both become "jui"
+SHORT_MONTHS = {
+    "en": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "es": ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+    "pt-BR": ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
+    "fr": ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+}
+
 COLUMN_LABELS = {
     "en": {"POS": "POS", "TEAM": "TEAM", "GP": "GP", "PTS": "PTS", "GD": "GD"},
     "es": {"POS": "POS", "TEAM": "EQUIPO", "GP": "PJ", "GD": "DG", "PTS": "PTS"},
@@ -66,7 +75,7 @@ TRANSLATIONS = {
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
-        "last_games": "Last {n} games",
+        "last_games": "Last {n} games · newest first",
         "form_W": "W",
         "form_D": "D",
         "form_L": "L",
@@ -148,7 +157,7 @@ TRANSLATIONS = {
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
-        "last_games": "Últimos {n} partidos",
+        "last_games": "Últimos {n} partidos · el más reciente primero",
         "form_W": "G",
         "form_D": "E",
         "form_L": "P",
@@ -230,7 +239,7 @@ TRANSLATIONS = {
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
-        "last_games": "Últimos {n} jogos",
+        "last_games": "Últimos {n} jogos · mais recente primeiro",
         "form_W": "V",
         "form_D": "E",
         "form_L": "D",
@@ -312,7 +321,7 @@ TRANSLATIONS = {
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
-        "last_games": "{n} derniers matchs",
+        "last_games": "{n} derniers matchs · du plus récent",
         "form_W": "V",
         "form_D": "N",
         "form_L": "D",
@@ -581,11 +590,15 @@ def add_cell_tooltips(table_html, df, form=None):
         # the row, bottom half above, so the taller box stays in the table.
         if c == 1 and (form or {}).get(df.iloc[r]["TEAM"]):
             games = form[df.iloc[r]["TEAM"]]
+            # Date on every line and the newest row highlighted, so the order
+            # (newest first) is obvious without reading the heading
             rows = "".join(
-                f'<span class="form-game"><span class="form-chip {res}">{t("form_" + res)}</span>'
+                f'<span class="form-game{" latest" if k == 0 else ""}">'
+                f'<span class="form-date">{date.day} {SHORT_MONTHS[st.session_state.lang][date.month - 1]}</span>'
+                f'<span class="form-chip {res}">{t("form_" + res)}</span>'
                 f'<span class="form-score">{gf}\u2013{ga}</span>'
                 f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
-                for res, gf, ga, opp, home in games
+                for k, (res, gf, ga, opp, home, date) in enumerate(games)
             )
             place = " tip-below" if r < len(df) / 2 else ""
             return (f'{m.group(1)} class="{m.group(4)} has-tip team-tip{place}">{m.group(5)}'
@@ -628,7 +641,7 @@ def load_dataset_processing():
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_recent_form(league, n=5):
     # Each team's last n league games this season, newest first, as
-    # {team: [(result, goals_for, goals_against, opponent, is_home), ...]}.
+    # {team: [(result, goals_for, goals_against, opponent, is_home, date), ...]}.
     # Results files use football-data.org names ("Arsenal FC"), mapped to the
     # table's names the same way the pipeline does.
     try:
@@ -648,7 +661,7 @@ def load_recent_form(league, n=5):
         for team, opp, gf, ga, home in [(row.homeTeam, row.awayTeam, hg, ag, True), (row.awayTeam, row.homeTeam, ag, hg, False)]:
             games = form.setdefault(team, [])
             if len(games) < n:
-                games.append(("W" if gf > ga else "D" if gf == ga else "L", gf, ga, opp, home))
+                games.append(("W" if gf > ga else "D" if gf == ga else "L", gf, ga, opp, home, row.utcDate))
     return form
 
 # ------------------------------- 
@@ -1014,7 +1027,9 @@ td.tip-left .cell-tip { left: auto; right: 0; }
 td.team-tip:hover { z-index: 10; text-decoration: underline dotted; text-underline-offset: 3px; }
 td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .form-title { display: block; margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.75; }
-.form-game { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-weight: 500; }
+.form-game { display: flex; align-items: center; gap: 8px; padding: 2px 6px; margin: 0 -6px; border-radius: 4px; font-weight: 500; }
+.form-game.latest { background-color: rgba(255,255,255,0.12); }
+.form-date { min-width: 44px; opacity: 0.65; font-variant-numeric: tabular-nums; }
 .form-chip {
     display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px;
     border-radius: 4px; font-size: 11px; font-weight: 700; color: #ffffff;
