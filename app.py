@@ -66,6 +66,12 @@ TRANSLATIONS = {
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
+        "last_games": "Last {n} games",
+        "form_W": "W",
+        "form_D": "D",
+        "form_L": "L",
+        "form_home": "H",
+        "form_away": "A",
         "card_title_title": "Title race",
         "card_title_sub": "Chance of winning the league",
         "card_race_title_ucl": "Champions League race",
@@ -142,6 +148,12 @@ TRANSLATIONS = {
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
+        "last_games": "Últimos {n} partidos",
+        "form_W": "G",
+        "form_D": "E",
+        "form_L": "P",
+        "form_home": "L",
+        "form_away": "V",
         "card_title_title": "Carrera por el título",
         "card_title_sub": "Probabilidad de ganar la liga",
         "card_race_title_ucl": "Carrera por la Champions League",
@@ -218,6 +230,12 @@ TRANSLATIONS = {
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
+        "last_games": "Últimos {n} jogos",
+        "form_W": "V",
+        "form_D": "E",
+        "form_L": "D",
+        "form_home": "C",
+        "form_away": "F",
         "card_title_title": "Disputa pelo título",
         "card_title_sub": "Chance de ser campeão",
         "card_race_title_ucl": "Disputa pela Champions League",
@@ -294,6 +312,12 @@ TRANSLATIONS = {
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
+        "last_games": "{n} derniers matchs",
+        "form_W": "V",
+        "form_D": "N",
+        "form_L": "D",
+        "form_home": "D",
+        "form_away": "E",
         "card_title_title": "Course au titre",
         "card_title_sub": "Probabilité de remporter le championnat",
         "card_race_title_ucl": "Course à la Ligue des champions",
@@ -542,7 +566,7 @@ def ordinal(n, lang):
         return "1er" if n == 1 else f"{n}e"
     return f"{n}.º" if lang == "es" else f"{n}º"
 
-def add_cell_tooltips(table_html, df):
+def add_cell_tooltips(table_html, df, form=None):
     # Hover text on each percentage ("Chelsea: 37.70% chance of finishing 4th").
     # A styled span inside the cell, shown instantly on hover by CSS -- the
     # browser's own title tooltips need the mouse held still for ~1s and often
@@ -553,6 +577,19 @@ def add_cell_tooltips(table_html, df):
     pos_cols = list(df.columns[5:])
     def with_tip(m):
         r, c = int(m.group(2)), int(m.group(3))
+        # Team name: its last five results. Top half of the table opens below
+        # the row, bottom half above, so the taller box stays in the table.
+        if c == 1 and (form or {}).get(df.iloc[r]["TEAM"]):
+            games = form[df.iloc[r]["TEAM"]]
+            rows = "".join(
+                f'<span class="form-game"><span class="form-chip {res}">{t("form_" + res)}</span>'
+                f'<span class="form-score">{gf}\u2013{ga}</span>'
+                f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
+                for res, gf, ga, opp, home in games
+            )
+            place = " tip-below" if r < len(df) / 2 else ""
+            return (f'{m.group(1)} class="{m.group(4)} has-tip team-tip{place}">{m.group(5)}'
+                    f'<span class="cell-tip"><span class="form-title">{t("last_games", n=len(games))}</span>{rows}</span></td>')
         if c < 5:
             return m.group(0)
         text = t("cell_tooltip", team=df.iloc[r]["TEAM"], pct=f"{df.iloc[r, c]:.2f}%",
@@ -578,6 +615,41 @@ def load_simulation_data():
             return pickle.load(f)
     except Exception:
         return {}
+
+@st.cache_resource(show_spinner=False)
+def load_dataset_processing():
+    # The pipeline's own module, for its team-name mappings and season start dates
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("dataset_processing", "2_dataset_processing.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_recent_form(league, n=5):
+    # Each team's last n league games this season, newest first, as
+    # {team: [(result, goals_for, goals_against, opponent, is_home), ...]}.
+    # Results files use football-data.org names ("Arsenal FC"), mapped to the
+    # table's names the same way the pipeline does.
+    try:
+        dp = load_dataset_processing()
+        files = [f for f in os.listdir("data") if f.startswith(f"past_{league}_") and f.endswith(".csv")]
+        df = pd.concat([pd.read_csv(f"data/{f}") for f in files])
+        df = df[df["status"] == "FINISHED"].dropna(subset=["homeGoals", "awayGoals"])
+        df = df.drop_duplicates(subset=["utcDate", "homeTeam", "awayTeam"])
+        df["utcDate"] = pd.to_datetime(df["utcDate"], utc=True, errors="coerce")
+        df = df[df["utcDate"] >= dp.SEASON_START_DATES[league]].sort_values("utcDate", ascending=False)
+        df[["homeTeam", "awayTeam"]] = df[["homeTeam", "awayTeam"]].replace(dp.mappings.get(league, {}))
+    except Exception:
+        return {}
+    form = {}
+    for row in df.itertuples():
+        hg, ag = int(row.homeGoals), int(row.awayGoals)
+        for team, opp, gf, ga, home in [(row.homeTeam, row.awayTeam, hg, ag, True), (row.awayTeam, row.homeTeam, ag, hg, False)]:
+            games = form.setdefault(team, [])
+            if len(games) < n:
+                games.append(("W" if gf > ga else "D" if gf == ga else "L", gf, ga, opp, home))
+    return form
 
 # ------------------------------- 
 # 5️⃣ PAGE STYLING + SELECTBOX + CONTACT PANEL
@@ -924,7 +996,9 @@ div.table-wrapper { width: 100%; overflow-x: auto; }
 
 /* Instant hover explanation on each percentage cell (see add_cell_tooltips).
    z-index clears the sticky frozen columns (z-index up to 5). */
-td.has-tip { position: relative; }
+/* Team cells are sticky (frozen column), which already anchors the tip --
+   position:relative here would un-freeze them. */
+td.has-tip:not(.team-tip) { position: relative; }
 .cell-tip {
     display: none; position: absolute; bottom: calc(100% + 6px); left: 0; z-index: 20;
     padding: 6px 10px; border-radius: 6px; background-color: #1f2a22; color: #ffffff;
@@ -934,6 +1008,21 @@ td.has-tip { position: relative; }
 td.has-tip:hover .cell-tip { display: block; }
 td.tip-below .cell-tip { bottom: auto; top: calc(100% + 6px); }
 td.tip-left .cell-tip { left: auto; right: 0; }
+/* Team-name hover: last five results with W/D/L chips */
+/* Lift the hovered team cell above the other frozen cells (z-index up to 5),
+   which otherwise paint over its tip row by row. */
+td.team-tip:hover { z-index: 10; text-decoration: underline dotted; text-underline-offset: 3px; }
+td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
+.form-title { display: block; margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.75; }
+.form-game { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-weight: 500; }
+.form-chip {
+    display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px;
+    border-radius: 4px; font-size: 11px; font-weight: 700; color: #ffffff;
+}
+.form-chip.W { background-color: #2E7D32; }
+.form-chip.D { background-color: #8A8F8B; }
+.form-chip.L { background-color: #D84343; }
+.form-score { min-width: 30px; font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* Zone legend under the table -- fixed light colours, since it sits inside
    the always-white table card. */
@@ -1706,7 +1795,7 @@ zone_legend = "".join(
 if zone_legend:
     zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
-    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df)}</div>{zone_legend}</div>',
+    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league))}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
 
