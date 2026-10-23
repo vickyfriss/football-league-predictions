@@ -990,6 +990,20 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     100% { box-shadow: 0 0 0 0 rgba(46,125,50,0); }
 }
 @media (prefers-reduced-motion: reduce) { .status-dot { animation: none; } }
+/* Phones: the pill doesn't fit on one line, and wrapping left the "·" dangling
+   at the end of the first line -- stack it as two centred lines instead. */
+@media (max-width: 600px) {
+    .status-banner { flex-direction: column; gap: 2px; border-radius: 16px; padding: 8px 18px; }
+    .status-banner b { display: inline-flex; align-items: center; gap: 8px; }
+    .status-banner > .status-dot { display: none; }
+    .status-banner b::before {
+        content: ""; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+        background-color: #2E7D32; animation: status-pulse 2s ease-out infinite;
+    }
+    .status-banner.stale b::before { background-color: #F0A04B; animation: none; }
+    .status-sep { display: none; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) { .status-banner b::before { animation: none; } }
 
 /* Data table: deliberately a fixed light card in any theme, same reasoning as
    the icon chips -- the pandas-rendered cells inside are colour-graded assuming
@@ -1061,10 +1075,17 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
    desktop, stacking to one column on phones. */
 .headline-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    /* Explicit counts rather than auto-fit, which left a lone card on its own
+       row (3 + 1, 2 + 1): three cards stay in one row, four (Championship) go
+       4 across, then 2 x 2; everything stacks on narrow screens. */
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin: 18px 0 4px;
 }
+.headline-cards.four { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1279px) { .headline-cards.four { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 860px) { .headline-cards { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .headline-cards.four { grid-template-columns: 1fr; } }
 .headline-card {
     background-color: var(--card-bg);
     border-radius: 12px;
@@ -1272,6 +1293,31 @@ div.stButton > button p:last-child {
     opacity: 0.8;
 }
 
+/* Laptop/tablet widths: nine pills in one row leave ~107px each at 1280px,
+   less than "Championship" needs, so long names broke mid-word ("Cham pions
+   hip"). Below 1440px: slightly smaller text and side padding (keeps one row
+   down to 1280px); below 1280px: wrap to two rows of 5 + 4. */
+@media (min-width: 601px) and (max-width: 1439px) {
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) div.stButton > button {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) div.stButton > button p:first-child {
+        font-size: 13px !important;
+    }
+}
+@media (min-width: 601px) and (max-width: 1279px) {
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) > div[data-testid="stColumn"] {
+        flex: 0 0 calc((100% - 32px) / 5) !important;
+        width: calc((100% - 32px) / 5) !important;
+        min-width: unset !important;
+    }
+}
+
 /* Mobile: st.columns stacks into 8 full-width rows below Streamlit's own
    responsive breakpoint by default -- that's a lot of vertical space for a
    league picker. A horizontally-scrolling row (tried first) has a real
@@ -1412,8 +1458,14 @@ header { display: none; }
 [data-testid="stLayoutWrapper"]:has(.st-key-lang_switcher) {
     display: contents;
 }
+/* absolute, not fixed: pinned to the window it floated over whatever
+   scrolled underneath (league buttons, cards); now it sits in the hero and
+   scrolls away with it, like the phone layout already did. */
+/* stMain (the scroll container) is position:static, so without this the
+   switcher anchored to a wrapper outside it and stayed put while scrolling. */
+[data-testid="stMainBlockContainer"] { position: relative; }
 .st-key-lang_switcher {
-    position: fixed;
+    position: absolute;
     top: 14px;
     right: 20px;
     z-index: 101;
@@ -1807,7 +1859,7 @@ if pos_cols and zones:
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
                       rel_probs.head(3), rel_probs.head(8)),
     ]
-    st.markdown(f'<div class="headline-cards">{"".join(cards)}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="headline-cards{" four" if len(cards) == 4 else ""}">{"".join(cards)}</div>', unsafe_allow_html=True)
 
 # -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
