@@ -7,7 +7,8 @@ import numpy as np
 import os
 import time
 import html
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from matplotlib import pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
@@ -52,6 +53,13 @@ TRANSLATIONS = {
         "loading_spinner": "Loading simulation data...",
         "data_not_ready": "⚠️ Simulation data not ready yet. Please reload later.",
         "last_run": "Simulations last run on: {date} UTC",
+        "ago_now": "just now",
+        "ago_minutes": "{n} min ago",
+        "ago_hour": "1 hour ago",
+        "ago_hours": "{n} hours ago",
+        "ago_day": "1 day ago",
+        "ago_days": "{n} days ago",
+        "updated_ago": "Updated {ago}",
         "results_eyebrow": "Live Predictions",
         "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
@@ -120,6 +128,13 @@ TRANSLATIONS = {
         "loading_spinner": "Cargando datos de la simulación...",
         "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
         "last_run": "Última ejecución de las simulaciones: {date} UTC",
+        "ago_now": "hace un momento",
+        "ago_minutes": "hace {n} min",
+        "ago_hour": "hace 1 hora",
+        "ago_hours": "hace {n} horas",
+        "ago_day": "hace 1 día",
+        "ago_days": "hace {n} días",
+        "updated_ago": "Actualizado {ago}",
         "results_eyebrow": "Predicciones en Vivo",
         "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
@@ -188,6 +203,13 @@ TRANSLATIONS = {
         "loading_spinner": "Carregando dados da simulação...",
         "data_not_ready": "⚠️ Os dados da simulação ainda não estão prontos. Recarregue mais tarde.",
         "last_run": "Última execução das simulações: {date} UTC",
+        "ago_now": "agora mesmo",
+        "ago_minutes": "há {n} min",
+        "ago_hour": "há 1 hora",
+        "ago_hours": "há {n} horas",
+        "ago_day": "há 1 dia",
+        "ago_days": "há {n} dias",
+        "updated_ago": "Atualizado {ago}",
         "results_eyebrow": "Previsões ao Vivo",
         "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
@@ -256,6 +278,13 @@ TRANSLATIONS = {
         "loading_spinner": "Chargement des données de simulation...",
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
         "last_run": "Dernière exécution des simulations : {date} UTC",
+        "ago_now": "à l'instant",
+        "ago_minutes": "il y a {n} min",
+        "ago_hour": "il y a 1 heure",
+        "ago_hours": "il y a {n} heures",
+        "ago_day": "il y a 1 jour",
+        "ago_days": "il y a {n} jours",
+        "updated_ago": "Mis à jour {ago}",
         "results_eyebrow": "Prédictions en Direct",
         "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
@@ -326,6 +355,19 @@ if "lang" not in st.session_state:
 def t(key, **kwargs):
     text = TRANSLATIONS[st.session_state.lang][key]
     return text.format(**kwargs) if kwargs else text
+
+def format_time_ago(run_dt):
+    # "6 hours ago" next to the exact run time, so freshness reads at a glance
+    minutes = int((datetime.now(timezone.utc) - run_dt).total_seconds() // 60)
+    if minutes < 1:
+        return t("ago_now")
+    if minutes < 60:
+        return t("ago_minutes", n=minutes)
+    hours = minutes // 60
+    if hours < 24:
+        return t("ago_hour") if hours == 1 else t("ago_hours", n=hours)
+    days = hours // 24
+    return t("ago_day") if days == 1 else t("ago_days", n=days)
 
 def format_run_date(run_dt, lang):
     # Each language's date order/particles are real grammar, not just translated
@@ -806,16 +848,30 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 .icon-chip:hover { transform: scale(1.08); }
 
-/* Branded replacement for st.info() -- Streamlit's built-in info box is a fixed
-   blue with no easy way to retheme it, so this is a plain styled div instead. */
+/* "Last updated" status pill (replaces the old full-width st.info()-style
+   box): a small centred chip with a live dot, the relative time in bold and
+   the exact run time muted after it. */
+.status-wrap { display: flex; justify-content: center; margin: 18px 0; }
 .status-banner {
-    max-width: 900px; margin: 18px auto; padding: 10px 18px;
-    background-color: #eaf5ec; border-left: 2px solid #a5d6a7; border-right: 2px solid #a5d6a7;
-    border-radius: 8px; color: #245f27; font-size: 13px; text-align: center;
+    display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 4px 8px;
+    padding: 7px 16px; border-radius: 999px;
+    background-color: var(--card-bg); border: 1px solid var(--border-light); box-shadow: var(--card-shadow);
+    color: var(--text-main); font-size: 13px; text-align: center;
 }
-@media (prefers-color-scheme: dark) {
-    .status-banner { background-color: #1b3320; color: #a5d6a7; }
+.status-banner b { font-weight: 600; }
+.status-sep, .status-date { opacity: 0.6; font-variant-numeric: tabular-nums; }
+.status-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    background-color: #2E7D32; box-shadow: 0 0 0 0 rgba(46,125,50,0.5);
+    animation: status-pulse 2s ease-out infinite;
 }
+.status-banner.stale .status-dot { background-color: #F0A04B; animation: none; }
+@keyframes status-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46,125,50,0.5); }
+    70% { box-shadow: 0 0 0 7px rgba(46,125,50,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,125,50,0); }
+}
+@media (prefers-reduced-motion: reduce) { .status-dot { animation: none; } }
 
 /* Data table: deliberately a fixed light card in any theme, same reasoning as
    the icon chips -- the pandas-rendered cells inside are colour-graded assuming
@@ -1419,9 +1475,27 @@ else:
             run_dt = datetime.strptime(f.read().strip(), "%Y-%m-%d %H:%M:%S UTC").replace(tzinfo=timezone.utc)
     else:
         run_dt = datetime.fromtimestamp(os.path.getmtime(pct_file), tz=timezone.utc)
-    formatted_date = format_run_date(run_dt, st.session_state.lang)
+    # Exact time in the visitor's own time zone (from their browser), labelled
+    # "BST" / "CET" where the zone has a name, "UTC−3" where it doesn't; plain
+    # UTC if the browser didn't send one.
+    local_dt, tz_label = run_dt, "UTC"
+    try:
+        local_dt = run_dt.astimezone(ZoneInfo(st.context.timezone))
+        tz_label = local_dt.strftime("%Z")
+        if not tz_label.isalpha():
+            offset = local_dt.utcoffset().total_seconds() / 3600
+            sign = "+" if offset > 0 else "\u2212"
+            tz_label = "UTC" if offset == 0 else f"UTC{sign}{abs(offset):g}"
+    except Exception:
+        pass
+    formatted_date = format_run_date(local_dt, st.session_state.lang)
     st.markdown(
-        f'<div class="status-banner">{t("last_run", date=formatted_date)}</div>',
+        # Compact status pill: "Updated 6 hours ago" first, exact time muted after.
+        # The dot turns amber once the data is over 36h old (the pipeline runs
+        # daily), so a missed run is visible without reading the date.
+        f'<div class="status-wrap"><div class="status-banner{" stale" if datetime.now(timezone.utc) - run_dt > timedelta(hours=36) else ""}" title="{t("last_run", date=formatted_date).replace(" UTC", " " + tz_label)}">'
+        f'<span class="status-dot"></span><b>{t("updated_ago", ago=format_time_ago(run_dt))}</b>'
+        f'<span class="status-sep">·</span><span class="status-date">{formatted_date} {tz_label}</span></div></div>',
         unsafe_allow_html=True
     )
 
