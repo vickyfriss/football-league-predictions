@@ -17,6 +17,8 @@ https://football-league-simulator.streamlit.app/
 
 The dashboard allows you to explore predicted league outcomes and probability distributions for each team.
 
+See [CHANGELOG.md](CHANGELOG.md) for what's changed and when.
+
 ---
 
 # 🚀 Features
