@@ -7,6 +7,7 @@ import numpy as np
 import os
 import time
 import html
+import re
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from matplotlib import pyplot as plt
@@ -64,6 +65,7 @@ TRANSLATIONS = {
         "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
+        "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
         "card_title_title": "Title race",
         "card_title_sub": "Chance of winning the league",
         "card_race_title_ucl": "Champions League race",
@@ -139,6 +141,7 @@ TRANSLATIONS = {
         "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
+        "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
         "card_title_title": "Carrera por el título",
         "card_title_sub": "Probabilidad de ganar la liga",
         "card_race_title_ucl": "Carrera por la Champions League",
@@ -214,6 +217,7 @@ TRANSLATIONS = {
         "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
+        "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
         "card_title_title": "Disputa pelo título",
         "card_title_sub": "Chance de ser campeão",
         "card_race_title_ucl": "Disputa pela Champions League",
@@ -289,6 +293,7 @@ TRANSLATIONS = {
         "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
+        "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
         "card_title_title": "Course au titre",
         "card_title_sub": "Probabilité de remporter le championnat",
         "card_race_title_ucl": "Course à la Ligue des champions",
@@ -343,11 +348,13 @@ TRANSLATIONS = {
     },
 }
 
-# First visit opens in the browser's own language (e.g. "pt-BR", "es-AR",
-# "fr-FR") when it's one we have, English otherwise; the switcher still works.
+# First visit opens in the language from the link (?lang=es), else the
+# browser's own language (e.g. "pt-BR", "es-AR", "fr-FR") when it's one we
+# have, else English; the switcher still works.
 if "lang" not in st.session_state:
+    url_lang = st.query_params.get("lang")
     browser_lang = (st.context.locale or "").lower()
-    st.session_state.lang = next(
+    st.session_state.lang = url_lang if url_lang in TRANSLATIONS else next(
         (code for prefix, code in [("es", "es"), ("fr", "fr"), ("pt", "pt-BR")] if browser_lang.startswith(prefix)),
         "en",
     )
@@ -527,6 +534,29 @@ def style_probabilities_table(df, column_labels=None, zones=None):
         styled = styled.map(zone_stripe, subset=[column_labels["POS"]])
 
     return styled, num_cols
+
+def ordinal(n, lang):
+    if lang == "en":
+        return f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+    if lang == "fr":
+        return "1er" if n == 1 else f"{n}e"
+    return f"{n}.º" if lang == "es" else f"{n}º"
+
+def add_cell_tooltips(table_html, df):
+    # Hover text on each percentage ("Chelsea: 37.70% chance of finishing 4th")
+    # as a plain title attribute: pandas 2.x's own set_tooltips are CSS pop-ups,
+    # which the table's horizontal-scroll wrapper would clip at the edges.
+    # Styler gives every cell an id ending "_row{r}_col{c}"; columns 5+ are the
+    # finishing positions, in the same order as df's.
+    pos_cols = list(df.columns[5:])
+    def with_title(m):
+        r, c = int(m.group(2)), int(m.group(3))
+        if c < 5:
+            return m.group(0)
+        text = t("cell_tooltip", team=df.iloc[r]["TEAM"], pct=f"{df.iloc[r, c]:.2f}%",
+                 pos=ordinal(int(pos_cols[c - 5]), st.session_state.lang))
+        return f'{m.group(1)} title="{html.escape(text, quote=True)}"'
+    return re.sub(r'(<td id="T_\w+_row(\d+)_col(\d+)")', with_title, table_html)
 
 # -------------------------------
 # 4️⃣ CACHE SIMULATION DATA LOADING
@@ -1389,6 +1419,7 @@ with st.container(key="lang_switcher"):
                 use_container_width=True,
             ) and st.session_state.lang != code:
                 st.session_state.lang = code
+                st.query_params["lang"] = code
                 st.rerun()
 
 # -------------------------------
@@ -1457,6 +1488,10 @@ for col, (key, pill_label, header_label) in zip(league_cols, LEAGUES):
 
 league = st.session_state.selected_league
 selected_display_name = league_header_labels[league]
+
+# Browser tab names the league ("La Liga · Football League Simulator"), in the
+# page's language, so open tabs and shared links say which league they're on.
+st.set_page_config(page_title=f'{selected_display_name.split(" (")[0]} · {t("hero_title")}')
 
 
 # -------------------------------
@@ -1655,7 +1690,7 @@ zone_legend = "".join(
 if zone_legend:
     zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
-    f'<div class="table-card"><div class="table-wrapper">{styled_table.to_html(escape=False)}</div>{zone_legend}</div>',
+    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df)}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
 
