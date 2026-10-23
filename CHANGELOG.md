@@ -17,6 +17,7 @@ What changed in the [Football League Simulator](https://football-league-simulato
 - **New:** The site opens in the visitor's own language (Spanish, French or Portuguese) when their browser is set to one.
 - **Improved:** Redesigned "last updated" badge: *"Updated 5 hours ago"* with the exact time in the visitor's own time zone, and a status dot that turns amber if the daily update is late.
 - **Improved:** "How This Simulation Works" uses the full page width in an even 4 + 4 grid; phone layout polished.
+- **Fixed:** Stray grey lines that stayed on screen while scrolling (a focus frame added in Streamlit 1.66), and a slight sideways scroll on the whole page.
 - **Fixed:** League buttons broken by a Streamlit update (labels squashed to "Premier League ..."); Streamlit is now pinned so updates can't silently break the layout again.
 
 ## 20 October 2026

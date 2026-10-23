@@ -1004,6 +1004,17 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
+/* Streamlit 1.66 draws a grey keyboard-focus frame around the whole scrolling
+   page (an inset box-shadow on a sticky stMain::before) as soon as you click
+   and then scroll with the arrow keys or space -- it stays put while the
+   content scrolls past, so it reads as stray lines across the page. */
+[data-testid="stMain"]::before { box-shadow: none !important; }
+/* The full-bleed bands (hero, methodology, about) size themselves with 100vw,
+   which counts the scrollbar's width too, so the page came out a few px wider
+   than the screen and grew a sideways scrollbar. Nothing on the page should
+   scroll sideways except the table, which has its own scroll box. */
+[data-testid="stMain"] { overflow-x: hidden; }
+
 /* "Matchday 9 of 38 · 29 to play" under the league name */
 .season-progress { margin: -4px 0 0; font-size: 13px; font-weight: 500; color: var(--text-main); opacity: 0.7; }
 
