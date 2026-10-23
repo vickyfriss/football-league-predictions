@@ -579,7 +579,10 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     border-bottom: 1px solid rgba(46,125,50,0.25);
     text-align: center;
 }
-.methodology-inner { max-width: 980px; margin: 0 auto; }
+/* 1280px rather than the original 980px -- at 980 the 4-per-row step cards
+   were narrow enough that longer steps (Team Strengths) ran far taller than
+   the rest. The intro paragraph keeps its own 640px cap for readability. */
+.methodology-inner { max-width: 1280px; margin: 0 auto; }
 .methodology-band .section-eyebrow { text-align: center; }
 /* Shared type scale for every section title on the page -- hero h1 is the one
    deliberately bigger headline, everything below it (methodology, the league
@@ -617,7 +620,9 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
    mobile with no separate media query needed. */
 .method-steps-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    /* 280px min keeps the 8 steps at a balanced 4 + 4 inside the 1280px band
+       (230px squeezed in a fifth column, leaving a lopsided 5 + 3). */
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 16px;
     margin-top: 28px;
     text-align: left;
