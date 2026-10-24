@@ -80,3 +80,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-18T14:45:00Z,9,FINISHED,FC Groningen,AFC Ajax,2,5,AWAY_TEAM
 2026-10-18T18:00:00Z,9,FINISHED,FC Twente '65,FC Utrecht,1,2,AWAY_TEAM
 2026-10-18T18:00:00Z,9,FINISHED,NEC,Fortuna Sittard,2,2,DRAW
+2026-10-23T18:00:00Z,10,FINISHED,Go Ahead Eagles,Telstar 1963,3,2,HOME_TEAM

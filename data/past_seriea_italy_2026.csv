@@ -69,3 +69,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-18T18:45:00Z,7,FINISHED,Juventus FC,SS Lazio,0,3,AWAY_TEAM
 2026-10-19T16:30:00Z,7,FINISHED,AC Monza,Cagliari Calcio,4,0,HOME_TEAM
 2026-10-19T18:45:00Z,7,FINISHED,Parma Calcio 1913,Torino FC,0,3,AWAY_TEAM
+2026-10-23T18:45:00Z,8,FINISHED,Torino FC,AC Monza,3,2,HOME_TEAM
