@@ -54,3 +54,9 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-18T13:30:00Z,6,FINISHED,Bayer 04 Leverkusen,SC Freiburg,2,1,HOME_TEAM
 2026-10-18T15:30:00Z,6,FINISHED,Borussia Mönchengladbach,TSG 1899 Hoffenheim,1,2,AWAY_TEAM
 2026-10-23T18:30:00Z,7,FINISHED,VfB Stuttgart,Borussia Mönchengladbach,2,3,AWAY_TEAM
+2026-10-24T13:30:00Z,7,FINISHED,1. FSV Mainz 05,SV Werder Bremen,2,3,AWAY_TEAM
+2026-10-24T13:30:00Z,7,FINISHED,1. FC Köln,FC Schalke 04,0,0,DRAW
+2026-10-24T13:30:00Z,7,FINISHED,RB Leipzig,SV 07 Elversberg,4,0,HOME_TEAM
+2026-10-24T13:30:00Z,7,FINISHED,SC Paderborn 07,Hamburger SV,1,0,HOME_TEAM
+2026-10-24T13:30:00Z,7,FINISHED,FC Augsburg,1. FC Union Berlin,1,1,DRAW
+2026-10-24T16:30:00Z,7,FINISHED,Borussia Dortmund,Eintracht Frankfurt,1,0,HOME_TEAM
