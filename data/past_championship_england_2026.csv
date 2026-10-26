@@ -132,3 +132,14 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-17T14:00:00Z,11,FINISHED,Wrexham AFC,Preston North End FC,4,1,HOME_TEAM
 2026-10-20T18:45:00Z,6,FINISHED,Wolverhampton Wanderers FC,Portsmouth FC,1,1,DRAW
 2026-10-23T19:00:00Z,12,FINISHED,Bolton Wanderers FC,Middlesbrough FC,1,5,AWAY_TEAM
+2026-10-24T11:30:00Z,12,FINISHED,Sheffield United FC,Derby County FC,1,1,DRAW
+2026-10-24T11:30:00Z,12,FINISHED,Charlton Athletic FC,Norwich City FC,1,3,AWAY_TEAM
+2026-10-24T11:30:00Z,12,FINISHED,Portsmouth FC,Millwall FC,2,1,HOME_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,Cardiff City FC,Birmingham City FC,1,0,HOME_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,Queens Park Rangers FC,Swansea City AFC,5,0,HOME_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,Stoke City FC,Bristol City FC,0,0,DRAW
+2026-10-24T14:00:00Z,12,FINISHED,Preston North End FC,West Bromwich Albion FC,1,1,DRAW
+2026-10-24T14:00:00Z,12,FINISHED,Lincoln City FC,Burnley FC,4,1,HOME_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,West Ham United FC,Southampton FC,2,3,AWAY_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,Blackburn Rovers FC,Wrexham AFC,2,0,HOME_TEAM
+2026-10-24T14:00:00Z,12,FINISHED,Wolverhampton Wanderers FC,Watford FC,1,0,HOME_TEAM

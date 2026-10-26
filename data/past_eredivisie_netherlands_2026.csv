@@ -81,3 +81,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-18T18:00:00Z,9,FINISHED,FC Twente '65,FC Utrecht,1,2,AWAY_TEAM
 2026-10-18T18:00:00Z,9,FINISHED,NEC,Fortuna Sittard,2,2,DRAW
 2026-10-23T18:00:00Z,10,FINISHED,Go Ahead Eagles,Telstar 1963,3,2,HOME_TEAM
+2026-10-24T14:30:00Z,10,FINISHED,FC Utrecht,PEC Zwolle,1,1,DRAW
+2026-10-24T16:45:00Z,10,FINISHED,Willem II Tilburg,SC Cambuur-Leeuwarden,1,6,AWAY_TEAM
+2026-10-24T19:00:00Z,10,FINISHED,ADO Den Haag,SC Heerenveen,2,3,AWAY_TEAM

@@ -72,3 +72,6 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-12T19:15:00Z,8,FINISHED,FC Famalicão,FC Alverca,1,4,AWAY_TEAM
 2026-10-19T19:15:00Z,2,FINISHED,Sporting Clube de Braga,Gil Vicente FC,1,2,AWAY_TEAM
 2026-10-23T19:45:00Z,9,FINISHED,Vitória SC,CS Marítimo,5,0,HOME_TEAM
+2026-10-24T14:30:00Z,9,FINISHED,CF Estrela da Amadora,Casa Pia AC,0,2,AWAY_TEAM
+2026-10-24T17:00:00Z,9,FINISHED,FC Alverca,FC Arouca,0,1,AWAY_TEAM
+2026-10-24T19:30:00Z,9,FINISHED,Gil Vicente FC,FC Porto,0,1,AWAY_TEAM
