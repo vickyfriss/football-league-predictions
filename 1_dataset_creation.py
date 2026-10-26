@@ -4,7 +4,7 @@ import os
 import time
 import pandas as pd
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import asyncio
 from playwright.async_api import async_playwright
 
@@ -451,7 +451,43 @@ def load_fixtures():
 
 # -------------------------------
 # Past results
-def fetch_past_season_results(data_folder="data/previous_season"):
+
+# football-data.org can take hours to mark a game FINISHED, so a game counts as
+# played once it kicked off PLAYED_AFTER ago and has a full-time score, whatever
+# its status says. Games in NOT_PLAYED never count, score or not.
+NOT_PLAYED = {"POSTPONED", "CANCELLED", "SUSPENDED"}
+PLAYED_AFTER = timedelta(hours=3)
+
+def played_matches(matches):
+    now = datetime.now(timezone.utc)
+    rows = []
+    for m in matches:
+        home, away = m["score"]["fullTime"]["home"], m["score"]["fullTime"]["away"]
+        kickoff = datetime.fromisoformat(m["utcDate"].replace("Z", "+00:00"))
+        if m["status"] in NOT_PLAYED or home is None or away is None or now - kickoff < PLAYED_AFTER:
+            continue
+        rows.append({
+            "utcDate": m["utcDate"],
+            "matchday": m.get("matchday"),
+            "status": "FINISHED",
+            "homeTeam": m["homeTeam"]["name"],
+            "awayTeam": m["awayTeam"]["name"],
+            "homeGoals": home,
+            "awayGoals": away,
+            "winner": "HOME_TEAM" if home > away else "AWAY_TEAM" if away > home else "DRAW",
+        })
+    return pd.DataFrame(rows, columns=["utcDate", "matchday", "status", "homeTeam", "awayTeam", "homeGoals", "awayGoals", "winner"])
+
+def merge_with_saved(df, file_path):
+    # The feed sometimes leaves out a game it already returned as played, so
+    # every game in the saved file is kept. Each pairing is played once a
+    # season, so (homeTeam, awayTeam) identifies a game; the fresh row wins
+    # in case the score was corrected.
+    if os.path.exists(file_path):
+        df = pd.concat([pd.read_csv(file_path), df]).drop_duplicates(subset=["homeTeam", "awayTeam"], keep="last")
+    return df.sort_values("utcDate").reset_index(drop=True)
+
+def fetch_past_season_results(data_folder="data/previous_season", leagues=None):
 
     API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
 
@@ -475,6 +511,9 @@ def fetch_past_season_results(data_folder="data/previous_season"):
 
     for comp_code, (league_name, seasons) in competitions.items():
 
+        if leagues is not None and league_name not in leagues:
+            continue
+
         past_matches[league_name] = {}
         previous_season = seasons[1]
 
@@ -494,36 +533,64 @@ def fetch_past_season_results(data_folder="data/previous_season"):
 
             url = f"https://api.football-data.org/v4/competitions/{comp_code}/matches"
 
-            params = {"season": season, "status": "FINISHED"}
+            # All statuses: played_matches() decides what has been played
+            params = {"season": season}
 
             throttle_football_data()
             response = request_with_retry(url, headers=headers, params=params)
 
-            matches = response.json().get("matches")
-
-            rows = []
-
-            for m in matches:
-
-                rows.append({
-                    "utcDate": m["utcDate"],
-                    "matchday": m.get("matchday"),
-                    "status": m["status"],
-                    "homeTeam": m["homeTeam"]["name"],
-                    "awayTeam": m["awayTeam"]["name"],
-                    "homeGoals": m["score"]["fullTime"]["home"],
-                    "awayGoals": m["score"]["fullTime"]["away"],
-                    "winner": m["score"]["winner"],
-                })
-
-            df = pd.DataFrame(rows)
+            df = played_matches(response.json().get("matches") or [])
 
             if season == previous_season:
                 df.to_csv(file_path, index=False)
+            else:
+                df = merge_with_saved(df, f"data/past_{league_name}_{season}.csv")
 
             past_matches[league_name][season] = df
 
     return past_matches
+
+# -------------------------------
+# Results vs the table
+
+# When the results hold fewer games than the scraped table says were played,
+# the feed is behind: refetch those leagues every RESULTS_RETRY_WAIT seconds,
+# up to RESULTS_RETRIES times, then report whatever is still missing.
+RESULTS_RETRIES = 3
+RESULTS_RETRY_WAIT = 15 * 60
+RESULTS_BEHIND_FILE = "logs/results_behind.txt"
+
+def results_behind(standings, past_results=None):
+    # {league: (games in the table, games in the results)} for every league
+    # whose current-season results are short. Without past_results, the saved
+    # CSVs are checked.
+    behind = {}
+    for league, table in standings.items():
+        if past_results is not None:
+            seasons = past_results.get(league)
+            if not seasons:
+                continue
+            df = seasons[max(seasons)]
+        else:
+            files = sorted(f for f in os.listdir("data") if f.startswith(f"past_{league}_") and f.endswith(".csv"))
+            if not files:
+                continue
+            df = pd.read_csv(f"data/{files[-1]}")
+        in_table = int(pd.to_numeric(table["gp"], errors="coerce").sum()) // 2
+        if len(df) < in_table:
+            behind[league] = (in_table, len(df))
+    return behind
+
+def write_results_behind(behind):
+    # The workflow fails its last step when this file has lines, so GitHub
+    # sends an email; no file means the results match the table.
+    os.makedirs(os.path.dirname(RESULTS_BEHIND_FILE), exist_ok=True)
+    if behind:
+        with open(RESULTS_BEHIND_FILE, "w") as f:
+            for league, (in_table, in_results) in behind.items():
+                f.write(f"{league}: {in_results} results, table says {in_table} played\n")
+    elif os.path.exists(RESULTS_BEHIND_FILE):
+        os.remove(RESULTS_BEHIND_FILE)
 
 # -------------------------------
 # Master function
@@ -538,11 +605,19 @@ def create_datasets(save_csv=True):
 
     league_table_folder = "data/league_table"
 
+    # Unchanged standings skip the API calls, unless the saved results are
+    # still behind the table, so a later run picks up games an earlier run missed
     if not standings_changed(standings, league_table_folder):
 
-        print("Standings unchanged. Skipping API calls.")
+        if not results_behind(standings):
 
-        return standings, None, None, None
+            print("Standings unchanged and results up to date. Skipping API calls.")
+
+            write_results_behind({})
+
+            return standings, None, None, None
+
+        print("Standings unchanged, but results are behind the table. Updating datasets...")
 
     print("Standings changed. Updating datasets...")
 
@@ -561,6 +636,26 @@ def create_datasets(save_csv=True):
     print("Fetching past season results...")
 
     past_results = fetch_past_season_results()
+
+    behind = results_behind(standings, past_results)
+
+    for attempt in range(1, RESULTS_RETRIES + 1):
+
+        if not behind:
+            break
+
+        for league, (in_table, in_results) in behind.items():
+            print(f"⚠️ {league}: {in_results} results, table says {in_table} played")
+
+        print(f"Results behind the table. Refetching in {RESULTS_RETRY_WAIT // 60} min (attempt {attempt}/{RESULTS_RETRIES})...")
+
+        time.sleep(RESULTS_RETRY_WAIT)
+
+        past_results.update(fetch_past_season_results(leagues=behind))
+
+        behind = results_behind(standings, past_results)
+
+    write_results_behind(behind)
 
     if save_csv:
 
