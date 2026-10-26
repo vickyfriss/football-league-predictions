@@ -638,8 +638,10 @@ def load_dataset_processing():
     spec.loader.exec_module(module)
     return module
 
-@st.cache_data(ttl=3600, show_spinner=False)
-def load_recent_form(league, n=5):
+@st.cache_data(show_spinner=False)
+def load_recent_form(league, data_version, n=5):
+    # data_version is the data's last-updated time: it only keys the cache, so
+    # a data update shows on the next page load instead of waiting out a TTL.
     # Each team's last n league games this season, newest first, as
     # {team: [(result, goals_for, goals_against, opponent, is_home, date), ...]}.
     # Results files use football-data.org names ("Arsenal FC"), mapped to the
@@ -1873,7 +1875,7 @@ zone_legend = "".join(
 if zone_legend:
     zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
-    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league))}</div>{zone_legend}</div>',
+    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league, os.path.getmtime("data/last_updated.txt") if os.path.exists("data/last_updated.txt") else None))}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
 

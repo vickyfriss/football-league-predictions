@@ -9,6 +9,7 @@ What changed in the [Football League Simulator](https://football-league-simulato
 ## 26 October 2026
 
 - **Fixed:** Recent results no longer go missing when the results feed is slow. A game counts as played once it has kicked off and has a final score, even before the feed marks it finished (on 26 Oct the morning update missed every Sunday game, Barcelona vs. Real Madrid included). Results already saved are never dropped, and each update checks the results against the league table, so any games the feed is still missing are picked up by the next update.
+- **Fixed:** The last-five-results hover shows new results as soon as the data updates, instead of up to an hour later.
 - **Improved:** The data now updates twice a day (03:30 and 13:00 UTC), so late results show up the same day.
 
 ## 23 October 2026 — Headline cards, table zones and a big usability pass
