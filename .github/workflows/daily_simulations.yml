@@ -94,15 +94,20 @@ jobs:
             exit 1
           fi
 
-      # 8️⃣ Fail the run (GitHub emails the owner) when some league's results
-      # are still behind its table after the retries. Runs after the commit,
-      # so everything that did update is still published.
+      # 8️⃣ Flag leagues whose results are behind the table: a warning while
+      # the feed catches up (the next run fetches again), a failed run (GitHub
+      # emails the owner) once a league has been behind for 24 hours. Runs
+      # after the commit, so everything that did update is still published.
       - name: Check results are complete
         run: |
-          if [ -s logs/results_behind.txt ]; then
-            while read -r line; do echo "::error::$line"; done < logs/results_behind.txt
-            exit 1
+          failed=0
+          if [ -f logs/results_annotations.txt ]; then
+            while IFS=$'\t' read -r level msg; do
+              echo "::$level::$msg"
+              [ "$level" = "error" ] && failed=1
+            done < logs/results_annotations.txt
           fi
+          exit $failed
 
       # 9️⃣ Upload logs
       - name: Upload logs

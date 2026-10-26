@@ -487,7 +487,7 @@ def merge_with_saved(df, file_path):
         df = pd.concat([pd.read_csv(file_path), df]).drop_duplicates(subset=["homeTeam", "awayTeam"], keep="last")
     return df.sort_values("utcDate").reset_index(drop=True)
 
-def fetch_past_season_results(data_folder="data/previous_season", leagues=None):
+def fetch_past_season_results(data_folder="data/previous_season"):
 
     API_KEY = get_api_key("FOOTBALL_DATA_API_KEY", local_file="API_KEY.env")
 
@@ -510,9 +510,6 @@ def fetch_past_season_results(data_folder="data/previous_season", leagues=None):
     os.makedirs(data_folder, exist_ok=True)
 
     for comp_code, (league_name, seasons) in competitions.items():
-
-        if leagues is not None and league_name not in leagues:
-            continue
 
         past_matches[league_name] = {}
         previous_season = seasons[1]
@@ -554,11 +551,15 @@ def fetch_past_season_results(data_folder="data/previous_season", leagues=None):
 # Results vs the table
 
 # When the results hold fewer games than the scraped table says were played,
-# the feed is behind: refetch those leagues every RESULTS_RETRY_WAIT seconds,
-# up to RESULTS_RETRIES times, then report whatever is still missing.
-RESULTS_RETRIES = 3
-RESULTS_RETRY_WAIT = 15 * 60
-RESULTS_BEHIND_FILE = "logs/results_behind.txt"
+# the feed is behind. A run never waits for it: the next scheduled run
+# fetches again (unchanged standings don't skip the fetch while results are
+# behind). RESULTS_BEHIND_FILE is committed with the data so each run knows
+# since when a league has been behind; the workflow warns for every lagging
+# league and fails (GitHub emails the owner) once one has been behind for
+# RESULTS_ALERT_AFTER.
+RESULTS_BEHIND_FILE = "data/results_behind.csv"
+RESULTS_ALERT_AFTER = timedelta(hours=24)
+RESULTS_ANNOTATIONS_FILE = "logs/results_annotations.txt"
 
 def results_behind(standings, past_results=None):
     # {league: (games in the table, games in the results)} for every league
@@ -582,15 +583,25 @@ def results_behind(standings, past_results=None):
     return behind
 
 def write_results_behind(behind):
-    # The workflow fails its last step when this file has lines, so GitHub
-    # sends an email; no file means the results match the table.
-    os.makedirs(os.path.dirname(RESULTS_BEHIND_FILE), exist_ok=True)
-    if behind:
-        with open(RESULTS_BEHIND_FILE, "w") as f:
-            for league, (in_table, in_results) in behind.items():
-                f.write(f"{league}: {in_results} results, table says {in_table} played\n")
-    elif os.path.exists(RESULTS_BEHIND_FILE):
-        os.remove(RESULTS_BEHIND_FILE)
+    now = datetime.now(timezone.utc)
+    since = {}
+    if os.path.exists(RESULTS_BEHIND_FILE):
+        saved = pd.read_csv(RESULTS_BEHIND_FILE)
+        since = dict(zip(saved["league"], pd.to_datetime(saved["behind_since"], utc=True)))
+    rows, notes = [], []
+    for league, (in_table, in_results) in behind.items():
+        first = since.get(league, now)
+        rows.append({"league": league, "behind_since": first.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                     "games_in_table": in_table, "games_in_results": in_results})
+        level = "error" if now - first >= RESULTS_ALERT_AFTER else "warning"
+        msg = f"{league}: {in_results} results, table says {in_table} played (behind since {first:%d %b %H:%M} UTC)"
+        print(f"⚠️ {msg}")
+        notes.append(f"{level}\t{msg}")
+    os.makedirs("data", exist_ok=True)
+    pd.DataFrame(rows, columns=["league", "behind_since", "games_in_table", "games_in_results"]).to_csv(RESULTS_BEHIND_FILE, index=False)
+    os.makedirs(os.path.dirname(RESULTS_ANNOTATIONS_FILE), exist_ok=True)
+    with open(RESULTS_ANNOTATIONS_FILE, "w") as f:
+        f.write("".join(n + "\n" for n in notes))
 
 # -------------------------------
 # Master function
@@ -638,22 +649,6 @@ def create_datasets(save_csv=True):
     past_results = fetch_past_season_results()
 
     behind = results_behind(standings, past_results)
-
-    for attempt in range(1, RESULTS_RETRIES + 1):
-
-        if not behind:
-            break
-
-        for league, (in_table, in_results) in behind.items():
-            print(f"⚠️ {league}: {in_results} results, table says {in_table} played")
-
-        print(f"Results behind the table. Refetching in {RESULTS_RETRY_WAIT // 60} min (attempt {attempt}/{RESULTS_RETRIES})...")
-
-        time.sleep(RESULTS_RETRY_WAIT)
-
-        past_results.update(fetch_past_season_results(leagues=behind))
-
-        behind = results_behind(standings, past_results)
 
     write_results_behind(behind)
 
