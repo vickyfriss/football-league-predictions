@@ -6,6 +6,11 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ---
 
+## 26 October 2026
+
+- **Fixed:** Recent results no longer go missing when the results feed is slow. A game counts as played once it has kicked off and has a final score, even before the feed marks it finished (on 26 Oct the morning update missed every Sunday game, Barcelona vs. Real Madrid included). Results already saved are never dropped, and each update checks the results against the league table and fetches again if any games are missing.
+- **Improved:** The data now updates twice a day (03:30 and 13:00 UTC), so late results show up the same day.
+
 ## 23 October 2026 — Headline cards, table zones and a big usability pass
 
 - **New:** Headline cards above the table: *Title race*, *Champions League race* (the teams either side of the top-4 cut-off — the real battle, not the obvious top teams) and *Relegation battle*. The Championship gets *Automatic promotion* and *Play-off race* cards, Brazil a *Libertadores race*. Click any card to expand it into a longer ranking, with the cut-off line marked.
