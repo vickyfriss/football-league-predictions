@@ -99,3 +99,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-25T20:00:00Z,10,FINISHED,FC Barcelona,Real Madrid CF,1,2,AWAY_TEAM
 2026-10-26T20:00:00Z,10,FINISHED,Sevilla FC,CA Osasuna,2,0,HOME_TEAM
 2026-10-30T20:00:00Z,11,FINISHED,Villarreal CF,RCD Espanyol de Barcelona,0,1,AWAY_TEAM
+2026-10-31T13:00:00Z,11,FINISHED,Levante UD,Club Atlético de Madrid,0,2,AWAY_TEAM

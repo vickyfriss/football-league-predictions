@@ -1,21 +1,21 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Manchester City,8,7,0,1,20,9,11,21
+1,Manchester City,9,7,0,2,20,10,10,21
 2,Arsenal,8,7,0,1,13,5,8,21
-3,Brighton & Hove Albion,8,5,1,2,23,7,16,16
-4,Liverpool,8,4,3,1,11,8,3,15
-5,Chelsea,8,4,1,3,17,15,2,13
-6,Brentford,8,2,5,1,14,9,5,11
-7,Leeds United,8,2,5,1,9,6,3,11
-8,Newcastle United,8,3,2,3,12,14,-2,11
-9,Aston Villa,8,3,2,3,9,12,-3,11
-10,Hull City,8,2,4,2,9,8,1,10
-11,Everton,8,2,4,2,8,9,-1,10
-12,Ipswich Town,8,3,1,4,12,16,-4,10
-13,AFC Bournemouth,8,2,3,3,12,13,-1,9
+3,Brighton & Hove Albion,9,6,1,2,24,7,17,19
+4,Chelsea,9,5,1,3,19,15,4,16
+5,Liverpool,8,4,3,1,11,8,3,15
+6,Brentford,9,3,5,1,16,9,7,14
+7,AFC Bournemouth,9,3,3,3,14,13,1,12
+8,Hull City,9,2,5,2,11,10,1,11
+9,Leeds United,9,2,5,2,9,8,1,11
+10,Newcastle United,8,3,2,3,12,14,-2,11
+11,Aston Villa,8,3,2,3,9,12,-3,11
+12,Ipswich Town,9,3,2,4,14,18,-4,11
+13,Everton,8,2,4,2,8,9,-1,10
 14,Tottenham Hotspur,8,2,3,3,8,10,-2,9
-15,Fulham,8,2,2,4,8,10,-2,8
-16,Manchester United,8,1,4,3,10,13,-3,7
-17,Crystal Palace,8,2,1,5,9,19,-10,7
-18,Nottingham Forest,8,1,3,4,6,10,-4,6
-19,Coventry City,8,2,0,6,6,15,-9,6
-20,Sunderland,8,1,2,5,6,14,-8,5
+15,Coventry City,9,3,0,6,9,16,-7,9
+16,Fulham,8,2,2,4,8,10,-2,8
+17,Manchester United,9,1,4,4,10,15,-5,7
+18,Crystal Palace,8,2,1,5,9,19,-10,7
+19,Nottingham Forest,9,1,3,5,6,12,-6,6
+20,Sunderland,9,1,2,6,7,17,-10,5

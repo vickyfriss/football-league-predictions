@@ -79,3 +79,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-25T14:00:00Z,8,FINISHED,Manchester United FC,AFC Bournemouth,0,3,AWAY_TEAM
 2026-10-25T14:00:00Z,8,FINISHED,Hull City AFC,Brentford FC,1,1,DRAW
 2026-10-25T16:30:00Z,8,FINISHED,Sunderland AFC,Leeds United FC,0,0,DRAW
+2026-10-31T12:30:00Z,9,FINISHED,Chelsea FC,Manchester United FC,2,0,HOME_TEAM
