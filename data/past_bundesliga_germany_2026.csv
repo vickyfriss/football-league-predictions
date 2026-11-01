@@ -69,3 +69,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-31T14:30:00Z,8,FINISHED,SV Werder Bremen,TSG 1899 Hoffenheim,2,0,HOME_TEAM
 2026-10-31T14:30:00Z,8,FINISHED,Bayer 04 Leverkusen,VfB Stuttgart,2,4,AWAY_TEAM
 2026-10-31T17:30:00Z,8,FINISHED,FC Bayern München,Borussia Dortmund,2,2,DRAW
+2026-11-01T14:30:00Z,8,FINISHED,1. FC Union Berlin,1. FC Köln,1,1,DRAW
