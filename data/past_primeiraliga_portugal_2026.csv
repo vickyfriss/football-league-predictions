@@ -81,3 +81,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-25T20:30:00Z,9,FINISHED,Sporting Clube de Portugal,Académico de Viseu FC,1,2,AWAY_TEAM
 2026-10-26T18:45:00Z,9,FINISHED,CD Santa Clara,Sport Lisboa e Benfica,1,2,AWAY_TEAM
 2026-10-30T20:15:00Z,10,FINISHED,Casa Pia AC,Sporting Clube de Portugal,0,2,AWAY_TEAM
+2026-10-31T15:30:00Z,10,FINISHED,Moreirense FC,CF Estrela da Amadora,2,1,HOME_TEAM
+2026-10-31T20:30:00Z,10,FINISHED,FC Porto,GD Estoril Praia,4,0,HOME_TEAM
