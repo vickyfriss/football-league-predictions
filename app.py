@@ -1702,8 +1702,6 @@ header { display: none; }
 .block-container {
     padding-top: 2rem !important;
     padding-bottom: 0 !important;
-    /* On big monitors the page stops spreading at 1240px of content */
-    max-width: calc(1240px + 2 * 5rem) !important;
 }
 
 /* Language switcher -- three small pill buttons (same st.button + st.columns
