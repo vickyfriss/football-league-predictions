@@ -832,19 +832,23 @@ def load_history(league, data_version):
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=columns)
 
 @st.cache_data(show_spinner=False)
-def load_match_days(league, data_version):
-    # Days with at least one league game this season, from the saved results
+def load_match_days(league, data_version, rounds_only=False):
+    # Days with at least one league game this season, from the saved results.
+    # rounds_only leaves out catch-up games: a game from a matchday well behind
+    # the rounds played around it (Brazil played two rearranged matchday-21
+    # games on 2 and 3 October, in the middle of the international break).
     try:
         season_start = load_dataset_processing().SEASON_START_DATES[league].tz_convert(None)
+        files = [f for f in os.listdir("data") if f.startswith(f"past_{league}_") and f.endswith(".csv")]
+        df = pd.concat([pd.read_csv(f"data/{f}", usecols=["utcDate", "matchday"]) for f in files])
     except Exception:
         return set()
-    days = set()
-    for file in os.listdir("data"):
-        if file.startswith(f"past_{league}_") and file.endswith(".csv"):
-            dates = pd.to_datetime(pd.read_csv(f"data/{file}", usecols=["utcDate"])["utcDate"], utc=True, errors="coerce")
-            dates = dates.dt.tz_convert(None).dt.normalize().dropna()
-            days |= set(dates[dates >= season_start])
-    return days
+    df["day"] = pd.to_datetime(df["utcDate"], utc=True, errors="coerce").dt.tz_convert(None).dt.normalize()
+    df = df[df["day"] >= season_start].dropna(subset=["day"])
+    if rounds_only and df["matchday"].notna().any():
+        around = [df.loc[(df["day"] - d).abs() <= pd.Timedelta(days=7), "matchday"].median() for d in df["day"]]
+        df = df[~(df["matchday"] < pd.Series(around, index=df.index) - 2)]
+    return set(df["day"])
 
 # Why a league stops: FIFA's international windows (from 2026 the September
 # and October windows are one long break) and the 2026 World Cup
@@ -856,12 +860,20 @@ INTERNATIONAL_WINDOWS = [
     (pd.Timestamp("2027-03-22"), pd.Timestamp("2027-03-30")),
 ]
 
-def break_reason(start, end):
+# Domestic cup rounds that stopped a league for a weekend, named as the cup is
+CUP_ROUNDS = {
+    "primeiraliga_portugal": [(pd.Timestamp("2026-10-14"), pd.Timestamp("2026-10-18"), "Taça de Portugal")],
+}
+
+def break_reason(start, end, league):
     overlaps = lambda window: start <= window[1] and end >= window[0]
     if overlaps(WORLD_CUP_2026):
         return t("break_world_cup")
     if any(overlaps(w) for w in INTERNATIONAL_WINDOWS):
         return t("break_international")
+    for first, last, cup in CUP_ROUNDS.get(league, []):
+        if overlaps((first, last)):
+            return cup
     return t("no_games")
 
 @st.cache_data(show_spinner=False)
@@ -1140,6 +1152,12 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 .methodology-heading, .about-heading, .results-heading { margin: 0 0 10px; font-size: 26px; font-weight: 800; }
 /* Streamlit's own h2 size outranks the class above inside markdown blocks */
 [data-testid="stMarkdownContainer"] h2.results-heading { font-size: 30px !important; padding: 0 !important; margin: 0 0 4px !important; letter-spacing: -0.01em; }
+/* Every other section title on one size: the method, about me, and the season chart */
+[data-testid="stMarkdownContainer"] .methodology-heading,
+[data-testid="stMarkdownContainer"] .about-heading,
+.trend-head .trend-title { font-size: 26px !important; font-weight: 800; padding: 0 !important; letter-spacing: -0.01em; }
+/* Links in the method and about sections in the site's green, like every other link */
+.methodology-band a, .about-band a { color: var(--accent-text) !important; text-underline-offset: 2px; }
 /* Scoped with the band ancestor (not just the bare class) on purpose --
    Streamlit injects its own ".st-emotion-cache-XXXX h1,h2,h3 { color:
    inherit }" rule per container, which is class+type (0,1,1) and silently
@@ -1383,11 +1401,11 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; align-items: baseline;
+    display: grid; grid-template-columns: minmax(0, 1fr) 4.2em; gap: 0 8px; align-items: baseline;
     margin-bottom: 9px; font-size: 13px; color: var(--text-main);
 }
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
 .mover-row .mv-delta.good { color: var(--good-text); }
 .mover-row .mv-delta.bad { color: var(--bad-text); }
 .mover-row .mv-what { grid-column: 1 / -1; font-size: 11px; line-height: 1.2; opacity: 0.6;
@@ -1413,7 +1431,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
     margin-top: 22px;
 }
 .trend-head { text-align: center; }
-.trend-head .trend-title { margin: 0; padding: 0; font-size: 22px; font-weight: 700; color: var(--text-main); }
+.trend-head .trend-title { margin: 0; padding: 0; color: var(--text-main); }
 .st-key-trend_card .trend-head p.trend-sub { margin: 4px 0 0; font-size: 13px; color: var(--text-main); opacity: 0.7; }
 .st-key-trend_card [data-testid="stElementContainer"]:has(.stRadio) { width: 100% !important; }
 .st-key-trend_card .stRadio { display: flex; justify-content: center; width: 100%; }
@@ -2401,16 +2419,21 @@ with st.container(key="trend_card"):
             first_day, last_day = data["day"].min(), data["day"].max()
             matchdays = sorted((d, md) for md, d in load_matchday_dates(league, data_version).items()
                                if first_day <= d <= last_day)
+            near_end = last_day - (last_day - first_day) * 0.04
             md_marks = alt.Data(values=[
-                {"day": f"{d:%Y-%m-%d}T12:00:00", "label": f'{t("md_short")} {md}' if md % 5 == 0 else ""}
+                {"day": f"{d:%Y-%m-%d}T12:00:00", "label": f'{t("md_short")} {md}' if md % 5 == 0 and d <= near_end else ""}
                 for d, md in matchdays
             ])
-            # Breaks come from the actual game days, not the matchdays: rearranged
-            # games spread a matchday out, but a break means no game at all
-            game_days = sorted(d for d in load_match_days(league, data_version) if first_day <= d <= last_day)
+            md_marks_end = alt.Data(values=[
+                {"day": f"{d:%Y-%m-%d}T12:00:00", "label": f'{t("md_short")} {md}'}
+                for d, md in matchdays if md % 5 == 0 and d > near_end
+            ])
+            # Breaks come from the actual game days, not the matchdays' middle dates
+            # (rearranged games spread a matchday out), leaving out catch-up games
+            game_days = sorted(d for d in load_match_days(league, data_version, rounds_only=True) if first_day <= d <= last_day)
             breaks = alt.Data(values=[
                 {"start": f"{a + pd.Timedelta(days=1):%Y-%m-%d}T00:00:00", "end": f"{b:%Y-%m-%d}T00:00:00",
-                 "mid": f"{a + (b - a) / 2:%Y-%m-%d}T12:00:00", "label": break_reason(a, b)}
+                 "mid": f"{a + (b - a) / 2:%Y-%m-%d}T12:00:00", "label": break_reason(a, b, league)}
                 for a, b in zip(game_days, game_days[1:]) if (b - a).days >= 10
             ])
             # Plain values: the chart is drawn in the browser (see below), so the
@@ -2445,6 +2468,8 @@ with st.container(key="trend_card"):
                         .encode(x="mid:T", y=alt.value(0), text="label:N"),
                     alt.Chart(md_marks).mark_rule(opacity=0.14, strokeWidth=1).encode(x="day:T"),
                     alt.Chart(md_marks).mark_text(align="left", baseline="top", dx=3, dy=2, fontSize=10, opacity=0.55)
+                        .encode(x="day:T", y=alt.value(0), text="label:N"),
+                    alt.Chart(md_marks_end).mark_text(align="right", baseline="top", dx=-3, dy=2, fontSize=10, opacity=0.55)
                         .encode(x="day:T", y=alt.value(0), text="label:N"),
                     base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(
                         detail="stretch:N", opacity=alt.condition(pick, alt.value(1), alt.value(0.15))),
