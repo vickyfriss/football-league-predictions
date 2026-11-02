@@ -1044,7 +1044,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-top: -2rem;
-    margin-bottom: 6px;
+    margin-bottom: 24px;
     padding: 30px 24px 26px;
     background:
         radial-gradient(ellipse 55% 90% at 85% 0%, var(--hero-glow), transparent 70%),
@@ -1235,7 +1235,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 /* "Last updated" status pill (replaces the old full-width st.info()-style
    box): a small centred chip with a live dot, the relative time in bold and
    the exact run time muted after it. */
-.status-wrap { display: flex; justify-content: center; margin: 10px 0 14px; }
+.status-wrap { display: flex; justify-content: center; margin: 14px 0 28px; }
 .status-banner {
     display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 4px 8px;
     padding: 7px 16px; border-radius: 999px;
@@ -1280,7 +1280,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     padding: 20px 24px;
     width: 100%;
-    margin: 18px auto;
+    margin: 30px auto 18px;
 }
 div.table-wrapper { width: 100%; overflow-x: auto; }
 
@@ -1348,8 +1348,8 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
        row (3 + 1, 2 + 1): three cards stay in one row, four (Championship) go
        4 across, then 2 x 2; everything stacks on narrow screens. */
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 18px 0 4px;
+    gap: 18px;
+    margin: 26px 0 6px;
 }
 .headline-cards.four { grid-template-columns: repeat(4, 1fr); }
 .headline-cards.five { grid-template-columns: repeat(5, 1fr); }
@@ -1367,15 +1367,15 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
     border-radius: 12px;
     box-shadow: var(--card-shadow);
     border-top: 3px solid #2E7D32;
-    padding: 16px 18px 10px;
+    padding: 20px 22px 14px;
     text-align: left;
 }
 .headline-card.relegation { border-top-color: #D84343; }
 .headline-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
-.headline-sub { margin: 2px 0 12px; font-size: 12px; color: var(--text-main); opacity: 0.7; }
+.headline-sub { margin: 3px 0 16px; font-size: 13px; line-height: 1.4; color: var(--text-main); opacity: 0.7; }
 .headline-row {
     display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; align-items: baseline;
-    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
+    margin-bottom: 12px; font-size: 13px; color: var(--text-main);
 }
 .headline-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .headline-row .pct { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -1396,7 +1396,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
     display: grid; grid-template-columns: minmax(0, 1fr) 4.2em; gap: 0 8px; align-items: baseline;
-    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
+    margin-bottom: 12px; font-size: 13px; color: var(--text-main);
 }
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
@@ -1413,7 +1413,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-row .delta { margin-right: 7px; font-size: 11px; font-weight: 700; }
 .delta.good { color: var(--good-text); }
 .delta.bad { color: var(--bad-text); }
-.delta-note { margin: 6px 2px 0; font-size: 11.5px; color: var(--text-main); opacity: 0.6; text-align: right; }
+.delta-note { margin: 8px 2px 0; font-size: 11.5px; color: var(--text-main); opacity: 0.6; text-align: right; }
 
 /* Season trend: a white card around Streamlit's own radio, multiselect and chart */
 .st-key-trend_card {
@@ -1454,7 +1454,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
        name like "Espanyol"), which desyncs every offset after it and makes
        the frozen columns overlap the scrolling ones. */
     table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 4px 6px !important; }
+    th, td { overflow: visible !important; white-space: normal !important; text-align: center !important; font-size: 14px !important; padding: 6px 6px !important; }
 
     /* Every column except TEAM must never wrap -- a wrapped cell makes its
        whole row taller, which looks broken for a results table. Widths below
@@ -1702,6 +1702,8 @@ header { display: none; }
 .block-container {
     padding-top: 2rem !important;
     padding-bottom: 0 !important;
+    /* On big monitors the page stops spreading at 1240px of content */
+    max-width: calc(1240px + 2 * 5rem) !important;
 }
 
 /* Language switcher -- three small pill buttons (same st.button + st.columns
