@@ -10,7 +10,6 @@ import html
 import altair as alt
 import streamlit.components.v1 as st_components
 import re
-import colorsys
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from matplotlib import pyplot as plt
@@ -110,8 +109,7 @@ TRANSLATIONS = {
         "m_top_libertadores": "Libertadores",
         "m_playoff": "Top {n}",
         "m_relegation": "Relegation",
-        "delta_note": "▲▼ change in percentage points (pp) over the last 7 days, since {date}",
-        "pp_unit": "pp",
+        "delta_note": "▲▼ change in the last 7 days (since {date})",
         "delta_tip": "Change since {date}",
         "trend_eyebrow": "Season So Far",
         "trend_title": "How the Chances Have Moved",
@@ -130,9 +128,9 @@ TRANSLATIONS = {
             "This simulation combines <b>historical results</b> and <b>betting odds</b> to estimate match outcome probabilities.  "
             "It then runs <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
         ),
-        "step1_title": "Standings:",
+        "step1_title": "Historical Data:",
         "step1_desc": 'Collect current standings via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Results and Fixtures:",
+        "step2_title": "Fixtures:",
         "step2_desc": 'Historical match results and remaining fixtures obtained via the <a href="https://www.football-data.org/" target="_blank">Football-Data.org API</a>.',
         "step3_title": "Betting Odds:",
         "step3_desc": 'Matches the bookmakers have already priced (<a href="https://the-odds-api.com/" target="_blank">The Odds API</a>) use their odds directly, with the margin removed.',
@@ -148,9 +146,10 @@ TRANSLATIONS = {
         "step7_desc": "Aggregate the simulation results into probability distributions.",
         "about_eyebrow": "The Creator",
         "about_title": "About Me",
-        "about_p1": 'Hi, I’m <b>Victoria Friss de Kereki</b>, a football data analyst working on probabilistic modelling, simulation and predictive models for sports organisations and analysts.',
-        "about_p3": 'I write about football analytics, player performance and simulations on <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>.',
-        "about_cta": "Interested in collaborating or talking sports analytics? Let’s connect.",
+        "about_p1": 'Hi, I’m <b>Victoria Friss de Kereki</b>, a <b>Football Data Analyst</b> turning football data into <b>data-driven insights</b>, with a growing focus on probabilistic modelling and simulation.',
+        "about_p2": "I build <b>data-driven insights</b>, <b>probabilistic simulations</b>, and <b>predictive models</b> to help sports organisations and analysts make informed decisions backed by data.",
+        "about_p3": 'My work can be explored on <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, where I share projects on football analytics, player performance, and simulations.',
+        "about_cta": "Interested in collaborating or discussing sports analytics? <br><b>Let’s connect!</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Built with Python & Streamlit",
     },
     "es": {
@@ -209,8 +208,7 @@ TRANSLATIONS = {
         "m_top_libertadores": "Libertadores",
         "m_playoff": "Top {n}",
         "m_relegation": "Descenso",
-        "delta_note": "▲▼ cambio en puntos porcentuales (p. p.) en los últimos 7 días, desde el {date}",
-        "pp_unit": "p.p.",
+        "delta_note": "▲▼ cambio en los últimos 7 días (desde el {date})",
         "delta_tip": "Cambio desde el {date}",
         "trend_eyebrow": "La Temporada Hasta Ahora",
         "trend_title": "Cómo Han Cambiado las Probabilidades",
@@ -229,9 +227,9 @@ TRANSLATIONS = {
             "Esta simulación combina <b>resultados históricos</b> y <b>cuotas de las casas de apuestas</b> para estimar las probabilidades de resultado de cada partido.  "
             "Luego ejecuta <b>10.000 simulaciones de Monte Carlo</b> sobre todos los partidos restantes para calcular la probabilidad de que cada equipo termine en cada posición de la liga."
         ),
-        "step1_title": "Clasificación:",
+        "step1_title": "Datos Históricos:",
         "step1_desc": 'Recopila la clasificación actual mediante web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Resultados y Calendario:",
+        "step2_title": "Calendario:",
         "step2_desc": 'Resultados históricos y partidos restantes obtenidos a través de la <a href="https://www.football-data.org/" target="_blank">API de Football-Data.org</a>.',
         "step3_title": "Cuotas de Apuestas:",
         "step3_desc": 'Los partidos que ya tienen cuota (<a href="https://the-odds-api.com/" target="_blank">The Odds API</a>) usan directamente sus probabilidades, sin el margen.',
@@ -247,9 +245,10 @@ TRANSLATIONS = {
         "step7_desc": "Resume los resultados de la simulación en distribuciones de probabilidad.",
         "about_eyebrow": "La Creadora",
         "about_title": "Sobre Mí",
-        "about_p1": 'Hola, soy <b>Victoria Friss de Kereki</b>, analista de datos de fútbol. Trabajo en modelado probabilístico, simulación y modelos predictivos para organizaciones deportivas y analistas.',
-        "about_p3": 'Escribo sobre análisis de fútbol, rendimiento de jugadores y simulaciones en <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>.',
-        "about_cta": "¿Te interesa colaborar o hablar de análisis deportivo? Conectemos.",
+        "about_p1": 'Hola, soy <b>Victoria Friss de Kereki</b>, <b>analista de datos de fútbol</b> que transforma datos futbolísticos en <b>insights valiosos</b>, con un enfoque creciente en modelado probabilístico y simulación.',
+        "about_p2": "Construyo <b>insights basados en datos</b>, <b>simulaciones probabilísticas</b> y <b>modelos predictivos</b> para ayudar a organizaciones deportivas y analistas a tomar decisiones más informadas.",
+        "about_p3": 'Puedes explorar mi trabajo en <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, donde comparto proyectos sobre análisis de fútbol, rendimiento de jugadores y simulaciones.',
+        "about_cta": "¿Interesado(a) en colaborar o hablar sobre análisis deportivo? <br><b>¡Conectemos!</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Hecho con Python y Streamlit",
     },
     "pt-BR": {
@@ -308,8 +307,7 @@ TRANSLATIONS = {
         "m_top_libertadores": "Libertadores",
         "m_playoff": "Top {n}",
         "m_relegation": "Rebaixamento",
-        "delta_note": "▲▼ variação em pontos percentuais (p.p.) nos últimos 7 dias, desde {date}",
-        "pp_unit": "p.p.",
+        "delta_note": "▲▼ variação nos últimos 7 dias (desde {date})",
         "delta_tip": "Variação desde {date}",
         "trend_eyebrow": "A Temporada Até Agora",
         "trend_title": "Como as Chances Mudaram",
@@ -328,9 +326,9 @@ TRANSLATIONS = {
             "Esta simulação combina <b>resultados históricos</b> e <b>odds de apostas</b> para estimar as probabilidades de resultado de cada partida.  "
             "Em seguida, executa <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes, calculando a probabilidade de cada time terminar em cada posição da liga."
         ),
-        "step1_title": "Classificação:",
+        "step1_title": "Dados Históricos:",
         "step1_desc": 'Coleta a tabela de classificação atual via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Resultados e Calendário:",
+        "step2_title": "Calendário:",
         "step2_desc": 'Resultados históricos e partidas restantes obtidos através da <a href="https://www.football-data.org/" target="_blank">API do Football-Data.org</a>.',
         "step3_title": "Odds de Apostas:",
         "step3_desc": 'As partidas que já têm odds (<a href="https://the-odds-api.com/" target="_blank">The Odds API</a>) usam diretamente as probabilidades das casas, sem a margem.',
@@ -346,9 +344,10 @@ TRANSLATIONS = {
         "step7_desc": "Resume os resultados da simulação em distribuições de probabilidade.",
         "about_eyebrow": "A Criadora",
         "about_title": "Sobre Mim",
-        "about_p1": 'Olá, sou <b>Victoria Friss de Kereki</b>, analista de dados de futebol. Trabalho com modelagem probabilística, simulação e modelos preditivos para organizações esportivas e analistas.',
-        "about_p3": 'Escrevo sobre análise de futebol, desempenho de jogadores e simulações no <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>.',
-        "about_cta": "Quer colaborar ou conversar sobre análise esportiva? Vamos nos conectar.",
+        "about_p1": 'Olá, sou <b>Victoria Friss de Kereki</b>, <b>analista de dados de futebol</b> que transforma dados do futebol em <b>insights valiosos</b>, com foco crescente em modelagem probabilística e simulação.',
+        "about_p2": "Eu crio <b>insights orientados por dados</b>, <b>simulações probabilísticas</b> e <b>modelos preditivos</b> para ajudar organizações esportivas e analistas a tomar decisões mais informadas.",
+        "about_p3": 'Você pode conhecer meu trabalho no <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, onde compartilho projetos sobre análise de futebol, desempenho de jogadores e simulações.',
+        "about_cta": "Interessado(a) em colaborar ou discutir análise esportiva? <br><b>Vamos nos conectar!</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Feito com Python e Streamlit",
     },
     "fr": {
@@ -407,8 +406,7 @@ TRANSLATIONS = {
         "m_top_libertadores": "Libertadores",
         "m_playoff": "Top {n}",
         "m_relegation": "Relégation",
-        "delta_note": "▲▼ évolution en points de pourcentage (pp) sur les 7 derniers jours, depuis le {date}",
-        "pp_unit": "pp",
+        "delta_note": "▲▼ évolution sur les 7 derniers jours (depuis le {date})",
         "delta_tip": "Évolution depuis le {date}",
         "trend_eyebrow": "La Saison Jusqu’ici",
         "trend_title": "L’Évolution des Probabilités",
@@ -427,9 +425,9 @@ TRANSLATIONS = {
             "Cette simulation combine <b>résultats historiques</b> et <b>cotes des paris</b> pour estimer les probabilités de résultat des matchs.  "
             "Elle exécute ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants afin de calculer la probabilité que chaque équipe termine à chaque place du classement."
         ),
-        "step1_title": "Classement :",
+        "step1_title": "Données Historiques :",
         "step1_desc": 'Récupère le classement actuel via web scraping (<a href="https://www.espn.com/soccer/standings/_/league/ENG.1/season/2026" target="_blank">ESPN</a>).',
-        "step2_title": "Résultats et Calendrier :",
+        "step2_title": "Calendrier :",
         "step2_desc": 'Résultats historiques et matchs restants obtenus via l\'<a href="https://www.football-data.org/" target="_blank">API Football-Data.org</a>.',
         "step3_title": "Cotes des Paris :",
         "step3_desc": 'Les matchs déjà cotés (<a href="https://the-odds-api.com/" target="_blank">The Odds API</a>) utilisent directement les probabilités des bookmakers, sans leur marge.',
@@ -445,9 +443,10 @@ TRANSLATIONS = {
         "step7_desc": "Agrège les résultats de la simulation en distributions de probabilité.",
         "about_eyebrow": "La Créatrice",
         "about_title": "À Propos de Moi",
-        "about_p1": "Bonjour, je suis <b>Victoria Friss de Kereki</b>, analyste de données football. Je travaille sur la modélisation probabiliste, la simulation et les modèles prédictifs pour les organisations sportives et les analystes.",
-        "about_p3": 'J\'écris sur l\'analyse du football, la performance des joueurs et les simulations sur <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>.',
-        "about_cta": "Envie de collaborer ou de parler d'analyse sportive ? Échangeons.",
+        "about_p1": "Bonjour, je suis <b>Victoria Friss de Kereki</b>, une <b>analyste de données</b> spécialisée en football, qui transforme les données du jeu en <b>insights précieux</b>, avec un intérêt croissant pour la modélisation probabiliste et la simulation.",
+        "about_p2": "Je conçois des <b>insights basés sur les données</b>, des <b>simulations probabilistes</b> et des <b>modèles prédictifs</b> pour aider les organisations sportives et les analystes à prendre des décisions plus éclairées.",
+        "about_p3": 'Vous pouvez découvrir mon travail sur <a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>, où je partage des projets sur l\'analyse du football, la performance des joueurs et les simulations.',
+        "about_cta": "Intéressé(e) par une collaboration ou une discussion sur l'analyse sportive ? <br><b>Connectons-nous !</b>",
         "footer": "© 2026 Victoria Friss de Kereki &middot; Créé avec Python et Streamlit",
     },
 }
@@ -1122,6 +1121,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     width: 30px; height: 30px; flex-shrink: 0; margin-right: 12px;
     transition: background-color 0.2s ease;
 }
+.method-step-card:hover .step-circle { background-color: #245f27; }
 
 /* Full-bleed methodology band -- same edge-to-edge technique as .hero-banner,
    but a light green tint instead of solid brand green: this section needs to
@@ -1190,17 +1190,20 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     /* 280px min keeps the 8 steps at a balanced 4 + 4 inside the 1280px band
        (230px squeezed in a fifth column, leaving a lopsided 5 + 3). */
     grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: 22px 28px;
-    margin-top: 30px;
+    gap: 16px;
+    margin-top: 28px;
     text-align: left;
 }
-/* Open steps rather than boxed cards: a rule on top, the number and name on
-   one line, the text below. Steps of different lengths then leave no
-   half-empty boxes. */
-.method-step-card { padding: 14px 2px 4px; border-top: 2px solid var(--hero-line); }
-.method-step-card .step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 15px; color: var(--text-main); }
-.method-step-card .step-circle { width: 26px; height: 26px; margin: 0; font-size: 13px; }
-.method-step-card p { margin: 0; color: var(--text-main); font-size: 14px; line-height: 1.55; opacity: 0.85; text-align: left !important; }
+.method-step-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 20px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.method-step-card:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+.method-step-card .step-circle { margin: 0 0 12px 0; }
+.method-step-card p { margin: 0; color: var(--text-main); font-size: 14px; line-height: 1.55; text-align: left !important; }
 
 /* Full-bleed "About Me" closing band -- same edge-to-edge technique as the
    hero, but the methodology band's light tint rather than a solid brand-green
@@ -1222,7 +1225,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 .about-band .about-heading { color: var(--text-main); }
 .about-band p { color: var(--text-main); font-size: 15px; line-height: 1.6; margin: 0 0 12px; }
 .about-band .about-cta-text {
-    margin: 14px 0 0; font-size: 15px; font-weight: 600; color: var(--accent-text);
+    margin: 8px 0 0; font-size: 17px; font-weight: 700; color: var(--accent-text);
 }
 .about-band .icon-row { margin-top: 20px; }
 
@@ -1375,13 +1378,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 }
 .headline-card.relegation { border-top-color: #D84343; }
 .headline-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
-/* Two lines tall whatever its length, so every card's rows start at the same height */
-.headline-sub { margin: 2px 0 12px; font-size: 12px; line-height: 1.4; min-height: 2.8em; color: var(--text-main); opacity: 0.7; }
-.headline-sub .nowrap { white-space: nowrap; }
-/* Five narrow cards in a row (the Championship): room for three lines */
-@media (min-width: 1280px) { .headline-cards.five .headline-sub { min-height: 4.2em; } }
-/* One card per row on phones: nothing to line up with */
-@media (max-width: 600px) { .headline-sub { min-height: 0; } }
+.headline-sub { margin: 2px 0 12px; font-size: 12px; color: var(--text-main); opacity: 0.7; }
 .headline-row {
     display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; align-items: baseline;
     margin-bottom: 9px; font-size: 13px; color: var(--text-main);
@@ -1404,7 +1401,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 8px; align-items: baseline;
+    display: grid; grid-template-columns: minmax(0, 1fr) 4.2em; gap: 0 8px; align-items: baseline;
     margin-bottom: 9px; font-size: 13px; color: var(--text-main);
 }
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1413,15 +1410,13 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .mover-row .mv-delta.bad { color: var(--bad-text); }
 .mover-row .mv-what { grid-column: 1 / -1; font-size: 11px; line-height: 1.2; opacity: 0.6;
     font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.headline-card.movers { border-top-color: #4F6F57; }
+.headline-card.movers { border-top-color: #8A8F8B; }
 .headline-cutoff {
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
     font-size: 11px; font-weight: 600; color: var(--accent-text); text-align: right;
 }
 /* Change over the last 7 days, before each card percentage */
-.headline-row .delta { margin-right: 8px; font-size: 11px; font-weight: 700; }
-/* "pp" after each change: percentage points, so it isn't read as a percentage */
-.delta .unit, .mv-delta .unit { margin-left: 1px; font-size: 0.85em; font-weight: 600; opacity: 0.75; }
+.headline-row .delta { margin-right: 7px; font-size: 11px; font-weight: 700; }
 .delta.good { color: var(--good-text); }
 .delta.bad { color: var(--bad-text); }
 .delta-note { margin: 6px 2px 0; font-size: 11.5px; color: var(--text-main); opacity: 0.6; text-align: right; }
@@ -1442,28 +1437,6 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .st-key-trend_card .stRadio { display: flex; justify-content: center; width: 100%; }
 .st-key-trend_card [role="radiogroup"] { justify-content: center; gap: 6px 22px; }
 .st-key-trend_card iframe { margin-top: 12px; }
-/* Title / Top 4 / Relegation as one segmented control instead of radio dots */
-.st-key-trend_card [role="radiogroup"] {
-    gap: 0 !important; padding: 3px; border-radius: 999px;
-    background-color: var(--section-band-bg); border: 1px solid var(--border-light);
-}
-.st-key-trend_card [data-testid="stRadioOption"] {
-    margin: 0 !important; padding: 5px 16px; border-radius: 999px; cursor: pointer;
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
-.st-key-trend_card [data-testid="stRadioOption"] > div > div:first-child { display: none; }
-.st-key-trend_card [data-testid="stRadioOption"] p { font-size: 13px !important; font-weight: 600; color: var(--text-main); }
-.st-key-trend_card [data-testid="stRadioOption"]:has(input:checked) { background-color: #2E7D32; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
-.st-key-trend_card [data-testid="stRadioOption"]:has(input:checked) p { color: #ffffff !important; }
-.st-key-trend_card [data-testid="stRadioOption"]:has(input:focus-visible) { outline: 2px solid var(--accent-text); outline-offset: 1px; }
-/* Team picker: a light outlined field with small chips, not a heavy grey block */
-.st-key-trend_card [data-testid="stMultiSelect"] label p { font-size: 12px !important; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.7; }
-.st-key-trend_card [data-testid="stMultiSelect"] div[data-rac][role] {
-    background-color: var(--card-bg) !important; border: 1px solid var(--border-light) !important; border-radius: 10px !important;
-}
-.st-key-trend_card [data-testid="stMultiSelect"] [data-tag] {
-    height: 26px; border-radius: 999px !important; font-size: 12px; padding-left: 10px;
-}
 /* Let the team picker grow to fit its tags instead of scrolling inside itself */
 .st-key-trend_card [data-testid="stMultiSelect"] div { max-height: none !important; }
 .st-key-trend_card [data-testid="stMultiSelect"] div:has(> span > span) { overflow-y: visible !important; height: auto !important; }
@@ -2081,7 +2054,7 @@ def change_badge(delta, bad_when_up):
         return ""
     good = (delta < 0) if bad_when_up else (delta > 0)
     return (f'<span class="delta {"good" if good else "bad"}" title="{delta_tip}">'
-            f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}<span class="unit">{t("pp_unit")}</span></span>')
+            f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>')
 
 def headline_rows(probs, cutoff_after=None, cutoff_label="", deltas=None, bad_when_up=False):
     rows = []
@@ -2105,8 +2078,6 @@ def headline_rows(probs, cutoff_after=None, cutoff_label="", deltas=None, bad_wh
 # the cut-off marked.
 def headline_card(card_id, css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label="", metric=None):
     deltas, bad_when_up = metric_changes(metric), metric == "relegation"
-    # A position range like "(18–20)" never splits over two lines
-    sub = re.sub(r"(\(\d+–\d+\))", r'<span class="nowrap">\1</span>', sub)
     return (
         f'<div class="headline-card {css_class}">'
         f'<input type="checkbox" id="{card_id}" class="headline-check">'
@@ -2182,7 +2153,7 @@ if pos_cols and zones:
                 # and in place of their bar, what moved, from and to
                 f'<div class="mover-row"><span class="team">{html.escape(team)}</span>'
                 f'<span class="mv-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">'
-                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}<span class="unit">{t("pp_unit")}</span></span>'
+                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>'
                 f'<span class="mv-what">{metric_label(league, metric)} · {now - delta:.1f}% → {now:.1f}%</span></div>'
                 for _, team, metric, delta, now in rows
             )
@@ -2387,13 +2358,7 @@ def _lab(hex_color):
     return 116 * f(y) - 16, 500 * (f(x) - f(y)), 200 * (f(y) - f(z))
 
 def _too_close(a, b):
-    # Close in colour overall, or two strong colours of the same hue (a light
-    # and a dark blue still read as "the blue one")
-    if sum((p - q) ** 2 for p, q in zip(_lab(a), _lab(b))) ** 0.5 < 25:
-        return True
-    (ha, sa, _), (hb, sb, _) = (colorsys.rgb_to_hsv(*(int(c[i:i + 2], 16) / 255 for i in (1, 3, 5))) for c in (a, b))
-    hue_gap = abs(ha - hb) * 360
-    return sa > 0.35 and sb > 0.35 and min(hue_gap, 360 - hue_gap) < 20
+    return sum((p - q) ** 2 for p, q in zip(_lab(a), _lab(b))) ** 0.5 < 25
 
 def team_line_colors(teams, dark):
     """One colour per team, in order: its own colours where they show up on the
@@ -2506,7 +2471,7 @@ with st.container(key="trend_card"):
                         .encode(x="day:T", y=alt.value(0), text="label:N"),
                     alt.Chart(md_marks_end).mark_text(align="right", baseline="top", dx=-3, dy=2, fontSize=10, opacity=0.55)
                         .encode(x="day:T", y=alt.value(0), text="label:N"),
-                    base.mark_line(strokeWidth=2.5).encode(
+                    base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(
                         detail="stretch:N", opacity=alt.condition(pick, alt.value(1), alt.value(0.15))),
                     base.mark_circle(size=60).encode(opacity=alt.condition(hover, alt.value(1), alt.value(0))),
                     alt.Chart(data).transform_pivot("team", value="share", groupby=["day"]).mark_rule(strokeDash=[4, 4]).encode(
@@ -2521,7 +2486,7 @@ with st.container(key="trend_card"):
                         .transform_calculate(label="datum.team + '  ' + format(datum.share, '.1%')")
                         .mark_text(align="right", dx=-4, dy=-12, fontSize=13, fontWeight="bold")
                         .encode(text="label:N"),
-                    base.mark_line(strokeWidth=14, strokeOpacity=0.001).encode(
+                    base.mark_line(strokeWidth=14, strokeOpacity=0.001, interpolate="monotone").encode(
                         detail="stretch:N", tooltip=[alt.Tooltip("team:N", title=t("trend_team"))]).add_params(pick),
                 ).properties(width="container", height=340, padding={"left": 6, "right": 24, "top": 8, "bottom": 4})
                 return chart
@@ -2531,19 +2496,46 @@ with st.container(key="trend_card"):
 # -------------------------------
 # -------------------------------
 # 1️⃣4️⃣ METHODOLOGY
-METHOD_STEPS = ["step1", "step2", "step3", "step4", "step_home", "step5", "step6", "step7"]
-method_steps = "".join(
-    f'<div class="method-step-card"><div class="step-head"><span class="step-circle">{n}</span>'
-    f'<b>{t(key + "_title").rstrip(" :")}</b></div><p>{t(key + "_desc")}</p></div>'
-    for n, key in enumerate(METHOD_STEPS, start=1)
-)
 st.markdown(f"""
 <div class="methodology-band">
 <div class="methodology-inner">
 <span class="section-eyebrow">{t("methodology_eyebrow")}</span>
 <h2 class="methodology-heading">{t("methodology_title")}</h2>
 <p class="methodology-intro-text">{t("methodology_intro")}</p>
-<div class="method-steps-grid">{method_steps}</div>
+<div class="method-steps-grid">
+<div class="method-step-card">
+<div class="step-circle">1</div>
+<p><b>{t("step1_title")}</b> {t("step1_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">2</div>
+<p><b>{t("step2_title")}</b> {t("step2_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">3</div>
+<p><b>{t("step3_title")}</b> {t("step3_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">4</div>
+<p><b>{t("step4_title")}</b> {t("step4_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">5</div>
+<p><b>{t("step_home_title")}</b> {t("step_home_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">6</div>
+<p><b>{t("step5_title")}</b> {t("step5_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">7</div>
+<p><b>{t("step6_title")}</b> {t("step6_desc")}</p>
+</div>
+<div class="method-step-card">
+<div class="step-circle">8</div>
+<p><b>{t("step7_title")}</b> {t("step7_desc")}</p>
+</div>
+</div>
 </div>
 </div>
 """, unsafe_allow_html=True)
@@ -2558,6 +2550,7 @@ st.markdown(f"""
 <span class="section-eyebrow">{t("about_eyebrow")}</span>
 <h2 class="about-heading">{t("about_title")}</h2>
 <p>{t("about_p1")}</p>
+<p>{t("about_p2")}</p>
 <p>{t("about_p3")}</p>
 <p class="about-cta-text">{t("about_cta")}</p>
 <div class="icon-row">
