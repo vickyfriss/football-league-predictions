@@ -91,7 +91,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
         "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last})",
         "card_movers_title": "Biggest changes",
-        "card_movers_sub": "The largest moves in any team’s chances over the last 7 days",
+        "card_movers_sub": "This week’s other big moves, beyond the cards alongside",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
@@ -117,6 +117,8 @@ TRANSLATIONS = {
         "trend_teams": "Teams",
         "md_short": "MD",
         "no_games": "No games",
+        "break_international": "International break",
+        "break_world_cup": "World Cup 2026",
         "trend_empty": "Not enough updates yet this season to show a trend.",
         "trend_date": "Date",
         "trend_team": "Team",
@@ -188,7 +190,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
         "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last})",
         "card_movers_title": "Mayores cambios",
-        "card_movers_sub": "Los mayores cambios en las probabilidades de cada equipo en los últimos 7 días",
+        "card_movers_sub": "Otros grandes cambios de la semana, además de las tarjetas de al lado",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
@@ -214,6 +216,8 @@ TRANSLATIONS = {
         "trend_teams": "Equipos",
         "md_short": "J",
         "no_games": "Sin partidos",
+        "break_international": "Parón internacional",
+        "break_world_cup": "Mundial 2026",
         "trend_empty": "Todavía no hay suficientes actualizaciones esta temporada para mostrar una tendencia.",
         "trend_date": "Fecha",
         "trend_team": "Equipo",
@@ -285,7 +289,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
         "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last})",
         "card_movers_title": "Maiores mudanças",
-        "card_movers_sub": "As maiores mudanças nas chances de cada time nos últimos 7 dias",
+        "card_movers_sub": "Outras grandes mudanças da semana, além dos cartões ao lado",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
@@ -311,6 +315,8 @@ TRANSLATIONS = {
         "trend_teams": "Times",
         "md_short": "R",
         "no_games": "Sem jogos",
+        "break_international": "Data FIFA",
+        "break_world_cup": "Copa do Mundo 2026",
         "trend_empty": "Ainda não há atualizações suficientes nesta temporada para mostrar uma tendência.",
         "trend_date": "Data",
         "trend_team": "Time",
@@ -382,7 +388,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
         "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last})",
         "card_movers_title": "Plus grands changements",
-        "card_movers_sub": "Les plus grandes évolutions des chances de chaque équipe sur les 7 derniers jours",
+        "card_movers_sub": "Les autres grands changements de la semaine, en plus des cartes voisines",
         "zone_ucl": "Ligue des champions",
         "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
@@ -408,6 +414,8 @@ TRANSLATIONS = {
         "trend_teams": "Équipes",
         "md_short": "J",
         "no_games": "Pas de matchs",
+        "break_international": "Trêve internationale",
+        "break_world_cup": "Coupe du monde 2026",
         "trend_empty": "Pas encore assez de mises à jour cette saison pour afficher une tendance.",
         "trend_date": "Date",
         "trend_team": "Équipe",
@@ -837,6 +845,24 @@ def load_match_days(league, data_version):
             dates = dates.dt.tz_convert(None).dt.normalize().dropna()
             days |= set(dates[dates >= season_start])
     return days
+
+# Why a league stops: FIFA's international windows (from 2026 the September
+# and October windows are one long break) and the 2026 World Cup
+WORLD_CUP_2026 = (pd.Timestamp("2026-06-11"), pd.Timestamp("2026-07-19"))
+INTERNATIONAL_WINDOWS = [
+    (pd.Timestamp("2026-03-23"), pd.Timestamp("2026-03-31")),
+    (pd.Timestamp("2026-09-21"), pd.Timestamp("2026-10-06")),
+    (pd.Timestamp("2026-11-09"), pd.Timestamp("2026-11-17")),
+    (pd.Timestamp("2027-03-22"), pd.Timestamp("2027-03-30")),
+]
+
+def break_reason(start, end):
+    overlaps = lambda window: start <= window[1] and end >= window[0]
+    if overlaps(WORLD_CUP_2026):
+        return t("break_world_cup")
+    if any(overlaps(w) for w in INTERNATIONAL_WINDOWS):
+        return t("break_international")
+    return t("no_games")
 
 @st.cache_data(show_spinner=False)
 def load_matchday_dates(league, data_version):
@@ -1357,14 +1383,15 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
-    display: grid; grid-template-columns: 1fr auto; gap: 1px 10px; align-items: baseline;
-    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline;
+    margin-bottom: 9px; padding-bottom: 7px; border-bottom: 1px solid var(--border-light);
+    font-size: 13px; color: var(--text-main);
 }
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mover-row .mv-delta.good { color: var(--good-text); }
 .mover-row .mv-delta.bad { color: var(--bad-text); }
-.mover-row .mv-what { grid-column: 1 / -1; font-size: 11.5px; opacity: 0.65; font-variant-numeric: tabular-nums; }
+.mover-row .mv-what { font-size: 11.5px; opacity: 0.6; white-space: nowrap; }
 .headline-card.movers { border-top-color: #8A8F8B; }
 .headline-cutoff {
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
@@ -2077,23 +2104,40 @@ if pos_cols and zones:
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
                       rel_probs.head(3), rel_probs.head(8), metric="relegation"),
     ]
-    # Biggest changes: the teams whose chances moved most in the last 7 days,
-    # each with whichever of its chances (title, top places, relegation...)
-    # moved most. A bigger relegation chance is bad news, so it's red.
+    # Biggest changes: news the other cards don't already show. A move counts
+    # when it's at least 3 points (smaller ones are mostly simulation noise),
+    # in a race that's still open (the chance is between 5% and 95% before or
+    # after), and the team isn't already in that race's card with its arrow.
+    # Each team appears once, with its biggest such move; a bigger relegation
+    # chance is bad news, so it's red.
     if changes is not None and len(changes):
         latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
+        shown = {(pos_pct_df.at[i, "TEAM"], metric) for metric, probs in [
+            ("title", title_probs.head(3)), ("top", race.iloc[top_last - 1:top_last + 2]),
+            ("relegation", rel_probs.head(3))] + ([("playoff", playoff_race.iloc[po_last - 1:po_last + 2])]
+                                                  if "top_playoff" in zones else []) for i in probs.index}
         moves = []
         for team, team_changes in changes.groupby(level="team"):
-            (_, metric), delta = max(team_changes.items(), key=lambda kv: abs(kv[1]))
-            if abs(delta) >= 0.5:
-                moves.append((abs(delta), team, metric, delta, latest[(team, metric)]))
+            options = []
+            for (_, metric), delta in team_changes.items():
+                now = latest.get((team, metric))
+                if now is None or abs(delta) < 3 or (team, metric) in shown:
+                    continue
+                if not (5 <= now <= 95 or 5 <= now - delta <= 95):
+                    continue
+                options.append((abs(delta), team, metric, delta, now))
+            if options:
+                moves.append(max(options))
         moves.sort(reverse=True)
         def mover_rows(rows):
             return "".join(
-                f'<div class="mover-row"><span class="team">{html.escape(team)}</span>'
+                # One line per team, like the other cards' rows; the before and
+                # after chances are in the row's hover text
+                f'<div class="mover-row" title="{html.escape(metric_label(league, metric))}: {now - delta:.1f}% → {now:.1f}%">'
+                f'<span class="team">{html.escape(team)}</span>'
+                f'<span class="mv-what">{metric_label(league, metric)}</span>'
                 f'<span class="mv-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">'
-                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>'
-                f'<span class="mv-what">{metric_label(league, metric)} · {now - delta:.1f}% → {now:.1f}%</span></div>'
+                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span></div>'
                 for _, team, metric, delta, now in rows
             )
         if moves:
@@ -2353,8 +2397,8 @@ with st.container(key="trend_card"):
                     prev = (day, pct)
             data = pd.DataFrame(rows, columns=["day", "team", "pct", "stretch"])
             # Matchdays: a faint line on each one's middle date, labelled every 5,
-            # and a shaded stretch where 10 days or more pass between two of them
-            # (international breaks, Brazil's World Cup break)
+            # and a shaded stretch, named by its reason, where 10 days or more
+            # pass without a league game
             first_day, last_day = data["day"].min(), data["day"].max()
             matchdays = sorted((d, md) for md, d in load_matchday_dates(league, data_version).items()
                                if first_day <= d <= last_day)
@@ -2362,10 +2406,13 @@ with st.container(key="trend_card"):
                 {"day": f"{d:%Y-%m-%d}T12:00:00", "label": f'{t("md_short")} {md}' if md % 5 == 0 else ""}
                 for d, md in matchdays
             ])
+            # Breaks come from the actual game days, not the matchdays: rearranged
+            # games spread a matchday out, but a break means no game at all
+            game_days = sorted(d for d in load_match_days(league, data_version) if first_day <= d <= last_day)
             breaks = alt.Data(values=[
                 {"start": f"{a + pd.Timedelta(days=1):%Y-%m-%d}T00:00:00", "end": f"{b:%Y-%m-%d}T00:00:00",
-                 "mid": f"{a + (b - a) / 2:%Y-%m-%d}T12:00:00", "label": t("no_games")}
-                for (a, _), (b, _) in zip(matchdays, matchdays[1:]) if (b - a).days >= 10
+                 "mid": f"{a + (b - a) / 2:%Y-%m-%d}T12:00:00", "label": break_reason(a, b)}
+                for a, b in zip(game_days, game_days[1:]) if (b - a).days >= 10
             ])
             # Plain values: the chart is drawn in the browser (see below), so the
             # data goes straight into the chart spec. Noon local time keeps each
