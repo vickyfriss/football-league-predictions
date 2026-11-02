@@ -735,9 +735,10 @@ def league_metrics(league):
     zones = LEAGUE_ZONES.get(league)
     if not zones:
         return {}
-    metrics = {"title": (1, 1), "top": zones["top"], "relegation": zones["relegation"]}
+    metrics = {"title": (1, 1), "top": zones["top"]}
     if "top_playoff" in zones:
         metrics["playoff"] = (1, zones["top_playoff"][1])
+    metrics["relegation"] = zones["relegation"]
     return metrics
 
 @st.cache_data(show_spinner=False)
@@ -2230,8 +2231,8 @@ if (narrow) spec.height = 290;
 spec.config = Object.assign(spec.config || {{}}, {{
   background: null, font: "Inter, Roboto, Arial, sans-serif", view: {{stroke: null}},
   axis: {{labelColor: ink, labelFontSize: 12, domain: false, ticks: false, gridColor: grid}},
-  axisX: {{tickCount: narrow ? 4 : 7, labelOverlap: "greedy", labelFlush: true, labelSeparation: 8}},
-  legend: {{labelColor: ink, columns: narrow ? 2 : 4, labelLimit: narrow ? 125 : 220}}, rule: {{color: ink}}
+  axisX: {{tickCount: narrow ? 4 : 7, labelOverlap: "greedy", labelFlush: true, labelSeparation: 8, labelPadding: 10}},
+  legend: {{labelColor: ink, columns: narrow ? 2 : 6, labelLimit: narrow ? 125 : 220}}, rule: {{color: ink}}
 }});
 vegaEmbed("#chart", spec, {{actions: false, renderer: "svg", tooltip: {{theme: dark ? "dark" : "light"}}}});
 </script></body></html>"""
