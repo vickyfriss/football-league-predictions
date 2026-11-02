@@ -76,6 +76,7 @@ TRANSLATIONS = {
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
         "last_games": "Last {n} games · newest first",
+        "next_games": "Next {n} games",
         "form_W": "W",
         "form_D": "D",
         "form_L": "L",
@@ -102,8 +103,6 @@ TRANSLATIONS = {
         "card_show_more": "Show more",
         "card_show_less": "Show less",
         "card_cutoff": "Top-{n} cut-off",
-        "hm_title": "Biggest moves this week",
-        "hm_sub": "Last 7 days · all 9 leagues",
         "m_title": "Title",
         "m_top_ucl": "Top {n}",
         "m_top_promotion": "Promotion",
@@ -118,7 +117,7 @@ TRANSLATIONS = {
         "trend_teams": "Teams",
         "trend_empty": "Not enough updates yet this season to show a trend.",
         "trend_date": "Date",
-        "download_button": "Download table as CSV",
+        "trend_team": "Team",
         "methodology_eyebrow": "The Method",
         "methodology_title": "How This Simulation Works",
         "methodology_intro": (
@@ -172,6 +171,7 @@ TRANSLATIONS = {
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
         "last_games": "Últimos {n} partidos · el más reciente primero",
+        "next_games": "Próximos {n} partidos",
         "form_W": "G",
         "form_D": "E",
         "form_L": "P",
@@ -198,8 +198,6 @@ TRANSLATIONS = {
         "card_show_more": "Ver más",
         "card_show_less": "Ver menos",
         "card_cutoff": "Corte: top {n}",
-        "hm_title": "Los mayores cambios de la semana",
-        "hm_sub": "Últimos 7 días · las 9 ligas",
         "m_title": "Título",
         "m_top_ucl": "Top {n}",
         "m_top_promotion": "Ascenso",
@@ -214,7 +212,7 @@ TRANSLATIONS = {
         "trend_teams": "Equipos",
         "trend_empty": "Todavía no hay suficientes actualizaciones esta temporada para mostrar una tendencia.",
         "trend_date": "Fecha",
-        "download_button": "Descargar tabla como CSV",
+        "trend_team": "Equipo",
         "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
         "methodology_intro": (
@@ -268,6 +266,7 @@ TRANSLATIONS = {
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
         "last_games": "Últimos {n} jogos · mais recente primeiro",
+        "next_games": "Próximos {n} jogos",
         "form_W": "V",
         "form_D": "E",
         "form_L": "D",
@@ -294,8 +293,6 @@ TRANSLATIONS = {
         "card_show_more": "Ver mais",
         "card_show_less": "Ver menos",
         "card_cutoff": "Corte: top {n}",
-        "hm_title": "As maiores mudanças da semana",
-        "hm_sub": "Últimos 7 dias · as 9 ligas",
         "m_title": "Título",
         "m_top_ucl": "Top {n}",
         "m_top_promotion": "Acesso",
@@ -310,7 +307,7 @@ TRANSLATIONS = {
         "trend_teams": "Times",
         "trend_empty": "Ainda não há atualizações suficientes nesta temporada para mostrar uma tendência.",
         "trend_date": "Data",
-        "download_button": "Baixar tabela como CSV",
+        "trend_team": "Time",
         "methodology_eyebrow": "O Método",
         "methodology_title": "Como Esta Simulação Funciona",
         "methodology_intro": (
@@ -364,6 +361,7 @@ TRANSLATIONS = {
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
         "last_games": "{n} derniers matchs · du plus récent",
+        "next_games": "{n} prochains matchs",
         "form_W": "V",
         "form_D": "N",
         "form_L": "D",
@@ -390,8 +388,6 @@ TRANSLATIONS = {
         "card_show_more": "Voir plus",
         "card_show_less": "Voir moins",
         "card_cutoff": "Limite : top {n}",
-        "hm_title": "Les plus grands changements de la semaine",
-        "hm_sub": "7 derniers jours · les 9 ligues",
         "m_title": "Titre",
         "m_top_ucl": "Top {n}",
         "m_top_promotion": "Promotion",
@@ -406,7 +402,7 @@ TRANSLATIONS = {
         "trend_teams": "Équipes",
         "trend_empty": "Pas encore assez de mises à jour cette saison pour afficher une tendance.",
         "trend_date": "Date",
-        "download_button": "Télécharger le tableau en CSV",
+        "trend_team": "Équipe",
         "methodology_eyebrow": "La Méthode",
         "methodology_title": "Comment Fonctionne Cette Simulation",
         "methodology_intro": (
@@ -633,7 +629,7 @@ def ordinal(n, lang):
         return "1er" if n == 1 else f"{n}e"
     return f"{n}.º" if lang == "es" else f"{n}º"
 
-def add_cell_tooltips(table_html, df, form=None):
+def add_cell_tooltips(table_html, df, form=None, upcoming=None):
     # Hover text on each percentage ("Chelsea: 37.70% chance of finishing 4th").
     # A styled span inside the cell, shown instantly on hover by CSS -- the
     # browser's own title tooltips need the mouse held still for ~1s and often
@@ -644,10 +640,12 @@ def add_cell_tooltips(table_html, df, form=None):
     pos_cols = list(df.columns[5:])
     def with_tip(m):
         r, c = int(m.group(2)), int(m.group(3))
-        # Team name: its last five results. Top half of the table opens below
-        # the row, bottom half above, so the taller box stays in the table.
-        if c == 1 and (form or {}).get(df.iloc[r]["TEAM"]):
-            games = form[df.iloc[r]["TEAM"]]
+        # Team name: its last five results and next two games. Top half of the
+        # table opens below the row, bottom half above, so the taller box stays
+        # in the table.
+        team = df.iloc[r]["TEAM"] if c == 1 else None
+        if team and ((form or {}).get(team) or (upcoming or {}).get(team)):
+            games = (form or {}).get(team, [])
             # Date on every line and the newest row highlighted, so the order
             # (newest first) is obvious without reading the heading
             rows = "".join(
@@ -658,9 +656,18 @@ def add_cell_tooltips(table_html, df, form=None):
                 f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
                 for k, (res, gf, ga, opp, home, date) in enumerate(games)
             )
+            nxt = (upcoming or {}).get(team, [])
+            next_rows = "".join(
+                f'<span class="form-game">'
+                f'<span class="form-date">{date.day} {SHORT_MONTHS[st.session_state.lang][date.month - 1]}</span>'
+                f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
+                for opp, home, date in nxt
+            )
+            parts = (f'<span class="form-title">{t("last_games", n=len(games))}</span>{rows}' if games else "")
+            parts += (f'<span class="form-title next">{t("next_games", n=len(nxt))}</span>{next_rows}' if nxt else "")
             place = " tip-below" if r < len(df) / 2 else ""
             return (f'{m.group(1)} class="{m.group(4)} has-tip team-tip{place}">{m.group(5)}'
-                    f'<span class="cell-tip"><span class="form-title">{t("last_games", n=len(games))}</span>{rows}</span></td>')
+                    f'<span class="cell-tip">{parts}</span></td>')
         if c < 5:
             return m.group(0)
         text = t("cell_tooltip", team=df.iloc[r]["TEAM"], pct=f"{df.iloc[r, c]:.2f}%",
@@ -724,6 +731,27 @@ def load_recent_form(league, data_version, n=5):
                 games.append(("W" if gf > ga else "D" if gf == ga else "L", gf, ga, opp, home, row.utcDate))
     return form
 
+@st.cache_data(show_spinner=False)
+def load_next_games(league, data_version, n=2):
+    # Each team's next n league games, soonest first, as
+    # {team: [(opponent, is_home, date), ...]}, from the fixtures saved with
+    # the data (football-data.org names, mapped like the results above).
+    try:
+        dp = load_dataset_processing()
+        df = pd.read_csv(f"data/fixtures_{league}.csv")
+        df["utcDate"] = pd.to_datetime(df["utcDate"], utc=True, errors="coerce")
+        df = df[df["utcDate"] >= pd.Timestamp.now(tz="UTC")].sort_values("utcDate")
+        df[["homeTeam", "awayTeam"]] = df[["homeTeam", "awayTeam"]].replace(dp.mappings.get(league, {}))
+    except Exception:
+        return {}
+    upcoming = {}
+    for row in df.itertuples():
+        for team, opp, home in [(row.homeTeam, row.awayTeam, True), (row.awayTeam, row.homeTeam, False)]:
+            games = upcoming.setdefault(team, [])
+            if len(games) < n:
+                games.append((opp, home, row.utcDate))
+    return upcoming
+
 # Every run also saves its full result in data/simulations/<run time>/
 # <league>_simulation.csv: one column per team, one row per finishing
 # position, counts out of 10,000. Those runs are the history behind the
@@ -777,6 +805,21 @@ def load_history(league, data_version):
             frames.append(pd.DataFrame({"day": pd.Timestamp(day), "team": chance.index, "metric": metric, "pct": chance.values}))
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=columns)
 
+@st.cache_data(show_spinner=False)
+def load_match_days(league, data_version):
+    # Days with at least one league game this season, from the saved results
+    try:
+        season_start = load_dataset_processing().SEASON_START_DATES[league].tz_convert(None)
+    except Exception:
+        return set()
+    days = set()
+    for file in os.listdir("data"):
+        if file.startswith(f"past_{league}_") and file.endswith(".csv"):
+            dates = pd.to_datetime(pd.read_csv(f"data/{file}", usecols=["utcDate"])["utcDate"], utc=True, errors="coerce")
+            dates = dates.dt.tz_convert(None).dt.normalize().dropna()
+            days |= set(dates[dates >= season_start])
+    return days
+
 def week_changes(history, days=7):
     """(change in percentage points per (team, metric) since the last run at
     least `days` days before the latest one, that run's date), or (None, None)."""
@@ -824,6 +867,12 @@ st.markdown("""
     --section-band-bg: #eaf5ec;
     --good-text: #2E7D32;
     --bad-text: #C62828;
+    --good-bg: rgba(46,125,50,0.10);
+    --bad-bg: rgba(198,40,40,0.08);
+    --hero-top: #e3f1e5;
+    --hero-glow: rgba(102,187,106,0.22);
+    --hero-ink: #16301a;
+    --hero-line: rgba(46,125,50,0.28);
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -837,6 +886,12 @@ st.markdown("""
         --section-band-bg: #16241a;
         --good-text: #7ddc84;
         --bad-text: #ff8a80;
+        --good-bg: rgba(125,220,132,0.12);
+        --bad-bg: rgba(255,138,128,0.12);
+        --hero-top: #17281b;
+        --hero-glow: rgba(102,187,106,0.14);
+        --hero-ink: #f1f5f1;
+        --hero-line: rgba(102,187,106,0.35);
     }
 }
 
@@ -905,52 +960,29 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-bottom: 6px;
 }
 
-/* Hero: a floodlit pitch at night -- deep green with faint mowing stripes,
-   the halfway line and centre circle, the title on the left and this week's
-   biggest moves on the right. Fixed colours in both themes: it's a deliberate
-   dark surface, like the step badges. Full-bleed via margin calc(-50vw + 50%)
-   (100vw would overshoot by the scrollbar gutter reserved further up);
-   margin-top cancels .block-container's 2rem top padding. */
+/* Hero: a short, centred intro on a soft green wash that fades into the page. Colours come from the theme
+   tokens, so it follows light and dark mode like the rest of the page.
+   Full-bleed via margin calc(-50vw + 50%) (100vw would overshoot by the
+   scrollbar gutter reserved further up); margin-top cancels
+   .block-container's 2rem top padding. */
 .hero-banner {
-    position: relative;
-    overflow: hidden;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-top: -2rem;
-    margin-bottom: 24px;
-    padding: 72px 24px 48px;
+    margin-bottom: 12px;
+    padding: 64px 24px 36px;
     background:
-        radial-gradient(ellipse 55% 85% at 80% -5%, rgba(120, 200, 125, 0.30), transparent 70%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0 90px, transparent 90px 180px),
-        linear-gradient(160deg, #08190d 0%, #0d2a15 55%, #123b1d 100%);
+        radial-gradient(ellipse 55% 90% at 85% 0%, var(--hero-glow), transparent 70%),
+        linear-gradient(180deg, var(--hero-top) 0%, var(--page-bg) 100%);
 }
-.hero-pitch { position: absolute; inset: 0; pointer-events: none; }
-.hero-pitch::before {
-    content: ""; position: absolute; top: 50%; left: 50%;
-    width: 380px; height: 380px; margin: -190px 0 0 -190px;
-    border: 2px solid rgba(255,255,255,0.06); border-radius: 50%;
-}
-.hero-pitch::after {
-    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
-    border-left: 2px solid rgba(255,255,255,0.06);
-}
-.hero-inner {
-    position: relative;
-    max-width: 1120px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 56px;
-    align-items: center;
-}
-.hero-inner.solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
 .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: #d6f0d8;
+    background: var(--card-bg);
+    border: 1px solid var(--hero-line);
+    color: var(--accent-text);
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -960,111 +992,69 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-bottom: 18px;
 }
 .hero-live {
-    width: 8px; height: 8px; border-radius: 50%; background: #7ddc84;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--accent-text);
     animation: hero-pulse 2.2s ease-out infinite;
 }
 @keyframes hero-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(125,220,132,0.55); }
-    70% { box-shadow: 0 0 0 8px rgba(125,220,132,0); }
-    100% { box-shadow: 0 0 0 0 rgba(125,220,132,0); }
+    0% { box-shadow: 0 0 0 0 rgba(46,125,50,0.45); }
+    70% { box-shadow: 0 0 0 8px rgba(46,125,50,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,125,50,0); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-live { animation: none; } }
-/* The page-wide rule centres every h1 and paragraph; the hero is left-aligned */
 .hero-banner .hero-copy h1 {
-    color: #ffffff !important;
-    font-size: clamp(34px, 4.4vw, 56px);
+    color: var(--hero-ink) !important;
+    font-size: clamp(32px, 4vw, 48px);
     font-weight: 800;
     line-height: 1.02;
     letter-spacing: -0.03em;
     margin: 0 0 16px;
     padding: 0 !important;
-    text-align: left !important;
+    text-align: center !important;
     text-wrap: balance;
 }
 .hero-banner .hero-copy .hero-lead {
-    color: #9be3a0;
+    color: var(--accent-text);
     font-size: clamp(18px, 1.7vw, 22px);
     font-weight: 700;
     line-height: 1.3;
     margin: 0 0 10px;
-    text-align: left !important;
+    text-align: center !important;
 }
 .hero-banner .hero-copy .hero-description {
-    color: rgba(255,255,255,0.78);
+    color: var(--text-main);
+    opacity: 0.8;
     font-size: 15px;
     line-height: 1.6;
-    max-width: 520px;
-    margin: 0 0 20px;
-    text-align: left !important;
+    max-width: 560px;
+    margin: 0 auto 18px;
+    text-align: center !important;
 }
 .hero-banner .hero-copy .hero-meta {
-    color: rgba(255,255,255,0.62);
+    color: var(--text-main);
     font-size: 13px;
     margin: 0;
-    text-align: left !important;
+    text-align: center !important;
 }
 .hero-meta a {
-    color: #ffffff !important;
+    color: var(--accent-text) !important;
     font-weight: 700;
     text-decoration: none !important;
-    border-bottom: 2px solid rgba(155,227,160,0.55);
+    border-bottom: 2px solid var(--hero-line);
     padding-bottom: 1px;
     margin-left: 4px;
     transition: border-color 0.2s ease;
 }
-.hero-meta a:hover { border-bottom-color: #9be3a0; }
+.hero-meta a:hover { border-bottom-color: var(--accent-text); }
 
-/* This week's biggest moves, across all nine leagues: each row links to its league */
-.hero-movers {
-    background: rgba(255,255,255,0.055);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 18px 20px 6px;
-    text-align: left;
-}
-.hm-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
-.hm-title { font-size: 15px; font-weight: 800; color: #ffffff; }
-.hm-sub { font-size: 11.5px; color: rgba(255,255,255,0.58); }
-.hm-row {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    column-gap: 14px;
-    align-items: center;
-    padding: 12px 0;
-    border-top: 1px solid rgba(255,255,255,0.09);
-    text-decoration: none !important;
-}
-.hm-code {
-    grid-column: 1; grid-row: 1 / 3;
-    min-width: 46px; padding: 5px 6px; border-radius: 6px;
-    background: rgba(255,255,255,0.08);
-    color: #cfeccf; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-align: center;
-}
-.hm-team { grid-column: 2; grid-row: 1; color: #ffffff; font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.hm-row:hover .hm-team { text-decoration: underline; text-underline-offset: 3px; }
-.hm-what { grid-column: 2; grid-row: 2; color: rgba(255,255,255,0.66); font-size: 12.5px; font-variant-numeric: tabular-nums; }
-.hm-delta {
-    grid-column: 3; grid-row: 1 / 3;
-    font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums;
-    padding: 5px 10px; border-radius: 8px;
-}
-.hm-delta.good { color: #9be3a0; background: rgba(125,220,132,0.13); }
-.hm-delta.bad { color: #ffa196; background: rgba(255,120,110,0.13); }
-
-/* Between phone and wide desktop, keep the content clear of the fixed contact
-   icons on the right edge */
-@media (min-width: 601px) and (max-width: 1320px) {
-    .hero-banner { padding-right: 100px; }
-}
-@media (max-width: 900px) {
-    .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+/* Between phone and desktop, keep the text clear of the fixed contact icons
+   on the right edge (both sides, so it stays centred) */
+@media (min-width: 601px) and (max-width: 1100px) {
+    .hero-banner { padding-left: 90px; padding-right: 90px; }
 }
 @media (max-width: 600px) {
     /* Extra top padding clears the language pills and the contact-icon row,
        which sit over the top of this banner on phones */
-    .hero-banner { padding: 104px 16px 28px; }
-    .hero-pitch::before { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
-    .hm-team { font-size: 14px; }
+    .hero-banner { padding: 104px 16px 24px; }
 }
 .app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
 
@@ -1274,6 +1264,7 @@ td.tip-left .cell-tip { left: auto; right: 0; }
 td.team-tip:hover { z-index: 10; text-decoration: underline dotted; text-underline-offset: 3px; }
 td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .form-title { display: block; margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.75; }
+.form-title.next { margin-top: 9px; }
 .form-game { display: flex; align-items: center; gap: 8px; padding: 2px 6px; margin: 0 -6px; border-radius: 4px; font-weight: 500; }
 .form-game.latest { background-color: rgba(255,255,255,0.12); }
 .form-date { min-width: 44px; opacity: 0.65; font-variant-numeric: tabular-nums; }
@@ -1466,9 +1457,8 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
    LEAGUE PILL BUTTONS (built from plain st.button, not st.segmented_control)
    segmented_control's internal styling proved too hard to reliably override --
    two attempts at its selected-state color and width both lost to Streamlit's
-   own internal CSS. st.button is what the download button already renders
-   correctly with in this exact environment, so the pill row is built from
-   st.button + st.columns instead: full page width and even spacing come for
+   own internal CSS. st.button renders correctly in this exact environment,
+   so the pill row is built from st.button + st.columns instead: full page width and even spacing come for
    free from st.columns (real layout, not a style override), and un/selected
    look comes from Streamlit's own long-established primary/secondary button
    "kind" attribute rather than a newer widget's internals.
@@ -1638,31 +1628,6 @@ div.stButton > button p:last-child {
 
 }
 
-/* Centered on its own line below the caption -- the negative margin-top
-   this used to pull the button up onto the caption's row broke down
-   whenever the caption text wrapped to two lines (translations vary in
-   length, and mobile width wraps sooner), overlapping the button on top of
-   the wrapped second line instead of sitting beside it. */
-[data-testid="stDownloadButton"] {
-    display: flex;
-    justify-content: center;
-    margin-top: 8px;
-}
-
-/* Download button -- always solid green regardless of primary/secondary kind
-   (it's the only stDownloadButton on the page, no need to differentiate it). */
-div[data-testid="stDownloadButton"] button {
-    background-color: #2E7D32 !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-    transition: background-color 0.2s ease;
-}
-div[data-testid="stDownloadButton"] button:hover {
-    background-color: #245f27 !important;
-    color: #ffffff !important;
-}
 div.stButton > button {
     border-radius: 8px !important;
     transition: background-color 0.2s ease;
@@ -1879,58 +1844,15 @@ DEFAULT_LEAGUE_KEY = "premierleague_england"
 # -------------------------------
 # 7️⃣ HERO SECTION
 
-def metric_label(league, metric):
-    # "Title", "Top 4", "Promotion", "Relegation"... for one tracked metric
-    zones = LEAGUE_ZONES[league]
-    if metric == "top":
-        return t(f"m_top_{zones['top_kind']}", n=zones["top"][1])
-    if metric == "playoff":
-        return t("m_playoff", n=zones["top_playoff"][1])
-    return t(f"m_{metric}")
-
-def change_label(delta):
-    return f"{'+' if delta > 0 else '−'}{abs(delta):.1f}"
-
-# The hero's right-hand panel: the three biggest changes in any team's
-# chances over the last 7 days, across all nine leagues. Each team appears
-# once, with whichever of its chances moved most; a bigger relegation chance
-# is shown as bad news.
-data_version = os.path.getmtime("data/last_updated.txt") if os.path.exists("data/last_updated.txt") else None
-league_codes = {key: pill.split("\n\n")[-1] for key, pill, header in LEAGUES}
-big_moves = []
-for lg in league_codes:
-    history = load_history(lg, data_version)
-    changes, _ = week_changes(history)
-    if changes is None or changes.empty:
-        continue
-    latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
-    for team, team_changes in changes.groupby(level="team"):
-        (_, metric), delta = max(team_changes.items(), key=lambda kv: abs(kv[1]))
-        big_moves.append((abs(delta), lg, team, metric, delta, latest[(team, metric)] - delta, latest[(team, metric)]))
-big_moves = sorted(big_moves, reverse=True)[:3]
-
-movers_html = ""
-if big_moves:
-    rows = "".join(
-        f'<a class="hm-row" href="?league={lg}&amp;lang={st.session_state.lang}" target="_self">'
-        f'<span class="hm-code">{league_codes[lg]}</span>'
-        f'<span class="hm-team">{html.escape(team)}</span>'
-        f'<span class="hm-what">{metric_label(lg, metric)} · {before:.1f}% → {after:.1f}%</span>'
-        f'<span class="hm-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">{change_label(delta)}</span></a>'
-        for _, lg, team, metric, delta, before, after in big_moves
-    )
-    movers_html = (f'<div class="hero-movers"><div class="hm-head"><span class="hm-title">{t("hm_title")}</span>'
-                   f'<span class="hm-sub">{t("hm_sub")}</span></div>{rows}</div>')
-
 st.markdown(
-    f'<div class="hero-banner"><div class="hero-pitch"></div>'
-    f'<div class="hero-inner{"" if movers_html else " solo"}"><div class="hero-copy">'
+    f'<div class="hero-banner">'
+    f'<div class="hero-inner"><div class="hero-copy">'
     f'<span class="hero-badge"><span class="hero-live"></span>{t("hero_badge")}</span>'
     f'<h1>{t("hero_title")}</h1>'
     f'<p class="hero-lead">{t("hero_lead")}</p>'
     f'<p class="hero-description">{t("hero_description")}</p>'
     f'<p class="hero-meta">{t("hero_byline")} ·<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">{t("hero_cta")}</a></p>'
-    f'</div>{movers_html}</div></div>',
+    f'</div></div></div>',
     unsafe_allow_html=True,
 )
 
@@ -2036,9 +1958,9 @@ pos_pct_df["POS"] = pos_pct_df["POS"].astype(int)
 pos_pct_df["GP"] = pos_pct_df["GP"].astype(int)
 pos_pct_df["PTS"] = pos_pct_df["PTS"].astype(int)
 
-# Goal difference isn't in the simulation output, but the league table saved alongside it each
-# morning has it. Kept numeric (the CSV download stays parseable); the table shows "8" / "0" / "−3"
-# with a true minus sign, blank if a team can't be matched.
+# Goal difference isn't in the simulation output, but the league table saved alongside it has
+# it. Kept numeric here; the table shows "8" / "0" / "−3" with a true minus sign, blank if a team
+# can't be matched.
 _table_file = f"data/league_table/{league}.csv"
 if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
     try:
@@ -2090,6 +2012,7 @@ def zone_pct(first, last):
     return pos_pct_df[[c for c in pos_cols if first <= int(c) <= last]].sum(axis=1)
 
 # Change in each card's chance over the last 7 days, from the saved runs
+data_version = os.path.getmtime("data/last_updated.txt") if os.path.exists("data/last_updated.txt") else None
 history = load_history(league, data_version)
 changes, base_day = week_changes(history)
 delta_tip = html.escape(t("delta_tip", date=short_date(base_day, st.session_state.lang))) if base_day is not None else ""
@@ -2189,16 +2112,14 @@ zone_legend = "".join(
 if zone_legend:
     zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
-    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league, os.path.getmtime("data/last_updated.txt") if os.path.exists("data/last_updated.txt") else None))}</div>{zone_legend}</div>',
+    f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league, data_version), load_next_games(league, data_version))}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
 
 # -------------------------------
-# 12️⃣ DOWNLOAD OPTION
+# 12️⃣ TABLE CAPTION
 
 st.caption(t("table_caption"))
-csv = pos_pct_df.to_csv(index=False).encode("utf-8")
-st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
 
 # -------------------------------
 # 1️⃣3️⃣ SEASON TREND
@@ -2206,7 +2127,7 @@ st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_po
 # converts chart data through pyarrow, and with NumPy pinned below 2 that
 # conversion crashed the whole server (a segfault, not an error) in testing.
 # The frame follows the visitor's light or dark setting like the rest of the page.
-def trend_chart_html(chart):
+def trend_chart_html(chart_light, chart_dark):
     major = alt.SCHEMA_VERSION.lstrip("v").split(".")[0]
     vega, embed = {"5": ("5", "6"), "6": ("6", "7")}.get(major, ("6", "7"))
     return f"""<!doctype html><html><head><meta charset="utf-8">
@@ -2223,7 +2144,7 @@ html, body {{ margin: 0; background: transparent; font-family: Inter, Roboto, Ar
 </style></head><body><div id="chart"></div><script>
 const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const ink = dark ? "#c9c9c9" : "#555555", grid = dark ? "#333333" : "#ececec";
-const spec = {chart.to_json()};
+const spec = dark ? {chart_dark.to_json()} : {chart_light.to_json()};
 // Sized to the width it's drawn at: fewer date labels, a shorter chart and a
 // legend that wraps on phones, so everything fits the frame
 const narrow = document.body.clientWidth < 560;
@@ -2241,7 +2162,154 @@ vegaEmbed("#chart", spec, {{actions: false, renderer: "svg", tooltip: {{theme: d
 # Each team's chance of the title, the top places or relegation after every
 # day's last update this season. Starts with the teams most likely to finish
 # there now; any team can be added.
+def metric_label(league, metric):
+    # "Title", "Top 4", "Promotion", "Relegation"... for one tracked metric
+    zones = LEAGUE_ZONES[league]
+    if metric == "top":
+        return t(f"m_top_{zones['top_kind']}", n=zones["top"][1])
+    if metric == "playoff":
+        return t("m_playoff", n=zones["top_playoff"][1])
+    return t(f"m_{metric}")
+
 TREND_COLORS = ["#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#56B4E9", "#8C6D31", "#7F7F7F"]
+
+# Club colours for the trend chart: (main colour, second colour). The chart uses
+# the main colour unless it's hard to see on the page (white or yellow on the
+# light page, black or navy on the dark one) or too close to a team already
+# drawn; then the second colour; then a standard chart colour. Teams left out
+# just get a standard chart colour.
+TEAM_COLORS = {
+    # Premier League
+    "Arsenal": ("#EF0107", "#063672"), "Manchester City": ("#6CABDD", "#1C2C5B"),
+    "Brighton & Hove Albion": ("#0057B8", "#FFCD00"), "Chelsea": ("#034694", "#DBA111"),
+    "Liverpool": ("#C8102E", "#00B2A9"), "Brentford": ("#E30613", "#FBB800"),
+    "AFC Bournemouth": ("#DA291C", "#000000"), "Tottenham Hotspur": ("#132257", "#FFFFFF"),
+    "Aston Villa": ("#670E36", "#95BFE5"), "Hull City": ("#F5A12D", "#000000"),
+    "Leeds United": ("#FFFFFF", "#1D428A"), "Newcastle United": ("#241F20", "#FFFFFF"),
+    "Ipswich Town": ("#3A64A3", "#FFFFFF"), "Everton": ("#003399", "#FFFFFF"),
+    "Fulham": ("#FFFFFF", "#000000"), "Coventry City": ("#59CBE8", "#1C1C1C"),
+    "Manchester United": ("#DA291C", "#FBE122"), "Crystal Palace": ("#1B458F", "#C4122E"),
+    "Nottingham Forest": ("#DD0000", "#FFFFFF"), "Sunderland": ("#EB172B", "#000000"),
+    # Championship
+    "Middlesbrough": ("#E11B22", "#FFFFFF"), "Swansea City": ("#FFFFFF", "#000000"),
+    "Wolverhampton Wanderers": ("#FDB913", "#231F20"), "West Bromwich Albion": ("#122F67", "#FFFFFF"),
+    "Southampton": ("#D71920", "#FFFFFF"), "Birmingham City": ("#1E3E8A", "#FFFFFF"),
+    "Stoke City": ("#E03A3E", "#FFFFFF"), "West Ham United": ("#7A263A", "#1BB1E7"),
+    "Queens Park Rangers": ("#1D5BA4", "#FFFFFF"), "Sheffield United": ("#EE2737", "#000000"),
+    "Portsmouth": ("#001489", "#FFFFFF"), "Millwall": ("#001D5E", "#FFFFFF"),
+    "Blackburn Rovers": ("#009EE0", "#FFFFFF"), "Bristol City": ("#E21A23", "#FFFFFF"),
+    "Norwich City": ("#FFF200", "#00A650"), "Lincoln City": ("#E31B23", "#000000"),
+    "Cardiff City": ("#0070B5", "#D11524"), "Wrexham": ("#C8102E", "#FFFFFF"),
+    "Bolton Wanderers": ("#FFFFFF", "#263C7E"), "Charlton Athletic": ("#D4021D", "#FFFFFF"),
+    "Watford": ("#FBEE23", "#ED2127"), "Burnley": ("#6C1D45", "#99D6EA"),
+    "Derby County": ("#FFFFFF", "#000000"), "Preston North End": ("#FFFFFF", "#0B2C5F"),
+    # Serie A
+    "Lazio": ("#87D8F7", "#1B3D6D"), "Internazionale": ("#0068A8", "#000000"),
+    "AS Roma": ("#8E1F2F", "#F0BC42"), "Como": ("#003DA5", "#FFFFFF"),
+    "AC Milan": ("#FB090B", "#000000"), "Frosinone": ("#FBE122", "#00438C"),
+    "Juventus": ("#000000", "#FFFFFF"), "Napoli": ("#12A0D7", "#003C82"),
+    "Bologna": ("#A21C26", "#1A2F48"), "Torino": ("#8A1E03", "#FFFFFF"),
+    "Genoa": ("#AD1919", "#002D72"), "Cagliari": ("#B01E2B", "#002350"),
+    "Atalanta": ("#1E71B8", "#000000"), "Lecce": ("#F7D117", "#D31E25"),
+    "Sassuolo": ("#00A752", "#000000"), "Monza": ("#E30613", "#FFFFFF"),
+    "Fiorentina": ("#592C82", "#FFFFFF"), "Parma": ("#FFD200", "#003D7C"),
+    "Udinese": ("#000000", "#FFFFFF"), "Venezia": ("#F37021", "#00753E"),
+    # La Liga
+    "Barcelona": ("#A50044", "#004D98"), "Atlético Madrid": ("#CB3524", "#272E61"),
+    "Real Madrid": ("#FFFFFF", "#00529F"), "Real Betis": ("#00954C", "#FFFFFF"),
+    "Real Sociedad": ("#0067B1", "#FFFFFF"), "Sevilla": ("#FFFFFF", "#D71920"),
+    "Athletic Club": ("#EE2523", "#FFFFFF"), "Villarreal": ("#FFE667", "#005187"),
+    "Celta Vigo": ("#8AC3EE", "#E5254E"), "Alavés": ("#0761AF", "#FFFFFF"),
+    "Rayo Vallecano": ("#E53027", "#FFFFFF"), "Getafe": ("#005999", "#FFFFFF"),
+    "Deportivo La Coruña": ("#1B5DAA", "#FFFFFF"), "Espanyol": ("#007FC8", "#FFFFFF"),
+    "Osasuna": ("#D91A21", "#0A346F"), "Racing Santander": ("#00824A", "#FFFFFF"),
+    "Elche": ("#05642C", "#FFFFFF"), "Levante": ("#B5104D", "#004B98"),
+    "Valencia": ("#FFFFFF", "#F18E00"), "Málaga": ("#0D5AA7", "#FFFFFF"),
+    # Bundesliga
+    "Bayern Munich": ("#DC052D", "#0066B2"), "Borussia Dortmund": ("#FDE100", "#000000"),
+    "SC Freiburg": ("#E3000F", "#000000"), "RB Leipzig": ("#DD0741", "#001F47"),
+    "Werder Bremen": ("#1D9053", "#FFFFFF"), "Bayer Leverkusen": ("#E32221", "#000000"),
+    "Eintracht Frankfurt": ("#E1000F", "#000000"), "Mainz": ("#C3141E", "#FFFFFF"),
+    "FC Augsburg": ("#BA3733", "#46714D"), "VfB Stuttgart": ("#FFFFFF", "#E32219"),
+    "TSG Hoffenheim": ("#1C63B7", "#FFFFFF"), "FC Cologne": ("#ED1C24", "#FFFFFF"),
+    "SC Paderborn 07": ("#10206B", "#000000"), "Hamburg SV": ("#0A3F86", "#FFFFFF"),
+    "1. FC Union Berlin": ("#EB1923", "#FFFFFF"), "Schalke 04": ("#004D9D", "#FFFFFF"),
+    "Borussia Mönchengladbach": ("#000000", "#00A651"),
+    # Ligue 1
+    "Paris Saint-Germain": ("#004170", "#DA291C"), "Lille": ("#E01E13", "#1E2D5C"),
+    "Lyon": ("#FFFFFF", "#14387F"), "Paris FC": ("#1D2E5C", "#FFFFFF"),
+    "Stade Rennais": ("#E13327", "#000000"), "Marseille": ("#2FAEE0", "#FFFFFF"),
+    "AS Monaco": ("#E51B22", "#FFFFFF"), "Nice": ("#E2001A", "#000000"),
+    "Lens": ("#FFE600", "#EC1C24"), "Lorient": ("#F58113", "#000000"),
+    "Toulouse": ("#5B2C83", "#FFFFFF"), "Strasbourg": ("#009FE3", "#FFFFFF"),
+    "AJ Auxerre": ("#FFFFFF", "#0062A9"), "Brest": ("#E2001A", "#FFFFFF"),
+    "Angers": ("#000000", "#FFFFFF"), "Troyes": ("#005CA4", "#FFFFFF"),
+    "Le Mans": ("#DA291C", "#F7D117"), "Le Havre AC": ("#6CB4E4", "#1B2A4E"),
+    # Eredivisie
+    "Feyenoord Rotterdam": ("#E30613", "#FFFFFF"), "Ajax Amsterdam": ("#D2122E", "#FFFFFF"),
+    "PSV Eindhoven": ("#ED1C24", "#FFFFFF"), "FC Twente": ("#E3000F", "#FFFFFF"),
+    "AZ Alkmaar": ("#DB0021", "#FFFFFF"), "Fortuna Sittard": ("#FFE500", "#009A44"),
+    "Heerenveen": ("#005FAE", "#FFFFFF"), "FC Groningen": ("#2E9B48", "#FFFFFF"),
+    "SC Cambuur": ("#FFD200", "#004A9F"), "Go Ahead Eagles": ("#E30613", "#FFD700"),
+    "Sparta Rotterdam": ("#E30613", "#FFFFFF"), "FC Utrecht": ("#E30613", "#FFFFFF"),
+    "NEC Nijmegen": ("#D51F26", "#00843D"), "PEC Zwolle": ("#0071BC", "#00A651"),
+    "Excelsior": ("#E30613", "#000000"), "Telstar": ("#E30613", "#FFFFFF"),
+    "ADO Den Haag": ("#00A650", "#FFD700"), "Willem II": ("#DA291C", "#003DA5"),
+    # Primeira Liga
+    "FC Porto": ("#003893", "#FFFFFF"), "Benfica": ("#E83030", "#FFFFFF"),
+    "Sporting CP": ("#008057", "#FFFFFF"), "Santa Clara": ("#E30613", "#FFFFFF"),
+    "Arouca": ("#F5D300", "#002E6D"), "Gil Vicente": ("#D71920", "#1D428A"),
+    "Braga": ("#E30613", "#FFFFFF"), "Moreirense": ("#00824A", "#FFFFFF"),
+    "FC Famalicao": ("#1E4C9A", "#FFFFFF"), "Vitória de Guimaraes": ("#FFFFFF", "#000000"),
+    "Maritimo": ("#00843D", "#D71920"), "Rio Ave": ("#009A49", "#FFFFFF"),
+    "C.D. Nacional": ("#000000", "#FFFFFF"), "Estoril": ("#FFD700", "#003DA5"),
+    # Série A (Brazil)
+    "Flamengo": ("#C4161C", "#000000"), "Palmeiras": ("#006437", "#FFFFFF"),
+    "Cruzeiro": ("#2F529E", "#FFFFFF"), "Fluminense": ("#870A28", "#00613C"),
+    "Athletico Paranaense": ("#C8102E", "#000000"), "Bahia": ("#005BAA", "#D71920"),
+    "Atlético-MG": ("#000000", "#FFFFFF"), "Santos": ("#FFFFFF", "#000000"),
+    "Red Bull Bragantino": ("#DA1F3D", "#FFFFFF"), "São Paulo": ("#FFFFFF", "#D71920"),
+    "Coritiba": ("#00544E", "#FFFFFF"), "Botafogo": ("#000000", "#FFFFFF"),
+    "Vasco da Gama": ("#000000", "#E30613"), "Vitória": ("#E30613", "#000000"),
+    "Grêmio": ("#0D80BF", "#000000"), "Mirassol": ("#FFDD00", "#00843D"),
+    "Corinthians": ("#FFFFFF", "#000000"), "Internacional": ("#E5050F", "#FFFFFF"),
+    "Remo": ("#1B2B6B", "#FFFFFF"), "Chapecoense": ("#00843D", "#FFFFFF"),
+}
+
+def _luminance(hex_color):
+    def channel(c):
+        c = c / 255
+        return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+
+def _lab(hex_color):
+    def channel(c):
+        c = c / 255
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = (channel(int(hex_color[i:i + 2], 16)) for i in (1, 3, 5))
+    x, y, z = ((0.4124 * r + 0.3576 * g + 0.1805 * b) / 0.9505, 0.2126 * r + 0.7152 * g + 0.0722 * b,
+               (0.0193 * r + 0.1192 * g + 0.9505 * b) / 1.089)
+    f = lambda t: t ** (1 / 3) if t > 0.008856 else 7.787 * t + 16 / 116
+    return 116 * f(y) - 16, 500 * (f(x) - f(y)), 200 * (f(y) - f(z))
+
+def _too_close(a, b):
+    return sum((p - q) ** 2 for p, q in zip(_lab(a), _lab(b))) ** 0.5 < 25
+
+def team_line_colors(teams, dark):
+    """One colour per team, in order: its own colours where they show up on the
+    page and don't clash with another team's, then chart colours for the rest."""
+    visible = (lambda c: _luminance(c) > 0.06) if dark else (lambda c: _luminance(c) < 0.55)
+    chosen = [None] * len(teams)
+    for i, team in enumerate(teams):
+        chosen[i] = next((c for c in TEAM_COLORS.get(team, ())
+                          if visible(c) and not any(o and _too_close(c, o) for o in chosen)), None)
+    for i in range(len(teams)):
+        if chosen[i] is None:
+            chosen[i] = next((c for c in TREND_COLORS if not any(o and _too_close(c, o) for o in chosen)),
+                             TREND_COLORS[i % len(TREND_COLORS)])
+    return chosen
+
 
 with st.container(key="trend_card"):
     st.markdown(
@@ -2264,9 +2332,23 @@ with st.container(key="trend_card"):
         if teams:
             data = data[data["team"].isin(teams)].sort_values(["team", "day"])
             top = min(100, max(10, np.ceil(data["pct"].max() * 1.1 / 10) * 10))
-            # A line breaks wherever more than 10 days pass without a run (Brazil's
-            # mid-season break), instead of drawing a curve through days with no data
-            data["stretch"] = data.groupby("team")["day"].transform(lambda d: (d.diff() > pd.Timedelta(days=10)).cumsum())
+            # Between two runs, a team's chance can only change once games are
+            # played. So the line stays flat at the last prediction until the next
+            # league game (through Brazil's World Cup break, for example), and breaks
+            # only where games were played for more than 3 days without a run.
+            match_days = sorted(load_match_days(league, data_version))
+            rows = []
+            for team, team_rows in data.groupby("team", sort=False):
+                stretch, prev = 0, None
+                for day, pct in zip(team_rows["day"], team_rows["pct"]):
+                    if prev is not None and (day - prev[0]).days > 1:
+                        first_game = next((d for d in match_days if prev[0] < d < day), None)
+                        rows.append((first_game or day - pd.Timedelta(days=1), team, prev[1], stretch))
+                        if first_game is not None and (day - first_game).days > 3:
+                            stretch += 1
+                    rows.append((day, team, pct, stretch))
+                    prev = (day, pct)
+            data = pd.DataFrame(rows, columns=["day", "team", "pct", "stretch"])
             # Plain values: the chart is drawn in the browser (see below), so the
             # data goes straight into the chart spec. Noon local time keeps each
             # run on its own day in every time zone.
@@ -2275,29 +2357,46 @@ with st.container(key="trend_card"):
                 for d, team, p, k in zip(data["day"], data["team"], data["pct"], data["stretch"])
             ])
             date_format = "%-d %b" if st.session_state.lang == "en" else "%d/%m"
-            hover = alt.selection_point(fields=["day"], nearest=True, on="pointerover", clear="pointerout", empty=False)
-            base = alt.Chart(data).encode(
-                x=alt.X("day:T", title=None, axis=alt.Axis(format=date_format, labelAngle=0, grid=False)),
-                y=alt.Y("share:Q", title=None, scale=alt.Scale(domain=[0, top / 100], clamp=True),
-                        axis=alt.Axis(format=".0%", tickCount=5)),
-                color=alt.Color("team:N", scale=alt.Scale(domain=teams, range=TREND_COLORS[:len(teams)]),
-                                legend=alt.Legend(orient="bottom", title=None, symbolType="stroke", symbolStrokeWidth=3,
-                                                  columnPadding=22, labelFontSize=12)),
-            )
-            # One tooltip per day with every selected team, in the order they
-            # were picked (dots and brackets in names are escaped for Vega)
-            escape = lambda name: re.sub(r"([.\[\]\\])", r"\\\1", name)
-            chart = alt.layer(
-                base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(detail="stretch:N"),
-                base.mark_circle(size=60).encode(opacity=alt.condition(hover, alt.value(1), alt.value(0))),
-                alt.Chart(data).transform_pivot("team", value="share", groupby=["day"]).mark_rule(strokeDash=[4, 4]).encode(
-                    x="day:T",
-                    opacity=alt.condition(hover, alt.value(0.5), alt.value(0)),
-                    tooltip=[alt.Tooltip("day:T", title=t("trend_date"), format=date_format)]
-                            + [alt.Tooltip(f"{escape(team)}:Q", title=team, format=".1%") for team in teams],
-                ).add_params(hover),
-            ).properties(width="container", height=340, padding={"left": 6, "right": 24, "top": 8, "bottom": 4})
-            st_components.html(trend_chart_html(chart), height=440)
+            def build_chart(colors):
+                hover = alt.selection_point(fields=["day"], nearest=True, on="pointerover", clear="pointerout", empty=False)
+                base = alt.Chart(data).encode(
+                    x=alt.X("day:T", title=None, axis=alt.Axis(format=date_format, labelAngle=0, grid=False)),
+                    y=alt.Y("share:Q", title=None, scale=alt.Scale(domain=[0, top / 100], clamp=True),
+                            axis=alt.Axis(format=".0%", tickCount=5)),
+                    color=alt.Color("team:N", scale=alt.Scale(domain=teams, range=colors),
+                                    legend=alt.Legend(orient="bottom", title=None, symbolType="stroke", symbolStrokeWidth=3,
+                                                      columnPadding=22, labelFontSize=12)),
+                )
+                # Pointing at a line highlights that team: the other lines fade, and its
+                # name and latest chance appear at the end of the line. A wide, invisible
+                # copy of each line makes the lines easy to hit. Anywhere else, one
+                # tooltip per day lists every selected team (dots and brackets in names
+                # are escaped for Vega).
+                pick = alt.selection_point(fields=["team"], clear="pointerout",
+                                          on="pointerover[event.item && event.item.mark.marktype === 'line']")
+                escape = lambda name: re.sub(r"([.\[\]\\])", r"\\\1", name)
+                chart = alt.layer(
+                    base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(
+                        detail="stretch:N", opacity=alt.condition(pick, alt.value(1), alt.value(0.15))),
+                    base.mark_circle(size=60).encode(opacity=alt.condition(hover, alt.value(1), alt.value(0))),
+                    alt.Chart(data).transform_pivot("team", value="share", groupby=["day"]).mark_rule(strokeDash=[4, 4]).encode(
+                        x="day:T",
+                        opacity=alt.condition(hover, alt.value(0.5), alt.value(0)),
+                        tooltip=[alt.Tooltip("day:T", title=t("trend_date"), format=date_format)]
+                                + [alt.Tooltip(f"{escape(team)}:Q", title=team, format=".1%") for team in teams],
+                    ).add_params(hover),
+                    base.transform_filter({"param": pick.name, "empty": False})
+                        .transform_window(latest="rank()", sort=[alt.SortField("day", order="descending")], groupby=["team"])
+                        .transform_filter("datum.latest == 1")
+                        .transform_calculate(label="datum.team + '  ' + format(datum.share, '.1%')")
+                        .mark_text(align="right", dx=-4, dy=-12, fontSize=13, fontWeight="bold")
+                        .encode(text="label:N"),
+                    base.mark_line(strokeWidth=14, strokeOpacity=0.001, interpolate="monotone").encode(
+                        detail="stretch:N", tooltip=[alt.Tooltip("team:N", title=t("trend_team"))]).add_params(pick),
+                ).properties(width="container", height=340, padding={"left": 6, "right": 24, "top": 8, "bottom": 4})
+                return chart
+            st_components.html(trend_chart_html(build_chart(team_line_colors(teams, dark=False)),
+                                                build_chart(team_line_colors(teams, dark=True))), height=440)
 
 # -------------------------------
 # -------------------------------

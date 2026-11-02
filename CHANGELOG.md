@@ -8,9 +8,11 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ## 2 November 2026
 
-- **New:** "How the chances have moved": each team's chance of the title, the top places or relegation after every update this season, as a chart. It starts with the teams most in the race, and any team can be added.
+- **New:** "How the chances have moved": each team's chance of the title, the top places or relegation after every update this season, as a chart in the clubs' own colours. It starts with the teams most in the race, and any team can be added. Point at a line to pick out that team; the line stays flat while no games are played (Brazil's World Cup break, for example).
 - **New:** Every percentage on the headline cards shows how much it moved in the last 7 days (▲▼).
-- **New:** Redesigned top of the page, with this week's three biggest moves across all nine leagues; each one opens its league.
+- **New:** Hover a team name for its next two games as well as its last five results.
+- **Improved:** A lighter, cleaner top of the page.
+- **Removed:** The "Download table as CSV" button.
 - **Fixed:** Every game now counts exactly once: either in the table's points or in the simulated games still to play. When the league table is slower than the results (on 1 Nov the evening update missed Union Berlin vs. Köln, Telstar vs. Utrecht and Excelsior vs. Twente), the missing results are added to the table from their scores. A game already played can no longer be simulated again. Each update checks that every team's played and remaining games add up to a full season, and a league that doesn't add up keeps its last predictions until the next update.
 
 ## 26 October 2026
