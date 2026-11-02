@@ -56,7 +56,6 @@ TRANSLATIONS = {
     "en": {
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
-        "contact_email": "Email",
         "hero_lead": "Every remaining fixture, played 10,000 times.",
         "hero_description": "Each team’s chance of finishing in every position, from the title to relegation, built from results and betting odds.",
         "loading_spinner": "Loading simulation data...",
@@ -155,7 +154,6 @@ TRANSLATIONS = {
     "es": {
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
-        "contact_email": "Correo",
         "hero_lead": "Cada partido que queda, jugado 10.000 veces.",
         "hero_description": "La probabilidad de cada equipo de terminar en cada posición, del título al descenso, a partir de resultados y cuotas de apuestas.",
         "loading_spinner": "Cargando datos de la simulación...",
@@ -254,7 +252,6 @@ TRANSLATIONS = {
     "pt-BR": {
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
-        "contact_email": "E-mail",
         "hero_lead": "Cada jogo que falta, disputado 10.000 vezes.",
         "hero_description": "A chance de cada time terminar em cada posição, do título ao rebaixamento, a partir de resultados e odds de apostas.",
         "loading_spinner": "Carregando dados da simulação...",
@@ -353,7 +350,6 @@ TRANSLATIONS = {
     "fr": {
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
-        "contact_email": "E-mail",
         "hero_lead": "Chaque match restant, joué 10 000 fois.",
         "hero_description": "Les chances de chaque équipe de terminer à chaque place, du titre à la relégation, à partir des résultats et des cotes des paris.",
         "loading_spinner": "Chargement des données de simulation...",
@@ -1089,14 +1085,12 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin: 0;
     text-align: center !important;
 }
-.hero-links a {
+.hero-meta a {
     color: var(--accent-text) !important;
     font-weight: 600;
     text-decoration: none !important;
-    margin-left: 14px;
 }
-.hero-links a:hover { text-decoration: underline !important; text-underline-offset: 3px; }
-.hero-links a:first-child { margin-left: 16px; }
+.hero-meta a:hover { text-decoration: underline !important; text-underline-offset: 3px; }
 
 /* Between phone and desktop, the title would run into the language pills in
    the top-right corner: start it below them */
@@ -1107,8 +1101,6 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     /* Extra top padding clears the language pills, which sit over the top
        of this banner on phones */
     .hero-banner { padding: 52px 16px 20px; }
-    .hero-links a:first-child { margin-left: 0; }
-    .hero-links { display: block; margin-top: 4px; }
 }
 .app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
 
@@ -1870,17 +1862,15 @@ DEFAULT_LEAGUE_KEY = "premierleague_england"
 # -------------------------------
 # 7️⃣ HERO SECTION
 
+BYLINE_LINK = '<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">Victoria Friss de Kereki</a>'
 st.markdown(
     f'<div class="hero-banner">'
     f'<div class="hero-inner"><div class="hero-copy">'
     f'<h1>{t("hero_title")}</h1>'
     f'<p class="hero-lead">{t("hero_lead")}</p>'
     f'<p class="hero-description">{t("hero_description")}</p>'
-    f'<p class="hero-meta">{t("hero_byline")}<span class="hero-links">'
-    f'<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">LinkedIn</a>'
-    f'<a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>'
-    f'<a href="https://github.com/vickyfriss" target="_blank">GitHub</a>'
-    f'<a href="mailto:vicky_friss@hotmail.com">{t("contact_email")}</a></span></p>'
+    # Byline: the name links to LinkedIn; the other contact links are in About Me
+    f'<p class="hero-meta">{t("hero_byline").replace("Victoria Friss de Kereki", BYLINE_LINK)}</p>'
     f'</div></div></div>',
     unsafe_allow_html=True,
 )
