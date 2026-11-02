@@ -446,32 +446,11 @@ def process_datasets(globals_dict):
 
     print(f"\nActive leagues: {active_leagues}")
 
-    # -------------------------------
-    # Betting odds fill (only active leagues)
-    print("\n📊 Checking betting odds")
-
-    for league in active_leagues:
-
-        future_matches = globals_dict.get(f"future_matches_{league}")
-        betting_odds = globals_dict.get(f"betting_odds_{league}")
-
-        if future_matches is None or betting_odds is None:
-            continue
-
-        future_set = set(zip(future_matches["homeTeam"], future_matches["awayTeam"]))
-        odds_df = normalize_columns(betting_odds)
-        book_set = set(zip(odds_df["homeTeam"], odds_df["awayTeam"]))
-
-        missing = book_set - future_set
-
-        for home, away in missing:
-            future_matches.loc[len(future_matches)] = {
-                "utcDate": pd.NaT,
-                "homeTeam": home,
-                "awayTeam": away
-            }
-
-        globals_dict[f"future_matches_{league}"] = future_matches
+    # Odds don't add games to the schedule: the odds feed also lists games in
+    # progress or just finished, which the table may already count. Any game
+    # missing from the schedule is added below instead, where the table
+    # decides whether it has been played. Odds still apply to every game on
+    # the schedule (3_probabilities.py).
 
     # -------------------------------
     # Reverse fixtures (only active leagues)
