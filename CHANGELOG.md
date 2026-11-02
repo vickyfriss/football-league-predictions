@@ -6,6 +6,10 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ---
 
+## 2 November 2026
+
+- **Fixed:** Every game now counts exactly once: either in the table's points or in the simulated games still to play. When the league table is slower than the results (on 1 Nov the evening update missed Union Berlin vs. Köln, Telstar vs. Utrecht and Excelsior vs. Twente), the missing results are added to the table from their scores. A game already played can no longer be simulated again. Each update checks that every team's played and remaining games add up to a full season, and a league that doesn't add up keeps its last predictions until the next update.
+
 ## 26 October 2026
 
 - **Fixed:** Recent results no longer go missing when the results feed is slow. A game counts as played once it has kicked off and has a final score, even before the feed marks it finished (on 26 Oct the morning update missed every Sunday game, Barcelona vs. Real Madrid included). Results already saved are never dropped, and each update checks the results against the league table, so any games the feed is still missing are picked up by the next update.
