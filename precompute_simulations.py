@@ -351,6 +351,82 @@ backfill_missing_team_fixtures(globals_dict, PRE_RUN_FIXTURES_SNAPSHOT, dataset_
 
 
 # =========================
+# 3️⃣.6 EVERY GAME COUNTED EXACTLY ONCE
+# =========================
+# Points come from ESPN's table and the simulation plays the schedule on top,
+# so every game has to be in exactly one of the two. Two things break that:
+# - ESPN's table can lag the results feed by hours (1 Nov 2026: Union Berlin
+#   v Köln finished around 16:25 UTC and was still missing from the table at
+#   18:14), so a game in the results but not in the table counted nowhere.
+#   Those games are added to the table from their score.
+# - A game already in the results can still be on the schedule (a slow
+#   status change), so it would count twice. It's dropped from the schedule.
+def results_ahead_of_table(table, past):
+    """Scored games the table doesn't count yet (empty if none), or None when
+    they can't be matched game by game to the teams that are ahead."""
+    scored = past.dropna(subset=["homeGoals", "awayGoals"]).copy()
+    scored["_date"] = pd.to_datetime(scored["utcDate"], utc=True, errors="coerce")
+    scored = scored.sort_values("_date", kind="stable")
+    gp = pd.to_numeric(table.set_index("team")["gp"], errors="coerce").fillna(0).astype(int)
+    counts = pd.concat([scored["homeTeam"], scored["awayTeam"]]).value_counts()
+    ahead = {t: int(counts.get(t, 0)) - int(gp[t]) for t in gp.index}
+    if all(n <= 0 for n in ahead.values()):
+        return scored.iloc[0:0]
+    extra = set()
+    for team, n in ahead.items():
+        if n > 0:
+            extra |= set(scored[(scored["homeTeam"] == team) | (scored["awayTeam"] == team)].tail(n).index)
+    games = scored.loc[sorted(extra)]
+    per_team = pd.concat([games["homeTeam"], games["awayTeam"]]).value_counts()
+    if any(int(per_team.get(t, 0)) != max(n, 0) for t, n in ahead.items()):
+        return None
+    return games
+
+def add_games_to_table(table, games):
+    t = table.copy()
+    for col in ["gp", "w", "d", "l", "gf", "ga", "gd", "pts"]:
+        t[col] = pd.to_numeric(t[col], errors="coerce").fillna(0).astype(int)
+    t = t.set_index("team")
+    for _, g in games.iterrows():
+        hg, ag = int(g["homeGoals"]), int(g["awayGoals"])
+        for team, gf, ga in [(g["homeTeam"], hg, ag), (g["awayTeam"], ag, hg)]:
+            t.loc[team, ["gp", "gf", "ga"]] += [1, gf, ga]
+            result = "w" if gf > ga else "d" if gf == ga else "l"
+            t.loc[team, result] += 1
+            t.loc[team, "pts"] += {"w": 3, "d": 1, "l": 0}[result]
+        print(f"   + {g['homeTeam']} {hg}-{ag} {g['awayTeam']}")
+    t["gd"] = t["gf"] - t["ga"]
+    # Stable sort: teams level on points, goal difference and goals keep the
+    # table's own order (some leagues split ties on head-to-head)
+    t = t.reset_index().sort_values(["pts", "gd", "gf"], ascending=False, kind="stable")
+    t["position"] = range(1, len(t) + 1)
+    return t.reset_index(drop=True)
+
+counting_problems = {}
+for lg in dataset_processing.leagues:
+    table = globals_dict.get(lg)
+    past = globals_dict.get(f"past_matches_{lg}_all")
+    future = globals_dict.get(f"future_matches_{lg}")
+    if table is None or table.empty or past is None or future is None:
+        continue
+    games = results_ahead_of_table(table, past)
+    if games is None:
+        counting_problems[lg] = "results and table can't be matched game by game"
+        continue
+    if len(games):
+        print(f"⚠️ {lg}: {len(games)} result(s) not in the table yet -- adding them")
+        globals_dict[lg] = add_games_to_table(table, games)
+    future = dataset_processing.normalize_columns(future)
+    played = set(zip(past["homeTeam"], past["awayTeam"]))
+    pairs = list(zip(future["homeTeam"], future["awayTeam"]))
+    keep = [p not in played for p in pairs]
+    if not all(keep):
+        print(f"⚠️ {lg}: dropping {keep.count(False)} game(s) from the schedule that are already in the results")
+    future = future[keep]
+    globals_dict[f"future_matches_{lg}"] = future.drop_duplicates(subset=["homeTeam", "awayTeam"]).reset_index(drop=True)
+
+
+# =========================
 # 4️⃣ LEAGUE CLASSIFICATION
 # =========================
 active_leagues = []
@@ -433,6 +509,28 @@ print("✅ Probabilities computed.")
 # 7️⃣ MONTE CARLO
 # =========================
 print("4️⃣ Running Monte Carlo simulations...")
+
+# Last check before simulating: for every team, games played in the table plus
+# games left on the schedule must make a full season. A league that doesn't add
+# up keeps its last predictions instead (see SAVE OUTPUTS), with a warning on
+# the GitHub run.
+for lg in list(active_leagues):
+    table = globals_dict[lg]
+    fixtures = dataset_simulation.drop_unknown_teams(df_simulation_all[lg], table)
+    season = 2 * (table["team"].nunique() - 1)
+    gp = pd.to_numeric(table.set_index("team")["gp"], errors="coerce").fillna(0).astype(int)
+    left = pd.concat([fixtures["homeTeam"], fixtures["awayTeam"]]).value_counts()
+    wrong = {t: int(gp[t] + left.get(t, 0)) for t in gp.index if gp[t] + left.get(t, 0) != season}
+    if wrong:
+        counting_problems[lg] = f"games don't add up to {season} for " + ", ".join(f"{t} ({n})" for t, n in sorted(wrong.items()))
+for lg, problem in counting_problems.items():
+    msg = f"{lg}: {problem}; keeping the last predictions"
+    print(f"⚠️ {msg}")
+    if lg in active_leagues:
+        active_leagues.remove(lg)
+    os.makedirs(os.path.dirname(dataset_creation.RESULTS_ANNOTATIONS_FILE), exist_ok=True)
+    with open(dataset_creation.RESULTS_ANNOTATIONS_FILE, "a") as f:
+        f.write(f"warning\t{msg}\n")
 
 tables_all = {lg: globals_dict.get(lg, pd.DataFrame()) for lg in active_leagues}
 
