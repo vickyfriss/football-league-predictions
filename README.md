@@ -69,6 +69,7 @@ See [CHANGELOG.md](CHANGELOG.md) for what's changed and when.
 | `precompute_simulations.py` | Runs the whole pipeline and saves the results to `data/` |
 | `app.py` | The Streamlit dashboard |
 | `.github/workflows/daily_simulations.yml` | The scheduled GitHub Actions run |
+| `tools/rebuild_history.py` | Re-runs past days with the current model, for the trend chart (`data/simulations_rebuilt`) |
 
 ---
 

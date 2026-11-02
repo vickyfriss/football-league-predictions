@@ -54,12 +54,11 @@ COLUMN_LABELS = {
 
 TRANSLATIONS = {
     "en": {
-        "hero_badge": "9 Leagues · Updated Twice a Day",
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
+        "contact_email": "Email",
         "hero_lead": "Every remaining fixture, played 10,000 times.",
         "hero_description": "Each team’s chance of finishing in every position, from the title to relegation, built from results and betting odds.",
-        "hero_cta": "Learn more about the creator & connect →",
         "loading_spinner": "Loading simulation data...",
         "data_not_ready": "⚠️ Simulation data not ready yet. Please reload later.",
         "last_run": "Simulations last run on: {date} UTC",
@@ -70,7 +69,6 @@ TRANSLATIONS = {
         "ago_day": "1 day ago",
         "ago_days": "{n} days ago",
         "updated_ago": "Updated {ago}",
-        "results_eyebrow": "Live Predictions",
         "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
@@ -149,12 +147,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Built with Python & Streamlit",
     },
     "es": {
-        "hero_badge": "9 Ligas · Actualizado Dos Veces al Día",
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
+        "contact_email": "Correo",
         "hero_lead": "Cada partido que queda, jugado 10.000 veces.",
         "hero_description": "La probabilidad de cada equipo de terminar en cada posición, del título al descenso, a partir de resultados y cuotas de apuestas.",
-        "hero_cta": "Conoce más sobre la creadora y conéctate →",
         "loading_spinner": "Cargando datos de la simulación...",
         "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
         "last_run": "Última ejecución de las simulaciones: {date} UTC",
@@ -165,7 +162,6 @@ TRANSLATIONS = {
         "ago_day": "hace 1 día",
         "ago_days": "hace {n} días",
         "updated_ago": "Actualizado {ago}",
-        "results_eyebrow": "Predicciones en Vivo",
         "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
@@ -244,12 +240,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Hecho con Python y Streamlit",
     },
     "pt-BR": {
-        "hero_badge": "9 Ligas · Atualizado Duas Vezes por Dia",
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
+        "contact_email": "E-mail",
         "hero_lead": "Cada jogo que falta, disputado 10.000 vezes.",
         "hero_description": "A chance de cada time terminar em cada posição, do título ao rebaixamento, a partir de resultados e odds de apostas.",
-        "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
         "loading_spinner": "Carregando dados da simulação...",
         "data_not_ready": "⚠️ Os dados da simulação ainda não estão prontos. Recarregue mais tarde.",
         "last_run": "Última execução das simulações: {date} UTC",
@@ -260,7 +255,6 @@ TRANSLATIONS = {
         "ago_day": "há 1 dia",
         "ago_days": "há {n} dias",
         "updated_ago": "Atualizado {ago}",
-        "results_eyebrow": "Previsões ao Vivo",
         "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
@@ -339,12 +333,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Feito com Python e Streamlit",
     },
     "fr": {
-        "hero_badge": "9 Ligues · Mis à Jour Deux Fois par Jour",
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
+        "contact_email": "E-mail",
         "hero_lead": "Chaque match restant, joué 10 000 fois.",
         "hero_description": "Les chances de chaque équipe de terminer à chaque place, du titre à la relégation, à partir des résultats et des cotes des paris.",
-        "hero_cta": "En savoir plus sur la créatrice et se connecter →",
         "loading_spinner": "Chargement des données de simulation...",
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
         "last_run": "Dernière exécution des simulations : {date} UTC",
@@ -355,7 +348,6 @@ TRANSLATIONS = {
         "ago_day": "il y a 1 jour",
         "ago_days": "il y a {n} jours",
         "updated_ago": "Mis à jour {ago}",
-        "results_eyebrow": "Prédictions en Direct",
         "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
@@ -656,15 +648,17 @@ def add_cell_tooltips(table_html, df, form=None, upcoming=None):
                 f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
                 for k, (res, gf, ga, opp, home, date) in enumerate(games)
             )
-            nxt = (upcoming or {}).get(team, [])
+            # Next games above the last ones, latest date first, so the whole
+            # list runs from the furthest date down to the oldest
+            nxt = list(reversed((upcoming or {}).get(team, [])))
             next_rows = "".join(
                 f'<span class="form-game">'
                 f'<span class="form-date">{date.day} {SHORT_MONTHS[st.session_state.lang][date.month - 1]}</span>'
                 f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
                 for opp, home, date in nxt
             )
-            parts = (f'<span class="form-title">{t("last_games", n=len(games))}</span>{rows}' if games else "")
-            parts += (f'<span class="form-title next">{t("next_games", n=len(nxt))}</span>{next_rows}' if nxt else "")
+            parts = (f'<span class="form-title">{t("next_games", n=len(nxt))}</span>{next_rows}' if nxt else "")
+            parts += (f'<span class="form-title{" later" if nxt else ""}">{t("last_games", n=len(games))}</span>{rows}' if games else "")
             place = " tip-below" if r < len(df) / 2 else ""
             return (f'{m.group(1)} class="{m.group(4)} has-tip team-tip{place}">{m.group(5)}'
                     f'<span class="cell-tip">{parts}</span></td>')
@@ -779,17 +773,25 @@ def load_history(league, data_version):
         season_start = load_dataset_processing().SEASON_START_DATES[league].tz_convert(None)
     except Exception:
         return pd.DataFrame(columns=columns)
-    if not metrics or not os.path.isdir("data/simulations"):
+    if not metrics:
         return pd.DataFrame(columns=columns)
+    # data/simulations_rebuilt holds the season's earlier runs re-run with the
+    # current model (see its README), so the whole line comes from one model:
+    # where a day has a rebuilt run, it's used instead of the original
     runs = {}
-    for snap in sorted(os.listdir("data/simulations")):
-        if not SNAPSHOT_NAME.match(snap):
+    for folder in ["data/simulations", "data/simulations_rebuilt"]:
+        if not os.path.isdir(folder):
             continue
-        when = datetime.strptime(snap, "%Y%m%d_%H%M%S")
-        path = f"data/simulations/{snap}/{league}_simulation.csv"
-        if when < season_start or not os.path.exists(path):
-            continue
-        runs[when.date()] = path   # later runs on the same day overwrite earlier ones
+        days = {}
+        for snap in sorted(os.listdir(folder)):
+            if not SNAPSHOT_NAME.match(snap):
+                continue
+            when = datetime.strptime(snap, "%Y%m%d_%H%M%S")
+            path = f"{folder}/{snap}/{league}_simulation.csv"
+            if when < season_start or not os.path.exists(path):
+                continue
+            days[when.date()] = path   # later runs on the same day overwrite earlier ones
+        runs.update(days)
     frames = []
     for day, path in runs.items():
         try:
@@ -969,64 +971,39 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-top: -2rem;
-    margin-bottom: 12px;
-    padding: 64px 24px 36px;
+    margin-bottom: 6px;
+    padding: 30px 24px 26px;
     background:
         radial-gradient(ellipse 55% 90% at 85% 0%, var(--hero-glow), transparent 70%),
         linear-gradient(180deg, var(--hero-top) 0%, var(--page-bg) 100%);
 }
 .hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--card-bg);
-    border: 1px solid var(--hero-line);
-    color: var(--accent-text);
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-    border-radius: 999px;
-    margin-bottom: 18px;
-}
-.hero-live {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--accent-text);
-    animation: hero-pulse 2.2s ease-out infinite;
-}
-@keyframes hero-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(46,125,50,0.45); }
-    70% { box-shadow: 0 0 0 8px rgba(46,125,50,0); }
-    100% { box-shadow: 0 0 0 0 rgba(46,125,50,0); }
-}
-@media (prefers-reduced-motion: reduce) { .hero-live { animation: none; } }
 .hero-banner .hero-copy h1 {
     color: var(--hero-ink) !important;
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(30px, 3.2vw, 42px);
     font-weight: 800;
     line-height: 1.02;
     letter-spacing: -0.03em;
-    margin: 0 0 16px;
+    margin: 0 0 10px;
     padding: 0 !important;
     text-align: center !important;
     text-wrap: balance;
 }
 .hero-banner .hero-copy .hero-lead {
     color: var(--accent-text);
-    font-size: clamp(18px, 1.7vw, 22px);
+    font-size: clamp(16px, 1.4vw, 19px);
     font-weight: 700;
     line-height: 1.3;
-    margin: 0 0 10px;
+    margin: 0 0 6px;
     text-align: center !important;
 }
 .hero-banner .hero-copy .hero-description {
     color: var(--text-main);
     opacity: 0.8;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 14.5px;
+    line-height: 1.55;
     max-width: 560px;
-    margin: 0 auto 18px;
+    margin: 0 auto 12px;
     text-align: center !important;
 }
 .hero-banner .hero-copy .hero-meta {
@@ -1035,26 +1012,26 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin: 0;
     text-align: center !important;
 }
-.hero-meta a {
+.hero-links a {
     color: var(--accent-text) !important;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none !important;
-    border-bottom: 2px solid var(--hero-line);
-    padding-bottom: 1px;
-    margin-left: 4px;
-    transition: border-color 0.2s ease;
+    margin-left: 14px;
 }
-.hero-meta a:hover { border-bottom-color: var(--accent-text); }
+.hero-links a:hover { text-decoration: underline !important; text-underline-offset: 3px; }
+.hero-links a:first-child { margin-left: 16px; }
 
-/* Between phone and desktop, keep the text clear of the fixed contact icons
-   on the right edge (both sides, so it stays centred) */
+/* Between phone and desktop, the title would run into the language pills in
+   the top-right corner: start it below them */
 @media (min-width: 601px) and (max-width: 1100px) {
-    .hero-banner { padding-left: 90px; padding-right: 90px; }
+    .hero-banner { padding-top: 56px; }
 }
 @media (max-width: 600px) {
-    /* Extra top padding clears the language pills and the contact-icon row,
-       which sit over the top of this banner on phones */
-    .hero-banner { padding: 104px 16px 24px; }
+    /* Extra top padding clears the language pills, which sit over the top
+       of this banner on phones */
+    .hero-banner { padding: 52px 16px 20px; }
+    .hero-links a:first-child { margin-left: 0; }
+    .hero-links { display: block; margin-top: 4px; }
 }
 .app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
 
@@ -1096,6 +1073,8 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
    section inventing its own. Each band only supplies the colour that reads
    against its own background. */
 .methodology-heading, .about-heading, .results-heading { margin: 0 0 10px; font-size: 26px; font-weight: 800; }
+/* Streamlit's own h2 size outranks the class above inside markdown blocks */
+[data-testid="stMarkdownContainer"] h2.results-heading { font-size: 30px !important; padding: 0 !important; margin: 0 0 4px !important; letter-spacing: -0.01em; }
 /* Scoped with the band ancestor (not just the bare class) on purpose --
    Streamlit injects its own ".st-emotion-cache-XXXX h1,h2,h3 { color:
    inherit }" rule per container, which is class+type (0,1,1) and silently
@@ -1181,7 +1160,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 /* "Last updated" status pill (replaces the old full-width st.info()-style
    box): a small centred chip with a live dot, the relative time in bold and
    the exact run time muted after it. */
-.status-wrap { display: flex; justify-content: center; margin: 18px 0; }
+.status-wrap { display: flex; justify-content: center; margin: 10px 0 14px; }
 .status-banner {
     display: inline-flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 4px 8px;
     padding: 7px 16px; border-radius: 999px;
@@ -1264,7 +1243,7 @@ td.tip-left .cell-tip { left: auto; right: 0; }
 td.team-tip:hover { z-index: 10; text-decoration: underline dotted; text-underline-offset: 3px; }
 td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .form-title { display: block; margin-bottom: 5px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.75; }
-.form-title.next { margin-top: 9px; }
+.form-title.later { margin-top: 9px; }
 .form-game { display: flex; align-items: center; gap: 8px; padding: 2px 6px; margin: 0 -6px; border-radius: 4px; font-weight: 500; }
 .form-game.latest { background-color: rgba(255,255,255,0.12); }
 .form-date { min-width: 44px; opacity: 0.65; font-variant-numeric: tabular-nums; }
@@ -1464,15 +1443,15 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
    "kind" attribute rather than a newer widget's internals.
 ================================ */
 div.stButton > button[kind="secondary"] {
-    background-color: #ffffff !important;
-    color: #333 !important;
-    border: 1px solid #e3e3e3 !important;
+    background-color: var(--card-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-light) !important;
     box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     font-weight: 500 !important;
 }
 div.stButton > button[kind="secondary"]:hover {
-    background-color: #e2f3e4 !important;
-    color: #111 !important;
+    background-color: var(--section-band-bg) !important;
+    color: var(--text-main) !important;
     border-color: #a5d6a7 !important;
 }
 /* Selected league pill */
@@ -1502,7 +1481,7 @@ div.stButton > button {
        others' natural single-line height instead of them matching it.
        Flex-centering keeps shorter single-line labels looking centered in
        the taller box rather than stuck at the top. */
-    height: 78px;
+    height: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1525,10 +1504,21 @@ div.stButton > button [data-testid="stMarkdownContainer"] {
 div.stButton > button [data-testid="stMarkdownContainer"] p {
     display: block !important;
 }
+div.stButton > button p {
+    font-size: 14px;
+}
 div.stButton > button p:last-child {
-    margin-top: 2px !important;
-    font-size: 13px;
-    opacity: 0.8;
+    margin-top: 1px !important;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    opacity: 0.7;
+}
+/* The language pills are one-line buttons: keep their own size */
+.st-key-lang_switcher div.stButton > button p {
+    font-size: inherit !important;
+    letter-spacing: normal !important;
+    opacity: 1 !important;
+    margin: 0 !important;
 }
 
 /* Laptop/tablet widths: nine pills in one row leave ~107px each at 1280px,
@@ -1587,46 +1577,8 @@ div.stButton > button p:last-child {
     }
 }
 
-/* Top-right contact panel -- also fixed white; same black-icon reasoning.
-   Sits well below the language pills (44px lower than the pills' own
-   bottom edge) so the two clusters read as two distinct, deliberately
-   spaced groups rather than one crowded corner. */
-#contact-panel {
-    position: fixed;
-    top: 88px;
-    right: 20px;
-    background-color: #ffffff; 
-    padding: 10px 12px; 
-    border-radius: 10px; 
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15); 
-    z-index: 100; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-}
-#contact-panel a { margin: 8px 0; text-decoration: none; transition: transform 0.2s; }
-#contact-panel a:first-child { margin-top: 4px; }
-#contact-panel a:hover img { transform: scale(1.3); }
 
-/* Responsive adjustments for other elements */
-@media (max-width: 600px) {
-    /* On narrow screens there's no room for a permanently pinned corner
-       cluster -- fixed position meant this panel stayed on screen and
-       covered real content (the "last run" banner, the table's top edge)
-       for the entire time the user scrolled through the page. Switching to
-       absolute anchors it to the top of the document instead: it still sits
-       over the hero banner exactly where it does today, but scrolls away
-       with the rest of the page instead of floating over content below. */
-    /* Centered to match the now-single-row, centered language switcher above
-       it, rather than staying right-jammed while the switcher above it is
-       centered -- top is 10px below that switcher's own bottom edge (a
-       single row of 26px pills starting at top:8px ends around 34px). */
-    #contact-panel { position: absolute; flex-direction: row; top: 44px; left: 50%; right: auto; transform: translateX(-50%); padding: 8px 10px; border-radius: 8px; }
-    #contact-panel a { margin: 0 8px; }
-    #contact-panel a:first-child { margin-left: 0; }
-    #contact-panel a img { width: 24px !important; height: 24px !important; }
 
-}
 
 div.stButton > button {
     border-radius: 8px !important;
@@ -1635,8 +1587,7 @@ div.stButton > button {
 /* Hide Streamlit's own chrome (hamburger menu, "Deploy" button, "Made with
    Streamlit" footer) -- a polished page shouldn't visibly announce the
    dev tool it was built with. display:none (not visibility) so nothing keeps
-   reserving space -- fixed-position elements like #contact-panel are
-   positioned relative to the viewport, not the header, so this doesn't move them.
+   reserving space.
    Plain tag selectors AND the newer data-testid ones are both included since
    which one actually matches has changed across Streamlit versions. */
 #MainMenu { visibility: hidden; }
@@ -1742,10 +1693,6 @@ header { display: none; }
     color: #ffffff !important;
 }
 @media (max-width: 600px) {
-    /* Same reasoning as #contact-panel above: fixed position left this
-       pinned over content (the results table, the run-date banner) for the
-       whole scroll. Absolute keeps it in the same spot over the hero banner
-       but lets it scroll away with the page instead of staying on top. */
     /* Four pills at 190px wide had no choice but to wrap into a cramped 2x2
        block, right-jammed into the corner. Centering a single row instead
        needs less width per pill (no flag+code label has to share a row with
@@ -1769,34 +1716,10 @@ header { display: none; }
 [data-testid="stElementContainer"]:has(style),
 [data-testid="stElementContainer"]:has(style) [data-testid="stMarkdown"],
 [data-testid="stElementContainer"]:has(style) [data-testid="stMarkdown"] > div,
-[data-testid="stElementContainer"]:has(style) [data-testid="stMarkdownContainer"],
-[data-testid="stElementContainer"]:has(#contact-panel),
-[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdown"],
-[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdown"] > div,
-[data-testid="stElementContainer"]:has(#contact-panel) [data-testid="stMarkdownContainer"] {
+[data-testid="stElementContainer"]:has(style) [data-testid="stMarkdownContainer"] {
     display: contents;
 }
 </style>
-""", unsafe_allow_html=True)
-
-# -------------------------------
-# 5️⃣.6 TOP-RIGHT CONTACT PANEL
-
-st.markdown("""
-<div id="contact-panel">
-    <a href="mailto:vicky_friss@hotmail.com" title="Email">
-        <img src="https://img.icons8.com/ios-filled/30/000000/new-post.png"/>
-    </a>
-    <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank" title="LinkedIn">
-        <img src="https://img.icons8.com/ios-filled/30/000000/linkedin.png"/>
-    </a>
-    <a href="https://medium.com/@vickyfrissdekereki" target="_blank" title="Medium">
-        <img src="https://img.icons8.com/ios-filled/30/000000/medium-monogram.png"/>
-    </a>
-    <a href="https://github.com/vickyfriss" target="_blank" title="GitHub">
-        <img src="https://img.icons8.com/ios-filled/30/000000/github.png"/>
-    </a>
-</div>
 """, unsafe_allow_html=True)
 
 # -------------------------------
@@ -1847,11 +1770,14 @@ DEFAULT_LEAGUE_KEY = "premierleague_england"
 st.markdown(
     f'<div class="hero-banner">'
     f'<div class="hero-inner"><div class="hero-copy">'
-    f'<span class="hero-badge"><span class="hero-live"></span>{t("hero_badge")}</span>'
     f'<h1>{t("hero_title")}</h1>'
     f'<p class="hero-lead">{t("hero_lead")}</p>'
     f'<p class="hero-description">{t("hero_description")}</p>'
-    f'<p class="hero-meta">{t("hero_byline")} ·<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">{t("hero_cta")}</a></p>'
+    f'<p class="hero-meta">{t("hero_byline")}<span class="hero-links">'
+    f'<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">LinkedIn</a>'
+    f'<a href="https://medium.com/@vickyfrissdekereki" target="_blank">Medium</a>'
+    f'<a href="https://github.com/vickyfriss" target="_blank">GitHub</a>'
+    f'<a href="mailto:vicky_friss@hotmail.com">{t("contact_email")}</a></span></p>'
     f'</div></div></div>',
     unsafe_allow_html=True,
 )
@@ -1996,7 +1922,6 @@ if len(pos_pct_df):
 
 st.markdown(f"""
 <div style="text-align:center; margin: 0 0 0.25rem;">
-    <span class="section-eyebrow">{t("results_eyebrow")}</span>
     <h2 class="results-heading">{selected_display_name.split(" (")[0]}</h2>
     {season_progress}
 </div>
