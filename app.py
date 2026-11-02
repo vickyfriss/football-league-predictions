@@ -72,7 +72,7 @@ TRANSLATIONS = {
         "updated_ago": "Updated {ago}",
         "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
-        "table_caption": "Chance of each finishing position, from 10,000 simulated seasons",
+        "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
         "last_games": "Last {n} games",
         "next_games": "Next {n} games",
@@ -171,7 +171,7 @@ TRANSLATIONS = {
         "updated_ago": "Actualizado {ago}",
         "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
-        "table_caption": "Probabilidad de cada posición final, según 10.000 temporadas simuladas",
+        "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
         "last_games": "Últimos {n} partidos",
         "next_games": "Próximos {n} partidos",
@@ -270,7 +270,7 @@ TRANSLATIONS = {
         "updated_ago": "Atualizado {ago}",
         "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
-        "table_caption": "Chance de cada posição final, com base em 10.000 temporadas simuladas",
+        "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
         "last_games": "Últimos {n} jogos",
         "next_games": "Próximos {n} jogos",
@@ -369,7 +369,7 @@ TRANSLATIONS = {
         "updated_ago": "Mis à jour {ago}",
         "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
-        "table_caption": "Probabilité de chaque place finale, sur 10 000 saisons simulées",
+        "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
         "last_games": "{n} derniers matchs",
         "next_games": "{n} prochains matchs",
@@ -508,7 +508,7 @@ mid_pct = 0.14
 max_pct = 0.75
 
 def zero_style(val):
-    return "background-color: white !important;" + (" color: #9a9a9a !important;" if val < 0.05 else "") if val < 1 else ""
+    return "background-color: white !important;" if val < 1 else ""
 
 def color_scale(val, mid=mid_pct, max_val=max_pct):
     if val >= max_val:
@@ -578,10 +578,7 @@ def style_probabilities_table(df, column_labels=None, zones=None):
         display_df.style
         .background_gradient(cmap=green_cmap, vmin=0, vmax=vmax, gmap=color_data, axis=None)
         .map(zero_style, subset=num_cols)
-        # One decimal like the cards; a chance below 0.05% shows as "<0.1%" and
-        # no chance at all as an empty cell, so the eye goes to the real numbers.
-        # The hover tip keeps two decimals.
-        .format({col: (lambda v: "" if v == 0 else "<0.1%" if v < 0.05 else f"{v:.1f}%") for col in num_cols})
+        .format({col: "{:.2f}%" for col in num_cols})
         .set_properties(subset=[c for c in text_cols if c not in (column_labels["TEAM"], column_labels["PTS"])], **{
             "text-align":"center","font-family":"Inter, Roboto, Arial, sans-serif",
             "font-size":"12px","font-weight":"500","color":"#555","white-space":"nowrap",
@@ -611,12 +608,9 @@ def style_probabilities_table(df, column_labels=None, zones=None):
                                         ("font-family","Inter, Roboto, Arial, sans-serif"),
                                         ("font-size","13px"),("font-weight","600")]},
             {"selector": "tr", "props":[("height","25px")]},
-            # Row lines only: no vertical lines between the percentage cells
-            {"selector": "td, th", "props":[("border-left","none"),("border-right","none"),("border-top","none"),
-                                            ("border-bottom","1px solid #ececec")]},
             {"selector": "th:nth-child(5), td:nth-child(5)", "props":[("border-right","2px solid #999")]},
             {"selector": "th:nth-child(5)", "props":[("font-weight","800"),("color","#000")]},
-            {"selector": "td:nth-child(-n+5)", "props":[("border-bottom","1px solid #e2e2e2")]},
+            {"selector": "td:nth-child(-n+5)", "props":[("border-bottom","1px solid #ccc")]},
             {"selector": "tr:nth-child(odd) td:nth-child(-n+5)", "props":[("background-color","#f9f9f9")]},
             {"selector": "tr:nth-child(even) td:nth-child(-n+5)", "props":[("background-color","#f2f2f2")]},
             # Row hover: a translucent green wash over the *entire* row, via
@@ -1137,10 +1131,11 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-top: 18px;
-    margin-bottom: 0;
+    margin-bottom: 18px;
     padding: 40px 24px 48px;
     background-color: var(--section-band-bg);
     border-top: 1px solid rgba(46,125,50,0.25);
+    border-bottom: 1px solid rgba(46,125,50,0.25);
     text-align: center;
 }
 /* 1280px rather than the original 980px -- at 980 the 4-per-row step cards
@@ -1214,10 +1209,9 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
 .about-band {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    /* Follows straight on from the method band: same tint, one divider */
-    margin-top: -1rem;
+    margin-top: 18px;
     margin-bottom: 0;
-    padding: 44px 24px 44px;
+    padding: 48px 24px 44px;
     background-color: var(--section-band-bg);
     border-top: 1px solid rgba(46,125,50,0.25);
     border-bottom: 1px solid rgba(46,125,50,0.25);
@@ -1347,8 +1341,6 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .zone-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: 12px; color: #555; }
 .zone-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
 .zone-legend .zone-note { font-style: italic; opacity: 0.8; }
-.zone-legend .table-note { margin-left: auto; opacity: 0.8; }
-@media (max-width: 860px) { .zone-legend .table-note { margin-left: 0; flex-basis: 100%; } }
 
 /* Headline cards above the table: title race, race for the top places,
    relegation. Same card look as the methodology steps; three across on
@@ -1500,11 +1492,13 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
     /* Every column except TEAM must never wrap -- a wrapped cell makes its
        whole row taller, which looks broken for a results table. Widths below
        are sized from the actual rendered font (measured against the live
-       page, 14px/600 for headers, 14px/500 for data): "100.0%" -- the
-       longest a percentage cell can ever be -- needs ~60px including the
-       6px+6px cell padding, so 66px leaves headroom. "POS": the header text
-       alone needs ~41px. */
-    th:nth-child(n+6), td:nth-child(n+6) { width: 66px; white-space: nowrap !important; }
+       page, 14px/600 for headers, 14px/500 for data): "100.00%" -- the
+       longest a percentage cell can ever be -- needs ~71px including the
+       6px+6px cell padding, so 78px leaves real headroom rather than being
+       exactly on the edge like the previous 60px (which is why cells were
+       wrapping to "12.26" / "%" on two lines). Same story for "POS": the
+       header text alone needs ~41px, more than the previous 40px column. */
+    th:nth-child(n+6), td:nth-child(n+6) { width: 78px; white-space: nowrap !important; }
 
     /* left offsets below are each 1px less than the exact running-total
        width (46, 258, 300, 346): at rest this changes nothing, since a sticky
@@ -2217,12 +2211,17 @@ zone_legend = "".join(
     f'{t("zone_" + zones["top_kind"]) if zone == "top" else t("zone_" + zone)}</span>'
     for zone in ZONE_COLORS if zone in zones
 )
-zone_legend = (f'<div class="zone-legend">{zone_legend}' + (f'<span class="zone-note">{t("zones_note")}</span>' if zone_legend else "")
-               + f'<span class="table-note">{t("table_caption")}</span></div>')
+if zone_legend:
+    zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
 st.markdown(
     f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league, data_version), load_next_games(league, data_version))}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
+
+# -------------------------------
+# 12️⃣ TABLE CAPTION
+
+st.caption(t("table_caption"))
 
 # -------------------------------
 # 1️⃣3️⃣ SEASON TREND
