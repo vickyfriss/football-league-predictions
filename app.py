@@ -73,7 +73,7 @@ TRANSLATIONS = {
         "results_header": "{league} Simulation Results",
         "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
-        "last_games": "Last {n} games · newest first",
+        "last_games": "Last {n} games",
         "next_games": "Next {n} games",
         "form_W": "W",
         "form_D": "D",
@@ -172,7 +172,7 @@ TRANSLATIONS = {
         "results_header": "Resultados de la Simulación: {league}",
         "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
-        "last_games": "Últimos {n} partidos · el más reciente primero",
+        "last_games": "Últimos {n} partidos",
         "next_games": "Próximos {n} partidos",
         "form_W": "G",
         "form_D": "E",
@@ -271,7 +271,7 @@ TRANSLATIONS = {
         "results_header": "Resultados da Simulação: {league}",
         "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
-        "last_games": "Últimos {n} jogos · mais recente primeiro",
+        "last_games": "Últimos {n} jogos",
         "next_games": "Próximos {n} jogos",
         "form_W": "V",
         "form_D": "E",
@@ -370,7 +370,7 @@ TRANSLATIONS = {
         "results_header": "Résultats de la Simulation : {league}",
         "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
-        "last_games": "{n} derniers matchs · du plus récent",
+        "last_games": "{n} derniers matchs",
         "next_games": "{n} prochains matchs",
         "form_W": "V",
         "form_D": "N",
@@ -1383,15 +1383,15 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: baseline;
-    margin-bottom: 9px; padding-bottom: 7px; border-bottom: 1px solid var(--border-light);
-    font-size: 13px; color: var(--text-main);
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; align-items: baseline;
+    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
 }
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mover-row .mv-delta.good { color: var(--good-text); }
 .mover-row .mv-delta.bad { color: var(--bad-text); }
-.mover-row .mv-what { font-size: 11.5px; opacity: 0.6; white-space: nowrap; }
+.mover-row .mv-what { grid-column: 1 / -1; font-size: 11px; line-height: 1.2; opacity: 0.6;
+    font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .headline-card.movers { border-top-color: #8A8F8B; }
 .headline-cutoff {
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
@@ -2131,13 +2131,12 @@ if pos_cols and zones:
         moves.sort(reverse=True)
         def mover_rows(rows):
             return "".join(
-                # One line per team, like the other cards' rows; the before and
-                # after chances are in the row's hover text
-                f'<div class="mover-row" title="{html.escape(metric_label(league, metric))}: {now - delta:.1f}% → {now:.1f}%">'
-                f'<span class="team">{html.escape(team)}</span>'
-                f'<span class="mv-what">{metric_label(league, metric)}</span>'
+                # Same shape as the other cards' rows: name and number on top,
+                # and in place of their bar, what moved, from and to
+                f'<div class="mover-row"><span class="team">{html.escape(team)}</span>'
                 f'<span class="mv-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">'
-                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span></div>'
+                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>'
+                f'<span class="mv-what">{metric_label(league, metric)} · {now - delta:.1f}% → {now:.1f}%</span></div>'
                 for _, team, metric, delta, now in rows
             )
         if moves:
