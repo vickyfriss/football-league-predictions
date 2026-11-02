@@ -7,6 +7,8 @@ import numpy as np
 import os
 import time
 import html
+import altair as alt
+import streamlit.components.v1 as st_components
 import re
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -52,13 +54,11 @@ COLUMN_LABELS = {
 
 TRANSLATIONS = {
     "en": {
-        "hero_badge": "9 Leagues · Updated Daily",
+        "hero_badge": "9 Leagues · Updated Twice a Day",
         "hero_title": "Football League Simulator",
         "hero_byline": "by Victoria Friss de Kereki",
-        "hero_description": (
-            "This simulation combines historical results and betting odds to estimate match outcome probabilities.<br>"
-            "It then runs <b>10,000 Monte Carlo simulations</b> for all remaining fixtures to calculate how likely each team is to finish in each league position."
-        ),
+        "hero_lead": "Every remaining fixture, played 10,000 times.",
+        "hero_description": "Each team’s chance of finishing in every position, from the title to relegation, built from results and betting odds.",
         "hero_cta": "Learn more about the creator & connect →",
         "loading_spinner": "Loading simulation data...",
         "data_not_ready": "⚠️ Simulation data not ready yet. Please reload later.",
@@ -102,6 +102,22 @@ TRANSLATIONS = {
         "card_show_more": "Show more",
         "card_show_less": "Show less",
         "card_cutoff": "Top-{n} cut-off",
+        "hm_title": "Biggest moves this week",
+        "hm_sub": "Last 7 days · all 9 leagues",
+        "m_title": "Title",
+        "m_top_ucl": "Top {n}",
+        "m_top_promotion": "Promotion",
+        "m_top_libertadores": "Libertadores",
+        "m_playoff": "Top {n}",
+        "m_relegation": "Relegation",
+        "delta_note": "▲▼ change in the last 7 days (since {date})",
+        "delta_tip": "Change since {date}",
+        "trend_eyebrow": "Season So Far",
+        "trend_title": "How the Chances Have Moved",
+        "trend_sub": "Each team’s chance after every update this season",
+        "trend_teams": "Teams",
+        "trend_empty": "Not enough updates yet this season to show a trend.",
+        "trend_date": "Date",
         "download_button": "Download table as CSV",
         "methodology_eyebrow": "The Method",
         "methodology_title": "How This Simulation Works",
@@ -134,13 +150,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Built with Python & Streamlit",
     },
     "es": {
-        "hero_badge": "9 Ligas · Actualizado a Diario",
+        "hero_badge": "9 Ligas · Actualizado Dos Veces al Día",
         "hero_title": "Simulador de Ligas de Fútbol",
         "hero_byline": "por Victoria Friss de Kereki",
-        "hero_description": (
-            "Esta simulación combina resultados históricos y las cuotas de las casas de apuestas para estimar las probabilidades de cada partido.<br>"
-            "Luego ejecuta <b>10.000 simulaciones de Monte Carlo</b> para todos los partidos restantes y calcula la probabilidad de que cada equipo termine en cada posición de la liga."
-        ),
+        "hero_lead": "Cada partido que queda, jugado 10.000 veces.",
+        "hero_description": "La probabilidad de cada equipo de terminar en cada posición, del título al descenso, a partir de resultados y cuotas de apuestas.",
         "hero_cta": "Conoce más sobre la creadora y conéctate →",
         "loading_spinner": "Cargando datos de la simulación...",
         "data_not_ready": "⚠️ Los datos de la simulación aún no están listos. Vuelve a intentarlo más tarde.",
@@ -184,6 +198,22 @@ TRANSLATIONS = {
         "card_show_more": "Ver más",
         "card_show_less": "Ver menos",
         "card_cutoff": "Corte: top {n}",
+        "hm_title": "Los mayores cambios de la semana",
+        "hm_sub": "Últimos 7 días · las 9 ligas",
+        "m_title": "Título",
+        "m_top_ucl": "Top {n}",
+        "m_top_promotion": "Ascenso",
+        "m_top_libertadores": "Libertadores",
+        "m_playoff": "Top {n}",
+        "m_relegation": "Descenso",
+        "delta_note": "▲▼ cambio en los últimos 7 días (desde el {date})",
+        "delta_tip": "Cambio desde el {date}",
+        "trend_eyebrow": "La Temporada Hasta Ahora",
+        "trend_title": "Cómo Han Cambiado las Probabilidades",
+        "trend_sub": "La probabilidad de cada equipo tras cada actualización de esta temporada",
+        "trend_teams": "Equipos",
+        "trend_empty": "Todavía no hay suficientes actualizaciones esta temporada para mostrar una tendencia.",
+        "trend_date": "Fecha",
         "download_button": "Descargar tabla como CSV",
         "methodology_eyebrow": "El Método",
         "methodology_title": "Cómo Funciona Esta Simulación",
@@ -216,13 +246,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Hecho con Python y Streamlit",
     },
     "pt-BR": {
-        "hero_badge": "9 Ligas · Atualizado Diariamente",
+        "hero_badge": "9 Ligas · Atualizado Duas Vezes por Dia",
         "hero_title": "Simulador de Ligas de Futebol",
         "hero_byline": "por Victoria Friss de Kereki",
-        "hero_description": (
-            "Esta simulação combina resultados históricos e odds de apostas para estimar as probabilidades de cada partida.<br>"
-            "Em seguida, executa <b>10.000 simulações de Monte Carlo</b> para todas as partidas restantes e calcula a probabilidade de cada time terminar em cada posição da liga."
-        ),
+        "hero_lead": "Cada jogo que falta, disputado 10.000 vezes.",
+        "hero_description": "A chance de cada time terminar em cada posição, do título ao rebaixamento, a partir de resultados e odds de apostas.",
         "hero_cta": "Saiba mais sobre a criadora e conecte-se →",
         "loading_spinner": "Carregando dados da simulação...",
         "data_not_ready": "⚠️ Os dados da simulação ainda não estão prontos. Recarregue mais tarde.",
@@ -266,6 +294,22 @@ TRANSLATIONS = {
         "card_show_more": "Ver mais",
         "card_show_less": "Ver menos",
         "card_cutoff": "Corte: top {n}",
+        "hm_title": "As maiores mudanças da semana",
+        "hm_sub": "Últimos 7 dias · as 9 ligas",
+        "m_title": "Título",
+        "m_top_ucl": "Top {n}",
+        "m_top_promotion": "Acesso",
+        "m_top_libertadores": "Libertadores",
+        "m_playoff": "Top {n}",
+        "m_relegation": "Rebaixamento",
+        "delta_note": "▲▼ variação nos últimos 7 dias (desde {date})",
+        "delta_tip": "Variação desde {date}",
+        "trend_eyebrow": "A Temporada Até Agora",
+        "trend_title": "Como as Chances Mudaram",
+        "trend_sub": "A chance de cada time após cada atualização desta temporada",
+        "trend_teams": "Times",
+        "trend_empty": "Ainda não há atualizações suficientes nesta temporada para mostrar uma tendência.",
+        "trend_date": "Data",
         "download_button": "Baixar tabela como CSV",
         "methodology_eyebrow": "O Método",
         "methodology_title": "Como Esta Simulação Funciona",
@@ -298,13 +342,11 @@ TRANSLATIONS = {
         "footer": "© 2026 Victoria Friss de Kereki &middot; Feito com Python e Streamlit",
     },
     "fr": {
-        "hero_badge": "9 Ligues · Mis à Jour Chaque Jour",
+        "hero_badge": "9 Ligues · Mis à Jour Deux Fois par Jour",
         "hero_title": "Simulateur de Ligues de Football",
         "hero_byline": "par Victoria Friss de Kereki",
-        "hero_description": (
-            "Cette simulation combine résultats historiques et cotes des paris pour estimer les probabilités de chaque match.<br>"
-            "Elle exécute ensuite <b>10 000 simulations de Monte-Carlo</b> pour tous les matchs restants et calcule la probabilité que chaque équipe termine à chaque position du classement."
-        ),
+        "hero_lead": "Chaque match restant, joué 10 000 fois.",
+        "hero_description": "Les chances de chaque équipe de terminer à chaque place, du titre à la relégation, à partir des résultats et des cotes des paris.",
         "hero_cta": "En savoir plus sur la créatrice et se connecter →",
         "loading_spinner": "Chargement des données de simulation...",
         "data_not_ready": "⚠️ Les données de simulation ne sont pas encore prêtes. Veuillez recharger plus tard.",
@@ -348,6 +390,22 @@ TRANSLATIONS = {
         "card_show_more": "Voir plus",
         "card_show_less": "Voir moins",
         "card_cutoff": "Limite : top {n}",
+        "hm_title": "Les plus grands changements de la semaine",
+        "hm_sub": "7 derniers jours · les 9 ligues",
+        "m_title": "Titre",
+        "m_top_ucl": "Top {n}",
+        "m_top_promotion": "Promotion",
+        "m_top_libertadores": "Libertadores",
+        "m_playoff": "Top {n}",
+        "m_relegation": "Relégation",
+        "delta_note": "▲▼ évolution sur les 7 derniers jours (depuis le {date})",
+        "delta_tip": "Évolution depuis le {date}",
+        "trend_eyebrow": "La Saison Jusqu’ici",
+        "trend_title": "L’Évolution des Probabilités",
+        "trend_sub": "Les chances de chaque équipe après chaque mise à jour de la saison",
+        "trend_teams": "Équipes",
+        "trend_empty": "Pas encore assez de mises à jour cette saison pour afficher une tendance.",
+        "trend_date": "Date",
         "download_button": "Télécharger le tableau en CSV",
         "methodology_eyebrow": "La Méthode",
         "methodology_title": "Comment Fonctionne Cette Simulation",
@@ -666,6 +724,75 @@ def load_recent_form(league, data_version, n=5):
                 games.append(("W" if gf > ga else "D" if gf == ga else "L", gf, ga, opp, home, row.utcDate))
     return form
 
+# Every run also saves its full result in data/simulations/<run time>/
+# <league>_simulation.csv: one column per team, one row per finishing
+# position, counts out of 10,000. Those runs are the history behind the
+# "change in the last 7 days" arrows and the season trend chart.
+SNAPSHOT_NAME = re.compile(r"^\d{8}_\d{6}$")
+
+def league_metrics(league):
+    """{metric: (first, last position)} tracked over time for a league."""
+    zones = LEAGUE_ZONES.get(league)
+    if not zones:
+        return {}
+    metrics = {"title": (1, 1), "top": zones["top"], "relegation": zones["relegation"]}
+    if "top_playoff" in zones:
+        metrics["playoff"] = (1, zones["top_playoff"][1])
+    return metrics
+
+@st.cache_data(show_spinner=False)
+def load_history(league, data_version):
+    # data_version only keys the cache, like load_recent_form. One row per
+    # day (that day's last run), team and metric, this season only.
+    metrics = league_metrics(league)
+    columns = ["day", "team", "metric", "pct"]
+    try:
+        season_start = load_dataset_processing().SEASON_START_DATES[league].tz_convert(None)
+    except Exception:
+        return pd.DataFrame(columns=columns)
+    if not metrics or not os.path.isdir("data/simulations"):
+        return pd.DataFrame(columns=columns)
+    runs = {}
+    for snap in sorted(os.listdir("data/simulations")):
+        if not SNAPSHOT_NAME.match(snap):
+            continue
+        when = datetime.strptime(snap, "%Y%m%d_%H%M%S")
+        path = f"data/simulations/{snap}/{league}_simulation.csv"
+        if when < season_start or not os.path.exists(path):
+            continue
+        runs[when.date()] = path   # later runs on the same day overwrite earlier ones
+    frames = []
+    for day, path in runs.items():
+        try:
+            counts = pd.read_csv(path)
+        except Exception:
+            continue
+        # A finished league is saved as its final table instead of counts
+        if counts.empty or "TEAM" in counts.columns:
+            continue
+        pct = counts.div(counts.sum(axis=0), axis=1) * 100
+        for metric, (first, last) in metrics.items():
+            chance = pct.iloc[first - 1:last].sum()
+            frames.append(pd.DataFrame({"day": pd.Timestamp(day), "team": chance.index, "metric": metric, "pct": chance.values}))
+    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=columns)
+
+def week_changes(history, days=7):
+    """(change in percentage points per (team, metric) since the last run at
+    least `days` days before the latest one, that run's date), or (None, None)."""
+    if history.empty:
+        return None, None
+    latest = history["day"].max()
+    earlier = history.loc[history["day"] <= latest - pd.Timedelta(days=days), "day"]
+    if earlier.empty:
+        return None, None
+    base_day = earlier.max()
+    now = history[history["day"] == latest].set_index(["team", "metric"])["pct"]
+    then = history[history["day"] == base_day].set_index(["team", "metric"])["pct"]
+    return (now - then).dropna(), base_day
+
+def short_date(day, lang):
+    return f"{day.day} {SHORT_MONTHS[lang][day.month - 1]}"
+
 # ------------------------------- 
 # 5️⃣ PAGE STYLING + SELECTBOX + CONTACT PANEL
 
@@ -694,6 +821,8 @@ st.markdown("""
     --border-light: #e3e3e3;
     --accent-text: #2E7D32;
     --section-band-bg: #eaf5ec;
+    --good-text: #2E7D32;
+    --bad-text: #C62828;
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -705,6 +834,8 @@ st.markdown("""
         --border-light: #3a3a3a;
         --accent-text: #66bb6a;
         --section-band-bg: #16241a;
+        --good-text: #7ddc84;
+        --bad-text: #ff8a80;
     }
 }
 
@@ -773,78 +904,166 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     margin-bottom: 6px;
 }
 
-/* Full-bleed hero banner -- breaks out of Streamlit's centered, padded
-   content column to run edge-to-edge, the way a masthead does on a real
-   sports-media site. The margin-left/right calc(-50vw + 50%) trick (not
-   width:100vw + left:50%) is the version that plays nicely with
-   scrollbar-gutter:stable further up this stylesheet: 100vw includes the
-   reserved scrollbar gutter and would overshoot the true viewport width by
-   that amount, this doesn't. Fixed brand green regardless of theme, same
-   reasoning as .step-circle and the table card elsewhere: it's a deliberate
-   solid-colour surface, not body text that should adapt to dark mode.
-   margin-top cancels .block-container's own 2rem top padding so the colour
-   actually touches the top of the page instead of leaving a grey sliver. */
+/* Hero: a floodlit pitch at night -- deep green with faint mowing stripes,
+   the halfway line and centre circle, the title on the left and this week's
+   biggest moves on the right. Fixed colours in both themes: it's a deliberate
+   dark surface, like the step badges. Full-bleed via margin calc(-50vw + 50%)
+   (100vw would overshoot by the scrollbar gutter reserved further up);
+   margin-top cancels .block-container's 2rem top padding. */
 .hero-banner {
+    position: relative;
+    overflow: hidden;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-top: -2rem;
     margin-bottom: 24px;
-    padding: 30px 24px 28px;
-    background: linear-gradient(135deg, #2E7D32 0%, #1e5c22 100%);
-    text-align: center;
+    padding: 72px 24px 48px;
+    background:
+        radial-gradient(ellipse 55% 85% at 80% -5%, rgba(120, 200, 125, 0.30), transparent 70%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0 90px, transparent 90px 180px),
+        linear-gradient(160deg, #08190d 0%, #0d2a15 55%, #123b1d 100%);
 }
-.hero-banner-inner { max-width: 720px; margin: 0 auto; }
+.hero-pitch { position: absolute; inset: 0; pointer-events: none; }
+.hero-pitch::before {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: 380px; height: 380px; margin: -190px 0 0 -190px;
+    border: 2px solid rgba(255,255,255,0.06); border-radius: 50%;
+}
+.hero-pitch::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+    border-left: 2px solid rgba(255,255,255,0.06);
+}
+.hero-inner {
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+}
+.hero-inner.solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
 .hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.35);
-    color: #ffffff;
-    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #d6f0d8;
+    font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 5px 13px;
+    padding: 6px 12px;
     border-radius: 999px;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
 }
-.hero-banner h1 {
+.hero-live {
+    width: 8px; height: 8px; border-radius: 50%; background: #7ddc84;
+    animation: hero-pulse 2.2s ease-out infinite;
+}
+@keyframes hero-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(125,220,132,0.55); }
+    70% { box-shadow: 0 0 0 8px rgba(125,220,132,0); }
+    100% { box-shadow: 0 0 0 0 rgba(125,220,132,0); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-live { animation: none; } }
+/* The page-wide rule centres every h1 and paragraph; the hero is left-aligned */
+.hero-banner .hero-copy h1 {
     color: #ffffff !important;
-    font-size: 28px;
+    font-size: clamp(34px, 4.4vw, 56px);
     font-weight: 800;
-    letter-spacing: -0.01em;
-    margin: 0 0 5px 0;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 0 0 16px;
+    padding: 0 !important;
+    text-align: left !important;
+    text-wrap: balance;
 }
-.hero-banner .hero-byline {
-    color: rgba(255,255,255,0.82);
-    font-size: 13px;
-    font-weight: 500;
-    margin: 0 0 12px 0;
+.hero-banner .hero-copy .hero-lead {
+    color: #9be3a0;
+    font-size: clamp(18px, 1.7vw, 22px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 10px;
+    text-align: left !important;
 }
-.hero-banner .hero-description {
-    color: rgba(255,255,255,0.97);
+.hero-banner .hero-copy .hero-description {
+    color: rgba(255,255,255,0.78);
     font-size: 15px;
     line-height: 1.6;
-    margin: 0;
+    max-width: 520px;
+    margin: 0 0 20px;
+    text-align: left !important;
 }
-.hero-banner .hero-description b { color: #ffffff; }
-.hero-banner-cta {
-    display: inline-block;
-    margin-top: 12px;
+.hero-banner .hero-copy .hero-meta {
+    color: rgba(255,255,255,0.62);
+    font-size: 13px;
+    margin: 0;
+    text-align: left !important;
+}
+.hero-meta a {
     color: #ffffff !important;
     font-weight: 700;
-    font-size: 14px;
     text-decoration: none !important;
-    border-bottom: 2px solid rgba(255,255,255,0.55);
-    padding-bottom: 2px;
+    border-bottom: 2px solid rgba(155,227,160,0.55);
+    padding-bottom: 1px;
+    margin-left: 4px;
     transition: border-color 0.2s ease;
 }
-.hero-banner-cta:hover { border-bottom-color: #ffffff; }
+.hero-meta a:hover { border-bottom-color: #9be3a0; }
+
+/* This week's biggest moves, across all nine leagues: each row links to its league */
+.hero-movers {
+    background: rgba(255,255,255,0.055);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 18px 20px 6px;
+    text-align: left;
+}
+.hm-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.hm-title { font-size: 15px; font-weight: 800; color: #ffffff; }
+.hm-sub { font-size: 11.5px; color: rgba(255,255,255,0.58); }
+.hm-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.09);
+    text-decoration: none !important;
+}
+.hm-code {
+    grid-column: 1; grid-row: 1 / 3;
+    min-width: 46px; padding: 5px 6px; border-radius: 6px;
+    background: rgba(255,255,255,0.08);
+    color: #cfeccf; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-align: center;
+}
+.hm-team { grid-column: 2; grid-row: 1; color: #ffffff; font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hm-row:hover .hm-team { text-decoration: underline; text-underline-offset: 3px; }
+.hm-what { grid-column: 2; grid-row: 2; color: rgba(255,255,255,0.66); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.hm-delta {
+    grid-column: 3; grid-row: 1 / 3;
+    font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums;
+    padding: 5px 10px; border-radius: 8px;
+}
+.hm-delta.good { color: #9be3a0; background: rgba(125,220,132,0.13); }
+.hm-delta.bad { color: #ffa196; background: rgba(255,120,110,0.13); }
+
+/* Between phone and wide desktop, keep the content clear of the fixed contact
+   icons on the right edge */
+@media (min-width: 601px) and (max-width: 1320px) {
+    .hero-banner { padding-right: 100px; }
+}
+@media (max-width: 900px) {
+    .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
 @media (max-width: 600px) {
-    /* Extra top padding clears the language-switcher pills (which wrap to
-       two rows on narrow screens) plus the contact-icon row below them,
-       both fixed-position and floating over the top of this banner. */
-    .hero-banner { padding: 128px 20px 24px; }
-    .hero-banner h1 { font-size: 22px; }
+    /* Extra top padding clears the language pills and the contact-icon row,
+       which sit over the top of this banner on phones */
+    .hero-banner { padding: 104px 16px 28px; }
+    .hero-pitch::before { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
+    .hm-team { font-size: 14px; }
 }
 .app-card p, .app-card li { color: var(--text-main); font-size: 15px; line-height: 1.6; }
 
@@ -1124,6 +1343,32 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
     font-size: 11px; font-weight: 600; color: var(--accent-text); text-align: right;
 }
+/* Change over the last 7 days, before each card percentage */
+.headline-row .delta { margin-right: 7px; font-size: 11px; font-weight: 700; }
+.delta.good { color: var(--good-text); }
+.delta.bad { color: var(--bad-text); }
+.delta-note { margin: 6px 2px 0; font-size: 11.5px; color: var(--text-main); opacity: 0.6; text-align: right; }
+
+/* Season trend: a white card around Streamlit's own radio, multiselect and chart */
+.st-key-trend_card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border-top: 3px solid #2E7D32;
+    padding: 22px 24px 12px;
+    margin-top: 22px;
+}
+.trend-head { text-align: center; }
+.trend-head .trend-title { margin: 0; padding: 0; font-size: 22px; font-weight: 700; color: var(--text-main); }
+.st-key-trend_card .trend-head p.trend-sub { margin: 4px 0 0; font-size: 13px; color: var(--text-main); opacity: 0.7; }
+.st-key-trend_card [data-testid="stElementContainer"]:has(.stRadio) { width: 100% !important; }
+.st-key-trend_card .stRadio { display: flex; justify-content: center; width: 100%; }
+.st-key-trend_card [role="radiogroup"] { justify-content: center; gap: 6px 22px; }
+.st-key-trend_card iframe { margin-top: 12px; }
+/* Let the team picker grow to fit its tags instead of scrolling inside itself */
+.st-key-trend_card [data-testid="stMultiSelect"] div { max-height: none !important; }
+.st-key-trend_card [data-testid="stMultiSelect"] div:has(> span > span) { overflow-y: visible !important; height: auto !important; }
+@media (max-width: 600px) { .st-key-trend_card { padding: 18px 12px 8px; } }
 
 /* Desktop: freeze the first five columns (POS, TEAM, GP, GD, PTS) while
    scrolling horizontally through the position-percentage columns -- same
@@ -1608,24 +1853,7 @@ with st.container(key="lang_switcher"):
                 st.rerun()
 
 # -------------------------------
-# 7️⃣ HERO SECTION
-
-st.markdown(f"""
-<div class="hero-banner">
-    <div class="hero-banner-inner">
-        <span class="hero-badge">{t("hero_badge")}</span>
-        <h1>{t("hero_title")}</h1>
-        <p class="hero-byline">{t("hero_byline")}</p>
-        <p class="hero-description">{t("hero_description")}</p>
-        <a class="hero-banner-cta" href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">
-            {t("hero_cta")}
-        </a>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# -------------------------------
-# 8️⃣ LEAGUE SELECTION
+# 6️⃣ LEAGUES
 
 # (internal key, two-line pill label, clean single-line label for the header below).
 # Every pill is forced into the same "name / code" shape on purpose -- before this,
@@ -1646,6 +1874,69 @@ LEAGUES = [
 league_header_labels = {key: header for key, pill, header in LEAGUES}
 
 DEFAULT_LEAGUE_KEY = "premierleague_england"
+
+# -------------------------------
+# 7️⃣ HERO SECTION
+
+def metric_label(league, metric):
+    # "Title", "Top 4", "Promotion", "Relegation"... for one tracked metric
+    zones = LEAGUE_ZONES[league]
+    if metric == "top":
+        return t(f"m_top_{zones['top_kind']}", n=zones["top"][1])
+    if metric == "playoff":
+        return t("m_playoff", n=zones["top_playoff"][1])
+    return t(f"m_{metric}")
+
+def change_label(delta):
+    return f"{'+' if delta > 0 else '−'}{abs(delta):.1f}"
+
+# The hero's right-hand panel: the three biggest changes in any team's
+# chances over the last 7 days, across all nine leagues. Each team appears
+# once, with whichever of its chances moved most; a bigger relegation chance
+# is shown as bad news.
+data_version = os.path.getmtime("data/last_updated.txt") if os.path.exists("data/last_updated.txt") else None
+league_codes = {key: pill.split("\n\n")[-1] for key, pill, header in LEAGUES}
+big_moves = []
+for lg in league_codes:
+    history = load_history(lg, data_version)
+    changes, _ = week_changes(history)
+    if changes is None or changes.empty:
+        continue
+    latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
+    for team, team_changes in changes.groupby(level="team"):
+        (_, metric), delta = max(team_changes.items(), key=lambda kv: abs(kv[1]))
+        big_moves.append((abs(delta), lg, team, metric, delta, latest[(team, metric)] - delta, latest[(team, metric)]))
+big_moves = sorted(big_moves, reverse=True)[:3]
+
+movers_html = ""
+if big_moves:
+    rows = "".join(
+        f'<a class="hm-row" href="?league={lg}&amp;lang={st.session_state.lang}" target="_self">'
+        f'<span class="hm-code">{league_codes[lg]}</span>'
+        f'<span class="hm-team">{html.escape(team)}</span>'
+        f'<span class="hm-what">{metric_label(lg, metric)} · {before:.1f}% → {after:.1f}%</span>'
+        f'<span class="hm-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">{change_label(delta)}</span></a>'
+        for _, lg, team, metric, delta, before, after in big_moves
+    )
+    movers_html = (f'<div class="hero-movers"><div class="hm-head"><span class="hm-title">{t("hm_title")}</span>'
+                   f'<span class="hm-sub">{t("hm_sub")}</span></div>{rows}</div>')
+
+st.markdown(
+    f'<div class="hero-banner"><div class="hero-pitch"></div>'
+    f'<div class="hero-inner{"" if movers_html else " solo"}"><div class="hero-copy">'
+    f'<span class="hero-badge"><span class="hero-live"></span>{t("hero_badge")}</span>'
+    f'<h1>{t("hero_title")}</h1>'
+    f'<p class="hero-lead">{t("hero_lead")}</p>'
+    f'<p class="hero-description">{t("hero_description")}</p>'
+    f'<p class="hero-meta">{t("hero_byline")} ·<a href="https://www.linkedin.com/in/victoria-friss-de-kereki/" target="_blank">{t("hero_cta")}</a></p>'
+    f'</div>{movers_html}</div></div>',
+    unsafe_allow_html=True,
+)
+
+# -------------------------------
+# 8️⃣ LEAGUE SELECTION
+
+
 
 # Built from plain st.button + st.columns rather than st.segmented_control --
 # see the CSS comment above for why. st.columns naturally divides the full
@@ -1797,12 +2088,31 @@ pos_cols = [c for c in pos_pct_df.columns if str(c).isdigit()]
 def zone_pct(first, last):
     return pos_pct_df[[c for c in pos_cols if first <= int(c) <= last]].sum(axis=1)
 
-def headline_rows(probs, cutoff_after=None, cutoff_label=""):
+# Change in each card's chance over the last 7 days, from the saved runs
+history = load_history(league, data_version)
+changes, base_day = week_changes(history)
+delta_tip = html.escape(t("delta_tip", date=short_date(base_day, st.session_state.lang))) if base_day is not None else ""
+
+def metric_changes(metric):
+    if changes is None or metric not in changes.index.get_level_values("metric"):
+        return {}
+    return changes.xs(metric, level="metric").to_dict()
+
+def change_badge(delta, bad_when_up):
+    # Moves under half a point are mostly simulation noise, so they get no arrow
+    if delta is None or abs(delta) < 0.5:
+        return ""
+    good = (delta < 0) if bad_when_up else (delta > 0)
+    return (f'<span class="delta {"good" if good else "bad"}" title="{delta_tip}">'
+            f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>')
+
+def headline_rows(probs, cutoff_after=None, cutoff_label="", deltas=None, bad_when_up=False):
     rows = []
     for rank, (i, p) in enumerate(probs.items(), start=1):
+        team = pos_pct_df.at[i, "TEAM"]
         rows.append(
-            f'<div class="headline-row"><span class="team">{html.escape(pos_pct_df.at[i, "TEAM"])}</span>'
-            f'<span class="pct">{"&lt;0.1" if 0 < p < 0.1 else f"{p:.1f}"}%</span>'
+            f'<div class="headline-row"><span class="team">{html.escape(team)}</span>'
+            f'<span class="pct">{change_badge((deltas or {}).get(team), bad_when_up)}{"&lt;0.1" if 0 < p < 0.1 else f"{p:.1f}"}%</span>'
             f'<div class="headline-bar"><span style="width:{min(p, 100):.1f}%"></span></div></div>'
         )
         if rank == cutoff_after and rank < len(probs):
@@ -1816,14 +2126,15 @@ def headline_rows(probs, cutoff_after=None, cutoff_label=""):
 # expanded list replaces the short one rather than adding below it, because
 # for the race cards it's a different slice: the full ranking from 1st, with
 # the cut-off marked.
-def headline_card(card_id, css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label=""):
+def headline_card(card_id, css_class, title, sub, short_probs, long_probs, cutoff_after=None, cutoff_label="", metric=None):
+    deltas, bad_when_up = metric_changes(metric), metric == "relegation"
     return (
         f'<div class="headline-card {css_class}">'
         f'<input type="checkbox" id="{card_id}" class="headline-check">'
         f'<label for="{card_id}" class="headline-label">'
         f'<div class="headline-title">{title}</div><div class="headline-sub">{sub}</div>'
-        f'<div class="headline-short">{headline_rows(short_probs)}</div>'
-        f'<div class="headline-long">{headline_rows(long_probs, cutoff_after, cutoff_label)}</div>'
+        f'<div class="headline-short">{headline_rows(short_probs, deltas=deltas, bad_when_up=bad_when_up)}</div>'
+        f'<div class="headline-long">{headline_rows(long_probs, cutoff_after, cutoff_label, deltas, bad_when_up)}</div>'
         f'<span class="headline-toggle"><span class="more">{t("card_show_more")} ▾</span>'
         f'<span class="less">{t("card_show_less")} ▴</span></span>'
         f'</label></div>'
@@ -1839,10 +2150,10 @@ if pos_cols and zones:
     rel_probs = zone_pct(*zones["relegation"]).sort_values(ascending=False)
     cards = [
         headline_card(f"hc-{league}-title", "", t("card_title_title"), t("card_title_sub"),
-                      title_probs.head(3), title_probs.head(8)),
+                      title_probs.head(3), title_probs.head(8), metric="title"),
         headline_card(f"hc-{league}-race", "", t(f"card_race_title_{zones['top_kind']}"), t("card_race_sub", n=top_last),
                       race.iloc[top_last - 1:top_last + 2], race.head(top_last + 6),
-                      cutoff_after=top_last, cutoff_label=t("card_cutoff", n=top_last)),
+                      cutoff_after=top_last, cutoff_label=t("card_cutoff", n=top_last), metric="top"),
     ]
     # Leagues with promotion play-offs (the Championship) also get a play-off
     # race: same edge-of-the-cut-off idea, for a top-6 finish.
@@ -1851,7 +2162,7 @@ if pos_cols and zones:
         playoff_race = zone_pct(1, po_last).sort_values(ascending=False)
         cards.append(headline_card(f"hc-{league}-playoff", "", t("card_playoff_title"), t("card_race_sub", n=po_last),
                                    playoff_race.iloc[po_last - 1:po_last + 2], playoff_race.head(po_last + 6),
-                                   cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last)))
+                                   cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last), metric="playoff"))
     cards += [
         # Subtitle names the exact positions counted; where a relegation
         # play-off spot exists (e.g. Eredivisie 16th) it says "direct" relegation
@@ -1859,9 +2170,11 @@ if pos_cols and zones:
                       t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1])
                       if "rel_playoff" in zones else
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
-                      rel_probs.head(3), rel_probs.head(8)),
+                      rel_probs.head(3), rel_probs.head(8), metric="relegation"),
     ]
-    st.markdown(f'<div class="headline-cards{" four" if len(cards) == 4 else ""}">{"".join(cards)}</div>', unsafe_allow_html=True)
+    delta_note = (f'<div class="delta-note">{t("delta_note", date=short_date(base_day, st.session_state.lang))}</div>'
+                  if base_day is not None else "")
+    st.markdown(f'<div class="headline-cards{" four" if len(cards) == 4 else ""}">{"".join(cards)}</div>{delta_note}', unsafe_allow_html=True)
 
 # -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
@@ -1885,6 +2198,105 @@ st.markdown(
 st.caption(t("table_caption"))
 csv = pos_pct_df.to_csv(index=False).encode("utf-8")
 st.download_button(t("download_button"), data=csv, file_name=f"{league}_final_positions.csv", mime="text/csv")
+
+# -------------------------------
+# 1️⃣3️⃣ SEASON TREND
+# Drawn in the browser with Vega-Embed rather than st.altair_chart: Streamlit
+# converts chart data through pyarrow, and with NumPy pinned below 2 that
+# conversion crashed the whole server (a segfault, not an error) in testing.
+# The frame follows the visitor's light or dark setting like the rest of the page.
+def trend_chart_html(chart):
+    major = alt.SCHEMA_VERSION.lstrip("v").split(".")[0]
+    vega, embed = {"5": ("5", "6"), "6": ("6", "7")}.get(major, ("6", "7"))
+    return f"""<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/vega@{vega}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@{major}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@{embed}"></script>
+<style>
+html, body {{ margin: 0; background: transparent; font-family: Inter, Roboto, Arial, sans-serif; }}
+#chart {{ width: 100%; }}
+#vg-tooltip-element {{ font-family: Inter, Roboto, Arial, sans-serif; font-size: 12px; border-radius: 8px; }}
+#vg-tooltip-element td.key {{ padding-right: 14px; }}
+#vg-tooltip-element td.value {{ text-align: right; font-variant-numeric: tabular-nums; }}
+</style></head><body><div id="chart"></div><script>
+const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const ink = dark ? "#c9c9c9" : "#555555", grid = dark ? "#333333" : "#ececec";
+const spec = {chart.to_json()};
+// Sized to the width it's drawn at: fewer date labels, a shorter chart and a
+// legend that wraps on phones, so everything fits the frame
+const narrow = document.body.clientWidth < 560;
+if (narrow) spec.height = 290;
+spec.config = Object.assign(spec.config || {{}}, {{
+  background: null, font: "Inter, Roboto, Arial, sans-serif", view: {{stroke: null}},
+  axis: {{labelColor: ink, labelFontSize: 12, domain: false, ticks: false, gridColor: grid}},
+  axisX: {{tickCount: narrow ? 4 : 7, labelOverlap: "greedy", labelFlush: true, labelSeparation: 8}},
+  legend: {{labelColor: ink, columns: narrow ? 2 : 4, labelLimit: narrow ? 125 : 220}}, rule: {{color: ink}}
+}});
+vegaEmbed("#chart", spec, {{actions: false, renderer: "svg", tooltip: {{theme: dark ? "dark" : "light"}}}});
+</script></body></html>"""
+
+
+# Each team's chance of the title, the top places or relegation after every
+# day's last update this season. Starts with the teams most likely to finish
+# there now; any team can be added.
+TREND_COLORS = ["#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#56B4E9", "#8C6D31", "#7F7F7F"]
+
+with st.container(key="trend_card"):
+    st.markdown(
+        f'<div class="trend-head"><span class="section-eyebrow">{t("trend_eyebrow")}</span>'
+        f'<h3 class="trend-title">{t("trend_title")}</h3><p class="trend-sub">{t("trend_sub")}</p></div>',
+        unsafe_allow_html=True,
+    )
+    metrics = league_metrics(league)
+    if not metrics or history["day"].nunique() < 2:
+        st.caption(t("trend_empty"))
+    else:
+        metric = st.radio(t("trend_title"), list(metrics), format_func=lambda m: metric_label(league, m),
+                          horizontal=True, key=f"trend_metric_{league}", label_visibility="collapsed")
+        data = history[history["metric"] == metric]
+        now = data[data["day"] == data["day"].max()].set_index("team")["pct"].sort_values(ascending=False)
+        defaults = list(now[now >= 0.5].index[:5]) or list(now.index[:2])
+        options = [team for team in pos_pct_df["TEAM"] if team in now.index]
+        teams = st.multiselect(t("trend_teams"), options, default=[team for team in defaults if team in options],
+                               max_selections=len(TREND_COLORS), key=f"trend_teams_{league}_{metric}")
+        if teams:
+            data = data[data["team"].isin(teams)].sort_values(["team", "day"])
+            top = min(100, max(10, np.ceil(data["pct"].max() * 1.1 / 10) * 10))
+            # A line breaks wherever more than 10 days pass without a run (Brazil's
+            # mid-season break), instead of drawing a curve through days with no data
+            data["stretch"] = data.groupby("team")["day"].transform(lambda d: (d.diff() > pd.Timedelta(days=10)).cumsum())
+            # Plain values: the chart is drawn in the browser (see below), so the
+            # data goes straight into the chart spec. Noon local time keeps each
+            # run on its own day in every time zone.
+            data = alt.Data(values=[
+                {"day": f"{d:%Y-%m-%d}T12:00:00", "team": team, "share": round(p / 100, 4), "stretch": int(k)}
+                for d, team, p, k in zip(data["day"], data["team"], data["pct"], data["stretch"])
+            ])
+            date_format = "%-d %b" if st.session_state.lang == "en" else "%d/%m"
+            hover = alt.selection_point(fields=["day"], nearest=True, on="pointerover", clear="pointerout", empty=False)
+            base = alt.Chart(data).encode(
+                x=alt.X("day:T", title=None, axis=alt.Axis(format=date_format, labelAngle=0, grid=False)),
+                y=alt.Y("share:Q", title=None, scale=alt.Scale(domain=[0, top / 100], clamp=True),
+                        axis=alt.Axis(format=".0%", tickCount=5)),
+                color=alt.Color("team:N", scale=alt.Scale(domain=teams, range=TREND_COLORS[:len(teams)]),
+                                legend=alt.Legend(orient="bottom", title=None, symbolType="stroke", symbolStrokeWidth=3,
+                                                  columnPadding=22, labelFontSize=12)),
+            )
+            # One tooltip per day with every selected team, in the order they
+            # were picked (dots and brackets in names are escaped for Vega)
+            escape = lambda name: re.sub(r"([.\[\]\\])", r"\\\1", name)
+            chart = alt.layer(
+                base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(detail="stretch:N"),
+                base.mark_circle(size=60).encode(opacity=alt.condition(hover, alt.value(1), alt.value(0))),
+                alt.Chart(data).transform_pivot("team", value="share", groupby=["day"]).mark_rule(strokeDash=[4, 4]).encode(
+                    x="day:T",
+                    opacity=alt.condition(hover, alt.value(0.5), alt.value(0)),
+                    tooltip=[alt.Tooltip("day:T", title=t("trend_date"), format=date_format)]
+                            + [alt.Tooltip(f"{escape(team)}:Q", title=team, format=".1%") for team in teams],
+                ).add_params(hover),
+            ).properties(width="container", height=340, padding={"left": 6, "right": 24, "top": 8, "bottom": 4})
+            st_components.html(trend_chart_html(chart), height=440)
 
 # -------------------------------
 # -------------------------------

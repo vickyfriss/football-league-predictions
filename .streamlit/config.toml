@@ -1,0 +1,7 @@
+# Widget accent (radio buttons, multiselect tags, focus rings) in the app's
+# green instead of Streamlit's default red, for both light and dark mode
+[theme.light]
+primaryColor = "#2E7D32"
+
+[theme.dark]
+primaryColor = "#66BB6A"
