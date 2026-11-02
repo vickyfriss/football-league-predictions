@@ -10,6 +10,8 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 - **New:** "How the chances have moved": each team's chance of the title, the top places or relegation after every update this season, as a chart in the clubs' own colours. It starts with the teams most in the race, and any team can be added. Point at a line to pick out that team; the line stays flat while no games are played (Brazil's World Cup break, for example).
 - **New:** Every percentage on the headline cards shows how much it moved in the last 7 days (▲▼).
+- **New:** A "Biggest changes" card in every league: the teams whose chances moved most in the last 7 days, and in what (title, top places, relegation).
+- **New:** The season chart marks every matchday, labels every fifth, and shades the breaks between them (international breaks, Brazil's World Cup break).
 - **New:** Hover a team name for its next two games as well as its last five results, latest date first.
 - **Model:** The season's earlier daily runs were re-run with the current model, using only what was known on each day, so the trend chart and the ▲▼ changes compare like with like (the model changed several times this season). Brazil also gets the weeks after the World Cup break when games were played but the simulator wasn't running yet (17 July to 9 August). The original runs are kept as they were published.
 - **Improved:** A cleaner, more compact page: lighter top section, contact links in the byline instead of a floating box, slimmer league buttons and one consistent type scale.

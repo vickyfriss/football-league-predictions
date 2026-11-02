@@ -44,7 +44,7 @@ See [CHANGELOG.md](CHANGELOG.md) for what's changed and when.
 - League-table zones: Champions League, a possible 5th Champions League place, promotion, play-offs and relegation
 - Headline cards for the title race, the top-four race and the relegation battle (promotion and play-off races for the Championship, the Libertadores race for Brazil)
 - Hover a team name for its last five results and next two games, or any percentage for a plain-English explanation
-- How each team's chances have moved over the season, as a chart, and the change in the last 7 days on every headline card
+- How each team's chances have moved over the season, as a chart with every matchday marked, the change in the last 7 days on every headline card, and a "Biggest changes" card per league
 - Matchday progress under each league name and a "last updated" badge in the visitor's own time zone
 - Four languages (English, Spanish, French, Portuguese), opening in the browser's language
 - Shareable links (`?league=laliga_spain&lang=es`)

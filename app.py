@@ -90,6 +90,8 @@ TRANSLATIONS = {
         "card_rel_title": "Relegation battle",
         "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
         "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last})",
+        "card_movers_title": "Biggest changes",
+        "card_movers_sub": "The largest moves in any team’s chances over the last 7 days",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
@@ -113,6 +115,8 @@ TRANSLATIONS = {
         "trend_title": "How the Chances Have Moved",
         "trend_sub": "Each team’s chance after every update this season",
         "trend_teams": "Teams",
+        "md_short": "MD",
+        "no_games": "No games",
         "trend_empty": "Not enough updates yet this season to show a trend.",
         "trend_date": "Date",
         "trend_team": "Team",
@@ -183,6 +187,8 @@ TRANSLATIONS = {
         "card_rel_title": "Lucha por la permanencia",
         "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
         "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last})",
+        "card_movers_title": "Mayores cambios",
+        "card_movers_sub": "Los mayores cambios en las probabilidades de cada equipo en los últimos 7 días",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
@@ -206,6 +212,8 @@ TRANSLATIONS = {
         "trend_title": "Cómo Han Cambiado las Probabilidades",
         "trend_sub": "La probabilidad de cada equipo tras cada actualización de esta temporada",
         "trend_teams": "Equipos",
+        "md_short": "J",
+        "no_games": "Sin partidos",
         "trend_empty": "Todavía no hay suficientes actualizaciones esta temporada para mostrar una tendencia.",
         "trend_date": "Fecha",
         "trend_team": "Equipo",
@@ -276,6 +284,8 @@ TRANSLATIONS = {
         "card_rel_title": "Luta contra o rebaixamento",
         "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
         "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last})",
+        "card_movers_title": "Maiores mudanças",
+        "card_movers_sub": "As maiores mudanças nas chances de cada time nos últimos 7 dias",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
@@ -299,6 +309,8 @@ TRANSLATIONS = {
         "trend_title": "Como as Chances Mudaram",
         "trend_sub": "A chance de cada time após cada atualização desta temporada",
         "trend_teams": "Times",
+        "md_short": "R",
+        "no_games": "Sem jogos",
         "trend_empty": "Ainda não há atualizações suficientes nesta temporada para mostrar uma tendência.",
         "trend_date": "Data",
         "trend_team": "Time",
@@ -369,6 +381,8 @@ TRANSLATIONS = {
         "card_rel_title": "Lutte pour le maintien",
         "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
         "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last})",
+        "card_movers_title": "Plus grands changements",
+        "card_movers_sub": "Les plus grandes évolutions des chances de chaque équipe sur les 7 derniers jours",
         "zone_ucl": "Ligue des champions",
         "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
@@ -392,6 +406,8 @@ TRANSLATIONS = {
         "trend_title": "L’Évolution des Probabilités",
         "trend_sub": "Les chances de chaque équipe après chaque mise à jour de la saison",
         "trend_teams": "Équipes",
+        "md_short": "J",
+        "no_games": "Pas de matchs",
         "trend_empty": "Pas encore assez de mises à jour cette saison pour afficher une tendance.",
         "trend_date": "Date",
         "trend_team": "Équipe",
@@ -822,6 +838,20 @@ def load_match_days(league, data_version):
             days |= set(dates[dates >= season_start])
     return days
 
+@st.cache_data(show_spinner=False)
+def load_matchday_dates(league, data_version):
+    # {matchday: its middle date} this season, from the saved results. The
+    # middle date, not the first, so one game brought forward doesn't move it.
+    try:
+        season_start = load_dataset_processing().SEASON_START_DATES[league].tz_convert(None)
+        files = [f for f in os.listdir("data") if f.startswith(f"past_{league}_") and f.endswith(".csv")]
+        df = pd.concat([pd.read_csv(f"data/{f}", usecols=["utcDate", "matchday"]) for f in files])
+    except Exception:
+        return {}
+    df["day"] = pd.to_datetime(df["utcDate"], utc=True, errors="coerce").dt.tz_convert(None).dt.normalize()
+    df = df[(df["day"] >= season_start) & df["matchday"].notna()]
+    return {int(md): g["day"].sort_values().iloc[len(g) // 2] for md, g in df.groupby("matchday")}
+
 def week_changes(history, days=7):
     """(change in percentage points per (team, metric) since the last run at
     least `days` days before the latest one, that run's date), or (None, None)."""
@@ -835,6 +865,15 @@ def week_changes(history, days=7):
     now = history[history["day"] == latest].set_index(["team", "metric"])["pct"]
     then = history[history["day"] == base_day].set_index(["team", "metric"])["pct"]
     return (now - then).dropna(), base_day
+
+def metric_label(league, metric):
+    # "Title", "Top 4", "Promotion", "Relegation"... for one tracked metric
+    zones = LEAGUE_ZONES[league]
+    if metric == "top":
+        return t(f"m_top_{zones['top_kind']}", n=zones["top"][1])
+    if metric == "playoff":
+        return t("m_playoff", n=zones["top_playoff"][1])
+    return t(f"m_{metric}")
 
 def short_date(day, lang):
     return f"{day.day} {SHORT_MONTHS[lang][day.month - 1]}"
@@ -1275,9 +1314,16 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
     margin: 18px 0 4px;
 }
 .headline-cards.four { grid-template-columns: repeat(4, 1fr); }
+.headline-cards.five { grid-template-columns: repeat(5, 1fr); }
+/* Five cards (the Championship): below 1280px, two per row with the last one
+   spanning the full row, so no card is left alone */
+@media (max-width: 1279px) {
+    .headline-cards.five { grid-template-columns: repeat(2, 1fr); }
+    .headline-cards.five > .headline-card:last-child { grid-column: 1 / -1; }
+}
 @media (max-width: 1279px) { .headline-cards.four { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 860px) { .headline-cards { grid-template-columns: 1fr; } }
-@media (max-width: 600px) { .headline-cards.four { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .headline-cards.four, .headline-cards.five { grid-template-columns: 1fr; } }
 .headline-card {
     background-color: var(--card-bg);
     border-radius: 12px;
@@ -1310,6 +1356,16 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-toggle { display: block; margin: auto 0 4px; padding-top: 2px; font-size: 12px; font-weight: 600; color: var(--accent-text); }
 .headline-toggle .less, .headline-check:checked + .headline-label .headline-toggle .more { display: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
+.mover-row {
+    display: grid; grid-template-columns: 1fr auto; gap: 1px 10px; align-items: baseline;
+    margin-bottom: 9px; font-size: 13px; color: var(--text-main);
+}
+.mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mover-row .mv-delta.good { color: var(--good-text); }
+.mover-row .mv-delta.bad { color: var(--bad-text); }
+.mover-row .mv-what { grid-column: 1 / -1; font-size: 11.5px; opacity: 0.65; font-variant-numeric: tabular-nums; }
+.headline-card.movers { border-top-color: #8A8F8B; }
 .headline-cutoff {
     margin: -2px 0 9px; padding-top: 4px; border-top: 1px dashed var(--accent-text);
     font-size: 11px; font-weight: 600; color: var(--accent-text); text-align: right;
@@ -2021,9 +2077,40 @@ if pos_cols and zones:
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
                       rel_probs.head(3), rel_probs.head(8), metric="relegation"),
     ]
+    # Biggest changes: the teams whose chances moved most in the last 7 days,
+    # each with whichever of its chances (title, top places, relegation...)
+    # moved most. A bigger relegation chance is bad news, so it's red.
+    if changes is not None and len(changes):
+        latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
+        moves = []
+        for team, team_changes in changes.groupby(level="team"):
+            (_, metric), delta = max(team_changes.items(), key=lambda kv: abs(kv[1]))
+            if abs(delta) >= 0.5:
+                moves.append((abs(delta), team, metric, delta, latest[(team, metric)]))
+        moves.sort(reverse=True)
+        def mover_rows(rows):
+            return "".join(
+                f'<div class="mover-row"><span class="team">{html.escape(team)}</span>'
+                f'<span class="mv-delta {"bad" if (delta > 0) == (metric == "relegation") else "good"}">'
+                f'{"▲" if delta > 0 else "▼"}{abs(delta):.1f}</span>'
+                f'<span class="mv-what">{metric_label(league, metric)} · {now - delta:.1f}% → {now:.1f}%</span></div>'
+                for _, team, metric, delta, now in rows
+            )
+        if moves:
+            cards.append(
+                f'<div class="headline-card movers"><input type="checkbox" id="hc-{league}-movers" class="headline-check">'
+                f'<label for="hc-{league}-movers" class="headline-label">'
+                f'<div class="headline-title">{t("card_movers_title")}</div><div class="headline-sub">{t("card_movers_sub")}</div>'
+                f'<div class="headline-short">{mover_rows(moves[:3])}</div>'
+                f'<div class="headline-long">{mover_rows(moves[:8])}</div>'
+                + (f'<span class="headline-toggle"><span class="more">{t("card_show_more")} ▾</span>'
+                   f'<span class="less">{t("card_show_less")} ▴</span></span>' if len(moves) > 3 else "")
+                + '</label></div>'
+            )
     delta_note = (f'<div class="delta-note">{t("delta_note", date=short_date(base_day, st.session_state.lang))}</div>'
                   if base_day is not None else "")
-    st.markdown(f'<div class="headline-cards{" four" if len(cards) == 4 else ""}">{"".join(cards)}</div>{delta_note}', unsafe_allow_html=True)
+    layout = {4: " four", 5: " five"}.get(len(cards), "")
+    st.markdown(f'<div class="headline-cards{layout}">{"".join(cards)}</div>{delta_note}', unsafe_allow_html=True)
 
 # -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
@@ -2078,7 +2165,7 @@ spec.config = Object.assign(spec.config || {{}}, {{
   background: null, font: "Inter, Roboto, Arial, sans-serif", view: {{stroke: null}},
   axis: {{labelColor: ink, labelFontSize: 12, domain: false, ticks: false, gridColor: grid}},
   axisX: {{tickCount: narrow ? 4 : 7, labelOverlap: "greedy", labelFlush: true, labelSeparation: 8, labelPadding: 10}},
-  legend: {{labelColor: ink, columns: narrow ? 2 : 6, labelLimit: narrow ? 125 : 220}}, rule: {{color: ink}}
+  legend: {{labelColor: ink, columns: narrow ? 2 : 6, labelLimit: narrow ? 125 : 220}}, rule: {{color: ink}}, text: {{color: ink}}
 }});
 vegaEmbed("#chart", spec, {{actions: false, renderer: "svg", tooltip: {{theme: dark ? "dark" : "light"}}}});
 </script></body></html>"""
@@ -2087,15 +2174,6 @@ vegaEmbed("#chart", spec, {{actions: false, renderer: "svg", tooltip: {{theme: d
 # Each team's chance of the title, the top places or relegation after every
 # day's last update this season. Starts with the teams most likely to finish
 # there now; any team can be added.
-def metric_label(league, metric):
-    # "Title", "Top 4", "Promotion", "Relegation"... for one tracked metric
-    zones = LEAGUE_ZONES[league]
-    if metric == "top":
-        return t(f"m_top_{zones['top_kind']}", n=zones["top"][1])
-    if metric == "playoff":
-        return t("m_playoff", n=zones["top_playoff"][1])
-    return t(f"m_{metric}")
-
 TREND_COLORS = ["#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#56B4E9", "#8C6D31", "#7F7F7F"]
 
 # Club colours for the trend chart: (main colour, second colour). The chart uses
@@ -2274,6 +2352,21 @@ with st.container(key="trend_card"):
                     rows.append((day, team, pct, stretch))
                     prev = (day, pct)
             data = pd.DataFrame(rows, columns=["day", "team", "pct", "stretch"])
+            # Matchdays: a faint line on each one's middle date, labelled every 5,
+            # and a shaded stretch where 10 days or more pass between two of them
+            # (international breaks, Brazil's World Cup break)
+            first_day, last_day = data["day"].min(), data["day"].max()
+            matchdays = sorted((d, md) for md, d in load_matchday_dates(league, data_version).items()
+                               if first_day <= d <= last_day)
+            md_marks = alt.Data(values=[
+                {"day": f"{d:%Y-%m-%d}T12:00:00", "label": f'{t("md_short")} {md}' if md % 5 == 0 else ""}
+                for d, md in matchdays
+            ])
+            breaks = alt.Data(values=[
+                {"start": f"{a + pd.Timedelta(days=1):%Y-%m-%d}T00:00:00", "end": f"{b:%Y-%m-%d}T00:00:00",
+                 "mid": f"{a + (b - a) / 2:%Y-%m-%d}T12:00:00", "label": t("no_games")}
+                for (a, _), (b, _) in zip(matchdays, matchdays[1:]) if (b - a).days >= 10
+            ])
             # Plain values: the chart is drawn in the browser (see below), so the
             # data goes straight into the chart spec. Noon local time keeps each
             # run on its own day in every time zone.
@@ -2301,6 +2394,12 @@ with st.container(key="trend_card"):
                                           on="pointerover[event.item && event.item.mark.marktype === 'line']")
                 escape = lambda name: re.sub(r"([.\[\]\\])", r"\\\1", name)
                 chart = alt.layer(
+                    alt.Chart(breaks).mark_rect(opacity=0.06, color="#888888").encode(x="start:T", x2="end:T"),
+                    alt.Chart(breaks).mark_text(baseline="top", dy=16, fontSize=10, opacity=0.55)
+                        .encode(x="mid:T", y=alt.value(0), text="label:N"),
+                    alt.Chart(md_marks).mark_rule(opacity=0.14, strokeWidth=1).encode(x="day:T"),
+                    alt.Chart(md_marks).mark_text(align="left", baseline="top", dx=3, dy=2, fontSize=10, opacity=0.55)
+                        .encode(x="day:T", y=alt.value(0), text="label:N"),
                     base.mark_line(strokeWidth=2.5, interpolate="monotone").encode(
                         detail="stretch:N", opacity=alt.condition(pick, alt.value(1), alt.value(0.15))),
                     base.mark_circle(size=60).encode(opacity=alt.condition(hover, alt.value(1), alt.value(0))),

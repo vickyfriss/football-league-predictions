@@ -47,7 +47,10 @@ for T in times:
     later = results[results["_d"] >= T][["utcDate", "homeTeam", "awayTeam"]].assign(status="SCHEDULED")
     fx = fixtures[pd.to_datetime(fixtures["utcDate"], utc=True) >= T][["utcDate", "status", "homeTeam", "awayTeam"]]
     future = pd.concat([later, fx]).drop_duplicates(subset=["homeTeam", "awayTeam"]).reset_index(drop=True)
-    t = {}
+    # Every team in the league, including those yet to play (ESPN's table lists
+    # them all from day one, on zero)
+    t = {m.get(x, x): dict(gp=0, w=0, d=0, l=0, gf=0, ga=0)
+         for x in pd.concat([results["homeTeam"], results["awayTeam"], fixtures["homeTeam"], fixtures["awayTeam"]]).dropna().unique()}
     for row in played.itertuples():
         h, a, hg, ag = m.get(row.homeTeam, row.homeTeam), m.get(row.awayTeam, row.awayTeam), int(row.homeGoals), int(row.awayGoals)
         for team, gf, ga in [(h, hg, ag), (a, ag, hg)]:
