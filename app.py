@@ -1062,6 +1062,7 @@ h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"] {
     text-align: center !important;
     text-wrap: balance;
 }
+.hero-banner .hero-copy .hero-lead, .hero-banner .hero-copy .hero-description { text-wrap: balance; }
 .hero-banner .hero-copy .hero-lead {
     color: var(--accent-text);
     font-size: clamp(16px, 1.4vw, 19px);
@@ -1506,10 +1507,16 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 /* Mobile: fix first two columns when scrolling horizontally */
 @media (max-width: 600px) {
     table { width: 100%; border-collapse: collapse; }
-    th, td { white-space: nowrap !important; }
+    /* Smaller text and padding than on desktop, so a phone shows points and
+       the first percentages next to the team without scrolling sideways */
+    th, td { white-space: nowrap !important; font-size: 12px !important; padding: 5px 5px !important; }
+    .table-card { padding: 12px 8px; }
+    /* Narrower page margins on phones: more room for the table and cards */
+    .block-container { padding-left: 10px !important; padding-right: 10px !important; }
 
-    /* Sticky first column: POS */
+    /* Sticky first column: POS, a fixed 34px so the TEAM column's offset holds */
     th:nth-child(1), td:nth-child(1) {
+        width: 34px; min-width: 34px; max-width: 34px;
         position: sticky;
         left: 0;
         z-index: 3;
@@ -1520,7 +1527,7 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
        purpose -- see the desktop block's comment above for why. */
     th:nth-child(2), td:nth-child(2) {
         position: sticky;
-        left: 39px;
+        left: 33px;
         z-index: 2;
         background-color: inherit;
         text-align: left !important;
@@ -1662,6 +1669,11 @@ div.stButton > button p:last-child {
         flex: 0 0 calc(50% - 4px) !important;
         width: calc(50% - 4px) !important;
         min-width: unset !important;
+    }
+    /* Nine leagues in two columns: the last one spans the row instead of sitting alone */
+    div[data-testid="stHorizontalBlock"]:has(div.stButton):not(.st-key-lang_switcher *) > div[data-testid="stColumn"]:last-child {
+        flex-basis: 100% !important;
+        width: 100% !important;
     }
     /* On a 320px phone each half-width pill leaves ~100px for text after
        Streamlit's 12px side padding -- just short of "Championship", which
