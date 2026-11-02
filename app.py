@@ -71,7 +71,7 @@ TRANSLATIONS = {
         "updated_ago": "Updated {ago}",
         "season_progress": "Matchday {md} of {total} · {left} to play",
         "results_header": "{league} Simulation Results",
-        "table_caption": "Table shows probability (%) of each team finishing in each position based on 10,000 simulated seasons.",
+        "table_caption": "Chance of each finishing position, from 10,000 simulated seasons",
         "cell_tooltip": "{team}: {pct} chance of finishing {pos}",
         "last_games": "Last {n} games",
         "next_games": "Next {n} games",
@@ -170,7 +170,7 @@ TRANSLATIONS = {
         "updated_ago": "Actualizado {ago}",
         "season_progress": "Jornada {md} de {total} · quedan {left}",
         "results_header": "Resultados de la Simulación: {league}",
-        "table_caption": "La tabla muestra la probabilidad (%) de que cada equipo termine en cada posición, según 10.000 temporadas simuladas.",
+        "table_caption": "Probabilidad de cada posición final, según 10.000 temporadas simuladas",
         "cell_tooltip": "{team}: {pct} de probabilidad de terminar {pos}",
         "last_games": "Últimos {n} partidos",
         "next_games": "Próximos {n} partidos",
@@ -269,7 +269,7 @@ TRANSLATIONS = {
         "updated_ago": "Atualizado {ago}",
         "season_progress": "Rodada {md} de {total} · faltam {left}",
         "results_header": "Resultados da Simulação: {league}",
-        "table_caption": "A tabela mostra a probabilidade (%) de cada time terminar em cada posição, com base em 10.000 temporadas simuladas.",
+        "table_caption": "Chance de cada posição final, com base em 10.000 temporadas simuladas",
         "cell_tooltip": "{team}: {pct} de chance de terminar em {pos}",
         "last_games": "Últimos {n} jogos",
         "next_games": "Próximos {n} jogos",
@@ -368,7 +368,7 @@ TRANSLATIONS = {
         "updated_ago": "Mis à jour {ago}",
         "season_progress": "Journée {md} sur {total} · {left} à jouer",
         "results_header": "Résultats de la Simulation : {league}",
-        "table_caption": "Le tableau montre la probabilité (%) que chaque équipe termine à chaque place, sur la base de 10 000 saisons simulées.",
+        "table_caption": "Probabilité de chaque place finale, sur 10 000 saisons simulées",
         "cell_tooltip": "{team} : {pct} de chances de finir {pos}",
         "last_games": "{n} derniers matchs",
         "next_games": "{n} prochains matchs",
@@ -1344,6 +1344,8 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .zone-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; font-size: 12px; color: #555; }
 .zone-legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
 .zone-legend .zone-note { font-style: italic; opacity: 0.8; }
+.zone-legend .table-note { margin-left: auto; opacity: 0.8; }
+@media (max-width: 860px) { .zone-legend .table-note { margin-left: 0; flex-basis: 100%; } }
 
 /* Headline cards above the table: title race, race for the top places,
    relegation. Same card look as the methodology steps; three across on
@@ -2182,17 +2184,12 @@ zone_legend = "".join(
     f'{t("zone_" + zones["top_kind"]) if zone == "top" else t("zone_" + zone)}</span>'
     for zone in ZONE_COLORS if zone in zones
 )
-if zone_legend:
-    zone_legend = f'<div class="zone-legend">{zone_legend}<span class="zone-note">{t("zones_note")}</span></div>'
+zone_legend = (f'<div class="zone-legend">{zone_legend}' + (f'<span class="zone-note">{t("zones_note")}</span>' if zone_legend else "")
+               + f'<span class="table-note">{t("table_caption")}</span></div>')
 st.markdown(
     f'<div class="table-card"><div class="table-wrapper">{add_cell_tooltips(styled_table.to_html(escape=False), pos_pct_df, load_recent_form(league, data_version), load_next_games(league, data_version))}</div>{zone_legend}</div>',
     unsafe_allow_html=True
 )
-
-# -------------------------------
-# 12️⃣ TABLE CAPTION
-
-st.caption(t("table_caption"))
 
 # -------------------------------
 # 1️⃣3️⃣ SEASON TREND
