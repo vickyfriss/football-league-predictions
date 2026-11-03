@@ -58,10 +58,12 @@ def match_probabilities_league(home, away, attack, defense, league_avg, home_adv
 # Bookmakers only price the next matchday or two, so on their own the odds only ever replaced the
 # model for those few matches. Working backwards from recent prices to each team's attack and
 # defence lets what the market knows (transfers, new managers, injuries) reach every remaining
-# fixture too. Backtested in Football-analytics/"202610 - 3 - Market-Implied Team Strengths
-# (Backtest).ipynb" on forecasts for matches not yet priced: the weight was chosen on March-May
-# 2026 (2025/26) and confirmed, unchanged, on August-October 2026 (2026/27).
-MARKET_WEIGHT = 0.25          # share of the market-implied rating in each team's final (log) rating
+# fixture too. Backtested in Football-analytics/"202611 - 1 - Market Share on Past Seasons
+# (Backtest).ipynb" on football-data.co.uk pre-match odds, forecasting every match not yet priced:
+# the weight was chosen on 2023/24 and 2024/25 (100% market was best at every stage of the season,
+# in all nine leagues) and confirmed, unchanged, on 2025/26 and 2026/27. The goals-based ratings
+# still anchor teams the market has barely priced (MARKET_RIDGE) and stand in when there are no odds.
+MARKET_WEIGHT = 1.0           # share of the market-implied rating in each team's final (log) rating
 MARKET_WINDOW_DAYS = 42       # use prices from the last six weeks...
 MARKET_HALF_LIFE_DAYS = 21    # ...with a three-week-old price counting half as much as today's
 MARKET_RIDGE = 0.5            # pulls a team with little market data back towards its goals-based rating

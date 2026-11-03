@@ -8,6 +8,7 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ## 3 November 2026
 
+- **Model:** Team strengths now come from what the last six weeks of betting odds imply (was a quarter odds, three quarters goals). Tested on four seasons of pre-match odds from football-data.co.uk: chosen on 2023/24 and 2024/25, where using the odds fully was best at every stage of the season in all nine leagues, then confirmed, unchanged, on 2025/26 and 2026/27. Goals still set the strength of a team the market has barely priced, and stand in when there are no odds. Forecasts also became slightly less confident, which matches how often favourites actually win.
 - **Fixed:** Betting odds taken while a match was being played are no longer used. The odds feed kept listing games after kick-off, and those in-play prices follow the score, not the teams (one had Tottenham at 94% to beat Everton). They were 168 of the 18,248 prices saved since March, but each match's latest price feeds the market-based team ratings, so they pulled some ratings off. They're removed from the saved history, and only matches that haven't kicked off are kept from now on.
 
 ## 2 November 2026
