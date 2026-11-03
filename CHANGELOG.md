@@ -6,6 +6,10 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ---
 
+## 3 November 2026
+
+- **Fixed:** Betting odds taken while a match was being played are no longer used. The odds feed kept listing games after kick-off, and those in-play prices follow the score, not the teams (one had Tottenham at 94% to beat Everton). They were 168 of the 18,248 prices saved since March, but each match's latest price feeds the market-based team ratings, so they pulled some ratings off. They're removed from the saved history, and only matches that haven't kicked off are kept from now on.
+
 ## 2 November 2026
 
 - **New:** "How the chances have moved": each team's chance of the title, the top places or relegation after every update this season, as a chart in the clubs' own colours. It starts with the teams most in the race, and any team can be added. Point at a line to pick out that team; the line stays flat while no games are played (Brazil's World Cup break, for example).

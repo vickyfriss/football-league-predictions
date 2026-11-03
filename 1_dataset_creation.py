@@ -324,7 +324,11 @@ def load_betting_odds():
 
 # -------------------------------
 # Flatten odds
-def flatten_odds(data):
+def flatten_odds(data, now=None):
+
+    # The API keeps returning a match while it's being played, with in-play prices that
+    # follow the score rather than the teams. Only matches that haven't kicked off are kept.
+    now = datetime.now(timezone.utc) if now is None else now
 
     rows = []
 
@@ -334,6 +338,9 @@ def flatten_odds(data):
         home = match["home_team"]
         away = match["away_team"]
         time_ = match["commence_time"]
+
+        if pd.Timestamp(time_) <= now:
+            continue
 
         for book in match.get("bookmakers", []):
 
