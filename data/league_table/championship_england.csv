@@ -1,25 +1,25 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Middlesbrough,13,8,4,1,30,17,13,28
-2,Swansea City,13,8,2,3,20,13,7,26
-3,Wolverhampton Wanderers,13,7,3,3,23,16,7,24
-4,West Bromwich Albion,13,7,3,3,19,14,5,24
-5,Southampton,13,8,3,2,28,13,15,23
-6,Birmingham City,13,6,5,2,23,13,10,23
-7,Stoke City,13,7,2,4,20,16,4,23
+2,Birmingham City,14,7,5,2,26,13,13,26
+3,Stoke City,14,8,2,4,22,17,5,26
+4,Swansea City,14,8,2,4,21,16,5,26
+5,West Bromwich Albion,14,7,4,3,20,15,5,25
+6,Southampton,14,8,4,2,29,14,15,24
+7,Wolverhampton Wanderers,13,7,3,3,23,16,7,24
 8,West Ham United,13,6,4,3,33,18,15,22
-9,Queens Park Rangers,13,5,5,3,21,16,5,20
-10,Sheffield United,13,5,4,4,17,15,2,19
-11,Portsmouth,13,5,4,4,16,15,1,19
-12,Millwall,13,5,3,5,23,21,2,18
-13,Blackburn Rovers,13,5,3,5,19,20,-1,18
-14,Bristol City,13,5,3,5,15,17,-2,18
-15,Norwich City,13,5,0,8,23,24,-1,15
-16,Lincoln City,13,4,3,6,14,23,-9,15
-17,Cardiff City,13,3,5,5,19,20,-1,14
-18,Wrexham,13,3,5,5,15,19,-4,14
-19,Bolton Wanderers,13,4,2,7,18,26,-8,14
-20,Charlton Athletic,13,3,5,5,11,21,-10,14
-21,Watford,13,3,2,8,12,23,-11,11
-22,Burnley,13,1,6,6,17,25,-8,9
-23,Derby County,13,1,4,8,11,25,-14,7
-24,Preston North End,13,1,2,10,10,27,-17,5
+9,Sheffield United,14,6,4,4,20,17,3,22
+10,Portsmouth,14,6,4,4,19,16,3,22
+11,Queens Park Rangers,14,5,6,3,22,17,5,21
+12,Norwich City,14,6,0,8,27,24,3,18
+13,Millwall,14,5,3,6,23,24,-1,18
+14,Blackburn Rovers,14,5,3,6,20,22,-2,18
+15,Bristol City,13,5,3,5,15,17,-2,18
+16,Bolton Wanderers,14,5,2,7,19,26,-7,17
+17,Lincoln City,14,4,3,7,14,24,-10,15
+18,Cardiff City,13,3,5,5,19,20,-1,14
+19,Wrexham,13,3,5,5,15,19,-4,14
+20,Watford,14,4,2,8,13,23,-10,14
+21,Charlton Athletic,14,3,5,6,11,22,-11,14
+22,Burnley,14,1,7,6,18,26,-8,10
+23,Derby County,14,1,4,9,11,29,-18,7
+24,Preston North End,14,1,2,11,12,30,-18,5
