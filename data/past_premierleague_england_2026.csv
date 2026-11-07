@@ -90,3 +90,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-01T16:30:00Z,9,FINISHED,Liverpool FC,Arsenal FC,0,1,AWAY_TEAM
 2026-11-02T20:00:00Z,9,FINISHED,Newcastle United FC,Everton FC,0,1,AWAY_TEAM
 2026-11-06T20:00:00Z,10,FINISHED,Everton FC,Coventry City FC,3,1,HOME_TEAM
+2026-11-07T12:30:00Z,10,FINISHED,Leeds United FC,Tottenham Hotspur FC,1,0,HOME_TEAM
