@@ -30,8 +30,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-30T14:30:00Z,4,FINISHED,CD Nacional,CF Estrela da Amadora,2,3,AWAY_TEAM
 2026-08-30T17:00:00Z,4,FINISHED,Casa Pia AC,Moreirense FC,0,1,AWAY_TEAM
 2026-08-30T19:30:00Z,4,FINISHED,FC Famalicão,Gil Vicente FC,0,0,DRAW
-2026-08-31T19:15:00Z,4,FINISHED,Sporting Clube de Braga,Vitória SC,1,0,HOME_TEAM
 2026-08-31T19:15:00Z,4,FINISHED,Sport Lisboa e Benfica,GD Estoril Praia,2,1,HOME_TEAM
+2026-08-31T19:15:00Z,4,FINISHED,Sporting Clube de Braga,Vitória SC,1,0,HOME_TEAM
 2026-09-04T19:15:00Z,5,FINISHED,FC Porto,Moreirense FC,2,1,HOME_TEAM
 2026-09-05T14:30:00Z,5,FINISHED,CF Estrela da Amadora,FC Famalicão,2,2,DRAW
 2026-09-05T17:00:00Z,5,FINISHED,FC Alverca,Sporting Clube de Braga,1,2,AWAY_TEAM
@@ -76,8 +76,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-24T17:00:00Z,9,FINISHED,FC Alverca,FC Arouca,0,1,AWAY_TEAM
 2026-10-24T19:30:00Z,9,FINISHED,Gil Vicente FC,FC Porto,0,1,AWAY_TEAM
 2026-10-25T15:30:00Z,9,FINISHED,GD Estoril Praia,Moreirense FC,1,3,AWAY_TEAM
-2026-10-25T18:00:00Z,9,FINISHED,CD Nacional,Sporting Clube de Braga,1,0,HOME_TEAM
 2026-10-25T18:00:00Z,9,FINISHED,Rio Ave FC,FC Famalicão,0,4,AWAY_TEAM
+2026-10-25T18:00:00Z,9,FINISHED,CD Nacional,Sporting Clube de Braga,1,0,HOME_TEAM
 2026-10-25T20:30:00Z,9,FINISHED,Sporting Clube de Portugal,Académico de Viseu FC,1,2,AWAY_TEAM
 2026-10-26T18:45:00Z,9,FINISHED,CD Santa Clara,Sport Lisboa e Benfica,1,2,AWAY_TEAM
 2026-10-30T20:15:00Z,10,FINISHED,Casa Pia AC,Sporting Clube de Portugal,0,2,AWAY_TEAM
@@ -89,3 +89,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-01T20:30:00Z,10,FINISHED,Sporting Clube de Braga,FC Famalicão,3,0,HOME_TEAM
 2026-11-02T20:15:00Z,10,FINISHED,Sport Lisboa e Benfica,FC Alverca,1,0,HOME_TEAM
 2026-11-02T20:15:00Z,10,FINISHED,Gil Vicente FC,Vitória SC,0,0,DRAW
+2026-11-06T20:45:00Z,11,FINISHED,FC Famalicão,FC Arouca,1,0,HOME_TEAM
