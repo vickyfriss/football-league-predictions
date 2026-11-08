@@ -113,3 +113,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-07T15:15:00Z,12,FINISHED,RCD Espanyol de Barcelona,RC Deportivo La Coruña,0,0,DRAW
 2026-11-07T17:30:00Z,12,FINISHED,CA Osasuna,Athletic Club,1,1,DRAW
 2026-11-07T20:00:00Z,12,FINISHED,Valencia CF,Real Madrid CF,0,3,AWAY_TEAM
+2026-11-08T13:00:00Z,12,FINISHED,Elche CF,Real Betis Balompié,0,2,AWAY_TEAM
