@@ -114,3 +114,7 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-07T17:30:00Z,12,FINISHED,CA Osasuna,Athletic Club,1,1,DRAW
 2026-11-07T20:00:00Z,12,FINISHED,Valencia CF,Real Madrid CF,0,3,AWAY_TEAM
 2026-11-08T13:00:00Z,12,FINISHED,Elche CF,Real Betis Balompié,0,2,AWAY_TEAM
+2026-11-08T15:15:00Z,12,FINISHED,Real Sociedad de Fútbol,Rayo Vallecano de Madrid,1,0,HOME_TEAM
+2026-11-08T17:30:00Z,12,FINISHED,RC Celta de Vigo,Levante UD,0,0,DRAW
+2026-11-08T17:30:00Z,12,FINISHED,Villarreal CF,Getafe CF,2,0,HOME_TEAM
+2026-11-08T20:00:00Z,12,FINISHED,Club Atlético de Madrid,FC Barcelona,1,2,AWAY_TEAM

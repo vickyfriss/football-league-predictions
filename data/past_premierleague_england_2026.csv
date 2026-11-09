@@ -98,3 +98,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-08T14:00:00Z,10,FINISHED,Sunderland AFC,Chelsea FC,1,0,HOME_TEAM
 2026-11-08T14:00:00Z,10,FINISHED,Ipswich Town FC,AFC Bournemouth,1,2,AWAY_TEAM
 2026-11-08T14:00:00Z,10,FINISHED,Brighton & Hove Albion FC,Brentford FC,2,0,HOME_TEAM
+2026-11-08T16:30:00Z,10,FINISHED,Manchester United FC,Aston Villa FC,4,4,DRAW
