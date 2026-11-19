@@ -21,16 +21,16 @@ utcDate,status,homeTeam,awayTeam
 2026-11-30T20:00:00Z,TIMED,RCD Espanyol de Barcelona,Getafe CF
 2026-12-02T18:00:00Z,TIMED,Real Sociedad de Fútbol,Real Madrid CF
 2026-12-02T20:30:00Z,TIMED,FC Barcelona,Club Atlético de Madrid
-2026-12-06T00:00:00Z,SCHEDULED,CA Osasuna,Elche CF
-2026-12-06T00:00:00Z,SCHEDULED,Sevilla FC,Málaga CF
-2026-12-06T00:00:00Z,SCHEDULED,Deportivo Alavés,RCD Espanyol de Barcelona
-2026-12-06T00:00:00Z,SCHEDULED,Club Atlético de Madrid,Real Betis Balompié
-2026-12-06T00:00:00Z,SCHEDULED,Real Racing Club de Santander,RC Deportivo La Coruña
-2026-12-06T00:00:00Z,SCHEDULED,FC Barcelona,RC Celta de Vigo
-2026-12-06T00:00:00Z,SCHEDULED,Getafe CF,Valencia CF
-2026-12-06T00:00:00Z,SCHEDULED,Athletic Club,Real Madrid CF
-2026-12-06T00:00:00Z,SCHEDULED,Villarreal CF,Real Sociedad de Fútbol
-2026-12-06T00:00:00Z,SCHEDULED,Rayo Vallecano de Madrid,Levante UD
+2026-12-04T20:00:00Z,TIMED,Deportivo Alavés,RCD Espanyol de Barcelona
+2026-12-05T13:00:00Z,TIMED,Real Racing Club de Santander,RC Deportivo La Coruña
+2026-12-05T15:15:00Z,TIMED,Rayo Vallecano de Madrid,Levante UD
+2026-12-05T17:30:00Z,TIMED,Villarreal CF,Real Sociedad de Fútbol
+2026-12-05T20:00:00Z,TIMED,FC Barcelona,RC Celta de Vigo
+2026-12-06T13:00:00Z,TIMED,CA Osasuna,Elche CF
+2026-12-06T15:15:00Z,TIMED,Athletic Club,Real Madrid CF
+2026-12-06T17:30:00Z,TIMED,Getafe CF,Valencia CF
+2026-12-06T20:00:00Z,TIMED,Club Atlético de Madrid,Real Betis Balompié
+2026-12-07T20:00:00Z,TIMED,Sevilla FC,Málaga CF
 2026-12-13T00:00:00Z,SCHEDULED,RCD Espanyol de Barcelona,RC Celta de Vigo
 2026-12-13T00:00:00Z,SCHEDULED,Málaga CF,FC Barcelona
 2026-12-13T00:00:00Z,SCHEDULED,Real Madrid CF,CA Osasuna
