@@ -1,19 +1,19 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
-1,Bayern Munich,10,6,4,0,30,10,20,22
-2,Borussia Dortmund,9,6,3,0,16,7,9,21
-3,SC Freiburg,9,6,1,2,20,10,10,19
-4,RB Leipzig,9,6,0,3,27,13,14,18
-5,Bayer Leverkusen,9,5,1,3,20,17,3,16
+1,Borussia Dortmund,10,7,3,0,17,7,10,24
+2,Bayern Munich,10,6,4,0,30,10,20,22
+3,SC Freiburg,10,7,1,2,21,10,11,22
+4,RB Leipzig,10,7,0,3,32,14,18,21
+5,Bayer Leverkusen,10,6,1,3,24,17,7,19
 6,Werder Bremen,9,4,3,2,17,15,2,15
-7,SV Elversberg,9,4,1,4,17,18,-1,13
-8,VfB Stuttgart,9,4,0,5,15,15,0,12
-9,TSG Hoffenheim,9,4,0,5,16,17,-1,12
-10,Eintracht Frankfurt,9,3,3,3,15,20,-5,12
+7,Eintracht Frankfurt,10,4,3,3,16,20,-4,15
+8,SV Elversberg,10,4,1,5,17,19,-2,13
+9,VfB Stuttgart,9,4,0,5,15,15,0,12
+10,TSG Hoffenheim,10,4,0,6,16,18,-2,12
 11,Hamburg SV,9,4,0,5,10,20,-10,12
 12,Mainz,9,3,1,5,18,19,-1,10
-13,SC Paderborn 07,9,2,4,3,8,11,-3,10
-14,FC Cologne,10,2,4,4,11,15,-4,10
+13,FC Cologne,10,2,4,4,11,15,-4,10
+14,SC Paderborn 07,10,2,4,4,8,15,-7,10
 15,FC Augsburg,9,2,3,4,20,20,0,9
-16,1. FC Union Berlin,9,1,4,4,7,21,-14,7
+16,1. FC Union Berlin,10,1,4,5,8,26,-18,7
 17,Schalke 04,9,1,3,5,5,11,-6,6
-18,Borussia Mönchengladbach,9,1,1,7,12,25,-13,4
+18,Borussia Mönchengladbach,10,1,1,8,12,26,-14,4

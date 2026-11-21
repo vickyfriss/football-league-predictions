@@ -90,3 +90,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-08T16:15:00Z,10,FINISHED,Angers SCO,OGC Nice,0,2,AWAY_TEAM
 2026-11-08T19:45:00Z,10,FINISHED,Racing Club de Lens,Olympique de Marseille,1,2,AWAY_TEAM
 2026-11-20T19:45:00Z,11,FINISHED,ES Troyes AC,Le Havre AC,3,1,HOME_TEAM
+2026-11-21T16:15:00Z,11,FINISHED,OGC Nice,Paris Saint-Germain FC,2,3,AWAY_TEAM
