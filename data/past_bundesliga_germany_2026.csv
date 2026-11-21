@@ -80,3 +80,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-08T14:30:00Z,9,FINISHED,1. FC Köln,Bayer 04 Leverkusen,1,2,AWAY_TEAM
 2026-11-08T16:30:00Z,9,FINISHED,SC Freiburg,1. FC Union Berlin,2,0,HOME_TEAM
 2026-11-08T18:30:00Z,9,FINISHED,TSG 1899 Hoffenheim,FC Schalke 04,2,1,HOME_TEAM
+2026-11-20T19:30:00Z,10,FINISHED,FC Bayern München,1. FC Köln,1,1,DRAW
