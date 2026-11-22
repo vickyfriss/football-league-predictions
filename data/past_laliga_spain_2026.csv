@@ -121,3 +121,5 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-20T20:00:00Z,13,FINISHED,Athletic Club,RCD Espanyol de Barcelona,0,1,AWAY_TEAM
 2026-11-21T13:00:00Z,13,FINISHED,Deportivo Alavés,RC Deportivo La Coruña,3,1,HOME_TEAM
 2026-11-21T15:15:00Z,13,FINISHED,Rayo Vallecano de Madrid,Valencia CF,0,1,AWAY_TEAM
+2026-11-21T17:30:00Z,13,FINISHED,Sevilla FC,Real Betis Balompié,1,1,DRAW
+2026-11-21T20:00:00Z,13,FINISHED,Real Madrid CF,RC Celta de Vigo,2,1,HOME_TEAM
