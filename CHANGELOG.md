@@ -6,6 +6,10 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ---
 
+## 23 November 2026
+
+- **Model:** In the Brasileirão, teams level on points are now ranked by number of wins first, then goal difference, then goals scored, as the league's rules say (it was goal difference first). Wins are counted in every simulated season, so a team that ends level on points but with more wins finishes above. The other eight leagues still rank teams level on points by goal difference.
+
 ## 3 November 2026
 
 - **Model:** Team strengths now come from what the last six weeks of betting odds imply (was a quarter odds, three quarters goals). Tested on four seasons of pre-match odds from football-data.co.uk: chosen on 2023/24 and 2024/25, where using the odds fully was best at every stage of the season in all nine leagues, then confirmed, unchanged, on 2025/26 and 2026/27. Goals still set the strength of a team the market has barely priced, and stand in when there are no odds. Forecasts also became slightly less confident, which matches how often favourites actually win. The season's earlier daily runs were re-run with the new model and the cleaned odds, so the trend chart and the ▲▼ changes compare like with like.

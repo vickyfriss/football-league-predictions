@@ -9,6 +9,10 @@ from matplotlib.colors import LinearSegmentedColormap
 
 # === 2. SIMULATION FUNCTIONS ===
 
+# Leagues whose rules rank teams level on points by number of wins first
+# (Brasileirão: wins, then goal difference, then goals scored).
+WINS_FIRST_LEAGUES = {"seriea_brazil"}
+
 def drop_unknown_teams(fixtures, table):
     """Filter out fixtures referencing a team not present in the standings table.
 
@@ -64,12 +68,21 @@ def run_simulations(fixtures, table, n_sim=10000, league_name=None):
     np.add.at(points_matrix, (row_idx, np.tile(home_idx, n_sim)), home_pts.ravel())
     np.add.at(points_matrix, (row_idx, np.tile(away_idx, n_sim)), away_pts.ravel())
 
-    # Ties break on each team's ACTUAL current goal difference, unchanged by
-    # the simulation -- same simplification the original per-simulation
-    # version used (it never tracked simulated scorelines, only win/draw/loss),
-    # kept here so this is a speed-up, not a behavior change.
+    # Ties on points break on each team's ACTUAL current goal difference (and
+    # goals scored), unchanged by the simulation, which draws win/draw/loss
+    # only and never a scoreline. Leagues in WINS_FIRST_LEAGUES rank by number
+    # of wins before goal difference, and wins ARE simulated.
     gd_matrix = np.tile(base_gd, (n_sim, 1))
-    order = np.lexsort((-gd_matrix, -points_matrix), axis=1)
+    if league_name in WINS_FIRST_LEAGUES:
+        base_wins = table.set_index("team")["w"].reindex(teams).fillna(0).to_numpy(dtype=float)
+        base_gf = table.set_index("team")["gf"].reindex(teams).fillna(0).to_numpy(dtype=float)
+        wins_matrix = np.tile(base_wins, (n_sim, 1))
+        np.add.at(wins_matrix, (row_idx, np.tile(home_idx, n_sim)), (outcome == 0).ravel().astype(float))
+        np.add.at(wins_matrix, (row_idx, np.tile(away_idx, n_sim)), (outcome == 2).ravel().astype(float))
+        gf_matrix = np.tile(base_gf, (n_sim, 1))
+        order = np.lexsort((-gf_matrix, -gd_matrix, -wins_matrix, -points_matrix), axis=1)
+    else:
+        order = np.lexsort((-gd_matrix, -points_matrix), axis=1)
     positions = np.empty_like(order)
     sim_rows = np.arange(n_sim)[:, None]
     positions[sim_rows, order] = np.arange(1, n_teams + 1)
