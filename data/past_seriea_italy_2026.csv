@@ -118,3 +118,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-22T14:00:00Z,12,FINISHED,US Sassuolo Calcio,Genoa CFC,0,2,AWAY_TEAM
 2026-11-22T17:00:00Z,12,FINISHED,AC Milan,Frosinone Calcio,5,1,HOME_TEAM
 2026-11-22T19:45:00Z,12,FINISHED,Atalanta BC,FC Internazionale Milano,4,4,DRAW
+2026-11-23T19:45:00Z,12,FINISHED,AC Monza,ACF Fiorentina,3,0,HOME_TEAM

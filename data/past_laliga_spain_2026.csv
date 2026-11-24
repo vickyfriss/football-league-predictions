@@ -127,3 +127,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-22T15:15:00Z,13,FINISHED,Real Racing Club de Santander,Real Sociedad de Fútbol,3,2,HOME_TEAM
 2026-11-22T17:30:00Z,13,FINISHED,CA Osasuna,Málaga CF,1,0,HOME_TEAM
 2026-11-22T20:00:00Z,13,FINISHED,Getafe CF,Club Atlético de Madrid,0,3,AWAY_TEAM
+2026-11-23T20:00:00Z,13,FINISHED,Levante UD,Elche CF,1,1,DRAW
