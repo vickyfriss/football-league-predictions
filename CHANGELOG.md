@@ -6,6 +6,11 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 ---
 
+## 24 November 2026
+
+- **Improved:** Hovering a team name shows its next three games instead of two, soonest first.
+- **Improved:** In the Brasileirão, the table shows each team's wins where the other leagues show goal difference, since wins are the first tiebreak there.
+
 ## 23 November 2026
 
 - **Model:** In the Brasileirão, teams level on points are now ranked by number of wins first, then goal difference, then goals scored, as the league's rules say (it was goal difference first). Wins are counted in every simulated season, so a team that ends level on points but with more wins finishes above. The other eight leagues still rank teams level on points by goal difference.

@@ -51,6 +51,8 @@ COLUMN_LABELS = {
     "pt-BR": {"POS": "POS", "TEAM": "TIME", "GP": "J", "GD": "SG", "PTS": "PTS"},
     "fr": {"POS": "POS", "TEAM": "ÉQUIPE", "GP": "MJ", "GD": "DB", "PTS": "PTS"},
 }
+# Brazil's table shows wins where the other leagues show goal difference
+WINS_LABEL = {"en": "W", "es": "PG", "pt-BR": "V", "fr": "G"}
 
 TRANSLATIONS = {
     "en": {
@@ -652,7 +654,7 @@ def add_cell_tooltips(table_html, df, form=None, upcoming=None):
     pos_cols = list(df.columns[5:])
     def with_tip(m):
         r, c = int(m.group(2)), int(m.group(3))
-        # Team name: its last five results and next two games. Top half of the
+        # Team name: its next three games and last five results. Top half of the
         # table opens below the row, bottom half above, so the taller box stays
         # in the table.
         team = df.iloc[r]["TEAM"] if c == 1 else None
@@ -668,9 +670,8 @@ def add_cell_tooltips(table_html, df, form=None, upcoming=None):
                 f'<span>{html.escape(opp)} ({t("form_home") if home else t("form_away")})</span></span>'
                 for k, (res, gf, ga, opp, home, date) in enumerate(games)
             )
-            # Next games above the last ones, latest date first, so the whole
-            # list runs from the furthest date down to the oldest
-            nxt = list(reversed((upcoming or {}).get(team, [])))
+            # Next games above the last ones, soonest first
+            nxt = (upcoming or {}).get(team, [])
             next_rows = "".join(
                 f'<span class="form-game">'
                 f'<span class="form-date">{date.day} {SHORT_MONTHS[st.session_state.lang][date.month - 1]}</span>'
@@ -746,7 +747,7 @@ def load_recent_form(league, data_version, n=5):
     return form
 
 @st.cache_data(show_spinner=False)
-def load_next_games(league, data_version, n=2):
+def load_next_games(league, data_version, n=3):
     # Each team's next n league games, soonest first, as
     # {team: [(opponent, is_home, date), ...]}, from the fixtures saved with
     # the data (football-data.org names, mapped like the results above).
@@ -2005,7 +2006,9 @@ if os.path.exists(_table_file) and "GD" not in pos_pct_df.columns:
             _tbl["team"] = _tbl["team"].replace(_dp.mappings.get(league, {}))
         except Exception:
             pass
-        _gd = _tbl.drop_duplicates("team").set_index("team")["gd"]
+        # Brazil shows wins in this column instead: the Brasileirão ranks teams level
+        # on points by wins first, so they say more there than goal difference
+        _gd = _tbl.drop_duplicates("team").set_index("team")["w" if league == "seriea_brazil" else "gd"]
         _gd_col = pos_pct_df["TEAM"].map(_gd)
         pos_pct_df.insert(pos_pct_df.columns.get_loc("GP") + 1, "GD", _gd_col.astype("Int64"))
     except Exception:
@@ -2180,7 +2183,10 @@ if pos_cols and zones:
 # -------------------------------
 # 11️⃣ STYLE AND DISPLAY TABLE
 
-styled_table, num_cols = style_probabilities_table(pos_pct_df, column_labels=COLUMN_LABELS[st.session_state.lang], zones=zones)
+_labels = dict(COLUMN_LABELS[st.session_state.lang])
+if league == "seriea_brazil":
+    _labels["GD"] = WINS_LABEL[st.session_state.lang]
+styled_table, num_cols = style_probabilities_table(pos_pct_df, column_labels=_labels, zones=zones)
 zone_legend = "".join(
     f'<span><span class="swatch" style="background:{ZONE_COLORS[zone]}"></span>'
     f'{t("zone_" + zones["top_kind"]) if zone == "top" else t("zone_" + zone)}</span>'
