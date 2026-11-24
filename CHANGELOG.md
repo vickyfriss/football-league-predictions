@@ -10,6 +10,8 @@ What changed in the [Football League Simulator](https://football-league-simulato
 
 - **Improved:** Hovering a team name shows its next three games instead of two, soonest first.
 - **Improved:** In the Brasileirão, the table shows each team's wins where the other leagues show goal difference, since wins are the first tiebreak there.
+- **Fixed:** A game that had kicked off but wasn't in the results yet dropped out of a team's hover, from both its next games and its last results. It now stays under the next games until its result is in.
+- **Improved:** The twice-daily updates are rescheduled so the morning one comes after Brazil's late games. GitHub usually starts them hours late, and the update times now allow for that.
 
 ## 23 November 2026
 

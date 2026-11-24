@@ -751,11 +751,18 @@ def load_next_games(league, data_version, n=3):
     # Each team's next n league games, soonest first, as
     # {team: [(opponent, is_home, date), ...]}, from the fixtures saved with
     # the data (football-data.org names, mapped like the results above).
+    # Every game not yet in the saved results counts, even one that has already
+    # kicked off: until the next data update it is still to play in the table
+    # and the simulations, and it isn't in the last results either.
     try:
         dp = load_dataset_processing()
         df = pd.read_csv(f"data/fixtures_{league}.csv")
+        past = pd.concat([pd.read_csv(f"data/{f}") for f in os.listdir("data")
+                          if f.startswith(f"past_{league}_") and f.endswith(".csv")])
         df["utcDate"] = pd.to_datetime(df["utcDate"], utc=True, errors="coerce")
-        df = df[df["utcDate"] >= pd.Timestamp.now(tz="UTC")].sort_values("utcDate")
+        past = past[pd.to_datetime(past["utcDate"], utc=True, errors="coerce") >= dp.SEASON_START_DATES[league]]
+        played = set(zip(past["homeTeam"], past["awayTeam"]))
+        df = df[[(h, a) not in played for h, a in zip(df["homeTeam"], df["awayTeam"])]].sort_values("utcDate")
         df[["homeTeam", "awayTeam"]] = df[["homeTeam", "awayTeam"]].replace(dp.mappings.get(league, {}))
     except Exception:
         return {}

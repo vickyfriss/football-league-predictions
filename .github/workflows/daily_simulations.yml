@@ -6,8 +6,16 @@ concurrency:
 
 on:
   schedule:
-    - cron: '30 3 * * *'   # Run daily at 03:30 UTC (04:30 UK time / 05:30 CEST during BST)
-    - cron: '0 13 * * *'   # Second run at 13:00 UTC: picks up results the feed hadn't published by the first run
+    # GitHub starts scheduled runs late, usually by 7-8 hours (Nov 2026: the
+    # 03:30 slot ran around 11:45, the 13:00 slot around 20:15). These two
+    # times work either way:
+    # - started late: about 04:00 (after Brazil's late games, which kick off
+    #   up to 00:30 UTC) and about 13:00 (after Europe's evening games)
+    # - started on time: 05:07 (after Brazil's late games) and 20:07
+    #   (Europe's afternoon games)
+    # Off the hour and half hour, when the queue is longest.
+    - cron: '7 20 * * *'
+    - cron: '7 5 * * *'
   workflow_dispatch:
 
 jobs:

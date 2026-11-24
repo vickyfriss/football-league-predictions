@@ -54,7 +54,7 @@ See [CHANGELOG.md](CHANGELOG.md) for what's changed and when.
 - **Team strengths:** attack and defence ratings from goals scored and conceded, with recent games counting more. Early in the season they're pulled towards the league average (or a typical promoted or relegated side), then blended 25% with what the last six weeks of betting odds imply
 - **Match probabilities:** a **Poisson model** of goals, with each league's home advantage. Matches the bookmakers have already priced use their odds directly, with the margin removed
 - **Monte Carlo simulation:** 10,000 simulated seasons per league, aggregated into the probability of each final position
-- **Daily updates:** GitHub Actions refreshes the data and simulations twice a day (03:30 and 13:00 UTC). Each run checks the results against the league table; if the results feed is behind, the next run fetches the missing games
+- **Daily updates:** GitHub Actions refreshes the data and simulations twice a day, scheduled so that one run lands after Brazil's late games even when GitHub starts it hours late. Each run checks the results against the league table; if the results feed is behind, the next run fetches the missing games
 
 ---
 

@@ -418,9 +418,12 @@ def load_fixtures():
     today = datetime.utcnow().date()
     end_of_season = today + timedelta(days=365)
 
+    # Every status, from a week back: a game that has kicked off but doesn't
+    # count as played yet (see played_matches) stays a fixture, so it is never
+    # missing from both the fixtures and the results. Games already played are
+    # left out below.
     params = {
-        "status": "SCHEDULED",
-        "dateFrom": today.isoformat(),
+        "dateFrom": (today - timedelta(days=7)).isoformat(),
         "dateTo": end_of_season.isoformat(),
     }
 
@@ -435,6 +438,9 @@ def load_fixtures():
             response = request_with_retry(url, headers=headers, params=params)
 
             data = response.json().get("matches", [])
+            played = {(r.homeTeam, r.awayTeam) for r in played_matches(data).itertuples()}
+            data = [m for m in data if m["status"] not in NOT_PLAYED
+                    and (m["homeTeam"]["name"], m["awayTeam"]["name"]) not in played]
 
             # ✅ handle empty response safely
             if not data:
