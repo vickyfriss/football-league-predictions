@@ -1,6 +1,6 @@
 position,team,gp,w,d,l,gf,ga,gd,pts
 1,Flamengo,36,24,8,4,74,31,43,80
-2,Palmeiras,36,21,11,4,64,26,38,74
+2,Palmeiras,37,21,11,5,64,29,35,74
 3,Cruzeiro,36,20,6,10,59,50,9,66
 4,Fluminense,36,18,9,9,57,42,15,63
 5,Athletico Paranaense,36,16,9,11,56,47,9,57
@@ -18,4 +18,4 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 17,Corinthians,35,10,10,15,40,42,-2,40
 18,Internacional,36,9,11,16,41,49,-8,38
 19,Remo,36,7,11,18,41,61,-20,32
-20,Chapecoense,36,4,9,23,34,74,-40,21
+20,Chapecoense,37,5,9,23,37,74,-37,24
