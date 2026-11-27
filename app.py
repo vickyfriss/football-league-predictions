@@ -87,13 +87,13 @@ TRANSLATIONS = {
         "card_race_title_promotion": "Automatic promotion race",
         "card_race_title_libertadores": "Libertadores race",
         "card_playoff_title": "Play-off race",
-        "card_race_sub": "Chance of a top-{n} finish, for the teams closest to the cut-off",
-        "card_race_sub_settled": "Decided: these teams finish in the top {n}",
+        "card_race_sub": "Top-{n} chance, around the cut-off",
+        "card_race_sub_settled": "Decided: these are the top {n}",
         "card_rel_title": "Relegation battle",
-        "card_rel_sub": "Chance of finishing in the relegation places ({first}–{last})",
+        "card_rel_sub": "Chance of relegation ({first}–{last})",
         "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last})",
         "card_movers_title": "Biggest changes",
-        "card_movers_sub": "This week’s other big moves, beyond the cards alongside",
+        "card_movers_sub": "This week’s other big moves",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
@@ -186,13 +186,13 @@ TRANSLATIONS = {
         "card_race_title_promotion": "Carrera por el ascenso directo",
         "card_race_title_libertadores": "Carrera por la Libertadores",
         "card_playoff_title": "Carrera por el playoff",
-        "card_race_sub": "Probabilidad de terminar entre los {n} primeros, para los equipos más cerca del corte",
-        "card_race_sub_settled": "Definido: estos equipos terminan entre los {n} primeros",
+        "card_race_sub": "Top {n}: equipos cerca del corte",
+        "card_race_sub_settled": "Decidido: estos son el top {n}",
         "card_rel_title": "Lucha por la permanencia",
-        "card_rel_sub": "Probabilidad de terminar en puestos de descenso ({first}–{last})",
-        "card_rel_sub_playoff": "Probabilidad de descenso directo ({first}–{last})",
+        "card_rel_sub": "Probabilidad de descenso ({first}–{last})",
+        "card_rel_sub_playoff": "Riesgo de descenso directo ({first}–{last})",
         "card_movers_title": "Mayores cambios",
-        "card_movers_sub": "Otros grandes cambios de la semana, además de las tarjetas de al lado",
+        "card_movers_sub": "Otros grandes cambios de la semana",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
@@ -285,13 +285,13 @@ TRANSLATIONS = {
         "card_race_title_promotion": "Disputa pelo acesso direto",
         "card_race_title_libertadores": "Disputa pela Libertadores",
         "card_playoff_title": "Disputa pelo playoff",
-        "card_race_sub": "Chance de terminar entre os {n} primeiros, para os times mais perto do corte",
-        "card_race_sub_settled": "Definido: estes times terminam entre os {n} primeiros",
+        "card_race_sub": "Chance de top {n}, perto do corte",
+        "card_race_sub_settled": "Definido: estes são o top {n}",
         "card_rel_title": "Luta contra o rebaixamento",
-        "card_rel_sub": "Chance de terminar na zona de rebaixamento ({first}–{last})",
-        "card_rel_sub_playoff": "Chance de rebaixamento direto ({first}–{last})",
+        "card_rel_sub": "Chance de rebaixamento ({first}–{last})",
+        "card_rel_sub_playoff": "Risco de rebaixamento direto ({first}–{last})",
         "card_movers_title": "Maiores mudanças",
-        "card_movers_sub": "Outras grandes mudanças da semana, além dos cartões ao lado",
+        "card_movers_sub": "Outras grandes mudanças da semana",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
@@ -379,18 +379,18 @@ TRANSLATIONS = {
         "form_home": "D",
         "form_away": "E",
         "card_title_title": "Course au titre",
-        "card_title_sub": "Probabilité de remporter le championnat",
+        "card_title_sub": "Probabilité d’être champion",
         "card_race_title_ucl": "Course à la Ligue des champions",
         "card_race_title_promotion": "Course à la montée directe",
         "card_race_title_libertadores": "Course à la Libertadores",
         "card_playoff_title": "Course aux barrages",
-        "card_race_sub": "Probabilité de finir dans les {n} premiers, pour les équipes les plus proches de la limite",
-        "card_race_sub_settled": "Décidé : ces équipes finissent dans les {n} premiers",
+        "card_race_sub": "Top {n} : équipes près de la limite",
+        "card_race_sub_settled": "Décidé : voici le top {n}",
         "card_rel_title": "Lutte pour le maintien",
-        "card_rel_sub": "Probabilité de finir en zone de relégation ({first}–{last})",
-        "card_rel_sub_playoff": "Probabilité de relégation directe ({first}–{last})",
+        "card_rel_sub": "Probabilité de relégation ({first}–{last})",
+        "card_rel_sub_playoff": "Risque de relégation directe ({first}–{last})",
         "card_movers_title": "Plus grands changements",
-        "card_movers_sub": "Les autres grands changements de la semaine, en plus des cartes voisines",
+        "card_movers_sub": "Autres gros écarts de la semaine",
         "zone_ucl": "Ligue des champions",
         "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
@@ -2110,8 +2110,8 @@ def headline_card(card_id, css_class, title, sub, short_probs, long_probs, cutof
 
 if pos_cols and zones:
     top_first, top_last = zones["top"]
-    # The race card shows the teams either side of the cut-off (e.g. the 4th,
-    # 5th and 6th most likely to finish top 4), not the top three again --
+    # The race card shows the teams either side of the cut-off (e.g. the 3rd
+    # to 6th most likely to finish top 4), not the top teams again --
     # those are usually near-certain and already in the title card.
     # Teams with no chance at all are left out, so a card lists fewer teams
     # when fewer are still in that race (a 0% team would only be an
@@ -2124,15 +2124,23 @@ if pos_cols and zones:
     # outside the cut-off can still get in, the race is decided and the card
     # shows the teams that made it instead, from the top.
     def race_short(probs, last):
-        return probs.head(last) if len(probs) <= last else probs.iloc[last - 1:last + 2]
+        return probs.head(last) if len(probs) <= last else probs.iloc[max(last - 2, 0):last + 2]
     def race_sub(last, probs=None):
         probs = race if probs is None else probs
         return t("card_race_sub_settled" if len(probs) <= last else "card_race_sub", n=last)
-    title_probs = ranked(zone_pct(1, 1))
     rel_probs = ranked(zone_pct(*zones["relegation"]))
+    # Each card shows four teams before "Show more", or as many as there are
+    # relegation places if that's more. The title card keeps its rows even
+    # at 0%: teams with no title chance fill them in league-table order.
+    rel_short = rel_probs.head(max(4, zones["relegation"][1] - zones["relegation"][0] + 1))
+    title_n = max(4, len(rel_short), len(race_short(race, top_last)))
+    _title = zone_pct(1, 1)
+    title_probs = _title.loc[pd.DataFrame({"p": _title, "pos": pos_pct_df["POS"]})
+                             .sort_values(["p", "pos"], ascending=[False, True]).index]
+    title_long = title_probs.head(max(title_n, min(8, int((title_probs > 0).sum()))))
     cards = [
         headline_card(f"hc-{league}-title", "", t("card_title_title"), t("card_title_sub"),
-                      title_probs.head(3), title_probs.head(8), metric="title"),
+                      title_probs.head(title_n), title_long, metric="title"),
         headline_card(f"hc-{league}-race", "", t(f"card_race_title_{zones['top_kind']}"), race_sub(top_last),
                       race_short(race, top_last), race.head(top_last + 6),
                       cutoff_after=top_last, cutoff_label=t("card_cutoff", n=top_last), metric="top"),
@@ -2152,7 +2160,7 @@ if pos_cols and zones:
                       t("card_rel_sub_playoff", first=zones["relegation"][0], last=zones["relegation"][1])
                       if "rel_playoff" in zones else
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
-                      rel_probs.head(3), rel_probs.head(8), metric="relegation"),
+                      rel_short, rel_probs.head(8), metric="relegation"),
     ]
     # Biggest changes: news the other cards don't already show. A move counts
     # when it's at least 3 points (smaller ones are mostly simulation noise),
@@ -2163,8 +2171,8 @@ if pos_cols and zones:
     if changes is not None and len(changes):
         latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
         shown = {(pos_pct_df.at[i, "TEAM"], metric) for metric, probs in [
-            ("title", title_probs.head(3)), ("top", race_short(race, top_last)),
-            ("relegation", rel_probs.head(3))] + ([("playoff", race_short(playoff_race, po_last))]
+            ("title", title_probs.head(title_n)), ("top", race_short(race, top_last)),
+            ("relegation", rel_short)] + ([("playoff", race_short(playoff_race, po_last))]
                                                   if "top_playoff" in zones else []) for i in probs.index}
         moves = []
         for team, team_changes in changes.groupby(level="team"):
