@@ -9,6 +9,7 @@ What changed in the [Football League Simulator](https://football-league-simulato
 ## 27 November 2026
 
 - **Fixed:** The headline cards only list teams with some chance in that race. The expanded relegation card always showed eight teams, so when only seven could still go down (Brazil, 27 Nov), the eighth was a 0% team picked at random from the ties, such as 2nd-placed Palmeiras.
+- **Improved:** Once a race for the top places is decided (no team outside the cut-off can still get in), its card shows the teams that made it, from the top, instead of the teams either side of the cut-off.
 
 ## 24 November 2026
 
