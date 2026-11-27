@@ -1409,8 +1409,10 @@ td.team-tip .cell-tip { padding: 8px 12px; text-decoration: none; }
 .headline-check:checked + .headline-label .headline-toggle .less { display: inline; }
 .mover-row {
     display: grid; grid-template-columns: minmax(0, 1fr) 4.2em; gap: 0 8px; align-items: baseline;
-    margin-bottom: 12px; font-size: 13px; color: var(--text-main);
+    margin-bottom: 6px; font-size: 13px; color: var(--text-main);
 }
+/* Mover rows have a second line instead of a bar, so they're spaced tighter
+   to fit four in the same height as the other cards' four rows */
 .mover-row .team { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mover-row .mv-delta { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
 .mover-row .mv-delta.good { color: var(--good-text); }
@@ -2198,10 +2200,10 @@ if pos_cols and zones:
                 f'<div class="headline-card movers"><input type="checkbox" id="hc-{league}-movers" class="headline-check">'
                 f'<label for="hc-{league}-movers" class="headline-label">'
                 f'<div class="headline-title">{t("card_movers_title")}</div><div class="headline-sub">{t("card_movers_sub")}</div>'
-                f'<div class="headline-short">{mover_rows(moves[:3])}</div>'
+                f'<div class="headline-short">{mover_rows(moves[:4])}</div>'
                 f'<div class="headline-long">{mover_rows(moves[:8])}</div>'
                 + (f'<span class="headline-toggle"><span class="more">{t("card_show_more")} ▾</span>'
-                   f'<span class="less">{t("card_show_less")} ▴</span></span>' if len(moves) > 3 else "")
+                   f'<span class="less">{t("card_show_less")} ▴</span></span>' if len(moves) > 4 else "")
                 + '</label></div>'
             )
     delta_note = (f'<div class="delta-note">{t("delta_note", date=short_date(base_day, st.session_state.lang))}</div>'
