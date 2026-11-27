@@ -93,7 +93,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Chance of relegation ({first}–{last})",
         "card_rel_sub_playoff": "Chance of direct relegation ({first}–{last})",
         "card_movers_title": "Biggest changes",
-        "card_movers_sub": "This week’s other big moves",
+        "card_movers_sub": "This week’s biggest moves",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possible 5th Champions League place",
         "zone_promotion": "Promotion",
@@ -192,7 +192,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Riesgo de descenso ({first}–{last})",
         "card_rel_sub_playoff": "Descenso directo ({first}–{last})",
         "card_movers_title": "Mayores cambios",
-        "card_movers_sub": "Otros grandes cambios",
+        "card_movers_sub": "Cambios de la semana",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Posible 5.ª plaza de Champions League",
         "zone_promotion": "Ascenso",
@@ -291,7 +291,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Risco de rebaixamento ({first}–{last})",
         "card_rel_sub_playoff": "Rebaixamento direto ({first}–{last})",
         "card_movers_title": "Maiores mudanças",
-        "card_movers_sub": "Outras grandes mudanças",
+        "card_movers_sub": "Mudanças da semana",
         "zone_ucl": "Champions League",
         "zone_top_maybe": "Possível 5ª vaga na Champions League",
         "zone_promotion": "Acesso",
@@ -390,7 +390,7 @@ TRANSLATIONS = {
         "card_rel_sub": "Risque de relégation ({first}–{last})",
         "card_rel_sub_playoff": "Relégation directe ({first}–{last})",
         "card_movers_title": "Plus grands changements",
-        "card_movers_sub": "Autres gros écarts",
+        "card_movers_sub": "Écarts de la semaine",
         "zone_ucl": "Ligue des champions",
         "zone_top_maybe": "Possible 5e place en Ligue des champions",
         "zone_promotion": "Montée",
@@ -2162,24 +2162,20 @@ if pos_cols and zones:
                       t("card_rel_sub", first=zones["relegation"][0], last=zones["relegation"][1]),
                       rel_short, rel_probs.head(8), metric="relegation"),
     ]
-    # Biggest changes: news the other cards don't already show. A move counts
-    # when it's at least 3 points (smaller ones are mostly simulation noise),
-    # in a race that's still open (the chance is between 5% and 95% before or
-    # after), and the team isn't already in that race's card with its arrow.
+    # Biggest changes: the week's largest moves, whether or not the team is
+    # also on another card. A move counts when it's at least 3 points
+    # (smaller ones are mostly simulation noise), in a race that's still open
+    # (the chance is between 5% and 95% before or after).
     # Each team appears once, with its biggest such move; a bigger relegation
     # chance is bad news, so it's red.
     if changes is not None and len(changes):
         latest = history[history["day"] == history["day"].max()].set_index(["team", "metric"])["pct"]
-        shown = {(pos_pct_df.at[i, "TEAM"], metric) for metric, probs in [
-            ("title", title_probs.head(title_n)), ("top", race_short(race, top_last)),
-            ("relegation", rel_short)] + ([("playoff", race_short(playoff_race, po_last))]
-                                                  if "top_playoff" in zones else []) for i in probs.index}
         moves = []
         for team, team_changes in changes.groupby(level="team"):
             options = []
             for (_, metric), delta in team_changes.items():
                 now = latest.get((team, metric))
-                if now is None or abs(delta) < 3 or (team, metric) in shown:
+                if now is None or abs(delta) < 3:
                     continue
                 if not (5 <= now <= 95 or 5 <= now - delta <= 95):
                     continue
