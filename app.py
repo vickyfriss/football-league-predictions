@@ -2109,9 +2109,15 @@ if pos_cols and zones:
     # The race card shows the teams either side of the cut-off (e.g. the 4th,
     # 5th and 6th most likely to finish top 4), not the top three again --
     # those are usually near-certain and already in the title card.
-    race = zone_pct(top_first, top_last).sort_values(ascending=False)
-    title_probs = zone_pct(1, 1).sort_values(ascending=False)
-    rel_probs = zone_pct(*zones["relegation"]).sort_values(ascending=False)
+    # Teams with no chance at all are left out, so a card lists fewer teams
+    # when fewer are still in that race (a 0% team would only be an
+    # arbitrary pick among the ties, e.g. 2nd-placed Palmeiras on the
+    # relegation card).
+    def ranked(probs):
+        return probs[probs > 0].sort_values(ascending=False)
+    race = ranked(zone_pct(top_first, top_last))
+    title_probs = ranked(zone_pct(1, 1))
+    rel_probs = ranked(zone_pct(*zones["relegation"]))
     cards = [
         headline_card(f"hc-{league}-title", "", t("card_title_title"), t("card_title_sub"),
                       title_probs.head(3), title_probs.head(8), metric="title"),
@@ -2123,7 +2129,7 @@ if pos_cols and zones:
     # race: same edge-of-the-cut-off idea, for a top-6 finish.
     if "top_playoff" in zones:
         po_last = zones["top_playoff"][1]
-        playoff_race = zone_pct(1, po_last).sort_values(ascending=False)
+        playoff_race = ranked(zone_pct(1, po_last))
         cards.append(headline_card(f"hc-{league}-playoff", "", t("card_playoff_title"), t("card_race_sub", n=po_last),
                                    playoff_race.iloc[po_last - 1:po_last + 2], playoff_race.head(po_last + 6),
                                    cutoff_after=po_last, cutoff_label=t("card_cutoff", n=po_last), metric="playoff"))
