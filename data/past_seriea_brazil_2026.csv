@@ -360,3 +360,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-24T00:00:00Z,36,FINISHED,Santos FC,Grêmio FBPA,0,2,AWAY_TEAM
 2026-11-24T21:00:00Z,37,FINISHED,Chapecoense AF,SE Palmeiras,3,0,HOME_TEAM
 2026-11-25T23:00:00Z,36,FINISHED,CA Mineiro,SC Corinthians Paulista,1,1,DRAW
+2026-11-26T23:00:00Z,37,FINISHED,São Paulo FC,Clube do Remo,3,1,HOME_TEAM
