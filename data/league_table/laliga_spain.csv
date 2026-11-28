@@ -4,8 +4,8 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 3,Atlético Madrid,13,10,1,2,26,10,16,31
 4,Real Betis,13,8,3,2,21,16,5,27
 5,Real Sociedad,13,7,1,5,23,23,0,22
-6,Sevilla,13,5,4,4,18,20,-2,19
-7,Racing Santander,13,5,2,6,20,32,-12,17
+6,Racing Santander,14,6,2,6,23,33,-10,20
+7,Sevilla,13,5,4,4,18,20,-2,19
 8,Athletic Club,12,4,4,4,15,12,3,16
 9,Alavés,13,4,4,5,18,18,0,16
 10,Villarreal,13,4,3,6,19,18,1,15
@@ -13,7 +13,7 @@ position,team,gp,w,d,l,gf,ga,gd,pts
 12,Deportivo,13,3,6,4,16,17,-1,15
 13,Osasuna,13,4,3,6,13,23,-10,15
 14,Celta Vigo,13,2,7,4,11,12,-1,13
-15,Levante,13,2,6,5,17,22,-5,12
+15,Levante,14,2,6,6,18,25,-7,12
 16,Rayo Vallecano,12,3,3,6,15,22,-7,12
 17,Valencia,13,3,3,7,9,20,-11,12
 18,Getafe,13,3,3,7,8,21,-13,12

@@ -11,8 +11,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-24T19:00:00Z,1,FINISHED,Fulham FC,Chelsea FC,2,3,AWAY_TEAM
 2026-08-28T19:00:00Z,2,FINISHED,Crystal Palace FC,Manchester City FC,1,4,AWAY_TEAM
 2026-08-29T11:30:00Z,2,FINISHED,Liverpool FC,Nottingham Forest FC,2,2,DRAW
-2026-08-29T14:00:00Z,2,FINISHED,AFC Bournemouth,Everton FC,1,1,DRAW
 2026-08-29T14:00:00Z,2,FINISHED,Coventry City FC,Hull City AFC,0,1,AWAY_TEAM
+2026-08-29T14:00:00Z,2,FINISHED,AFC Bournemouth,Everton FC,1,1,DRAW
 2026-08-29T16:30:00Z,2,FINISHED,Tottenham Hotspur FC,Newcastle United FC,0,2,AWAY_TEAM
 2026-08-30T13:00:00Z,2,FINISHED,Sunderland AFC,Fulham FC,1,0,HOME_TEAM
 2026-08-30T13:00:00Z,2,FINISHED,Chelsea FC,Brighton & Hove Albion FC,4,3,HOME_TEAM
@@ -21,11 +21,11 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-08-31T19:00:00Z,2,FINISHED,Aston Villa FC,Arsenal FC,0,1,AWAY_TEAM
 2026-09-04T19:00:00Z,3,FINISHED,Ipswich Town FC,Liverpool FC,0,2,AWAY_TEAM
 2026-09-05T11:30:00Z,3,FINISHED,Newcastle United FC,AFC Bournemouth,2,2,DRAW
-2026-09-05T14:00:00Z,3,FINISHED,Fulham FC,Crystal Palace FC,2,3,AWAY_TEAM
-2026-09-05T14:00:00Z,3,FINISHED,Brighton & Hove Albion FC,Leeds United FC,1,1,DRAW
 2026-09-05T14:00:00Z,3,FINISHED,Brentford FC,Sunderland AFC,1,1,DRAW
 2026-09-05T14:00:00Z,3,FINISHED,Nottingham Forest FC,Tottenham Hotspur FC,0,0,DRAW
 2026-09-05T14:00:00Z,3,FINISHED,Manchester City FC,Coventry City FC,1,0,HOME_TEAM
+2026-09-05T14:00:00Z,3,FINISHED,Brighton & Hove Albion FC,Leeds United FC,1,1,DRAW
+2026-09-05T14:00:00Z,3,FINISHED,Fulham FC,Crystal Palace FC,2,3,AWAY_TEAM
 2026-09-05T16:30:00Z,3,FINISHED,Hull City AFC,Aston Villa FC,0,0,DRAW
 2026-09-06T13:00:00Z,3,FINISHED,Everton FC,Manchester United FC,2,2,DRAW
 2026-09-06T15:30:00Z,3,FINISHED,Arsenal FC,Chelsea FC,2,1,HOME_TEAM
@@ -50,10 +50,10 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-09-20T13:00:00Z,5,FINISHED,Manchester City FC,Sunderland AFC,5,3,HOME_TEAM
 2026-09-20T15:30:00Z,5,FINISHED,Fulham FC,Manchester United FC,1,1,DRAW
 2026-10-10T11:30:00Z,6,FINISHED,Arsenal FC,Leeds United FC,2,1,HOME_TEAM
-2026-10-10T14:00:00Z,6,FINISHED,Ipswich Town FC,Fulham FC,2,1,HOME_TEAM
-2026-10-10T14:00:00Z,6,FINISHED,Aston Villa FC,Brentford FC,2,2,DRAW
 2026-10-10T14:00:00Z,6,FINISHED,Sunderland AFC,Brighton & Hove Albion FC,0,2,AWAY_TEAM
 2026-10-10T14:00:00Z,6,FINISHED,Chelsea FC,AFC Bournemouth,5,1,HOME_TEAM
+2026-10-10T14:00:00Z,6,FINISHED,Ipswich Town FC,Fulham FC,2,1,HOME_TEAM
+2026-10-10T14:00:00Z,6,FINISHED,Aston Villa FC,Brentford FC,2,2,DRAW
 2026-10-10T16:30:00Z,6,FINISHED,Manchester United FC,Tottenham Hotspur FC,1,1,DRAW
 2026-10-11T13:00:00Z,6,FINISHED,Hull City AFC,Everton FC,2,2,DRAW
 2026-10-11T13:00:00Z,6,FINISHED,Crystal Palace FC,Nottingham Forest FC,3,1,HOME_TEAM
@@ -64,9 +64,9 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-17T14:00:00Z,7,FINISHED,Manchester City FC,Ipswich Town FC,3,2,HOME_TEAM
 2026-10-17T14:00:00Z,7,FINISHED,Brentford FC,Liverpool FC,1,2,AWAY_TEAM
 2026-10-17T16:30:00Z,7,FINISHED,Newcastle United FC,Aston Villa FC,0,1,AWAY_TEAM
+2026-10-18T13:00:00Z,7,FINISHED,AFC Bournemouth,Sunderland AFC,2,0,HOME_TEAM
 2026-10-18T13:00:00Z,7,FINISHED,Leeds United FC,Manchester United FC,1,1,DRAW
 2026-10-18T13:00:00Z,7,FINISHED,Brighton & Hove Albion FC,Crystal Palace FC,5,0,HOME_TEAM
-2026-10-18T13:00:00Z,7,FINISHED,AFC Bournemouth,Sunderland AFC,2,0,HOME_TEAM
 2026-10-18T15:30:00Z,7,FINISHED,Nottingham Forest FC,Arsenal FC,0,1,AWAY_TEAM
 2026-10-19T19:00:00Z,7,FINISHED,Tottenham Hotspur FC,Coventry City FC,3,1,HOME_TEAM
 2026-10-23T19:00:00Z,8,FINISHED,Ipswich Town FC,Nottingham Forest FC,1,1,DRAW
@@ -82,9 +82,9 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-10-31T12:30:00Z,9,FINISHED,Chelsea FC,Manchester United FC,2,0,HOME_TEAM
 2026-10-31T15:00:00Z,9,FINISHED,Brentford FC,Nottingham Forest FC,2,0,HOME_TEAM
 2026-10-31T15:00:00Z,9,FINISHED,Hull City AFC,Ipswich Town FC,2,2,DRAW
-2026-10-31T15:00:00Z,9,FINISHED,Manchester City FC,Brighton & Hove Albion FC,0,1,AWAY_TEAM
-2026-10-31T15:00:00Z,9,FINISHED,AFC Bournemouth,Leeds United FC,2,0,HOME_TEAM
 2026-10-31T15:00:00Z,9,FINISHED,Coventry City FC,Sunderland AFC,3,1,HOME_TEAM
+2026-10-31T15:00:00Z,9,FINISHED,AFC Bournemouth,Leeds United FC,2,0,HOME_TEAM
+2026-10-31T15:00:00Z,9,FINISHED,Manchester City FC,Brighton & Hove Albion FC,0,1,AWAY_TEAM
 2026-10-31T17:30:00Z,9,FINISHED,Tottenham Hotspur FC,Crystal Palace FC,2,0,HOME_TEAM
 2026-10-31T20:00:00Z,9,FINISHED,Aston Villa FC,Fulham FC,1,1,DRAW
 2026-11-01T16:30:00Z,9,FINISHED,Liverpool FC,Arsenal FC,0,1,AWAY_TEAM
@@ -96,8 +96,8 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-07T17:30:00Z,10,FINISHED,Nottingham Forest FC,Manchester City FC,3,1,HOME_TEAM
 2026-11-08T14:00:00Z,10,FINISHED,Brighton & Hove Albion FC,Brentford FC,2,0,HOME_TEAM
 2026-11-08T14:00:00Z,10,FINISHED,Ipswich Town FC,AFC Bournemouth,1,2,AWAY_TEAM
-2026-11-08T14:00:00Z,10,FINISHED,Sunderland AFC,Chelsea FC,1,0,HOME_TEAM
 2026-11-08T14:00:00Z,10,FINISHED,Crystal Palace FC,Liverpool FC,1,3,AWAY_TEAM
+2026-11-08T14:00:00Z,10,FINISHED,Sunderland AFC,Chelsea FC,1,0,HOME_TEAM
 2026-11-08T16:30:00Z,10,FINISHED,Manchester United FC,Aston Villa FC,4,4,DRAW
 2026-11-21T12:30:00Z,11,FINISHED,Manchester City FC,Fulham FC,1,1,DRAW
 2026-11-21T15:00:00Z,11,FINISHED,Chelsea FC,Leeds United FC,1,4,AWAY_TEAM
@@ -109,3 +109,4 @@ utcDate,matchday,status,homeTeam,awayTeam,homeGoals,awayGoals,winner
 2026-11-22T14:00:00Z,11,FINISHED,Hull City AFC,Brighton & Hove Albion FC,2,0,HOME_TEAM
 2026-11-22T16:30:00Z,11,FINISHED,Liverpool FC,Manchester United FC,4,0,HOME_TEAM
 2026-11-23T20:00:00Z,11,FINISHED,Brentford FC,Everton FC,4,0,HOME_TEAM
+2026-11-27T20:00:00Z,12,FINISHED,Nottingham Forest FC,Chelsea FC,3,2,HOME_TEAM
